@@ -1,1 +1,22 @@
 ### Use Cases
+
+- draw a card
+- play a standard card (match color/number)
+- change color of play
+- choose card design theme
+- choose rules
+- choose special cards (e.g. skip, reverse, trade hands)
+- set point total [ADD DESCRIPTION HERE]
+- set number of players
+- set initial number of cards per player
+- show and clear high score
+- AI players
+- save and resume a game
+- play multiple games at once
+- replay game without quitting
+- start a new game
+- game area editor - toggle specific color/image
+- 
+- 
+- 
+- 

@@ -9,7 +9,7 @@ public class Card implements Comparable<Card> {
     private final Value myValue;
 
     /**
-     * Create
+     * Create a new Card.
      * @param color
      * @param value
      */
@@ -18,10 +18,18 @@ public class Card implements Comparable<Card> {
         myValue = value;
     }
 
+    /**
+     * Get Color of Card.
+     * @return myColor
+     */
     public Color getColor () {
         return myColor;
     }
 
+    /**
+     * Get Value of Card.
+     * @return myValue
+     */
     public Value getValue () {
         return myValue;
     }

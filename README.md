@@ -18,6 +18,8 @@ Finish Date:
 
 Hours Spent Together: 3 hours
 
+Tess Hours: 1.5 hours
+
 ### Primary Roles
 
 

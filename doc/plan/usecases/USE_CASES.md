@@ -2,10 +2,11 @@
 
 - draw a card
 - play a standard card (match color/number)
+- play a special card [explain this and the difference here]
 - change color of play
 - choose card design theme
 - choose rules
-- choose special cards (e.g. skip, reverse, trade hands)
+- choose and play special cards (e.g. skip, reverse, trade hands)
 - set point total [ADD DESCRIPTION HERE]
 - set number of players
 - set initial number of cards per player
@@ -16,7 +17,6 @@
 - replay game without quitting
 - start a new game
 - game area editor - toggle specific color/image
-- 
-- 
-- 
-- 
+- deal a hand of cards
+- create and shuffle a card deck
+- move turn to next player

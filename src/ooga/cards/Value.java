@@ -1,5 +1,8 @@
 package ooga.cards;
 
+/**
+ * This enum contains all the possible Values for cards.
+ */
 public enum Value {
     ZERO(0),
     ONE(1),
@@ -18,6 +21,10 @@ public enum Value {
         myNumericValue = numericValue;
     }
 
+    /**
+     * Returns the corresponding int of the Value.
+     * @return myNumericValue
+     */
     public int getNumericValue () {
         return myNumericValue;
     }

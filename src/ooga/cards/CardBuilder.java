@@ -1,0 +1,15 @@
+package ooga.cards;
+
+import java.util.List;
+
+/**
+ * This class instantiates Cards and compiles them into a List.
+ */
+public interface CardBuilder {
+
+    /**
+     * This method instantiates every possible Card combination and returns them as a List.
+     * @return full deck of cards
+     */
+    public List<Card> getFullDeck();
+}

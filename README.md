@@ -4,15 +4,19 @@ final
 This project implements a player for multiple related games.
 
 Names:
+* Tess Noonan (tcn6)
+* Mary Jiang (mvj6)
+* Selena Qian (sq22)
+* Suomo Ammah (sna19)
 
 
 ### Timeline
 
-Start Date: 
+Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent:
+Hours Spent Together: 3 hours
 
 ### Primary Roles
 

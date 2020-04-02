@@ -5,15 +5,15 @@
         - involves update of backend information about what cards the player holds
         - requires update to frontend displaying number of cards in the hand and adding the new card to the human player's visual
     hand display
-    2. Play a standard card (must match color/number)
+    2. Play a standard card (must match suit/number)
         - human player check for click on desired card, AI player randomly choose a valid card
         - also needs to check for card validity and throw exception if invalid
         - update the discard pile with the new top card - both in front and backend
         - update hands and view of them accordingly
     3. Play a special card - skip, reverse, draw 2, draw 4 wild cards, etc.
         - similar to playing a standard card but affects gameplay differently by changing which player goes next
-    4. Play a wild card - change color of play
-      - similar to playing a standard card but also changes color with no option for number matching
+    4. Play a wild card - change suit of play
+      - similar to playing a standard card but also changes suit with no option for number matching
 2. Choose card design theme - e.g. Duke theme, space theme
     - create view of cards with the particular theme
 3. Choose rules - e.g. when unable to play, draw 1 card and play if possible vs. draw until can play a card vs. immediately lose
@@ -50,8 +50,8 @@
 12. Start a new game in the middle of a game - via settings menu
     - user input for button to start a new game
     - calls backend and frontend to do new game setup overwriting current
-13. Game area editor - toggle specific color/image
-    - frontend searching for and changing the visual of cards with that color/image
+13. Game area editor - toggle specific suit/image
+    - frontend searching for and changing the visual of cards with that suit/image
     - interacts with backend classes involving cards to figure out which cards' displays need to change
 14. Deal a hand of cards
     - backend allocates the appropriate number to a player

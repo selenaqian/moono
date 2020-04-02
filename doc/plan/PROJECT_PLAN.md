@@ -37,7 +37,7 @@ progress as we go and will then have a better idea of what people have been work
 - choose a card to play - human - Suomo
 - choose a card to play - AI - Suomo
 - move turn to next player (simple order) - Mary
-- change color of play (wild cards) - Mary
+- change suit of play (wild cards) - Mary
 - draw a card, play if possible - Mary
 - shuffle discard pile - Tess
 - any player out of cards - end game - Mary
@@ -59,10 +59,10 @@ progress as we go and will then have a better idea of what people have been work
 - save and resume playing a game - Mary
 - multiple games at once - Mary
 - call uno! (click button) penalty also involves backend - Mary
-- game area editor - change a particular color/image - Selena
+- game area editor - change a particular suit/image - Selena
 - rules selection - Selena
 - special cards selection - Selena
-- color theme selection - Selena
+- suit theme selection - Selena
 
 ##### Complete
 - dark mode
@@ -75,7 +75,7 @@ progress as we go and will then have a better idea of what people have been work
 - draw 4 everyone else
 - discard 2 "trash"
 - swap one card of your choice with random from someone else
-- discard all of one color
+- discard all of one suit
 - update special cards selection
 - preferences
 - preferences selection

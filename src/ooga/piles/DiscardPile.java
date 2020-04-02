@@ -16,7 +16,7 @@ public class DiscardPile implements Pile, Deck {
      */
     public Card showTopCard(){
         //TODO: Write method;
-        return new Card(Color.BLUE, Value.ZERO, Action.NONE);
+        return new Card(Suit.A, Value.ZERO, Action.NONE);
     }
 
     @Override

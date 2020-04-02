@@ -4,7 +4,7 @@
  *
  */
 
-public class UseCaseunnumbered {
+public class UseCase4 {
     private List<Card> deck;
     private DrawPile drawPile = new DrawPile();
     private int numcardsperhand;
@@ -26,4 +26,3 @@ public class UseCaseunnumbered {
     }
 
 }
-

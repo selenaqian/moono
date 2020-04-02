@@ -1,5 +1,4 @@
-package ooga.game;
-
+p
 /**
  * Keeps track of players and delegates turns
  * Used to rotate between player objects so that each player can play

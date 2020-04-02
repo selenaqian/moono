@@ -1,7 +1,7 @@
 final
 ====
 
-This project implements a player for multiple related games.
+This project implements multiple versions of Uno, with flexibility allowing players to choose rules and design.
 
 Names:
 * Tess Noonan (tcn6)
@@ -16,15 +16,21 @@ Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent Together: 3 hours
+Hours Spent Together: 5 hours
 
-Tess Hours: 1.5 hours
+Individual:
+- Tess Hours: 1.5 hours
+- Mary Hours:
+- Selena Hours: 2 hours
+- Suomo Hours:
 
 ### Primary Roles
 
 
 ### Resources Used
-
+- [Uno Rules](https://service.mattel.com/instruction_sheets/42001pr.pdf)
+- [Uno Variations - invented by players](https://www.pagat.com/invented/uno_vars.html)
+- [Uno Variations - special cards in themed decks](http://unovariations.blogspot.com/p/special-wild-cards.html)
 
 ### Running the Program
 

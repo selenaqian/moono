@@ -5,14 +5,16 @@ import ooga.cards.Card;
 import java.util.List;
 
 /**
- * A WelcomeView creates the user interface for the initial game option setup.
+ * A ViewInterface creates the user interface. It has the options for initial game setup and will be able to pass that
+ * information to the backend.
+ *
  * These initial options include slider values for the number of players (2-4), number of cards per player, the point
  * total that one player needs to reach before determining the overall winner, any custom rules selections, any special cards
  * selections, and the deck theme.
  *
  * @author Selena Qian
  */
-public interface WelcomeView {
+public interface ViewInterface {
     /**
      * Gets information from the number of players slider.
      * @return the desired number of players determined by the user.

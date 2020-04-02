@@ -7,5 +7,16 @@
  */
 
 public class UseCase3 {
-    // The following code would appear within a method called when the node is clicked
+    private ViewInterface welcomeView;
+    private Hand humanPlayerHand;
+
+    /**
+     * The following code would appear within a method called when the user clicks a design theme node.
+     * It would need to access the selected theme and the cards in the hand and build the card views based on that.
+     */
+    String theme = welcomeView.getSelectedTheme();
+
+    for (Card c : humanPlayerHand.getAllCards) {
+
+    }
 }

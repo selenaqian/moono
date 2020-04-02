@@ -9,6 +9,8 @@ import java.util.List;
  * These initial options include slider values for the number of players (2-4), number of cards per player, the point
  * total that one player needs to reach before determining the overall winner, any custom rules selections, any special cards
  * selections, and the deck theme.
+ *
+ * @author Selena Qian
  */
 public interface WelcomeView {
     /**

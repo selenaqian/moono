@@ -5,6 +5,8 @@ import ooga.cards.Card;
 /**
  * A GameplayView handles the visuals for the main bulk of the game. This interface (possibly later a class) will likely
  * have helper classes that handle the specific portions (e.g. drawPileView, discardPileView) to reduce the size of the class.
+ *
+ * @author Selena Qian
  */
 public interface GameplayView {
     /**

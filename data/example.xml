@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<game>
+
+    <playercount>2</playercount>
+
+    <hand0>
+        <card>
+            <color>blue</color>
+            <value>1</value>
+        </card>
+        <card>
+            <color>blue</color>
+            <value>2</value>
+        </card>
+        <card>
+            <color>green</color>
+            <value>1</value>
+        </card>
+    </hand0>
+
+    <hand1>
+        <card>
+            <color>red</color>
+            <value>5</value>
+        </card>
+        <card>
+            <color>yellow</color>
+            <value>6</value>
+        </card>
+        <card>
+            <color>green</color>
+            <value>7</value>
+        </card>
+        <card>
+            <color>blue</color>
+            <value>8</value>
+        </card>
+        <card>
+            <color>red</color>
+            <value>9</value>
+        </card>
+    </hand1>
+
+    <drawpile>
+        <card>
+            <color>green</color>
+            <value>9</value>
+        </card>
+        <card>
+            <color>red</color>
+            <value>7</value>
+        </card>
+        <card>
+            <color>blue</color>
+            <value>5</value>
+        </card>
+        <card>
+            <color>red</color>
+            <value>3</value>
+        </card>
+    </drawpile>
+
+    <discardpile>
+        <card>
+            <color>yellow</color>
+            <value>4</value>
+        </card>
+    </discardpile>
+
+    <turn>0</turn>
+
+    <points>
+        <p0>125</p0>
+        <p1>30</p1>
+    </points>
+
+    <rules>classic</rules>
+
+    <theme>classic</theme>
+
+</game>

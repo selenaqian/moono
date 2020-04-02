@@ -31,6 +31,7 @@ Individual:
 - [Uno Rules](https://service.mattel.com/instruction_sheets/42001pr.pdf)
 - [Uno Variations - invented by players](https://www.pagat.com/invented/uno_vars.html)
 - [Uno Variations - special cards in themed decks](http://unovariations.blogspot.com/p/special-wild-cards.html)
+- [XML into Java Objects](https://www.javatpoint.com/jaxb-unmarshalling-example)
 
 ### Running the Program
 

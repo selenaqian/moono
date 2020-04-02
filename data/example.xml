@@ -5,17 +5,17 @@
 
     <hand0>
         <card>
-            <color>blue</color>
+            <suit>A</suit>
             <value>1</value>
             <action>none</action>
         </card>
         <card>
-            <color>blue</color>
+            <suit>A</suit>
             <value>2</value>
             <action>none</action>
         </card>
         <card>
-            <color>green</color>
+            <suit>B</suit>
             <value>1</value>
             <action>none</action>
         </card>
@@ -23,27 +23,27 @@
 
     <hand1>
         <card>
-            <color>red</color>
+            <suit>C</suit>
             <value>5</value>
             <action>none</action>
         </card>
         <card>
-            <color>yellow</color>
+            <suit>D</suit>
             <value>6</value>
             <action>none</action>
         </card>
         <card>
-            <color>green</color>
+            <suit>B</suit>
             <value>7</value>
             <action>none</action>
         </card>
         <card>
-            <color>blue</color>
+            <suit>A</suit>
             <value>8</value>
             <action>none</action>
         </card>
         <card>
-            <color>red</color>
+            <suit>C</suit>
             <value>9</value>
             <action>none</action>
         </card>
@@ -51,22 +51,22 @@
 
     <drawpile>
         <card>
-            <color>green</color>
+            <suit>B</suit>
             <value>9</value>
             <action>none</action>
         </card>
         <card>
-            <color>red</color>
+            <suit>C</suit>
             <value>7</value>
             <action>none</action>
         </card>
         <card>
-            <color>blue</color>
+            <suit>A</suit>
             <value>5</value>
             <action>none</action>
         </card>
         <card>
-            <color>red</color>
+            <suit>C</suit>
             <value>3</value>
             <action>none</action>
         </card>
@@ -74,7 +74,7 @@
 
     <discardpile>
         <card>
-            <color>yellow</color>
+            <suit>D</suit>
             <value>4</value>
             <action>none</action>
         </card>

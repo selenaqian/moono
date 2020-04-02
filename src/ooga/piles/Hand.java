@@ -11,11 +11,11 @@ import java.util.List;
 public class Hand implements Pile {
 
     /**
-     * Counts the number of Cards of a given Color in the Hand.
-     * @param color
+     * Counts the number of Cards of a given Suit in the Hand.
+     * @param suit
      * @return int
      */
-    int numColor(Color color){
+    int numSuit(Suit suit){
         //TODO: Write method;
         return 0;
     }
@@ -47,7 +47,7 @@ public class Hand implements Pile {
      */
     Card playCard(Card card){
         //TODO: Write method;
-        return new Card(Color.BLUE, Value.ZERO, Action.NONE);
+        return new Card(Suit.A, Value.ZERO, Action.NONE);
     }
 
     @Override

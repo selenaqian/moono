@@ -11,6 +11,12 @@ public interface TurnManager{
     final int CW = 1;
     final int CCW = -1;
 
+    /**
+     * Adds a player to the game
+     * Can be called when initializing a new game
+     * @param player new player to add
+     */
+    void addPlayer(Player player);
 
     /**
      * Determines the first player to play at the start of a new game or round
@@ -34,19 +40,6 @@ public interface TurnManager{
      * @return the player with no cards left after their turn, or returns null if there is no winner yet
      */
     Player findWinner();
-
-    /**
-     * Adds a player to the game
-     * Can be called when initializing a new game
-     * @param player new player to add
-     */
-    void addPlayer(Player player);
-
-    /**
-     * Can be called when initializing a new game
-     * @return total number of players currently in the game, up to 4
-     */
-    int getNumPlayers();
 
     /**
      * What direction the next turn will go in

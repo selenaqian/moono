@@ -28,4 +28,6 @@ public interface GameStatus{
      * @return true if game is over
      */
     boolean isOver();
+
+
 }

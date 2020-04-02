@@ -30,9 +30,9 @@ public interface Hand /*implements Pile*/ {
     boolean contains(Card card);
 
     /**
-     * Returns and removes given Card from Hand.
+     * Removes given Card from Hand.
      * @param card
      * @return Card
      */
-    Card playCard(Card card);
+    void removeCard(Card card);
 }

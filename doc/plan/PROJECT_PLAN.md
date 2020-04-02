@@ -18,6 +18,9 @@ project. Also, we will all be aware of what everyone else is working on so that 
 - Piles
     - primary: Tess
     - handles the groupings of cards - e.g. draw pile, discard pile, hand
+- Rules
+    - primary: Tess
+    - handles rule implementation
 - Player
     - primary: Suomo
     - handles the player behavior - human players and AI players

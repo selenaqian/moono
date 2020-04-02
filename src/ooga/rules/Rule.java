@@ -7,7 +7,7 @@ import ooga.piles.Hand;
  * A Ruleset defines how a game is to be played, as in what moves are legal, how the game ends,
  * and the consequences of special Cards.
  */
-public interface Ruleset {
+public interface Rule {
 
     /**
      * This method determines whether or not a move is legal based on

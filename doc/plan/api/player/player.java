@@ -34,4 +34,11 @@ public interface player {
      */
     String playerName();
 
+    /**
+     *governs what card a player can play
+     */
+    void playcard(List<Card> hand){
+
+    }
+
 }

@@ -6,14 +6,15 @@ package ooga.game;
 
 public interface GameControl{
     /**
-     * Set up new a game or new round
-     */
-    void initialize();
-
-    /**
      * Begin playing a new game or new round
      */
     void start();
+
+    /**
+     * Set up new a game or new round
+     * For a game, start will be called before initialize
+     */
+    void initialize();
 
     /**
      * Pause gameplay

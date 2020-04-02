@@ -1,4 +1,6 @@
-package ooga.cards;
+package ooga.piles;
+
+import ooga.cards.Card;
 
 import java.util.List;
 

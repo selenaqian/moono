@@ -7,6 +7,8 @@
  */
 public class UseCase1 {
     public static void main (String[] args){
+        //the follow are chunks of code that could be written within the initialize() method in GameControl
+
         //create a drawPile with the default set of Cards, shuffle
         Deck draw = new DrawPile();
         draw.shuffle();

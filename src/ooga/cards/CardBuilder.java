@@ -11,5 +11,5 @@ public interface CardBuilder {
      * This method instantiates every possible Card combination and returns them as a List.
      * @return full deck of cards
      */
-    List<Card> getFullDeck();
+    List<Card> makeFullDeck();
 }

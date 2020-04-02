@@ -47,7 +47,7 @@ public class Hand implements Pile {
      */
     Card playCard(Card card){
         //TODO: Write method;
-        return new Card(Color.BLUE, Value.ZERO);
+        return new Card(Color.BLUE, Value.ZERO, Action.NONE);
     }
 
     @Override

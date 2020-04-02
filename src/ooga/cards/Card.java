@@ -1,21 +1,24 @@
 package ooga.cards;
 
 /**
- * This class combines Color and Value to create a Card.
+ * This class combines Color, Value, and Action to create a Card.
  * Has capacity for comparison via Comparable.
  */
 public class Card implements Comparable<Card> {
     private final Color myColor;
     private final Value myValue;
+    private final Action myAction;
 
     /**
      * Create a new Card.
      * @param color
      * @param value
+     * @param action
      */
-    public Card (Color color, Value value) {
+    public Card (Color color, Value value, Action action) {
         myColor = color;
         myValue = value;
+        myAction = action;
     }
 
     /**
@@ -34,9 +37,17 @@ public class Card implements Comparable<Card> {
         return myValue;
     }
 
+    /**
+     * Get Action of Card.
+     * @return myAction
+     */
+    public Action getAction (){
+        return myAction;
+    }
+
     @Override
     public String toString () {
-        return getColor().toString() + getValue().toString();
+        return getColor().toString() + getValue().toString() + getAction().toString();
     }
 
     @Override

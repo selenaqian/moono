@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * This class instantiates Cards and compiles them into a List.
+ * (Will be changed to concrete class)
  */
 public interface CardBuilder {
 

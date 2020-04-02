@@ -1,5 +1,6 @@
 /**
  * This class demonstrates the use case:
+<<<<<<< HEAD
  * dealing a hand of cards
  *
  */
@@ -26,3 +27,14 @@ public class UseCase3 {
     }
 
 }
+=======
+ * Choose card design theme - e.g. Duke theme, space theme
+ *     - create view of cards with the particular theme
+ * This use case focuses on the frontend, allowing users to click on a node or button that would then spur changes in the
+ * visual output of the cards.
+ */
+
+public class UseCase3 {
+    // The following code would appear within a method called when the node is clicked
+}
+>>>>>>> c5716c33bf66ce459f89dd8ffc76076c5d63dc51

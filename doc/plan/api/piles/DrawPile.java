@@ -7,7 +7,7 @@ import java.util.List;
  * This is a Deck that typically starts with a complete set of Cards then shrinks.
  * (Will be changed to concrete class)
  */
-public interface DrawPile /*implements Pile, Deck*/ {
+public interface DrawPile /*extends Deck*/ {
 
     /**
      * Returns the specified number of Cards and removes them from Pile.

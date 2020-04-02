@@ -15,7 +15,7 @@ public class Hand implements Pile {
      * @param suit
      * @return int
      */
-    int numSuit(Suit suit){
+    public int numSuit(Suit suit){
         //TODO: Write method;
         return 0;
     }
@@ -25,7 +25,7 @@ public class Hand implements Pile {
      * @param value
      * @return int
      */
-    int numValue(Value value){
+    public int numValue(Value value){
         //TODO: Write method;
         return 0;
     }
@@ -35,19 +35,18 @@ public class Hand implements Pile {
      * @param card
      * @return boolean
      */
-    boolean contains(Card card){
+    public boolean contains(Card card){
         //TODO: Write method;
         return false;
     }
 
     /**
-     * Returns and removes given Card from Hand.
+     * Removes given Card from Hand.
      * @param card
      * @return Card
      */
-    Card playCard(Card card){
+    public void removeCard(Card card){
         //TODO: Write method;
-        return new Card(Suit.A, Value.ZERO, Action.NONE);
     }
 
     @Override

@@ -20,4 +20,8 @@ The entire Game module is designed to be as extensible as possible. It is not sp
 
 #### Design Considerations
 Rules- we have a feature that allows a user to mix and match rules from various variations to create a an
-entirely new game. With this,  
+entirely new game. With this, we could either have a rule superclass that each game variation extends and then have another independent class which creates an instance of that  rule interface and can 
+call on any method which give a variety of choices. Say we had an abstract method in the super class that each sub class overrode, possible complications will arise 
+since we cannot tell which variation's rule will be implemented.
+
+  

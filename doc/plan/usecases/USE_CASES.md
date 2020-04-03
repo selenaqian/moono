@@ -2,8 +2,9 @@
 
 1. For both human and AI player:
     1. Draw a card from the deck
-        - involves update of backend information about what cards the player holds
-        - requires update to frontend displaying number of cards in the hand and adding the new card to the human player's visual
+        - have no playable cards in hand, then triggers:
+        - update of backend information about what cards the player holds
+        - update to frontend displaying number of cards in the hand and adding the new card to the human player's visual
     hand display
     2. Play a standard card (must match suit/number)
         - human player check for click on desired card, AI player randomly choose a valid card
@@ -15,17 +16,19 @@
     4. Play a wild card - change suit of play
       - similar to playing a standard card but also changes suit with no option for number matching
 2. Choose card design theme - e.g. Duke theme, space theme
+    - user clicks node for the theme choice
     - create view of cards with the particular theme
 3. Choose rules - e.g. when unable to play, draw 1 card and play if possible vs. draw until can play a card vs. immediately lose
-    - toggle options on and off in initial screens
+    - user toggle options on and off in initial screens
     - take the information inputted through the frontend and affect gameplay in the backend
 4. Choose which special cards to include in the deck
-    - toggle options on and off in initial screens
+    - user toggle options on and off in initial screens
     - take this information and use it to create the initial deck of cards
 5. Set point total:
     - in Uno, when someone wins, the other players total up the value of the cards in their hand. Players will play until
     one person reaches the set point total (or the default of 500). At that point, the person with the lowest point total
     is the winner.
+    - user sets the desired total via the GUI
     - keep track of this information in the backend
     - update view with scores accordingly
     - update "high" score (actually lowest) and save to a file
@@ -50,7 +53,8 @@
 12. Start a new game in the middle of a game - via settings menu
     - user input for button to start a new game
     - calls backend and frontend to do new game setup overwriting current
-13. Game area editor - toggle specific suit/image
+13. Game area editor - toggle specific suit
+    -  user input to change a suit to a different color/image
     - frontend searching for and changing the visual of cards with that suit/image
     - interacts with backend classes involving cards to figure out which cards' displays need to change
 14. Deal a hand of cards

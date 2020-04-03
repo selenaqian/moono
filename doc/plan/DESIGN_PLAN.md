@@ -2,6 +2,10 @@
 
 #### Introduction
 
+The goal of our project is to write a program that allows users to play a variety of Uno-based games. We plan to first create the classic Uno game, then extend on the rules and special cards available. The project thus will be most flexible in the rules and cards options. This flexibility will necessarily also require additions of buttons and toggles to the user interface as well as the addition of rules and cards in their respective classes. The project will also allow for different color and image themes on the cards, both static and dynamic. That is, users will be able to choose a theme at the beginning as well as change particular colors/images during gameplay. Our design will make use of interfaces to encapsulate these parts of the project so that additions to the types of cards or changes to the rules in play should not affect any of the other portions of the program, and the same goes for changes to the theme.
+
+We hope to create a fun, functional game that gives options beyond the traditional Uno game by providing novel combinations of rules and special cards.
+
 #### Overview
 
 #### Design Details
@@ -43,13 +47,18 @@ Play count is another choice made by the user at the start. We have a Player int
 Finally, Hands are dealt from the DrawPile. There is a drawCards() method where you can specify how many Cards to pull from the Pile. Therefore, to change the size of a Hand based on the count passed in by the User, we just have to pass that integer to the drawCards() method to pull the top x cards and put them in a new Hand.
 
 #### Design Considerations
-Rules- we have a feature that allows a user to mix and match rules from various variations to create a an
+1. Rules- we have a feature that allows a user to mix and match rules from various variations to create a an
 entirely new game. With this, we could either have a rule superclass that each game variation extends and then have another independent class which creates an instance of that  rule interface and can 
 call on any method which give a variety of choices. Say we had an abstract method in the super class that each sub class overrode, possible complications will arise 
 since we cannot tell which variation's rule will be implemented.
 
+
 Alternative design: we considered making Deck an interface instead of an abstract class. In this case, DiscardPile and DrawPile would implement both Deck and Pile. This would have let DiscardPile
  and DrawPile have separate implementations of the Pile methods. However, the shuffle method implementation would have overlapped, giving us repeated code.
   Ultimately, we decided there was enough overlap between DiscardPile and DrawPile that the abstract class would be successful.
+
+Also, connecting model and view: to use MVC or not, and where? One option we considered was just having the model and view components keep references and call methods directly on each other, without a controller to handle the logic. Writing our model and view classes like this would not adhere to the single-responsibility principle, and it would be difficult to divide the code for the sake of collaboration. Implementing an MVC pattern does add complexity, however, and we would need to create multiple controllers to handle all of our view components. We still decided to follow the MVC pattern, but will not always explicitly separate our code cleanly into separate MVC packages. The smaller view and controller components will likely communicate freely without going through the model, reducing complexity. Another pro of using the MVC model is greater flexibility in implementing different game variations. 
+
+
 
 

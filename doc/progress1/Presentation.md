@@ -71,9 +71,10 @@ With this game, the deck changes most because each user input affects all card p
 ### API: Game
 - Controls flow of actions among players in the game
 - It is not specific to just Uno, nor does it need to know that it is playing a card game. It only assumes that it will be used with a game (that may or may not have multiple rounds) with multiple players and a score to play up until. 
+- When it tells Player objects to perform a move, it does not know about the specific implementation of what the player does
 - Use Case 1: To manage which player is currently actively making a move, the TurnManager interface is able to return the Player who is currently making a play, in addition to the next Player. 
 - Use Case 2: To manage behavior once a round has ended, the end() method in the GameControl interface can be called. The two classes (Round and Game) that implement it will each have their own behaviors and will reference ScoreTracker to determine the winner of the round/game.
-
+- Alternative design: We considered deciding the behavior of playing cards (checking if they are legal plays, activating special card effects) inside this API because the cards that are played often affect how the game behaves (e.g. who has the next turn). It seemed easier to check for those behaviors directly in the Game module, but this would make it less flexible. We decided to delegate responsibility to other modules (Player and Rules) in order to maintain extensibility. 
 
 ### API: Piles
 

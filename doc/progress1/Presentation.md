@@ -57,6 +57,11 @@ Complete: Additional Features
 #### [Wireframe](https://www.youtube.com/watch?v=EtFE2KQ19k0)
 
 ### Design Plan
+Our goals for the design is to have one that gives the user the most flexibility in terms out game outlook without having to 
+handle every possible user combination. 
+For now, we have three modules, one handling individual card creation, one handling the flow of the game , one handling the player and another handling the deck.
+The card module takes card properties like value and color from respective enum classes and creates the combinations needed to play the game. The deck module then puts these into a one complete deck of cards and splits them into two sub decks for drawing cards while playing the game and discarding what has been played.
+  
 
 ### API: Game
 

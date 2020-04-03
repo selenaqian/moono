@@ -48,5 +48,8 @@ entirely new game. With this, we could either have a rule superclass that each g
 call on any method which give a variety of choices. Say we had an abstract method in the super class that each sub class overrode, possible complications will arise 
 since we cannot tell which variation's rule will be implemented.
 
+Alternative design: we considered making Deck an interface instead of an abstract class. In this case, DiscardPile and DrawPile would implement both Deck and Pile. This would have let DiscardPile
+ and DrawPile have separate implementations of the Pile methods. However, the shuffle method implementation would have overlapped, giving us repeated code.
+  Ultimately, we decided there was enough overlap between DiscardPile and DrawPile that the abstract class would be successful.
 
 

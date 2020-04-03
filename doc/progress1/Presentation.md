@@ -54,10 +54,22 @@ Complete: Additional Features
 - saving to web
 - social center
     
-#### [Wireframe](link goes here)
+#### [Wireframe](https://www.youtube.com/watch?v=EtFE2KQ19k0)
 
 ### Design Plan
 
 ### API: Game
 
-### API: Piles 
+### API: Piles
+
+- It structures the Cards into the various groups required for a game:
+    - Hand
+    - DrawPile
+    - DiscardPile
+- DrawPile uses a CardBuilder class to fill the Stack of Cards. To customize the Deck, the makeDeck() method can take a List of Actions which specifies the different types of Cards to use, allowing the user to choose which special cards to include (i.e. with the toggles)
+- There are convenient, well-named methods to add and remove cards from the various Piles, as well as informative getters like returning the size of the Pile. The specificity provided by the abstraction allows the code to do all the heavy lifting, the constructors and data structures will be geared towards the subclass’s purpose.
+- Use Case 1: To create a shuffle a standard DrawPile, all we would need to do is instantiate the Deck and then call the shuffle() method. By default, the DrawPile will call CardBuilder to return the Stack of normal Cards. DrawPile extends Deck which equips it with the shuffle() method.
+- Use Case 2: To deal a Hand, take the DrawPile and call the drawCards() method. This will return a List of Cards that can then be passed into the Hand constructor to create a new Hand. To deal Hands for all Players, we can simply repeat this process for every player.
+- Alternative design: we considered making Deck an interface instead of an abstract class. In this case, DiscardPile and DrawPile would implement both Deck and Pile. This would have let DiscardPile and DrawPile have separate implementations of the Pile methods. However, the shuffle method implementation would have overlapped, giving us repeated code. Ultimately, we decided there was enough overlap between DiscardPile and DrawPile that the abstract class would be successful.
+
+[Pile Hierarchy](https://coursework.cs.duke.edu/compsci307_2020spring/final_team09/-/raw/master/pile_hierarchy.png)

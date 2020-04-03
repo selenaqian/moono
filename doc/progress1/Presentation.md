@@ -72,4 +72,4 @@ Complete: Additional Features
 - Use Case 2: To deal a Hand, take the DrawPile and call the drawCards() method. This will return a List of Cards that can then be passed into the Hand constructor to create a new Hand. To deal Hands for all Players, we can simply repeat this process for every player.
 - Alternative design: we considered making Deck an interface instead of an abstract class. In this case, DiscardPile and DrawPile would implement both Deck and Pile. This would have let DiscardPile and DrawPile have separate implementations of the Pile methods. However, the shuffle method implementation would have overlapped, giving us repeated code. Ultimately, we decided there was enough overlap between DiscardPile and DrawPile that the abstract class would be successful.
 
-![Pile Hierarchy](https://coursework.cs.duke.edu/compsci307_2020spring/final_team09/-/raw/master/pile_hierarchy.png)
+[Pile Hierarchy](https://coursework.cs.duke.edu/compsci307_2020spring/final_team09/-/raw/master/pile_hierarchy.png)

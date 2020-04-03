@@ -2,6 +2,10 @@
 
 #### Introduction
 
+The goal of our project is to write a program that allows users to play a variety of Uno-based games. We plan to first create the classic Uno game, then extend on the rules and special cards available. The project thus will be most flexible in the rules and cards options. This flexibility will necessarily also require additions of buttons and toggles to the user interface as well as the addition of rules and cards in their respective classes. The project will also allow for different color and image themes on the cards, both static and dynamic. That is, users will be able to choose a theme at the beginning as well as change particular colors/images during gameplay. Our design will make use of interfaces to encapsulate these parts of the project so that additions to the types of cards or changes to the rules in play should not affect any of the other portions of the program, and the same goes for changes to the theme.
+
+We hope to create a fun, functional game that gives options beyond the traditional Uno game by providing novel combinations of rules and special cards.
+
 #### Overview
 
 #### Design Details

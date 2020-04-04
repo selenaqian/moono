@@ -63,7 +63,7 @@ We are thinking of a possible mvc design or an observer to coordinate between th
 We want to have our cards created once per game and immutable for the duration of that game and since game updates. 
 For now, we have three modules, one handling individual card creation, one handling the flow of the game , one handling the player and another handling the deck.
 The card module takes card properties like value and color from respective enum classes and creates the combinations needed to play the game. The deck module then puts these into a one complete deck of cards and splits them into two sub decks for drawing cards while playing the game and discarding what has been played.
-Gameflow controls the game in a braod sense in that with uno, multiple games have to be finished before a winner is found so that module handles the larger overarching game and the smaller game subsets.
+Gameflow controls the game in a broad sense in that with uno, multiple games have to be finished before a winner is found so that module handles the larger overarching game and the smaller game subsets.
 The player module basically contains player characteristics and game actions and feeds them into the gameflow to update the deck.
 With this game, the deck changes most because each user input affects all card piles including the user's. 
  

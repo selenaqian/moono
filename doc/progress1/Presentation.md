@@ -2,7 +2,7 @@
 
 ### Implementation Plan
 
-#### Board Games - Uno Variations
+#### Card Games - Uno Variations
 
 Commonalities:
 - has cards and groupings of cards
@@ -39,12 +39,14 @@ Sprint 1: Basic Uno Game
 - creating player actions (1 human + up to 3 AI)
 - playing through the game
 - end screen that can start a new game
+
 Sprint 2: Extensions on the Uno Game
 - special cards (skip, reverse, draw 2, draw 4 wild)
 - rules selection, special cards selection
 - calling "Uno!"
 - dynamic display editor
 - save and resume game
+
 Complete: Additional Features
 - additional special cards (e.g. draw entire deck, trade hands with another player)
 - different themes (Duke, space)

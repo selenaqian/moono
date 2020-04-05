@@ -13,10 +13,16 @@ import java.util.Stack;
 public class CardBuilder {
 
     /**
+     * Creates new CardBuilder.
+     */
+    public CardBuilder(){
+    }
+
+    /**
      * This method instantiates every possible Card combination and returns them as a List.
      * @return full deck of cards
      */
-    Stack<Card> makeFullDeck(){
+    public Stack<Card> makeFullDeck(){
         //TODO: Write method;
         return new Stack<>();
     }
@@ -27,7 +33,7 @@ public class CardBuilder {
      * There will be 4 of every Card without Action.NONE (1 per suit)
      * @return custom deck of cards
      */
-    Stack<Card> makeDeck(List<Action> actions){
+    public Stack<Card> makeDeck(List<Action> actions){
         //TODO: Write method;
         return new Stack<>();
     }

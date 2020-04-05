@@ -18,9 +18,4 @@ public class DiscardPile extends Deck {
         //TODO: Write method;
         return new Card(Suit.A, Value.ZERO, Action.NONE);
     }
-
-    @Override
-    public void shuffle(){
-        //TODO: Write method;
-    }
 }

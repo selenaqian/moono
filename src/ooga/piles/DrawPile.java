@@ -14,11 +14,13 @@ public class DrawPile extends Deck {
     public DrawPile(){
         CardBuilder build = new CardBuilder();
         myCards = build.makeFullDeck();
+        shuffle();
     }
 
     public DrawPile(List<Action> actions){
         CardBuilder build = new CardBuilder();
         myCards = build.makeDeck(actions);
+        shuffle();
     }
 
     /**

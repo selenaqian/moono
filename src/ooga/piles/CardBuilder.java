@@ -1,7 +1,6 @@
 package ooga.piles;
 
-import ooga.cards.Action;
-import ooga.cards.Card;
+import ooga.cards.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +22,14 @@ public class CardBuilder {
      * @return full deck of cards
      */
     public Stack<Card> makeFullDeck(){
-        //TODO: Write method;
-        return new Stack<>();
+        Stack<Card> out = new Stack<>();
+        for(Value v : Value.values()){
+            for(Suit s : Suit.values()){
+                out.push(new Card(s, v, Action.NONE));
+                out.push(new Card(s, v, Action.NONE));
+            }
+        }
+        return out;
     }
 
     /**
@@ -34,7 +39,13 @@ public class CardBuilder {
      * @return custom deck of cards
      */
     public Stack<Card> makeDeck(List<Action> actions){
-        //TODO: Write method;
-        return new Stack<>();
+        Stack<Card> out = makeFullDeck();
+        for(Action a : actions){
+            if(a == Action.NONE){
+                break;
+            }
+            //TODO: implement in Sprint 2;
+        }
+        return out;
     }
 }

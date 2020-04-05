@@ -2,20 +2,34 @@ package ooga.piles;
 
 import ooga.cards.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
- * This is a Deck that Starts with no Cards then grows.
+ * This is a Deck that Starts with no or few Cards then grows.
  */
 public class DiscardPile extends Deck {
+
+    /**
+     * Creates a new empty DiscardPile.
+     */
+    public DiscardPile(){
+        myCards = new Stack<>();
+    }
+
+    /**
+     * Creates a new DiscardPile with given initial Card.
+     * @param card
+     */
+    public DiscardPile(Card card){
+        myCards = new Stack<>();
+        myCards.push(card);
+    }
 
     /**
      * Returns the the top card, does not remove from Pile.
      * @return
      */
     public Card showTopCard(){
-        //TODO: Write method;
-        return new Card(Suit.A, Value.ZERO, Action.NONE);
+        return myCards.peek();
     }
 }

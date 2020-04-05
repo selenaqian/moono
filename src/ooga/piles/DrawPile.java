@@ -11,12 +11,20 @@ import java.util.List;
  */
 public class DrawPile extends Deck {
 
+    /**
+     * Creates a new shuffled DrawPile with a full standard Deck.
+     */
     public DrawPile(){
         CardBuilder build = new CardBuilder();
         myCards = build.makeFullDeck();
         shuffle();
     }
 
+    /**
+     * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
+     * TODO: This will not be relevant until Sprint 2
+     * @param actions
+     */
     public DrawPile(List<Action> actions){
         CardBuilder build = new CardBuilder();
         myCards = build.makeDeck(actions);

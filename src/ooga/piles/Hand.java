@@ -10,15 +10,39 @@ import java.util.List;
  */
 public class Hand implements Pile {
 
+    private List<Card> myCards;
+
+    /**
+     * Creates new empty Hand.
+     */
+    public Hand(){
+        myCards = new ArrayList<>();
+    }
+
+    /**
+     * Creates new Hand with passed Cards.
+     * @param initialCards
+     */
+    public Hand(List<Card> initialCards){
+        myCards = initialCards;
+    }
+
     /**
      * Counts the number of Cards of a given Suit in the Hand.
      * @param suit
      * @return int
      */
     public int numSuit(Suit suit){
-        //TODO: Write method;
-        return 0;
+        int count = 0;
+        for(Card c : myCards){
+            if(c.getSuit() == suit){
+                count++;
+            }
+        }
+        return count;
     }
+
+    //TODO: refactor, overlap between numSuit and numValue?
 
     /**
      * Counts the number of Cards of a given Value in the Hand.
@@ -26,8 +50,13 @@ public class Hand implements Pile {
      * @return int
      */
     public int numValue(Value value){
-        //TODO: Write method;
-        return 0;
+        int count = 0;
+        for(Card c : myCards){
+            if(c.getValue() == value){
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -36,7 +65,11 @@ public class Hand implements Pile {
      * @return boolean
      */
     public boolean contains(Card card){
-        //TODO: Write method;
+        for(Card c : myCards){
+            if(c.equals(card)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -46,28 +79,26 @@ public class Hand implements Pile {
      * @return Card
      */
     public void removeCard(Card card){
-        //TODO: Write method;
+        myCards.remove(card);
     }
 
     @Override
     public void addCard(Card card){
-        //TODO: Write method;
+        myCards.add(card);
     }
 
     @Override
     public void addCards(List<Card> cards){
-        //TODO: Write method;
+        myCards.addAll(cards);
     }
 
     @Override
     public List<Card> getAllCards(){
-        //TODO: Write method;
-        return new ArrayList<Card>();
+        return myCards;
     }
 
     @Override
     public int getCardCount(){
-        //TODO: Write method;
-        return 0;
+        return myCards.size();
     }
 }

@@ -19,7 +19,7 @@ Finish Date:
 Hours Spent Together: 6 hours
 
 Individual:
-- Tess Hours: 6 hours
+- Tess Hours: 6 hours 45 mins
 - Mary Hours:
 - Selena Hours: 4 hours
 - Suomo Hours:

@@ -16,10 +16,10 @@ public interface CardBuilder {
     Stack<Card> makeDeck();
 
     /**
-     * This method creates a Deck using Cards with the given Actions.
-     * There will be 8 of every Card with Action.NONE (2 per suit)
-     * There will be 4 of every Card without Action.NONE (1 per suit)
+     * This method creates a Deck using Cards with the given Value.
+     * There will be 8 of every Card with 0 <= Value <= 9 (2 per suit)
+     * There will be 4 of every Card without 10 <= Value (1 per suit)
      * @return custom deck of cards
      */
-    Stack<Card> makeDeck(List<Action> actions);
+    Stack<Card> makeDeck(List<Value> values);
 }

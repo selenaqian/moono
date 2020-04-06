@@ -1,7 +1,7 @@
 package ooga.piles;
 
-import ooga.cards.Action;
 import ooga.cards.Card;
+import ooga.cards.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +23,11 @@ public class DrawPile extends Deck {
     /**
      * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
      * TODO: This will not be relevant until Sprint 2
-     * @param actions
+     * @param values
      */
-    public DrawPile(List<Action> actions){
+    public DrawPile(List<Value> values){
         CardBuilder build = new CardBuilder();
-        myCards = build.makeDeck(actions);
+        myCards = build.makeDeck(values);
         shuffle();
     }
 

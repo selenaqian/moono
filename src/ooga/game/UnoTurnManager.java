@@ -1,5 +1,9 @@
 package ooga.game;
 
+import ooga.player.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class UnoTurnManager implements TurnManager {
@@ -14,11 +18,16 @@ public class UnoTurnManager implements TurnManager {
 
     private Player current; //the player making the turn
 
-    public UnoPlayerManager(players){
-        this.players = players;
+    public UnoTurnManager(){
+        this.players = new ArrayList<Player>();
         iterator = players.listIterator();
         current = getFirstPlayer();
         direction = CW;
+    }
+
+    @Override
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 
     @Override
@@ -28,17 +37,20 @@ public class UnoTurnManager implements TurnManager {
     }
 
     @Override
-    public Player getNextPlayer() {
+    public void nextPlayer() {
         if (direction == CCW){
-            return iterator.previous();
+            current = iterator.previous();
+        } else {
+            current = iterator.next();
         }
-        return iterator.next();
     }
 
     @Override
     public Player getCurrentPlayer() {
+        //TODO: add error handling for when there are no players added yet
         return current;
     }
+
 
     /**
      * Changes the direction, affecting which player has the next turn

@@ -10,6 +10,12 @@ import java.util.List;
 public interface DrawPile /*extends Deck*/ {
 
     /**
+     * Returns the top Card and removes it from the Pile.
+     * @return Card
+     */
+    Card drawCard();
+
+    /**
      * Returns the specified number of Cards and removes them from Pile.
      * @param numCards
      * @return List<Card>

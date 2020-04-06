@@ -1,5 +1,6 @@
 package ooga.game;
 
+import ooga.cards.Card;
 import ooga.piles.Hand;
 import ooga.player.Player;
 
@@ -12,37 +13,50 @@ public class Uno {
     private View view;
 
     private UnoTurnManager turnManager;
+    private PileManager pileManager;
     private Player currentPlayer;
 
 
     public Uno(){
         //initialize connection to view
         this.view = new View();
+        turnManager = new UnoTurnManager();
+        pileManager = new PileManager();
         currentPlayer = turnManager.getCurrentPlayer();
     }
 
     /**
      * Handle behavior when a user selects a card to play it
      * Called from the view
+     * @param card the card selected by the player in the view
      */
-    public void makePlay(){
-        currentPlayer.playCard();
+    public void playCard(Card card){
+        //get the player to play a valid card from their hand
+        currentPlayer.playCard(card);
+
+        //end current player's turn and go to next player
         turnManager.nextPlayer();
-        //TODO: update view
     }
 
     /**
      * When a user isn't able to play a card and they take a card from the draw pile
-     * Called from the view
+     * Called from the view for human players
+     * For AI players, must be called programmatically
      */
     public void drawCard(){
-        currentPlayer.drawCard();
+        //take the top card from the discard pile
+        Card card = pileManager.removeCard();
+
+        //get player to accept the drawn card into their own hand of cards
+        currentPlayer.takeCard(card);
+
+        //end current player's turn and go to next player
         turnManager.nextPlayer();
-        //TODO: update view
     }
 
     /**
      * Handle effect of an action card when it is drawn
+     * This method should have access to TurnManager, especially for Reverse cards
      * TODO: put action methods in a resource file and use this method to call them
      */
     public void handleAction(){

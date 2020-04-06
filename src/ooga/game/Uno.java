@@ -15,9 +15,9 @@ public class Uno {
     private Player currentPlayer;
 
 
-    public Uno(View view){
+    public Uno(){
         //initialize connection to view
-        this.view = view;
+        this.view = new View();
         currentPlayer = turnManager.getCurrentPlayer();
     }
 

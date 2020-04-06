@@ -32,7 +32,15 @@ public class DrawPile extends Deck {
     }
 
     /**
-     * Returns the specified number of Cards and removes them from Pile.
+     * Returns the top Card and removes it from the Pile.
+     * @return Card
+     */
+    public Card drawCard(){
+        return myCards.pop();
+    }
+
+    /**
+     * Returns the specified number of Cards and removes them from the Pile.
      * @param numCards
      * @return List<Card>
      */

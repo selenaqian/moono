@@ -1,30 +1,32 @@
 package ooga.view;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class ViewTest {
+class GameViewTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getNumberPlayers() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getNumberCards() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getPointTotal() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getSelectedRules() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getSelectedCards() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getSelectedTheme() {
     }
 }

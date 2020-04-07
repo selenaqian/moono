@@ -3,6 +3,7 @@ package ooga.cards;
 /**
  * This class combines Suit and Value to create a Card.
  * Has capacity for comparison via Comparable.
+ * @author Tess Noonan (tcn6)
  */
 public class Card implements Comparable<Card> {
     private final Suit mySuit;

@@ -2,6 +2,7 @@ package ooga.cards;
 
 /**
  * This enum contains all the possible Values for cards.
+ * @author Tess Noonan (tcn6)
  */
 public enum Value {
     ZERO(0),

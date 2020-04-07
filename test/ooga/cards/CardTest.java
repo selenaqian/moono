@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the Card class.
+ * @author Tess Noonan (tcn6)
+ */
 class CardTest {
 
     private Card card1 = new Card(Suit.A, Value.ZERO);

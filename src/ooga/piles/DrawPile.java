@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * This is a Deck that typically starts with a complete set of Cards then shrinks.
+ * @author Tess Noonan (tcn6)
  */
 public class DrawPile extends Deck {
 

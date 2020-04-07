@@ -8,6 +8,7 @@ import java.util.Stack;
 
 /**
  * This class instantiates Cards and compiles them into a List.
+ * @author Tess Noonan (tcn6)
  */
 public class CardBuilder {
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Unordered and visible Pile meant to function as the set of Cards a Player posses.
+ * @author Tess Noonan (tcn6)
  */
 public class Hand implements Pile {
 

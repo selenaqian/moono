@@ -6,6 +6,7 @@ import java.util.Stack;
 
 /**
  * This is a Deck that Starts with no or few Cards then grows.
+ * @author Tess Noonan (tcn6)
  */
 public class DiscardPile extends Deck {
 

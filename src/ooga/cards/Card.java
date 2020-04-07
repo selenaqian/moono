@@ -41,7 +41,15 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo (Card o) {
-        return myValue.compareTo(o.myValue);
+        int valueComp = myValue.compareTo(o.myValue);
+        int suitComp = mySuit.compareTo(o.mySuit);
+        if(valueComp == 0 && suitComp == 0){
+            return 0;
+        }
+        else if(valueComp != 0){
+            return valueComp;
+        }
+        return suitComp;
     }
 
 }

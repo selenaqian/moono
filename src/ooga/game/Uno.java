@@ -25,7 +25,7 @@ public class Uno {
 
     public Uno(){
         //initialize connection to view
-        this.view = new View();
+        this.view = new View(); //change to interface
         turnManager = new UnoTurnManager();
         currentPlayer = turnManager.getCurrentPlayer();
 

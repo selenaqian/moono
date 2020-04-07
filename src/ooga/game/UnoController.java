@@ -2,7 +2,6 @@ package ooga.game;
 
 public class UnoController implements GameControl {
 
-
     @Override
     public void start() {
 

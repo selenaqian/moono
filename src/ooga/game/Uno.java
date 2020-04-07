@@ -6,6 +6,8 @@ import ooga.piles.DrawPile;
 import ooga.piles.Hand;
 import ooga.player.Player;
 import ooga.rules.Rule;
+import ooga.view.GameView;
+import ooga.view.GameViewInterface;
 
 /**
  * Controller class for handling play of Uno
@@ -13,7 +15,7 @@ import ooga.rules.Rule;
  */
 public class Uno {
 
-    private View view;
+    private GameViewInterface view;
 
     private UnoTurnManager turnManager;
     private Player currentPlayer;
@@ -25,7 +27,7 @@ public class Uno {
 
     public Uno(){
         //initialize connection to view
-        this.view = new View(); //change to interface
+        this.view = new GameView(); //change to interface
         turnManager = new UnoTurnManager();
         currentPlayer = turnManager.getCurrentPlayer();
 

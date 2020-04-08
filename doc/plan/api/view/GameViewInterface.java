@@ -29,7 +29,7 @@ public interface GameViewInterface {
      * @param cardsLeft the number of cards the AI player has left. The view doesn't need to know
      *                  what cards the AI player has, just how many are left.
      */
-    public void updateHand(int cardsLeft);
+    public void updateHand(int playerNumber, int cardsLeft);
 
     /**
      * Called by the controller. Updates the visual of what card is on top of the discard pile.

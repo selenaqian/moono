@@ -12,6 +12,12 @@ public interface GameController{
     void start();
 
     /**
+     * Pause gameplay
+     * For example, when a user accesses settings during a game
+     */
+    void pause();
+
+    /**
      * Handle the end of a game if a player reaches the winning score or if a round is completed
      */
     void end();

@@ -39,6 +39,7 @@ public class Uno implements GameModel {
         this.settings = settings;
         turnManager = new UnoTurnManager();
         gameStatus = new GameStatus();
+        addPlayers();
     }
 
     @Override
@@ -47,7 +48,6 @@ public class Uno implements GameModel {
         drawPile = new DrawPile();
         currentPlayer = turnManager.getCurrentPlayer();
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
-
         dealCards();
     }
 
@@ -118,6 +118,15 @@ public class Uno implements GameModel {
         }
     }
 
+    /**
+     * Adds players to the game based on number of players selected in SetupView
+     * TODO: Refactor this - have another class to manage/initialize players?
+     */
+    private void addPlayers(){
+        for (int i = 0; i < settings.getNumPlayers(); i++){
+            turnManager.addPlayer(new Player());
+        }
+    }
 
 //    /**
 //     * Handle effect of an action card when it played

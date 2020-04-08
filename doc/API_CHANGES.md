@@ -11,3 +11,4 @@ that information elsewhere. We also determined that we would need methods to all
 on the view when actions in the backend occurred.
 4. (4/7/2020) Modified the updateHand(int cardsLeft) method to be updateHand(int playerNumber, int cardsLeft) because realized
 the view needs to know which player to update the hand view of in that method.
+5. (4/7/2020) Renamed and modified GamePlay to GameModel as it will be referenced in the View. The interface is now specific to card games and includes methods to manage drawing and playing cards.

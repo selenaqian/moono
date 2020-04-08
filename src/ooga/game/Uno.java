@@ -13,7 +13,7 @@ import ooga.view.GameViewInterface;
  * Controller class for handling play of Uno
  * Equivalent to GamePlay interface from planning
  */
-public class Uno {
+public class Uno implements GameControl {
 
     private GameViewInterface view;
 
@@ -27,12 +27,20 @@ public class Uno {
 
     public Uno(){
         //initialize connection to view
-        this.view = new GameView(); //change to interface
+        this.view = new GameView(); //TODO: change to interface
         turnManager = new UnoTurnManager();
-        currentPlayer = turnManager.getCurrentPlayer();
+    }
 
+    @Override
+    public void start() {
         discPile = new DiscardPile();
         drawPile = new DrawPile();
+        currentPlayer = turnManager.getCurrentPlayer();
+    }
+
+    @Override
+    public void end() {
+
     }
 
     public void setRules(Rule rule){
@@ -52,13 +60,13 @@ public class Uno {
             //currentPlayer.playCard(selectedCard);
 
             //update the discard pile to add the card
-            discPile.addCard(selectedCard); //TODO: make sure addCard adds to the top of the pile?
+            discPile.addCard(selectedCard);
+
+            //TODO: make call to handleAction() once special cards are implemented
+
+            //go to next player only when a valid card is played
+            turnManager.nextPlayer();
         }
-
-        //TODO: make call to handleAction() once special cards are implemented
-
-        //end current player's turn and go to next player
-        turnManager.nextPlayer();
     }
 
     /**

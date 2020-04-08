@@ -8,6 +8,7 @@ package ooga.game;
 public interface GameController{
     /**
      * Begin playing a new game or new round
+     * Called from view once a user has finished setting up
      */
     void start();
 
@@ -20,6 +21,6 @@ public interface GameController{
     /**
      * Handle the end of a game if a player reaches the winning score or if a round is completed
      */
-    void end();
+    void endGame();
 
 }

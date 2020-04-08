@@ -1,4 +1,5 @@
 package ooga.player;
+import ooga.rules.ClassicRules;
 
 import ooga.cards.Card;
 
@@ -25,6 +26,9 @@ public class ManualPlayer implements Player {
     @Override
     public Card playcard(List<Card> hand, Card card) {
         Card chosen;
+        if((ClassicRules.isValid(card,chosen))== true){
+
+        }
         return chosen;
     }
 

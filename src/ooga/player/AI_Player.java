@@ -1,7 +1,7 @@
 package ooga.player;
 
 import ooga.cards.Card;
-
+import ooga.rules.ClassicRules;
 import java.util.List;
 
 public class AI_Player implements Player {
@@ -30,7 +30,7 @@ public class AI_Player implements Player {
     public Card playcard(List<Card> hand, Card card) {
 
         for (Card playable: hand) {
-            if((playable.toString().compareTo(card.toString()))>0){
+            if((ClassicRules.isValid(card, playable)==true){
                 goodcard = playable;
             }
         }

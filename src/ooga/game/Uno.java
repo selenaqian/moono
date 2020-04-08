@@ -9,17 +9,21 @@ import ooga.rules.Rule;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
 
+import java.util.List;
+
 /**
- * Controller class for handling play of Uno
+ * Model class for handling play of Uno
  * Equivalent to GamePlay interface from planning
  */
 public class Uno implements GameModel {
 
     private GameViewInterface view;
 
+    private GameSettings settings;
     private GameStatus gameStatus;
     private UnoTurnManager turnManager;
     private Player currentPlayer;
+    private Player user; //the human player
 
     private DiscardPile discPile;
     private DrawPile drawPile;
@@ -27,8 +31,12 @@ public class Uno implements GameModel {
     private Rule rule;
 
     public Uno(){
-        //initialize connection to view
+        this(new GameSettings());
+    }
+
+    public Uno(GameSettings settings){
         this.view = new GameView(); //TODO: change to interface
+        this.settings = settings;
         turnManager = new UnoTurnManager();
         gameStatus = new GameStatus();
     }
@@ -42,6 +50,7 @@ public class Uno implements GameModel {
         discPile = new DiscardPile();
         drawPile = new DrawPile();
         currentPlayer = turnManager.getCurrentPlayer();
+        user = currentPlayer; //TODO: change this so that the human doesn't always start first
     }
 
     /**
@@ -83,6 +92,11 @@ public class Uno implements GameModel {
         endTurn();
     }
 
+    @Override
+    public List<Card> getUserHand() {
+        return user.hand();
+    }
+
     private void endTurn(){
         //check if a player has no more cards
         if (currentPlayer.hand().size() == 0){
@@ -91,6 +105,7 @@ public class Uno implements GameModel {
             turnManager.nextPlayer();
         }
     }
+
 
 
 //    /**

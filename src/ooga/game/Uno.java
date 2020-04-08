@@ -34,10 +34,9 @@ public class Uno implements GameModel {
     }
 
     public Uno(GameSettings settings){
-        this.view = new GameView(); //TODO: change to interface
+        this.view = new GameView(settings); //TODO: change to interface
         this.settings = settings;
         turnManager = new UnoTurnManager();
-        unoController = new UnoController();
         addPlayers();
     }
 

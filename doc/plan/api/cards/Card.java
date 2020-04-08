@@ -1,7 +1,7 @@
 package ooga.cards;
 
 /**
- * This class combines Suit, Value, and Action to create a Card.
+ * This class combines Suit and Value to create a Card.
  * Has capacity for comparison via Comparable.
  * (Will be changed to concrete class)
  */
@@ -18,12 +18,6 @@ public interface Card /*implements Comparable<Card>*/ {
      * @return myValue
      */
     Value getValue ();
-
-    /**
-     * Get Action of Card.
-     * @return myAction
-     */
-    Action getAction ();
 
     @Override
     String toString ();

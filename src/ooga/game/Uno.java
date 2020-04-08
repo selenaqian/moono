@@ -6,6 +6,8 @@ import ooga.piles.DrawPile;
 import ooga.piles.Hand;
 import ooga.player.Player;
 import ooga.rules.Rule;
+import ooga.view.GameView;
+import ooga.view.GameViewInterface;
 
 /**
  * Controller class for handling play of Uno
@@ -13,7 +15,7 @@ import ooga.rules.Rule;
  */
 public class Uno {
 
-    private View view;
+    private GameViewInterface view;
 
     private UnoTurnManager turnManager;
     private Player currentPlayer;
@@ -25,7 +27,7 @@ public class Uno {
 
     public Uno(){
         //initialize connection to view
-        this.view = new View();
+        this.view = new GameView(); //change to interface
         turnManager = new UnoTurnManager();
         currentPlayer = turnManager.getCurrentPlayer();
 
@@ -47,7 +49,7 @@ public class Uno {
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
 
             //make sure player updates their hand to remove the card
-            currentPlayer.playCard(selectedCard);
+            //currentPlayer.playCard(selectedCard);
 
             //update the discard pile to add the card
             discPile.addCard(selectedCard); //TODO: make sure addCard adds to the top of the pile?
@@ -66,10 +68,10 @@ public class Uno {
      */
     public void drawCard(){
         //take the top card from the discard pile, make sure it is removed from the discard pile
-        Card card = discPile.popTopCard();
+        //Card card = discPile.popTopCard();
 
         //get player to accept the drawn card into their own hand of cards
-        currentPlayer.takeCard(card);
+        //currentPlayer.takeCard(card);
 
         //end current player's turn and go to next player
         turnManager.nextPlayer();

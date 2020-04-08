@@ -9,6 +9,7 @@ import java.util.Stack;
 
 /**
  * A Deck is an ordered Pile that acts like a Stack (only add/draw from top).
+ * @author Tess Noonan (tcn6)
  */
 public abstract class Deck implements Pile {
 
@@ -42,7 +43,7 @@ public abstract class Deck implements Pile {
     }
 
     @Override
-    public List<Card> getAllCards(){
+    public Stack<Card> getAllCards(){
         return myCards;
     }
 

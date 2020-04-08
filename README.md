@@ -16,12 +16,12 @@ Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent Together: 6 hours
+Hours Spent Together: 7 hours
 
 Individual:
-- Tess Hours: 6 hours 45 mins
+- Tess Hours: 8 hours
 - Mary Hours:
-- Selena Hours: 4 hours
+- Selena Hours: 8 hours
 - Suomo Hours:
 
 ### Primary Roles
@@ -32,6 +32,7 @@ Individual:
 - [Uno Variations - invented by players](https://www.pagat.com/invented/uno_vars.html)
 - [Uno Variations - special cards in themed decks](http://unovariations.blogspot.com/p/special-wild-cards.html)
 - [XML into Java Objects](https://www.javatpoint.com/jaxb-unmarshalling-example)
+- [JavaFX Slider Example](https://docs.oracle.com/javafx/2/ui_controls/slider.htm)
 
 ### Running the Program
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * A Pile is an organized, mutable group of Cards.
- * TODO: Change to abstract class if there are overlapping method implementations;
+ * @author Tess Noonan (tcn6)
  */
 public interface Pile {
 

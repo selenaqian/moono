@@ -1,24 +1,22 @@
 package ooga.cards;
 
 /**
- * This class combines Suit, Value, and Action to create a Card.
+ * This class combines Suit and Value to create a Card.
  * Has capacity for comparison via Comparable.
+ * @author Tess Noonan (tcn6)
  */
 public class Card implements Comparable<Card> {
     private final Suit mySuit;
     private final Value myValue;
-    private final Action myAction;
 
     /**
      * Create a new Card.
      * @param suit
      * @param value
-     * @param action
      */
-    public Card (Suit suit, Value value, Action action) {
+    public Card (Suit suit, Value value) {
         mySuit = suit;
         myValue = value;
-        myAction = action;
     }
 
     /**
@@ -37,22 +35,22 @@ public class Card implements Comparable<Card> {
         return myValue;
     }
 
-    /**
-     * Get Action of Card.
-     * @return myAction
-     */
-    public Action getAction (){
-        return myAction;
-    }
-
     @Override
     public String toString () {
-        return getSuit().toString() + getValue().toString() + getAction().toString();
+        return getSuit().toString() + getValue().toString();
     }
 
     @Override
     public int compareTo (Card o) {
-        return myValue.compareTo(o.myValue);
+        int valueComp = myValue.compareTo(o.myValue);
+        int suitComp = mySuit.compareTo(o.mySuit);
+        if(valueComp == 0 && suitComp == 0){
+            return 0;
+        }
+        else if(valueComp != 0){
+            return valueComp;
+        }
+        return suitComp;
     }
 
 }

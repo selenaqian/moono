@@ -1,13 +1,14 @@
 package ooga.piles;
 
-import ooga.cards.Action;
 import ooga.cards.Card;
+import ooga.cards.Value;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This is a Deck that typically starts with a complete set of Cards then shrinks.
+ * @author Tess Noonan (tcn6)
  */
 public class DrawPile extends Deck {
 
@@ -23,16 +24,24 @@ public class DrawPile extends Deck {
     /**
      * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
      * TODO: This will not be relevant until Sprint 2
-     * @param actions
+     * @param values
      */
-    public DrawPile(List<Action> actions){
+    public DrawPile(List<Value> values){
         CardBuilder build = new CardBuilder();
-        myCards = build.makeDeck(actions);
+        myCards = build.makeDeck(values);
         shuffle();
     }
 
     /**
-     * Returns the specified number of Cards and removes them from Pile.
+     * Returns the top Card and removes it from the Pile.
+     * @return Card
+     */
+    public Card drawCard(){
+        return myCards.pop();
+    }
+
+    /**
+     * Returns the specified number of Cards and removes them from the Pile.
      * @param numCards
      * @return List<Card>
      */

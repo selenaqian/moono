@@ -1,25 +1,24 @@
 package ooga.game;
 
-public class UnoController implements GameControl {
-
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void initialize() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void end() {
-
-    }
-}
+///**
+// * Manages an entire game of uno
+// * Sprint 1 assumes 1 round in a game
+// */
+//public class UnoController implements GameControl {
+//
+//    @Override
+//    public void init() {
+//        Uno game = new Uno();
+//    }
+//
+//    @Override
+//    public void end() {
+//
+//
+//    }
+//
+//    @Override
+//    public boolean isOver() {
+//
+//    }
+//}

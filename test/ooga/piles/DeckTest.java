@@ -18,7 +18,7 @@ class DeckTest {
      * Note: Stacks are equal when they have the same elements in the same order.
      */
     @Test
-    void shuffle() {
+    void shuffleStandardDeck() {
         Deck deck1 = new DrawPile();
         Stack<Card> deck1Start = deck1.getAllCards();
         assertEquals(deck1Start, deck1.getAllCards());
@@ -63,7 +63,7 @@ class DeckTest {
      * Tests that addCard() adds a single Card to the top of the Deck.
      */
     @Test
-    void addCard() {
+    void addUniqueCard() {
         Card card1 = new Card(Suit.D, Value.NINE);
         Card card2 = new Card(Suit.B, Value.SIX);
         Deck deck4 = new DiscardPile(card1);

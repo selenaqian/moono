@@ -12,6 +12,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.game.GameSettings;
 
+import java.util.ArrayList;
+
 public class SetupView {
     public static final int DEFAULT_STAGE_WIDTH = 1000;
     public static final int DEFAULT_STAGE_HEIGHT = 600;
@@ -83,6 +85,7 @@ public class SetupView {
         settings.setNumPlayers((int) numberPlayersSlider.getValue());
         settings.setWinningScore((int) scoreToWinSlider.getValue());
 
+        new GameView(settings.getNumPlayers(), settings.getHandSize(), new ArrayList<>(), mainStage);
         //TODO: transition to next scene
     }
 

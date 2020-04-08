@@ -1,11 +1,9 @@
 package ooga.piles;
 
 import ooga.cards.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,28 +13,18 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class DeckTest {
 
-    //TODO: Get rid of the instance var/before each
-    private Deck deck1;
-
-    /**
-     * Start each test with a fresh Deck.
-     * Uses DrawPile as the concrete subclass because it provides Cards to start that we can use for the testing.
-     */
-    @BeforeEach
-    void setUp() {
-        deck1 = new DrawPile();
-    }
-
     /**
      * Tests that the Card Stacks are unequal to the original Stack after shuffling.
      * Note: Stacks are equal when they have the same elements in the same order.
      */
     @Test
     void shuffle() {
+        Deck deck1 = new DrawPile();
         Stack<Card> deck1Start = deck1.getAllCards();
         assertEquals(deck1Start, deck1.getAllCards());
         deck1.shuffle();
         assertNotEquals(deck1Start, deck1.getAllCards());
+
         Stack<Card> deck1Next = deck1.getAllCards();
         assertEquals(deck1Next, deck1.getAllCards());
         deck1.shuffle();
@@ -52,6 +40,7 @@ class DeckTest {
         Deck deck2 = new DiscardPile();
         Stack<Card> deck2Start = deck2.getAllCards();
         assertEquals(deck2Start, deck2.getAllCards());
+
         deck2.shuffle();
         assertEquals(deck2Start, deck2.getAllCards());
     }
@@ -65,6 +54,7 @@ class DeckTest {
         Deck deck3 = new DiscardPile(new Card(Suit.C, Value.SEVEN));
         Stack<Card> deck2Start = deck3.getAllCards();
         assertEquals(deck2Start, deck3.getAllCards());
+
         deck3.shuffle();
         assertEquals(deck2Start, deck3.getAllCards());
     }
@@ -99,8 +89,32 @@ class DeckTest {
         assertEquals(card1, deck5.getAllCards().pop());
     }
 
+    /**
+     * Tests adding a List of Cards with the addCards() method when
+     * there is only one Card in the List.
+     */
     @Test
-    void addCards() {
+    void addCardsSingle() {
+        Deck deck6 = new DiscardPile();
+        Card card1 = new Card(Suit.D, Value.NINE);
+
+        List<Card> moreCards = new ArrayList<>(Arrays.asList(card1));
+        deck6.addCards(moreCards);
+        assertEquals(card1, deck6.getAllCards().peek());
+        assertEquals(1, deck6.getAllCards().size());
+    }
+
+    @Test
+    void addCardsMultiple() {
+        Deck deck7 = new DiscardPile();
+        Card card1 = new Card(Suit.D, Value.NINE);
+        Card card2 = new Card(Suit.A, Value.ONE);
+        Card cardiB = new Card(Suit.D, Value.ONE);
+       //TODO: finish writing this test
+        List<Card> moreCards = new ArrayList<>(Arrays.asList(card1, card2, cardiB));
+        deck7.addCards(moreCards);
+        assertEquals(card1, deck7.getAllCards().peek());
+        assertEquals(1, deck7.getAllCards().size());
     }
 
     @Test

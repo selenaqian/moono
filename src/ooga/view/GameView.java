@@ -9,6 +9,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.cards.Card;
+import ooga.cards.Suit;
+import ooga.cards.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +21,25 @@ public class GameView implements GameViewInterface {
     private Stage mainStage;
     private List<Pane> playerViews;
     private BorderPane mainPane;
+    private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
 
     public GameView() {
-        this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Stage());
+        this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Card(Suit.A, Value.ZERO), new Stage());
     }
 
-    public GameView(int numPlayers, int startCards, List<Card> player1Cards, Stage stage) {
+    public GameView(int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
         mainStage = stage;
+        allPlayersCardsLeft = new ArrayList<>();
         playerViews = makePlayerStatuses(numPlayers, startCards);
         updateHand(player1Cards);
         mainPane = new BorderPane();
-        anchorPlayerViews();
+        positionPlayerViews();
         // TODO: figure out why alignment isn't working
         for (Pane p : playerViews) {
             mainPane.setAlignment(p, Pos.CENTER);
         }
 
-        // TODO: still need render the deck and discard piles, uno button
+        // TODO: still need render the deck and discard piles in center of pane
 
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainStage.setScene(mainScene);
@@ -44,7 +48,7 @@ public class GameView implements GameViewInterface {
         // TODO: initialize and use properties file for text
     }
 
-    private void anchorPlayerViews() {
+    private void positionPlayerViews() {
         mainPane.setBottom(playerViews.get(0));
         mainPane.setLeft(playerViews.get(1));
         if (playerViews.size()>2) mainPane.setTop(playerViews.get(2));
@@ -59,7 +63,7 @@ public class GameView implements GameViewInterface {
 
             Text playerNumber = new Text("Player " + (i+1));
             Text cardsLeft = new Text(startCards + " left");
-            cardsLeft.setId("player" + (i+1) + "cardsleft");
+            allPlayersCardsLeft.add(cardsLeft);
             textBox.getChildren().addAll(playerNumber, cardsLeft);
 
             Circle playerIcon = new Circle(10);
@@ -86,11 +90,18 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        // just needs to update the text inside the vbox - use a lookup probably
+        allPlayersCardsLeft.remove(allPlayersCardsLeft.get(playerNumber - 1));
+        allPlayersCardsLeft.add(playerNumber - 1, new Text(cardsLeft + " left"));
     }
 
     @Override
     public void updateDiscardPile(Card card) {
         // replace the rendering of the current discard with a new one
+    }
+
+    // Methods below primarily used for testing - to get objects and check their displayed values.
+
+    public List<Text> getAllPlayersCardsLeft() {
+        return allPlayersCardsLeft;
     }
 }

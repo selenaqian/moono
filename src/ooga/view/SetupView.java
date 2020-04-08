@@ -10,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.cards.Card;
+import ooga.cards.Suit;
+import ooga.cards.Value;
 import ooga.game.GameSettings;
 
 import java.util.ArrayList;
@@ -85,7 +88,7 @@ public class SetupView {
         settings.setNumPlayers((int) numberPlayersSlider.getValue());
         settings.setWinningScore((int) scoreToWinSlider.getValue());
 
-        new GameView(settings.getNumPlayers(), settings.getHandSize(), new ArrayList<>(), mainStage);
+        new GameView(settings.getNumPlayers(), settings.getHandSize(), new ArrayList<>(),  new Card(Suit.A, Value.ZERO), mainStage);
         //TODO: transition to next scene
     }
 

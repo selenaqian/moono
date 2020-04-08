@@ -101,6 +101,10 @@ public class GameView implements GameViewInterface {
 
     // Methods below primarily used for testing - to get objects and check their displayed values.
 
+    /**
+     * Used for testing. Allows test to access the list of text objects that state how many cards each player has left.
+     * @return the list of text objects where the text object at a certain index corresponds to the text display to player number index+1.
+     */
     public List<Text> getAllPlayersCardsLeft() {
         return allPlayersCardsLeft;
     }

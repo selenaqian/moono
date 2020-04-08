@@ -41,16 +41,14 @@ public class Uno implements GameModel {
         gameStatus = new GameStatus();
     }
 
-    public void setRules(Rule rule){
-        this.rule = rule;
-    }
-
     @Override
     public void start() {
         discPile = new DiscardPile();
         drawPile = new DrawPile();
         currentPlayer = turnManager.getCurrentPlayer();
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
+
+        dealCards();
     }
 
     /**
@@ -84,10 +82,10 @@ public class Uno implements GameModel {
     @Override
     public void drawCard(){
         //take the top card from the discard pile, make sure it is removed from the discard pile
-        //Card card = discPile.popTopCard();
+        Card card = drawPile.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        //currentPlayer.takeCard(card);
+        currentPlayer.takeCard(card);
 
         endTurn();
     }
@@ -106,6 +104,19 @@ public class Uno implements GameModel {
         }
     }
 
+    /**
+     * Deal cards to all players in the beginning of a game
+     */
+    private void dealCards(){
+        for(int i = 0; i < settings.getNumPlayers(); i ++){
+            Player player = turnManager.getFirstPlayer();
+            for (int j = 0; j < settings.getHandSize(); j++){
+                Card card = drawPile.drawCard();
+                player.takeCard(card);
+                turnManager.nextPlayer();
+            }
+        }
+    }
 
 
 //    /**

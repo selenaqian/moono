@@ -11,17 +11,21 @@ public class ManualPlayer implements player {
     }
 
     @Override
-    public Card cardBeingPlayed(List<Card> hand) {
+    public Card cardBeingPlayed(List<Card> hand, Card card) {
+        return null;
+    }
+
+
+    @Override
+    public List playerName() {
         return null;
     }
 
     @Override
-    public String playerName() {
-        return null;
+    public Card playcard(List<Card> hand, Card card) {
+
+        return card;
     }
 
-    @Override
-    public void playcard(List<Card> hand) {
 
-    }
 }

@@ -13,7 +13,7 @@ public class Main extends Application {
     }
 
     public void newGame(){
-        SetupView start = new SetupView();
+        SetupView setup = new SetupView();
     }
 
     public static void main(String[] args) {

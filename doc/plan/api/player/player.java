@@ -1,6 +1,7 @@
 package player;
 
 import ooga.cards.Card;
+import ooga.piles.DrawPile;
 
 import java.util.List;
 
@@ -12,17 +13,21 @@ import java.util.List;
  *
  */
 public interface player {
+    int numcardsperhand = 7;
+
 
     /**
      * returns a list of the player's hand
      * @return
      */
-    List<Card> hand();
+    default List<Card> hand(){
+        return DrawPile.drawCards(numcardsperhand);
+    }
 
     /**
      * for AI player, computes the best card of play
      * for manual player, obtains the choice of card from player(ie button click)
-     * @param  list of the player's hand
+     * @param   hand,card
      * @return the chosen card of play
      */
     Card cardBeingPlayed(List<Card> hand, Card card);
@@ -32,7 +37,7 @@ public interface player {
      * for manual player, string input
      * @return the player's chosen name
      */
-    List playerName();
+    String playerName();
 
     /**
      *governs what card a player can play

@@ -1,12 +1,11 @@
-package player;
+package ooga.player;
 
 import ooga.cards.Card;
-import ooga.piles.DrawPile;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ManualPlayer implements player {
+public class ManualPlayer implements Player {
 
     @Override
     public Card cardBeingPlayed(List<Card> hand, Card card) {

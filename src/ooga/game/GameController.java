@@ -5,7 +5,7 @@ package ooga.game;
  * Controls the overall flow of the game and will control the game loop
  */
 
-public interface GameControl{
+public interface GameController{
     /**
      * Begin playing a new game or new round
      */

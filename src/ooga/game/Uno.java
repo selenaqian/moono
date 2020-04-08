@@ -13,7 +13,7 @@ import ooga.view.GameViewInterface;
  * Controller class for handling play of Uno
  * Equivalent to GamePlay interface from planning
  */
-public class Uno implements GameControl {
+public class Uno implements GameModel {
 
     private GameViewInterface view;
 
@@ -33,6 +33,10 @@ public class Uno implements GameControl {
         gameStatus = new GameStatus();
     }
 
+    public void setRules(Rule rule){
+        this.rule = rule;
+    }
+
     @Override
     public void start() {
         discPile = new DiscardPile();
@@ -40,20 +44,12 @@ public class Uno implements GameControl {
         currentPlayer = turnManager.getCurrentPlayer();
     }
 
-    @Override
-    public void end() {
-
-    }
-
-    public void setRules(Rule rule){
-        this.rule = rule;
-    }
-
     /**
      * Handle behavior when a user selects a card to play it
      * Called from the view
      * @param selectedCard the card selected by the player in the view or selected by the AI player
      */
+    @Override
     public void playCard(Card selectedCard){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
@@ -76,6 +72,7 @@ public class Uno implements GameControl {
      * Called from the view for human players
      * For AI players, must be called programmatically
      */
+    @Override
     public void drawCard(){
         //take the top card from the discard pile, make sure it is removed from the discard pile
         //Card card = discPile.popTopCard();

@@ -33,6 +33,7 @@ public class SetupView {
     private Slider numberPlayersSlider;
     private Slider cardsPerPlayerSlider;
     private Slider scoreToWinSlider;
+    private Button welcomeOkButton;
 
     /**
      * Initializes the SetupView object by initializing all of its instance variables.
@@ -64,7 +65,7 @@ public class SetupView {
         HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, "# cards per player", DEFAULT_CARDS, INCREMENT_ONE);
         HBox scoreToWin = makeSlider(scoreToWinSlider, "max. score to win", DEFAULT_SCORE, INCREMENT_50);
 
-        Button welcomeOkButton = new Button("okay!");
+        welcomeOkButton = new Button("okay!");
         welcomeOkButton.setOnAction(e -> welcomeOkPressed());
 
         root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton);
@@ -100,6 +101,7 @@ public class SetupView {
 
         slide.setBlockIncrement(increment);
         slide.setMajorTickUnit(increment);
+        slide.setMinorTickCount(0);
         slide.setSnapToTicks(true);
 
         // Code here based on the example in the JavaFX Slider Example (see README for link to resource)
@@ -112,5 +114,45 @@ public class SetupView {
         box.getChildren().addAll(text, slide, slideValue);
         box.setAlignment(Pos.CENTER);
         return box;
+    }
+
+    /**
+     * Used for testing. Allows test to access the okay! button in the starting scene.
+     * @return the okay! button in welcomeScene.
+     */
+    public Button getWelcomeOkButton() {
+        return welcomeOkButton;
+    }
+
+    /**
+     * Used for testing. Allows test to access the gameSettings object to check that values have updated appropriately.
+     * @return the gameSettings object instance in this.
+     */
+    public GameSettings getSettings() {
+        return settings;
+    }
+
+    /**
+     * Used for testing. Allows test to access numberPlayersSlider to change its value.
+     * @return the slider that controls the number of players in the game.
+     */
+    public Slider getNumberPlayersSlider() {
+        return numberPlayersSlider;
+    }
+
+    /**
+     * Used for testing. Allows test to access cardsPerPlayerSlider to change its value.
+     * @return the slider that controls the number of cards initially dealt to players in the game.
+     */
+    public Slider getCardsPerPlayerSlider() {
+        return cardsPerPlayerSlider;
+    }
+
+    /**
+     * Used for testing. Allows test to access getScoreToWinSlider to change its value.
+     * @return the slider that controls the setting of the score win condition.
+     */
+    public Slider getScoreToWinSlider() {
+        return scoreToWinSlider;
     }
 }

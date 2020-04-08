@@ -17,6 +17,7 @@ public class Uno implements GameControl {
 
     private GameViewInterface view;
 
+    private GameStatus gameStatus;
     private UnoTurnManager turnManager;
     private Player currentPlayer;
 
@@ -29,6 +30,7 @@ public class Uno implements GameControl {
         //initialize connection to view
         this.view = new GameView(); //TODO: change to interface
         turnManager = new UnoTurnManager();
+        gameStatus = new GameStatus();
     }
 
     @Override
@@ -65,7 +67,7 @@ public class Uno implements GameControl {
             //TODO: make call to handleAction() once special cards are implemented
 
             //go to next player only when a valid card is played
-            turnManager.nextPlayer();
+            endTurn();
         }
     }
 
@@ -81,33 +83,42 @@ public class Uno implements GameControl {
         //get player to accept the drawn card into their own hand of cards
         //currentPlayer.takeCard(card);
 
-        //end current player's turn and go to next player
-        turnManager.nextPlayer();
+        endTurn();
     }
 
-    /**
-     * Handle effect of an action card when it played
-     * This method should have access to TurnManager, especially for Reverse cards
-     * TODO: put action methods in a resource file and use this method to call them
-     */
-    public void handleAction(){
-
+    private void endTurn(){
+        //check if a player has no more cards
+        if (currentPlayer.hand().size() == 0){
+            gameStatus.endGame();
+        } else {
+            turnManager.nextPlayer();
+        }
     }
 
-    /**
-     * Allows the human player to declare uno
-     * Called from view class when the "uno" button is clicked
-     */
-    public void callUno(){
 
-    }
-
-    /**
-     * Once a player has no cards left, check if they have declared uno
-     * If a player has not declared, then they must pick up more cards
-     */
-    public void checkUno(){
-
-    }
+//    /**
+//     * Handle effect of an action card when it played
+//     * This method should have access to TurnManager, especially for Reverse cards
+//     * TODO: put action methods in a resource file and use this method to call them
+//     */
+//    public void handleAction(){
+//
+//    }
+//
+//    /**
+//     * Allows the human player to declare uno
+//     * Called from view class when the "uno" button is clicked
+//     */
+//    public void callUno(){
+//
+//    }
+//
+//    /**
+//     * Once a player has no cards left, check if they have declared uno
+//     * If a player has not declared, then they must pick up more cards
+//     */
+//    public void checkUno(){
+//
+//    }
 
 }

@@ -1,5 +1,6 @@
 package ooga.game;
 
+import javafx.stage.Stage;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
@@ -9,9 +10,9 @@ public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
 
-    public UnoController(GameSettings settings){
-        this.settings = settings;
-        //setupView = new SetupView(this, settings); //so that view knows about controller and GameSettings
+    public UnoController(Stage stage){
+        this.settings = new GameSettings();
+        setupView = new SetupView(this, settings, stage); //so that view knows about controller and GameSettings
     }
 
     @Override

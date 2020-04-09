@@ -8,6 +8,7 @@ import ooga.rules.Rule;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class Uno implements GameModel {
 
     private GameViewInterface view;
 
-    private GameSettings settings;
+    private GameSettings mySettings;
     private UnoController unoController;
     private UnoTurnManager turnManager;
     private Player currentPlayer;
@@ -34,8 +35,8 @@ public class Uno implements GameModel {
     }
 
     public Uno(GameSettings settings){
-        this.view = new GameView(settings); //TODO: change to interface
-        this.settings = settings;
+        view = new GameView(); //TODO: change to interface
+        mySettings = settings;
         turnManager = new UnoTurnManager();
         addPlayers();
     }

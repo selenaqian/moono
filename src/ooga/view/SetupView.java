@@ -14,6 +14,7 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.game.GameSettings;
+import ooga.game.UnoController;
 
 import java.util.ArrayList;
 
@@ -33,21 +34,26 @@ public class SetupView {
     public static final int INCREMENT_50 = 50;
     public static final int DEFAULT_SPACING = 10;
 
-    private GameSettings settings;
-    private UnoController controller;
+    private GameSettings mySettings;
+    private UnoController myController;
     private Stage mainStage;
     private Slider numberPlayersSlider;
     private Slider cardsPerPlayerSlider;
     private Slider scoreToWinSlider;
     private Button welcomeOkButton;
 
+    public SetupView(Stage stage) {
+        this(new UnoController(stage), new GameSettings(), stage);
+    }
+
     /**
      * Initializes the SetupView object by initializing all of its instance variables.
      * Also displays the first scene.
      */
-    public SetupView() {
-        settings = new GameSettings();
-        mainStage = new Stage();
+    public SetupView(UnoController controller, GameSettings settings, Stage stage) {
+        myController = controller;
+        mySettings = settings;
+        mainStage = stage;
 
         numberPlayersSlider = new Slider(MIN_PLAYERS, MAX_PLAYERS, DEFAULT_PLAYERS);
         cardsPerPlayerSlider = new Slider(MIN_CARDS, MAX_CARDS, DEFAULT_CARDS);
@@ -85,12 +91,11 @@ public class SetupView {
      * Helper method to handle actions once the okay! button is pressed on the welcome scene.
      */
     private void welcomeOkPressed() {
-        settings.setHandSize((int) cardsPerPlayerSlider.getValue());
-        settings.setNumPlayers((int) numberPlayersSlider.getValue());
-        settings.setWinningScore((int) scoreToWinSlider.getValue());
+        mySettings.setHandSize((int) cardsPerPlayerSlider.getValue());
+        mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
+        mySettings.setWinningScore((int) scoreToWinSlider.getValue());
 
-        new GameView(settings.getNumPlayers(), settings.getHandSize(), new ArrayList<>(),  new Card(Suit.A, Value.ZERO), mainStage);
-        //TODO: transition to next scene
+        myController.start();
     }
 
     /**
@@ -135,8 +140,8 @@ public class SetupView {
      * Used for testing. Allows test to access the gameSettings object to check that values have updated appropriately.
      * @return the gameSettings object instance in this.
      */
-    public GameSettings getSettings() {
-        return settings;
+    public GameSettings getMySettings() {
+        return mySettings;
     }
 
     /**

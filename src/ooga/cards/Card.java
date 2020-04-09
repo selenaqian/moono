@@ -41,6 +41,14 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card c = (Card) o;
+        return this.getSuit() == c.getSuit() && this.getValue() == c.getValue();
+    }
+
+    @Override
     public int compareTo (Card o) {
         int valueComp = myValue.compareTo(o.myValue);
         int suitComp = mySuit.compareTo(o.mySuit);

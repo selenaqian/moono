@@ -28,9 +28,13 @@ public class DiscardPile extends Deck {
 
     /**
      * Returns the the top card, does not remove from Pile.
-     * @return
+     * If Pile is empty, returns null.
+     * @return Card
      */
     public Card showTopCard(){
+        if(myCards.size() == 0){
+            return null;
+        }
         return myCards.peek();
     }
 }

@@ -2,8 +2,8 @@
 
 Documents any changes to the API after the finalization of the plan.
 
-1. added drawCard() method in DiscardPile
-2. removed Action enum (and all its occurrences)
+1. (4/6/2020) Added drawCard() method in DiscardPile
+2. (4/6/2020) Removed Action enum (and all its occurrences)
 3. (4/6/2020) Changed the ViewInterface to GameViewInterface. This new interface now has methods updateHand and updateDiscardPile.
 As we figured out more of the details of implementation and information flow, we decided to have a SetupView class that
 would store a GameSettings object and call setter methods for each of the sliders instead of having the view package send
@@ -12,3 +12,4 @@ on the view when actions in the backend occurred.
 4. (4/7/2020) Modified the updateHand(int cardsLeft) method to be updateHand(int playerNumber, int cardsLeft) because realized
 the view needs to know which player to update the hand view of in that method.
 5. (4/7/2020) Renamed and modified GamePlay to GameModel as it will be referenced in the View. The interface is now specific to card games and includes methods to manage drawing and playing cards.
+6. (4/8/2020) Added equals() method Override in Card.

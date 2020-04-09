@@ -18,7 +18,7 @@ class DeckTest {
      * Note: Stacks are equal when they have the same elements in the same order.
      */
     @Test
-    void shuffle() {
+    void shuffleStandardDeck() {
         Deck deck1 = new DrawPile();
         Stack<Card> deck1Start = deck1.getAllCards();
         assertEquals(deck1Start, deck1.getAllCards());
@@ -63,7 +63,7 @@ class DeckTest {
      * Tests that addCard() adds a single Card to the top of the Deck.
      */
     @Test
-    void addCard() {
+    void addUniqueCard() {
         Card card1 = new Card(Suit.D, Value.NINE);
         Card card2 = new Card(Suit.B, Value.SIX);
         Deck deck4 = new DiscardPile(card1);
@@ -101,27 +101,69 @@ class DeckTest {
         List<Card> moreCards = new ArrayList<>(Arrays.asList(card1));
         deck6.addCards(moreCards);
         assertEquals(card1, deck6.getAllCards().peek());
-        assertEquals(1, deck6.getAllCards().size());
+        assertEquals(1, deck6.getCardCount());
     }
 
+    /**
+     * Tests adding a List of Cards with the addCards() method when
+     * there are multiple Cards in the List.
+     */
     @Test
     void addCardsMultiple() {
         Deck deck7 = new DiscardPile();
         Card card1 = new Card(Suit.D, Value.NINE);
         Card card2 = new Card(Suit.A, Value.ONE);
         Card cardiB = new Card(Suit.D, Value.ONE);
-       //TODO: finish writing this test
+
         List<Card> moreCards = new ArrayList<>(Arrays.asList(card1, card2, cardiB));
         deck7.addCards(moreCards);
-        assertEquals(card1, deck7.getAllCards().peek());
-        assertEquals(1, deck7.getAllCards().size());
+
+        assertEquals(3, deck7.getCardCount());
+        assertEquals(cardiB, deck7.getAllCards().pop());
+        assertEquals(card2, deck7.getAllCards().pop());
+        assertEquals(card1, deck7.getAllCards().pop());
     }
 
+    /**
+     * Tests the getAllCards() method with an empty Deck.
+     */
     @Test
-    void getAllCards() {
+    void getAllCardsEmptyDeck() {
+        Deck deck8 = new DiscardPile();
+        assertEquals(new Stack<Card>(), deck8.getAllCards());
     }
 
+    /**
+     * Tests the getAllCards() method with a populated Deck.
+     */
     @Test
-    void getCardCount() {
+    void getAllCardsNormalDeck() {
+        Deck deck9 = new DiscardPile();
+        Card card1 = new Card(Suit.D, Value.NINE);
+        Card card2 = new Card(Suit.A, Value.ONE);
+        deck9.addCards(Arrays.asList(card1, card2));
+
+        Stack<Card> expected = new Stack<>();
+        expected.push(card1);
+        expected.push(card2);
+        assertEquals(expected, deck9.getAllCards());
+    }
+
+    /**
+     * Tests getCardCount() for a populated Deck.
+     */
+    @Test
+    void getCardCountFullDeck() {
+        Deck deck10 = new DrawPile();
+        assertEquals(80, deck10.getCardCount());
+    }
+
+    /**
+     * Tests getCardCount() for an empty Deck.
+     */
+    @Test
+    void getCardCountEmptyDeck() {
+        Deck deck11 = new DiscardPile();
+        assertEquals(0, deck11.getCardCount());
     }
 }

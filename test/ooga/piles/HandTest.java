@@ -1,6 +1,7 @@
 package ooga.piles;
 
 import ooga.cards.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -16,8 +17,14 @@ class HandTest {
     private Card card1 = new Card(Suit.A, Value.ONE);
     private Card card2 = new Card(Suit.A, Value.EIGHT);
     private Card card3 = new Card(Suit.B, Value.ONE);
-    private Hand h1 = new Hand(Arrays.asList(card1, card2, card3));
-    private Hand emptyHand = new Hand();
+    private Hand h1;
+    private Hand emptyHand;
+
+    @BeforeEach
+    void setUp() {
+        h1 = new Hand(Arrays.asList(card1, card2, card3));
+        emptyHand = new Hand();
+    }
 
     /**
      * Tests numSuit() when there are no Cards of that Suit.
@@ -74,8 +81,28 @@ class HandTest {
         assertFalse(h1.contains(new Card(Suit.C, Value.ZERO)));
     }
 
+    /**
+     * Tests removeCard() when it is present in the Hand.
+     * //TODO: error here. Find and fix.
+     */
     @Test
-    void removeCard() {
+    void removeCardPresent() {
+        assertEquals(3, h1.getCardCount());
+        h1.removeCard(card1);
+        assertEquals(2, h1.getCardCount());
+        h1.removeCard(new Card(Suit.A, Value.EIGHT));
+        assertEquals(1, h1.getCardCount());
+    }
+
+    /**
+     * Tests removeCard() when it is absent from the Hand.
+     * (There should be no changes to the Hand)
+     */
+    @Test
+    void removeCardAbsent() {
+        assertEquals(3, h1.getCardCount());
+        h1.removeCard(new Card(Suit.D, Value.FOUR));
+        assertEquals(3, h1.getCardCount());
     }
 
     @Test

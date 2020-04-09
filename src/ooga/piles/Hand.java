@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class Hand implements Pile {
 
+//    //I changed this from a List to an ArrayList so I could have access to the remove() method.
+//    private ArrayList<Card> myCards;
     private List<Card> myCards;
 
     /**
@@ -75,12 +77,12 @@ public class Hand implements Pile {
     }
 
     /**
-     * Removes given Card from Hand.
+     * Removes given Card from Hand if present.
      * @param card
-     * @return Card
      */
     public void removeCard(Card card){
-        myCards.remove(card);
+        boolean ret = myCards.remove(card);
+        return;
     }
 
     @Override

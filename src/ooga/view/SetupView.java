@@ -34,6 +34,7 @@ public class SetupView {
     public static final int DEFAULT_SPACING = 10;
 
     private GameSettings settings;
+    private UnoController controller;
     private Stage mainStage;
     private Slider numberPlayersSlider;
     private Slider cardsPerPlayerSlider;

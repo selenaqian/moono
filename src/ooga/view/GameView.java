@@ -1,6 +1,7 @@
 package ooga.view;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,10 +84,24 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(List<Card> cards) {
+        HBox player1Hand = new HBox(5);
+        for (Card c : cards) {
+            player1Hand.getChildren().add(generateCardView(c));
+        }
         // generate viewable nodes for the cards - should be scalable based on window
         // put the cards in an hbox
         // put that hbox on top of a white rectangle - inside a stackpane
         // add this stackpane into the playerViews list
+    }
+
+    private Node generateCardView(Card c) {
+        StackPane cardView = new StackPane();
+        Rectangle cardViewBase = new Rectangle();
+
+        cardViewBase.getStyleClass().add(c.getSuit().toString());
+        // make text
+        // put cardViewBase and text in cardView
+        return cardView;
     }
 
     @Override

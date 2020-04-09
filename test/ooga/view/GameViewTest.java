@@ -48,11 +48,11 @@ class GameViewTest extends DukeApplicationTest {
      */
     @Test
     void testUpdateHandOneNew() {
-        sleep(5, TimeUnit.SECONDS);
+        sleep(2, TimeUnit.SECONDS);
         List<Card> newCards = new ArrayList<>();
         newCards.add(new Card(Suit.B, Value.FIVE));
         javafxRun(() -> gameView.updateHand(newCards));
-        sleep(5, TimeUnit.SECONDS);
+        sleep(2, TimeUnit.SECONDS);
 
         HBox hand = gameView.getPlayer1Hand();
         List<CardView> cards = new ArrayList<>();
@@ -61,18 +61,18 @@ class GameViewTest extends DukeApplicationTest {
         }
 
         assertEquals(0, new Card(Suit.B, Value.FIVE).compareTo(cards.get(0).getCard()));
-        assertTrue(new Rectangle(100, 600/4, Color.BLUE).equals(cards.get(0).getChildren().get(0)));
-        assertEquals("5", cards.get(0).getChildren().get(1).toString());
+        assertEquals("5", ((Text)cards.get(0).getChildren().get(1)).getText());
+        // will check rectangle appearance in CardViewTest
     }
 
     @Test
     void testUpdateHandMultipleNew() {
-        sleep(5, TimeUnit.SECONDS);
+        sleep(2, TimeUnit.SECONDS);
         List<Card> newCards = new ArrayList<>();
         newCards.add(new Card(Suit.B, Value.FIVE));
-        for(int i=1; i<6; i++) newCards.add(new Card(Suit.C, Value.NINE));
+        for(int i=0; i<5; i++) newCards.add(new Card(Suit.C, Value.NINE));
         javafxRun(() -> gameView.updateHand(newCards));
-        sleep(5, TimeUnit.SECONDS);
+        sleep(2, TimeUnit.SECONDS);
 
         HBox hand = gameView.getPlayer1Hand();
         List<CardView> cards = new ArrayList<>();
@@ -81,13 +81,11 @@ class GameViewTest extends DukeApplicationTest {
         }
 
         assertEquals(0, new Card(Suit.B, Value.FIVE).compareTo(cards.get(0).getCard()));
-        assertTrue(new Rectangle(1000/6-5, 600/4, Color.BLUE).equals(cards.get(0).getChildren().get(0)));
-        assertEquals("5", cards.get(0).getChildren().get(1).toString());
+        assertEquals("5", ((Text)cards.get(0).getChildren().get(1)).getText());
 
-        for(int i=0; i< hand.getChildren().size(); i++) {
-            assertEquals(0, new Card(Suit.C, Value.NINE).compareTo(cards.get(i).getCard()));
-            assertTrue(new Rectangle(1000/6-5, 600/4, Color.GREEN).equals(cards.get(i).getChildren().get(0)));
-            assertEquals("9", cards.get(i).getChildren().get(1).toString());
+        for(int i=0; i< hand.getChildren().size()-1; i++) {
+            assertEquals(0, new Card(Suit.C, Value.NINE).compareTo(cards.get(i+1).getCard()));
+            assertEquals("9", ((Text)cards.get(i+1).getChildren().get(1)).getText());
         }
     }
 

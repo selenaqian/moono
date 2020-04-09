@@ -1,3 +1,8 @@
+/**
+ * Class that builds the welcome scenes GUI and gets user input to set up the game.
+ *
+ * @author Selena Qian
+ */
 package ooga.view;
 
 import javafx.beans.value.ChangeListener;

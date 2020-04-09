@@ -1,7 +1,11 @@
+/**
+ * Class that builds the main gameplay scenes and gets user input to play and draw cards.
+ *
+ * @author Selena Qian
+ */
 package ooga.view;
 
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;

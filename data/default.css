@@ -4,8 +4,20 @@
 .button {
     -fx-font-size: 12pt;
 }
-.cardText {
+.AText {
     -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.BText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.CText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.DText {
+    -fx-fill: black;
     -fx-font-size: 24pt;
 }
 .A {

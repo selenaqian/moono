@@ -33,7 +33,7 @@ public class CardView extends StackPane {
         cardViewBase.getStyleClass().add(myCard.getSuit().toString());
 
         Text cardViewText = new Text("" + myCard.getValue().getNumericValue());
-        cardViewText.getStyleClass().add("cardText");
+        cardViewText.getStyleClass().add(myCard.getSuit() + "Text");
 
         this.getChildren().addAll(cardViewBase, cardViewText);
         this.setAlignment(Pos.CENTER);

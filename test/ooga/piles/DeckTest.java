@@ -101,7 +101,7 @@ class DeckTest {
         List<Card> moreCards = new ArrayList<>(Arrays.asList(card1));
         deck6.addCards(moreCards);
         assertEquals(card1, deck6.getAllCards().peek());
-        assertEquals(1, deck6.getAllCards().size());
+        assertEquals(1, deck6.getCardCount());
     }
 
     /**
@@ -118,7 +118,7 @@ class DeckTest {
         List<Card> moreCards = new ArrayList<>(Arrays.asList(card1, card2, cardiB));
         deck7.addCards(moreCards);
 
-        assertEquals(3, deck7.getAllCards().size());
+        assertEquals(3, deck7.getCardCount());
         assertEquals(cardiB, deck7.getAllCards().pop());
         assertEquals(card2, deck7.getAllCards().pop());
         assertEquals(card1, deck7.getAllCards().pop());

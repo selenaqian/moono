@@ -16,15 +16,15 @@ public abstract class Player {
     }
 
 
-    /**
-     * for AI player, computes the best card of play
-     * for manual player, obtains the choice of card from player(ie button click)
-     * @param   hand,card
-     * @return the chosen card of play
-     */
-    Card cardBeingPlayed(List<Card> hand, Card card){
-
-    }
+//    /**
+//     * for AI player, computes the best card of play
+//     * for manual player, obtains the choice of card from player(ie button click)
+//     * @param   hand,card
+//     * @return the chosen card of play
+//     */
+//    Card cardBeingPlayed(List<Card> hand, Card card){
+//
+//    }
 
 
     /**
@@ -32,20 +32,16 @@ public abstract class Player {
      * for manual player, string input
      * @return the player's chosen name
      */
-    abstract String playerName(){
+    abstract String playerName();
 
-        return null;
-    }
 
 
     /**
      *governs what card a player can play
      * @return
      */
-    Card playcard(List<Card> hand, Card card){
+    abstract Card playcard(List<Card> hand, Card card);
 
-        return card;
-    }
 
     void takecard(Card card){
         playerhand.addCard(card);

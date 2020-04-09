@@ -1,6 +1,6 @@
 package ooga.game;
 
-import ooga.player.Playeryrdeujhfgk;
+import ooga.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,30 +8,30 @@ import java.util.ListIterator;
 
 public class UnoTurnManager implements TurnManager {
 
-    private List<Playeryrdeujhfgk> players;
-    private ListIterator<Playeryrdeujhfgk> iterator;
+    private List<Player> players;
+    private ListIterator<Player> iterator;
 
     // Direction of "rotation" to the next player
     private int direction;
     final int CW = 1;
     final int CCW = -1;
 
-    private Playeryrdeujhfgk current; //the player making the turn
+    private Player current; //the player making the turn
 
     public UnoTurnManager(){
-        this.players = new ArrayList<Playeryrdeujhfgk>();
+        this.players = new ArrayList<Player>();
         iterator = players.listIterator();
         current = getFirstPlayer();
         direction = CW;
     }
 
     @Override
-    public void addPlayer(Playeryrdeujhfgk player) {
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
     @Override
-    public Playeryrdeujhfgk getFirstPlayer() {
+    public Player getFirstPlayer() {
         //TODO: randomize this
         return players.get(0);
     }

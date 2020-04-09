@@ -10,10 +10,10 @@ public class AI_Player extends Player {
     private List<Card> myCards;
 
 
-    @Override
-    public Card cardBeingPlayed(List<Card> hand, Card card) {
-        return playcard(hand,card);
-    }
+//    @Override
+//    public Card cardBeingPlayed(List<Card> hand, Card card) {
+//        return playcard(hand,card);
+//    }
 
 
     @Override

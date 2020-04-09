@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class ManualPlayer extends Player{
 
-    @Override
-    public Card cardBeingPlayed(List<Card> hand, Card card) {
-        return playcard(hand,card);
-    }
+//    @Override
+//    public Card cardBeingPlayed(List<Card> hand, Card card) {
+//        return playcard(hand,card);
+//    }
 
 
     @Override

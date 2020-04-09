@@ -28,22 +28,25 @@ public class DrawPile extends Deck {
         shuffle();
     }
 
-    /**
-     * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
-     * TODO: This will not be relevant until Sprint 2
-     * @param values
-     */
-    public DrawPile(List<Value> values){
-        CardBuilder build = new CardBuilder();
-        myCards = build.makeDeck(values);
-        shuffle();
-    }
+//    /**
+//     * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
+//     * TODO: This will not be relevant until Sprint 2
+//     * @param values
+//     */
+//    public DrawPile(List<Value> values){
+//        CardBuilder build = new CardBuilder();
+//        myCards = build.makeDeck(values);
+//        shuffle();
+//    }
 
     /**
      * Returns the top Card and removes it from the Pile.
      * @return Card
      */
     public Card drawCard(){
+        if(myCards.size() == 0){
+            return null;
+        }
         return myCards.pop();
     }
 
@@ -55,6 +58,9 @@ public class DrawPile extends Deck {
     public List<Card> drawCards(int numCards){
         List<Card> out = new ArrayList<>();
         for(int i = 0; i < numCards; i++){
+            if(myCards.size() == 0){
+                break;
+            }
             out.add(myCards.pop());
         }
         return out;

@@ -23,7 +23,7 @@ public class Uno implements GameModel {
     private GameSettings mySettings;
     private UnoController unoController;
     private UnoTurnManager turnManager;
-    private List<Player> players;
+    private List<Player> players = new ArrayList<Player>();
     private Player currentPlayer;
     private Player user; //the human player
 
@@ -42,13 +42,14 @@ public class Uno implements GameModel {
         turnManager = new UnoTurnManager(players);
         currentPlayer = turnManager.getCurrentPlayer();
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
-        dealCards();
-        view = new GameView(this, settings.getNumPlayers(), settings.getHandSize(), getUserHand(), discPile.showTopCard(), stage); //TODO: change to interface
+        view = new GameView(this, stage); //TODO: change to interface
     }
 
     @Override
     public void start() {
-
+        discPile = new DiscardPile();
+        drawPile = new DrawPile();
+        dealCards();
     }
 
     /**
@@ -62,7 +63,7 @@ public class Uno implements GameModel {
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
 
             //make sure player updates their hand to remove the card
-            //currentPlayer.playCard(selectedCard);
+            currentPlayer.playCard(selectedCard);
 
             //update the discard pile to add the card
             discPile.addCard(selectedCard);
@@ -92,7 +93,7 @@ public class Uno implements GameModel {
         Card card = drawPile.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        // uncomment currentPlayer.takeCard(card);
+        currentPlayer.takeCard(card);
 
         endTurn();
     }
@@ -109,7 +110,7 @@ public class Uno implements GameModel {
     }
 
     public int getNumCardsInPlayerHand(int playerNum){
-        return players.get(playerNum - 1).hand().size();
+        return players.get(playerNum - 1).hand().getCardCount();
     }
 
     private void endTurn(){
@@ -129,7 +130,7 @@ public class Uno implements GameModel {
             Player player = turnManager.getFirstPlayer();
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = drawPile.drawCard();
-                //uncomment player.takeCard(card);
+                player.takeCard(card);
                 turnManager.nextPlayer();
             }
         }

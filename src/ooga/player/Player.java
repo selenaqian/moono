@@ -9,12 +9,12 @@ public class Player {
     private Hand playerhand = new Hand();
 
 
-
     /**
      * returns a list of the player's hand
+     *
      * @return
      */
-    Hand hand(){
+    public Hand hand() {
         return playerhand;
     }
 
@@ -38,17 +38,18 @@ public class Player {
 //    abstract String playerName(String name);
 
 
-
     /**
-     *governs what card a player can play
+     * governs what card a player can play
+     *
      * @return
      */
-    void playcard(Card handcard){
+    public void playCard(Card handcard) {
         playerhand.removeCard(handcard);
     }
 
 
-    void takecard(Card card){
+    public void takeCard(Card card) {
         playerhand.addCard(card);
     }
+}
 

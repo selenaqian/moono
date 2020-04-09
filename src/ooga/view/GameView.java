@@ -104,8 +104,12 @@ public class GameView implements GameViewInterface {
         Rectangle player1Mat = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
         player1Base.getChildren().addAll(player1Mat, player1Hand);
 
-        player1Box.getChildren().addAll(playerViews.get(0), player1Base);
+        //TODO: fix this - currently is plucking out the circle from the first round of using this
+        // - might need something special not sure how to make that different
+        // might have to save the player1 stuff separate from everything else which is kinda rip
+        player1Box.getChildren().addAll(playerViews.get(0).getChildren().get(0), player1Base);
         player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
+        mainPane.getChildren().remove(playerViews.get(0));
         playerViews.remove(0);
         playerViews.add(0, player1Box);
         positionPlayer1();

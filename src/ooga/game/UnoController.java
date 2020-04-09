@@ -36,9 +36,17 @@ public class UnoController implements GameController{
         EndView endView = new EndView(mainStage);
     }
 
-    //when a player selects a card
+    /**
+     * Called when a user selects a card from their hand
+     * @param card card that was clicked in the view
+     */
     public void handleCardClick(Card card){
         uno.playCard(card);
+        gameView.updateHand(uno.getUserHand());
+    }
+
+    public void handleDrawPileClick(){
+        uno.drawCard();
         gameView.updateHand(uno.getUserHand());
     }
 }

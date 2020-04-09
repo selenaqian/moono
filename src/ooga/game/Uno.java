@@ -83,7 +83,6 @@ public class Uno implements GameModel {
      */
     @Override
     public void drawCard(){
-
         //when draw pile is empty, put discard pile cards into it
         if (drawPile.getCardCount() == 0){
             drawPile = new DrawPile(discPile.getAllCards());
@@ -101,8 +100,7 @@ public class Uno implements GameModel {
 
     @Override
     public List<Card> getUserHand() {
-        // uncomment return user.hand();
-        return new ArrayList<>(); //comment out
+        return user.hand().getAllCards();
     }
 
     @Override

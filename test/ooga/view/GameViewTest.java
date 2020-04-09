@@ -33,7 +33,7 @@ class GameViewTest extends DukeApplicationTest {
             cardList.add(new Card(Suit.A, Value.ZERO));
         }
         discardStart = new Card(Suit.A, Value.THREE);
-        gameView = new GameView(new Uno(), DEFAULT_PLAYERS, DEFAULT_CARDS, cardList, discardStart, stage);
+        gameView = new GameView(new Uno(), stage);
     }
 
     @Test

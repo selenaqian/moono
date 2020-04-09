@@ -11,9 +11,8 @@ import java.util.List;
  */
 public class Hand implements Pile {
 
-//    //I changed this from a List to an ArrayList so I could have access to the remove() method.
-//    private ArrayList<Card> myCards;
-    private List<Card> myCards;
+    //I changed this from a List to an ArrayList so I could apply methods such as remove() and add()
+    private ArrayList<Card> myCards;
 
     /**
      * Creates new empty Hand.
@@ -26,7 +25,7 @@ public class Hand implements Pile {
      * Creates new Hand with passed Cards.
      * @param initialCards
      */
-    public Hand(List<Card> initialCards){
+    public Hand(ArrayList<Card> initialCards){
         myCards = initialCards;
     }
 

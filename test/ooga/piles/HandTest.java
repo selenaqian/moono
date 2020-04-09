@@ -22,7 +22,8 @@ class HandTest {
 
     @BeforeEach
     void setUp() {
-        h1 = new Hand(Arrays.asList(card1, card2, card3));
+        ArrayList<Card> cards = new ArrayList<>(Arrays.asList(card1, card2, card3));
+        h1 = new Hand(cards);
         emptyHand = new Hand();
     }
 
@@ -83,7 +84,6 @@ class HandTest {
 
     /**
      * Tests removeCard() when it is present in the Hand.
-     * //TODO: error here. Find and fix.
      */
     @Test
     void removeCardPresent() {
@@ -105,19 +105,91 @@ class HandTest {
         assertEquals(3, h1.getCardCount());
     }
 
+    /**
+     * Tests that addCard() adds a single Card to the Hand.
+     */
     @Test
-    void addCard() {
+    void addUniqueCard() {
+        ArrayList<Card> start = new ArrayList<>(Arrays.asList(card1));
+        Hand hand = new Hand(start);
+        hand.addCard(card2);
+
+        assertTrue(hand.contains(card1));
+        assertTrue(hand.contains(card2));
     }
 
+    /**
+     * Tests that addCard() adds a single Card to the Hand
+     * despite it being a duplicate to one already present.
+     */
     @Test
-    void addCards() {
+    void addDuplicateCard() {
+        ArrayList<Card> start = new ArrayList<>(Arrays.asList(card1));
+        Hand hand = new Hand(start);
+        hand.addCard(card1);
+
+        assertTrue(hand.contains(card1));
+        assertEquals(2, hand.getCardCount());
     }
 
+    /**
+     * Tests adding a List of Cards with the addCards() method when
+     * there is only one Card in the List.
+     */
     @Test
-    void getAllCards() {
+    void addCardsSingle() {
+        List<Card> moreCards = new ArrayList<>(Arrays.asList(card1));
+        emptyHand.addCards(moreCards);
+        assertTrue(emptyHand.contains(card1));
+        assertEquals(1, emptyHand.getCardCount());
     }
 
+    /**
+     * Tests adding a List of Cards with the addCards() method when
+     * there are multiple Cards in the List.
+     */
     @Test
-    void getCardCount() {
+    void addCardsMultiple() {
+        List<Card> moreCards = new ArrayList<>(Arrays.asList(card1, card2, card3));
+        emptyHand.addCards(moreCards);
+
+        assertEquals(3, emptyHand.getCardCount());
+        assertTrue(emptyHand.contains(card1));
+        assertTrue(emptyHand.contains(card2));
+        assertTrue(emptyHand.contains(card3));
+    }
+
+    /**
+     * Tests the getAllCards() method with an empty Hand.
+     */
+    @Test
+    void getAllCardsEmptyHand() {
+        assertEquals(new ArrayList<Card>(), emptyHand.getAllCards());
+    }
+
+    /**
+     * Tests the getAllCards() method with a populated Hand.
+     */
+    @Test
+    void getAllCardsPopulatedHand() {
+        List<Card> expected = new ArrayList<>();
+        expected.addAll(Arrays.asList(card1, card2, card3));
+        assertEquals(expected, h1.getAllCards());
+    }
+
+    /**
+     * Tests getCardCount() for a populated Hand.
+     */
+    @Test
+    void getCardCountFullDeck() {
+        assertEquals(3, h1.getCardCount());
+    }
+
+    /**
+     * Tests getCardCount() for an empty Hand.
+     */
+    @Test
+    void getCardCountEmptyDeck() {
+        assertEquals(0, emptyHand.getCardCount());
     }
 }

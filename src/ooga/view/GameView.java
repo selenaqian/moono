@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.game.Uno;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +34,10 @@ public class GameView implements GameViewInterface {
     private CardView discardView;
     private Rectangle deckView;
     private HBox decks; // stores the view of both decks together
+    private Uno myGameController;
 
-    public GameView() {
-        this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Card(Suit.A, Value.ZERO), new Stage());
-    }
-
-    public GameView(int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
+    public GameView(Uno uno, int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
+        myGameController = uno;
         mainStage = stage;
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();

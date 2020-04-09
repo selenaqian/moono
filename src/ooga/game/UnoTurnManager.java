@@ -19,9 +19,9 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(){
-        this.players = new ArrayList<Player>();
+        players = new ArrayList<>();
         iterator = players.listIterator();
-        current = getFirstPlayer();
+        current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
         direction = CW;
     }
 

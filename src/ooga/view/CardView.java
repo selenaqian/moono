@@ -13,10 +13,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import ooga.cards.Card;
 
-import static ooga.view.SetupView.DEFAULT_STAGE_WIDTH;
-
 public class CardView extends StackPane {
     private Card myCard;
+    private Rectangle cardViewBase;
+    private Text cardViewText;
 
     CardView(Card c, double width, double height) {
         myCard = c;
@@ -29,10 +29,10 @@ public class CardView extends StackPane {
      * @param height the height of the rectangle for the card.
      */
     private void renderCard(double width, double height) {
-        Rectangle cardViewBase = new Rectangle(width, height);
+        cardViewBase = new Rectangle(width, height);
         cardViewBase.getStyleClass().add(myCard.getSuit().toString());
 
-        Text cardViewText = new Text("" + myCard.getValue().getNumericValue());
+        cardViewText = new Text("" + myCard.getValue().getNumericValue());
         cardViewText.getStyleClass().add(myCard.getSuit() + "Text");
 
         this.getChildren().addAll(cardViewBase, cardViewText);
@@ -46,5 +46,23 @@ public class CardView extends StackPane {
      */
     Card getCard() {
         return myCard;
+    }
+
+    // Methods below used for testing.
+
+    /**
+     * Used for testing. Allows test to access the Rectangle of the CardView rendering for comparison to expected color/image, size.
+     * @return the Rectangle object rendered by this CardView.
+     */
+    public Rectangle getCardViewBase() {
+        return cardViewBase;
+    }
+
+    /**
+     * Used for testing. Allows test to access the Text of the CardView rendering for comparison to expected String.
+     * @return the Text object rendered by this CardView.
+     */
+    public Text getCardViewText() {
+        return cardViewText;
     }
 }

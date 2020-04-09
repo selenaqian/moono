@@ -24,8 +24,6 @@ class CardBuilderTest {
         assertEquals(80, cards.size());
 
         //the returned Stack is not shuffled so the top Card should be of the greatest Suit/Value
-        Card top = cards.peek();
-        assertEquals(Suit.D, top.getSuit());
-        assertEquals(Value.NINE, top.getValue());
+        assertEquals(new Card(Suit.D, Value.NINE), cards.peek());
     }
 }

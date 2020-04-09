@@ -71,6 +71,25 @@ class CardTest {
     }
 
     /**
+     * Tests equals() when the Cards are the same in instance or value.
+     */
+    @Test
+    void equalsTrue(){
+        assertTrue(card1.equals(card1));
+        assertTrue(card1.equals(card2));
+    }
+
+    /**
+     * Tests equals() when the Cards have different values.
+     */
+    @Test
+    void equalsFalse(){
+        assertFalse(card1.equals(card4));
+        assertFalse(card1.equals(card3));
+        assertFalse(card1.equals(card5));
+    }
+
+    /**
      * Tests compareTo() when the Cards are the same instance.
      */
     @Test

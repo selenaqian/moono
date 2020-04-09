@@ -1,11 +1,7 @@
 package ooga.game;
 
-import ooga.player.Player;
+import ooga.player.Playeryrdeujhfgk;
 import org.junit.jupiter.api.BeforeEach;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,15 +11,15 @@ class UnoTurnManagerTest {
 
     @BeforeEach
     void setUp(){
-        manager.addPlayer(new Player());
-        manager.addPlayer(new Player());
-        manager.addPlayer(new Player());
-        manager.addPlayer(new Player());
+        manager.addPlayer(new Playeryrdeujhfgk());
+        manager.addPlayer(new Playeryrdeujhfgk());
+        manager.addPlayer(new Playeryrdeujhfgk());
+        manager.addPlayer(new Playeryrdeujhfgk());
     }
 
     @org.junit.jupiter.api.Test
     void testAddPlayer() {
-        manager.addPlayer(new Player());
+        manager.addPlayer(new Playeryrdeujhfgk());
     }
 
 //    @org.junit.jupiter.api.Test

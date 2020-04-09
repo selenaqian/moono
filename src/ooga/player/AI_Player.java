@@ -4,7 +4,7 @@ import ooga.cards.Card;
 import ooga.rules.ClassicRules;
 import java.util.List;
 
-public class AI_Player implements Player {
+public class AI_Player extends Player {
     Card goodcard = null;
     int num_AI_players= 3;
     private List<Card> myCards;
@@ -15,11 +15,12 @@ public class AI_Player implements Player {
         return playcard(hand,card);
     }
 
+
     @Override
     public String playerName() {
         //       List<String> AI_names = new ArrayList<>();
         //       while(num_AI_players>0){
-        String name = "Player "+ String.valueOf(num_AI_players);
+  //      String name = "Player "+ String.valueOf(num_AI_players);
         //          AI_names.add(name);
         //           num_AI_players-=1;
         //      }

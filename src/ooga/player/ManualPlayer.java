@@ -6,7 +6,7 @@ import ooga.cards.Card;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManualPlayer implements Player {
+public class ManualPlayer extends Player{
 
     @Override
     public Card cardBeingPlayed(List<Card> hand, Card card) {

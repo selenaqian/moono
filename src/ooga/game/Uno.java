@@ -3,8 +3,7 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
-import ooga.piles.Hand;
-import ooga.player.Player;
+import ooga.player.Playeryrdeujhfgk;
 import ooga.rules.Rule;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
@@ -18,7 +17,7 @@ public class Uno {
     private GameViewInterface view;
 
     private UnoTurnManager turnManager;
-    private Player currentPlayer;
+    private Playeryrdeujhfgk currentPlayer;
 
     private DiscardPile discPile;
     private DrawPile drawPile;

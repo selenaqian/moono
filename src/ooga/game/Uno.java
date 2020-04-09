@@ -42,14 +42,15 @@ public class Uno implements GameModel {
         turnManager = new UnoTurnManager(players);
         currentPlayer = turnManager.getCurrentPlayer();
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
+        discPile = new DiscardPile();
+        drawPile = new DrawPile();
+        dealCards();
         view = new GameView(this, stage); //TODO: change to interface
     }
 
     @Override
     public void start() {
-        discPile = new DiscardPile();
-        drawPile = new DrawPile();
-        dealCards();
+
     }
 
     /**

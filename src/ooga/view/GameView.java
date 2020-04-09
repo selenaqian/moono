@@ -22,9 +22,10 @@ public class GameView implements GameViewInterface {
     public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
     private List<Pane> playerViews;
+    private Pane player1Label; // store the user label separate from the others as well
     private Pane mainPane;
     private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
-    private HBox player1Hand;
+    private HBox player1Hand; // store the card nodes for the user's hand
     private CardView discardView;
     private Rectangle deckView;
 
@@ -89,7 +90,7 @@ public class GameView implements GameViewInterface {
 
             playersList.add(playerBox);
         }
-
+        player1Label = playersList.get(0);
         return playersList;
     }
 
@@ -104,10 +105,7 @@ public class GameView implements GameViewInterface {
         Rectangle player1Mat = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
         player1Base.getChildren().addAll(player1Mat, player1Hand);
 
-        //TODO: fix this - currently is plucking out the circle from the first round of using this
-        // - might need something special not sure how to make that different
-        // might have to save the player1 stuff separate from everything else which is kinda rip
-        player1Box.getChildren().addAll(playerViews.get(0).getChildren().get(0), player1Base);
+        player1Box.getChildren().addAll(player1Label, player1Base);
         player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
         mainPane.getChildren().remove(playerViews.get(0));
         playerViews.remove(0);

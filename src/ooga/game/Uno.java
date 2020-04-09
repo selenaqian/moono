@@ -102,6 +102,11 @@ public class Uno implements GameModel {
         return new ArrayList<>(); //comment out
     }
 
+    @Override
+    public Card getTopDiscardCard() {
+        return discPile.showTopCard();
+    }
+
     private void endTurn(){
         //check if a player has no more cards
         /** uncomment if (currentPlayer.hand().size() == 0){

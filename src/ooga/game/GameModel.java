@@ -16,4 +16,6 @@ public interface GameModel {
      * @return list of cards inside a
      */
     List<Card> getUserHand();
+
+    Card getTopDiscardCard();
 }

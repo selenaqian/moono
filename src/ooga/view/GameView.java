@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.game.GameSettings;
 import ooga.game.Uno;
 
 import java.util.ArrayList;
@@ -35,8 +36,9 @@ public class GameView implements GameViewInterface {
     private Rectangle deckView;
     private HBox decks; // stores the view of both decks together
     private Uno myGameController;
+    private GameSettings mySettings;
 
-    public GameView(Uno uno, int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
+    public GameView(Uno uno, Stage stage) {
         myGameController = uno;
         mainStage = stage;
         mainPane = new AnchorPane();
@@ -46,19 +48,24 @@ public class GameView implements GameViewInterface {
         mainStage.setScene(mainScene);
         mainStage.show();
 
+        // TODO: initialize and use properties file for text
+    }
+
+    public void initializeGameScene(GameSettings settings) {
+        mySettings = settings;
+        int numPlayers = mySettings.getNumPlayers();
+        int startCards = mySettings.getHandSize();
+
         playerViews = makePlayerStatuses(numPlayers, startCards);
         positionPlayerViews();
-        updateHand(player1Cards);
 
         decks = new HBox(DEFAULT_SPACING);
         deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
-        discardView = new CardView(discardFirst, mainPane.getWidth()/7, mainPane.getHeight()/3);
+        discardView = new CardView(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardView);
         mainPane.getChildren().add(decks);
         AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
-
-        // TODO: initialize and use properties file for text
     }
 
     private void positionPlayerViews() {
@@ -128,7 +135,6 @@ public class GameView implements GameViewInterface {
         decks.getChildren().remove(discardView);
         discardView = new CardView(card, discardView.getWidth(), discardView.getHeight());
         decks.getChildren().add(discardView);
-        // put into scene
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.

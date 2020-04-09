@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
-import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +19,14 @@ import java.util.List;
 import static ooga.view.SetupView.*;
 
 public class GameView implements GameViewInterface {
+    public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
     private List<Pane> playerViews;
-    private BorderPane mainPane;
+    private Pane mainPane;
     private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
+    private HBox player1Hand;
+    private CardView discardView;
+    private Rectangle deckView;
 
     public GameView() {
         this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Card(Suit.A, Value.ZERO), new Stage());
@@ -31,30 +34,43 @@ public class GameView implements GameViewInterface {
 
     public GameView(int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
         mainStage = stage;
+        mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
-        playerViews = makePlayerStatuses(numPlayers, startCards);
-        updateHand(player1Cards);
-        mainPane = new BorderPane();
-        positionPlayerViews();
-        // TODO: figure out why alignment isn't working
-        for (Pane p : playerViews) {
-            mainPane.setAlignment(p, Pos.CENTER);
-        }
-
-        // TODO: still need render the deck and discard piles in center of pane
-
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
+
+        playerViews = makePlayerStatuses(numPlayers, startCards);
+        positionPlayerViews();
+        updateHand(player1Cards);
+
+        HBox decks = new HBox(DEFAULT_SPACING);
+        deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
+        discardView = new CardView(discardFirst, mainPane.getWidth()/7, mainPane.getHeight()/3);
+        decks.getChildren().addAll(deckView, discardView);
+        mainPane.getChildren().add(decks);
+        AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
+        AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
         // TODO: initialize and use properties file for text
     }
 
     private void positionPlayerViews() {
-        mainPane.setBottom(playerViews.get(0));
-        mainPane.setLeft(playerViews.get(1));
-        if (playerViews.size()>2) mainPane.setTop(playerViews.get(2));
-        if (playerViews.size()>3) mainPane.setRight(playerViews.get(3));
+        positionPlayer1();
+
+        VBox allPlayersNot1 = new VBox(10);
+        for(int i=1; i<playerViews.size(); i++) {
+            allPlayersNot1.getChildren().add(playerViews.get(i));
+        }
+        mainPane.getChildren().add(allPlayersNot1);
+        AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
+        AnchorPane.setBottomAnchor(allPlayersNot1, mainStage.getHeight()/2);
+    }
+
+    private void positionPlayer1() {
+        mainPane.getChildren().add(playerViews.get(0));
+        AnchorPane.setBottomAnchor(playerViews.get(0), 0.0);
     }
 
     private List<Pane> makePlayerStatuses(int numPlayers, int startCards) {
@@ -73,35 +89,30 @@ public class GameView implements GameViewInterface {
 
             playersList.add(playerBox);
         }
-        Rectangle player1Base = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
-        VBox player1Box = new VBox();
-        player1Box.getChildren().addAll(playersList.get(0), player1Base);
-        player1Box.setAlignment(Pos.CENTER); //TODO: alignment still a problem here too
-        playersList.remove(0);
-        playersList.add(0, player1Box);
+
         return playersList;
     }
 
     @Override
     public void updateHand(List<Card> cards) {
-        HBox player1Hand = new HBox(5);
+        player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            player1Hand.getChildren().add(generateCardView(c));
+            player1Hand.getChildren().add(new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4));
         }
-        // generate viewable nodes for the cards - should be scalable based on window
-        // put the cards in an hbox
-        // put that hbox on top of a white rectangle - inside a stackpane
-        // add this stackpane into the playerViews list
-    }
+        VBox player1Box = new VBox();
+        StackPane player1Base = new StackPane();
+        Rectangle player1Mat = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
+        player1Base.getChildren().addAll(player1Mat, player1Hand);
 
-    private Node generateCardView(Card c) {
-        StackPane cardView = new StackPane();
-        Rectangle cardViewBase = new Rectangle();
-
-        cardViewBase.getStyleClass().add(c.getSuit().toString());
-        // make text
-        // put cardViewBase and text in cardView
-        return cardView;
+        //TODO: fix this - currently is plucking out the circle from the first round of using this
+        // - might need something special not sure how to make that different
+        // might have to save the player1 stuff separate from everything else which is kinda rip
+        player1Box.getChildren().addAll(playerViews.get(0).getChildren().get(0), player1Base);
+        player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
+        mainPane.getChildren().remove(playerViews.get(0));
+        playerViews.remove(0);
+        playerViews.add(0, player1Box);
+        positionPlayer1();
     }
 
     @Override
@@ -112,7 +123,7 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateDiscardPile(Card card) {
-        // replace the rendering of the current discard with a new one
+        // TODO: replace the rendering of the current discard with a new one
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.
@@ -123,5 +134,13 @@ public class GameView implements GameViewInterface {
      */
     public List<Text> getAllPlayersCardsLeft() {
         return allPlayersCardsLeft;
+    }
+
+    /**
+     * Used for testing. Allows test to access the box containing CardView objects for comparison to expected values.
+     * @return the HBox with children CardView nodes representing player 1's hand.
+     */
+    public HBox getPlayer1Hand() {
+        return player1Hand;
     }
 }

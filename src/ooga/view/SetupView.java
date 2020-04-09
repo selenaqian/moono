@@ -10,13 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ooga.cards.Card;
-import ooga.cards.Suit;
-import ooga.cards.Value;
 import ooga.game.GameSettings;
 import ooga.game.UnoController;
-
-import java.util.ArrayList;
 
 public class SetupView {
     public static final int DEFAULT_STAGE_WIDTH = 1000;
@@ -33,6 +28,7 @@ public class SetupView {
     public static final int INCREMENT_ONE = 1;
     public static final int INCREMENT_50 = 50;
     public static final int DEFAULT_SPACING = 10;
+    public static final String DEFAULT_STYLESHEET = "default.css";
 
     private GameSettings mySettings;
     private UnoController myController;
@@ -68,10 +64,11 @@ public class SetupView {
      * @param stage this object's stage where the scene will be shown.
      */
     private void showWelcomeScene(Stage stage) {
-        VBox root = new VBox();
+        VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
 
         Text welcomeText = new Text("welcome to moono"); // TODO: need a properties file for the text and css file for styling
+        welcomeText.getStyleClass().add("title");
 
         HBox numberPlayers = makeSlider(numberPlayersSlider, "# of players", DEFAULT_PLAYERS, INCREMENT_ONE);
         HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, "# cards per player", DEFAULT_CARDS, INCREMENT_ONE);
@@ -83,6 +80,7 @@ public class SetupView {
         root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton);
 
         Scene welcomeScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        welcomeScene.getStylesheets().add(DEFAULT_STYLESHEET);
         stage.setScene(welcomeScene);
         stage.show();
     }

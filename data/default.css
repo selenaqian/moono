@@ -1,0 +1,22 @@
+.title {
+    -fx-font-size: 72pt;
+}
+.button {
+    -fx-font-size: 12pt;
+}
+.cardText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.A {
+    -fx-fill: red;
+}
+.B {
+    -fx-fill: blue;
+}
+.C {
+    -fx-fill: green;
+}
+.D {
+    -fx-fill: yellow;
+}

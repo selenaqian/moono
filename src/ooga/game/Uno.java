@@ -84,34 +84,35 @@ public class Uno implements GameModel {
         Card card = drawPile.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        currentPlayer.takeCard(card);
+        // uncomment currentPlayer.takeCard(card);
 
         endTurn();
     }
 
     @Override
     public List<Card> getUserHand() {
-        return user.hand();
+        // uncomment return user.hand();
+        return new ArrayList<>(); //comment out
     }
 
     private void endTurn(){
         //check if a player has no more cards
-        if (currentPlayer.hand().size() == 0){
+        /** uncomment if (currentPlayer.hand().size() == 0){
             unoController.endGame();
         } else {
             turnManager.nextPlayer();
-        }
+        }*/
     }
 
     /**
      * Deal cards to all players in the beginning of a game
      */
     private void dealCards(){
-        for(int i = 0; i < settings.getNumPlayers(); i ++){
+        for(int i = 0; i < mySettings.getNumPlayers(); i ++){
             Player player = turnManager.getFirstPlayer();
-            for (int j = 0; j < settings.getHandSize(); j++){
+            for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = drawPile.drawCard();
-                player.takeCard(card);
+                //uncomment player.takeCard(card);
                 turnManager.nextPlayer();
             }
         }
@@ -122,7 +123,7 @@ public class Uno implements GameModel {
      * TODO: Refactor this - have another class to manage/initialize players?
      */
     private void addPlayers(){
-        for (int i = 0; i < settings.getNumPlayers(); i++){
+        for (int i = 0; i < mySettings.getNumPlayers(); i++){
             turnManager.addPlayer(new Player());
         }
     }

@@ -3,8 +3,7 @@ package ooga.piles;
 import ooga.cards.Card;
 import ooga.cards.Value;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This is a Deck that typically starts with a complete set of Cards then shrinks.
@@ -18,6 +17,14 @@ public class DrawPile extends Deck {
     public DrawPile(){
         CardBuilder build = new CardBuilder();
         myCards = build.makeFullDeck();
+        shuffle();
+    }
+
+    /**
+     * Creates a new shuffled DrawPile with the passed Cards.
+     */
+    public DrawPile(Stack<Card> cards){
+        myCards = cards;
         shuffle();
     }
 

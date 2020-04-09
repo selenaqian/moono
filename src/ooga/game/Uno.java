@@ -3,7 +3,6 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
-import ooga.piles.Hand;
 import ooga.player.Player;
 import ooga.rules.Rule;
 import ooga.view.GameView;
@@ -20,7 +19,7 @@ public class Uno implements GameModel {
     private GameViewInterface view;
 
     private GameSettings settings;
-    private GameStatus gameStatus;
+    private UnoController unoController;
     private UnoTurnManager turnManager;
     private Player currentPlayer;
     private Player user; //the human player
@@ -35,10 +34,10 @@ public class Uno implements GameModel {
     }
 
     public Uno(GameSettings settings){
-        this.view = new GameView(); //TODO: change to interface
+        this.view = new GameView(settings); //TODO: change to interface
         this.settings = settings;
         turnManager = new UnoTurnManager();
-        gameStatus = new GameStatus();
+        addPlayers();
     }
 
     @Override
@@ -47,7 +46,6 @@ public class Uno implements GameModel {
         drawPile = new DrawPile();
         currentPlayer = turnManager.getCurrentPlayer();
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
-
         dealCards();
     }
 
@@ -98,7 +96,7 @@ public class Uno implements GameModel {
     private void endTurn(){
         //check if a player has no more cards
         if (currentPlayer.hand().size() == 0){
-            gameStatus.endGame();
+            unoController.endGame();
         } else {
             turnManager.nextPlayer();
         }
@@ -118,6 +116,15 @@ public class Uno implements GameModel {
         }
     }
 
+    /**
+     * Adds players to the game based on number of players selected in SetupView
+     * TODO: Refactor this - have another class to manage/initialize players?
+     */
+    private void addPlayers(){
+        for (int i = 0; i < settings.getNumPlayers(); i++){
+            turnManager.addPlayer(new Player());
+        }
+    }
 
 //    /**
 //     * Handle effect of an action card when it played

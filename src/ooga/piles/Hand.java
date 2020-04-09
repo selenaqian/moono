@@ -12,6 +12,7 @@ import java.util.List;
 public class Hand implements Pile {
 
     //I changed this from a List to an ArrayList so I could apply methods such as remove() and add()
+    //TODO: is there a way to keep this as an ArrayList but let methods accept Lists?
     private ArrayList<Card> myCards;
 
     /**

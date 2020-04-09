@@ -43,10 +43,23 @@ public class UnoController implements GameController{
     public void handleCardClick(Card card){
         uno.playCard(card);
         gameView.updateHand(uno.getUserHand());
+        gameView.updateDiscardPile(uno.getTopDiscardCard());
     }
 
+    /**
+     * Called when a user clicks on the draw pile
+     */
     public void handleDrawPileClick(){
         uno.drawCard();
         gameView.updateHand(uno.getUserHand());
+    }
+
+    /**
+     * Called from view when player presses "next" button
+     * Where it is called will be changed in future sprints
+     */
+    public void handleAIPlay(){
+        uno.playCard();
+        //TODO: update game view to update number of cards
     }
 }

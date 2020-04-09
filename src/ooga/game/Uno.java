@@ -77,6 +77,25 @@ public class Uno implements GameModel {
     }
 
     /**
+     * Method used for AI players to play a card
+     * Temporary use for Sprint 1
+     */
+    public void playCard() {
+        boolean hasPlayableCard = false;
+        //go through each of the cards in the hand and try playing each card
+        for (Card card : currentPlayer.hand().getAllCards()) {
+            if (card.equals(getTopDiscardCard())) {
+                hasPlayableCard = true;
+                playCard(card);
+            }
+        }
+
+        if (!hasPlayableCard) {
+            drawCard();
+        }
+    }
+
+    /**
      * When a user isn't able to play a card and they take a card from the draw pile
      * Called from the view for human players
      * For AI players, must be called programmatically

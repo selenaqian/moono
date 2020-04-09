@@ -19,7 +19,7 @@ public class UnoController implements GameController{
 
     @Override
     public void start() {
-        Uno game = new Uno();
+        Uno game = new Uno(settings, mainStage);
         game.start();
         //TODO: possibly update view here?
     }

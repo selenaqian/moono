@@ -1,5 +1,6 @@
 package ooga.game;
 
+import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
@@ -32,23 +33,22 @@ public class Uno implements GameModel {
     private Rule rule;
 
     public Uno(){
-        this(new GameSettings());
+        this(new GameSettings(), new Stage());
     }
 
-    public Uno(GameSettings settings){
-        view = new GameView(); //TODO: change to interface
+    public Uno(GameSettings settings, Stage stage){
         mySettings = settings;
         addPlayers();
         turnManager = new UnoTurnManager(players);
+        currentPlayer = turnManager.getCurrentPlayer();
+        user = currentPlayer; //TODO: change this so that the human doesn't always start first
+        dealCards();
+        view = new GameView(this, settings.getNumPlayers(), settings.getHandSize(), getUserHand(), discPile.showTopCard(), stage); //TODO: change to interface
     }
 
     @Override
     public void start() {
-        discPile = new DiscardPile();
-        drawPile = new DrawPile();
-        currentPlayer = turnManager.getCurrentPlayer();
-        user = currentPlayer; //TODO: change this so that the human doesn't always start first
-        dealCards();
+
     }
 
     /**

@@ -28,6 +28,7 @@ public class GameView implements GameViewInterface {
     private HBox player1Hand; // store the card nodes for the user's hand
     private CardView discardView;
     private Rectangle deckView;
+    private HBox decks; // stores the view of both decks together
 
     public GameView() {
         this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Card(Suit.A, Value.ZERO), new Stage());
@@ -46,7 +47,7 @@ public class GameView implements GameViewInterface {
         positionPlayerViews();
         updateHand(player1Cards);
 
-        HBox decks = new HBox(DEFAULT_SPACING);
+        decks = new HBox(DEFAULT_SPACING);
         deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
         discardView = new CardView(discardFirst, mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardView);
@@ -121,7 +122,10 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateDiscardPile(Card card) {
-        // TODO: replace the rendering of the current discard with a new one
+        decks.getChildren().remove(discardView);
+        discardView = new CardView(card, discardView.getWidth(), discardView.getHeight());
+        decks.getChildren().add(discardView);
+        // put into scene
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.
@@ -140,5 +144,13 @@ public class GameView implements GameViewInterface {
      */
     public HBox getPlayer1Hand() {
         return player1Hand;
+    }
+
+    /**
+     * Used for testing. Allows test to access the CardView of the discardPile for comparison to expected values.
+     * @return the CardView object representing the discard pile.
+     */
+    public CardView getDiscardView() {
+        return discardView;
     }
 }

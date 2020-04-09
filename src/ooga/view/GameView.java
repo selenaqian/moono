@@ -24,6 +24,7 @@ public class GameView implements GameViewInterface {
     private List<Pane> playerViews;
     private Pane mainPane;
     private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
+    private HBox player1Hand;
 
     public GameView() {
         this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Card(Suit.A, Value.ZERO), new Stage());
@@ -86,9 +87,9 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(List<Card> cards) {
-        HBox player1Hand = new HBox(SPACING_BETWEEN_CARDS);
+        player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            player1Hand.getChildren().add(generateCardView(c, mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getHeight()/4));
+            player1Hand.getChildren().add(new CardView(c, mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getHeight()/4));
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();
@@ -100,19 +101,6 @@ public class GameView implements GameViewInterface {
         playerViews.remove(0);
         playerViews.add(0, player1Box);
         positionPlayer1();
-    }
-
-    private Node generateCardView(Card c, double width, double height) {
-        StackPane cardView = new StackPane();
-        Rectangle cardViewBase = new Rectangle(width, height);
-        cardViewBase.getStyleClass().add(c.getSuit().toString());
-
-        Text cardViewText = new Text("" + c.getValue().getNumericValue());
-        cardViewText.getStyleClass().add("cardText");
-
-        cardView.getChildren().addAll(cardViewBase, cardViewText);
-        cardView.setAlignment(Pos.CENTER);
-        return cardView;
     }
 
     @Override

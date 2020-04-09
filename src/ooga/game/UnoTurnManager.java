@@ -41,8 +41,10 @@ public class UnoTurnManager implements TurnManager {
         if (direction == CCW){
             current = iterator.previous();
         } else {
+            iterator.next();
             current = iterator.next();
         }
+
     }
 
     @Override

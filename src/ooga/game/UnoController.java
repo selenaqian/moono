@@ -1,15 +1,17 @@
 package ooga.game;
 
 import javafx.stage.Stage;
+import ooga.cards.Card;
 import ooga.view.EndView;
 import ooga.view.GameView;
-import ooga.view.GameViewInterface;
 import ooga.view.SetupView;
 
 public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
+    GameView gameView;
     Stage mainStage;
+    Uno uno;
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -19,9 +21,9 @@ public class UnoController implements GameController{
 
     @Override
     public void start() {
-        Uno game = new Uno(settings, mainStage);
-        game.start();
-        //TODO: possibly update view here?
+        uno = new Uno(settings);
+        uno.start();
+        gameView = new GameView(uno, this, mainStage); //TODO: change to interface
     }
 
     @Override
@@ -34,4 +36,9 @@ public class UnoController implements GameController{
         EndView endView = new EndView(mainStage);
     }
 
+    //when a player selects a card
+    public void handleCardClick(Card card){
+        uno.playCard(card);
+        gameView.updateHand(uno.getUserHand());
+    }
 }

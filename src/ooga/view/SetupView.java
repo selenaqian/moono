@@ -97,7 +97,6 @@ public class SetupView {
         mySettings.setHandSize((int) cardsPerPlayerSlider.getValue());
         mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
         mySettings.setWinningScore((int) scoreToWinSlider.getValue());
-
         myController.start();
     }
 

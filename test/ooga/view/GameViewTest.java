@@ -10,6 +10,7 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.game.Uno;
+import ooga.game.UnoController;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -25,15 +26,17 @@ class GameViewTest extends DukeApplicationTest {
     private GameView gameView;
     private List<Card> cardList;
     private Card discardStart;
+    private UnoController controller;
 
     @Override
     public void start(Stage stage) {
+        controller = new UnoController(stage);
         cardList = new ArrayList<>();
         for(int i=0; i<7; i++) {
             cardList.add(new Card(Suit.A, Value.ZERO));
         }
         discardStart = new Card(Suit.A, Value.THREE);
-        gameView = new GameView(new Uno(), stage);
+        gameView = new GameView(new Uno(), controller, stage);
     }
 
     @Test

@@ -18,6 +18,7 @@ import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.game.GameSettings;
 import ooga.game.Uno;
+import ooga.game.UnoController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +36,14 @@ public class GameView implements GameViewInterface {
     private CardView discardView;
     private Rectangle deckView;
     private HBox decks; // stores the view of both decks together
-    private Uno myGameController;
+    private Uno uno;
+    private UnoController controller;
     private GameSettings mySettings;
 
-    public GameView(Uno uno, Stage stage) {
-        myGameController = uno;
+    public GameView(Uno uno, UnoController controller, Stage stage) {
+        this.uno = uno; //model
+        this.controller = controller; //controller
+        mySettings = uno.getSettings();
         mainStage = stage;
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
@@ -47,12 +51,11 @@ public class GameView implements GameViewInterface {
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
-
+        initializeGameScene(mySettings);
         // TODO: initialize and use properties file for text
     }
 
     public void initializeGameScene(GameSettings settings) {
-        mySettings = settings;
         int numPlayers = mySettings.getNumPlayers();
         int startCards = mySettings.getHandSize();
 

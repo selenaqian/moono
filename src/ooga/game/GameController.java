@@ -1,5 +1,7 @@
 package ooga.game;
 
+import javafx.stage.Stage;
+
 /**
  * Can be implemented by classes controlling an overall game and each round within a game
  * Controls the overall flow of the game and will control the game loop

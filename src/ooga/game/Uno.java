@@ -18,10 +18,7 @@ import java.util.List;
  */
 public class Uno implements GameModel {
 
-    private GameViewInterface view;
-
     private GameSettings mySettings;
-    private UnoController unoController;
     private UnoTurnManager turnManager;
     private List<Player> players = new ArrayList<Player>();
     private Player currentPlayer;
@@ -33,10 +30,14 @@ public class Uno implements GameModel {
     private Rule rule;
 
     public Uno(){
-        this(new GameSettings(), new Stage());
+        this(new GameSettings());
     }
 
-    public Uno(GameSettings settings, Stage stage){
+    public GameSettings getSettings(){
+        return mySettings;
+    }
+
+    public Uno(GameSettings settings){
         mySettings = settings;
         addPlayers();
         turnManager = new UnoTurnManager(players);
@@ -45,7 +46,6 @@ public class Uno implements GameModel {
         discPile = new DiscardPile();
         drawPile = new DrawPile();
         dealCards();
-        view = new GameView(this, stage); //TODO: change to interface
     }
 
     @Override

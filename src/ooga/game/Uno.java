@@ -80,6 +80,13 @@ public class Uno implements GameModel {
      */
     @Override
     public void drawCard(){
+
+        //when draw pile is empty, put discard pile cards into it
+        if (drawPile.getCardCount() == 0){
+            drawPile = new DrawPile(discPile.getAllCards());
+            discPile = new DiscardPile();
+        }
+
         //take the top card from the discard pile, make sure it is removed from the discard pile
         Card card = drawPile.drawCard();
 

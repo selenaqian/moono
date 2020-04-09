@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
-import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +30,15 @@ public class GameView implements GameViewInterface {
 
     public GameView(int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
         mainStage = stage;
+        mainPane = new BorderPane();
+        Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
+        mainStage.setScene(mainScene);
+        mainStage.show();
+
         allPlayersCardsLeft = new ArrayList<>();
         playerViews = makePlayerStatuses(numPlayers, startCards);
         updateHand(player1Cards);
-        mainPane = new BorderPane();
         positionPlayerViews();
         // TODO: figure out why alignment isn't working
         for (Pane p : playerViews) {
@@ -42,10 +46,6 @@ public class GameView implements GameViewInterface {
         }
 
         // TODO: still need render the deck and discard piles in center of pane
-
-        Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
-        mainStage.setScene(mainScene);
-        mainStage.show();
 
         // TODO: initialize and use properties file for text
     }

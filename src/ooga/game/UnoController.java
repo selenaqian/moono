@@ -9,10 +9,12 @@ import ooga.view.SetupView;
 public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
+    Stage mainStage;
 
     public UnoController(Stage stage){
+        mainStage = stage;
         this.settings = new GameSettings();
-        setupView = new SetupView(this, settings, stage); //so that view knows about controller and GameSettings
+        setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
     }
 
     @Override
@@ -29,6 +31,6 @@ public class UnoController implements GameController{
 
     @Override
     public void endGame() {
-        EndView endView = new EndView();
+        EndView endView = new EndView(mainStage);
     }
 }

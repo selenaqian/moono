@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.game.Uno;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -32,7 +33,7 @@ class GameViewTest extends DukeApplicationTest {
             cardList.add(new Card(Suit.A, Value.ZERO));
         }
         discardStart = new Card(Suit.A, Value.THREE);
-        gameView = new GameView(DEFAULT_PLAYERS, DEFAULT_CARDS, cardList, discardStart, stage);
+        gameView = new GameView(new Uno(), DEFAULT_PLAYERS, DEFAULT_CARDS, cardList, discardStart, stage);
     }
 
     @Test

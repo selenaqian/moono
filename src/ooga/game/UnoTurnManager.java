@@ -46,7 +46,7 @@ public class UnoTurnManager implements TurnManager {
     }
 
     @Override
-    public Playeryrdeujhfgk getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         //TODO: add error handling for when there are no players added yet
         return current;
     }

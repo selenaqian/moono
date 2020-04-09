@@ -17,7 +17,7 @@ public class Uno {
     private GameViewInterface view;
 
     private UnoTurnManager turnManager;
-    private Playeryrdeujhfgk currentPlayer;
+    private Player currentPlayer;
 
     private DiscardPile discPile;
     private DrawPile drawPile;

@@ -25,6 +25,8 @@ public class GameView implements GameViewInterface {
     private Pane mainPane;
     private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
     private HBox player1Hand;
+    private CardView discardView;
+    private Rectangle deckView;
 
     public GameView() {
         this(DEFAULT_PLAYERS, DEFAULT_CARDS, new ArrayList<>(), new Card(Suit.A, Value.ZERO), new Stage());
@@ -43,6 +45,13 @@ public class GameView implements GameViewInterface {
         positionPlayerViews();
         updateHand(player1Cards);
 
+        HBox decks = new HBox(DEFAULT_SPACING);
+        deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
+        discardView = new CardView(discardFirst, mainPane.getWidth()/7, mainPane.getHeight()/3);
+        decks.getChildren().addAll(deckView, discardView);
+        mainPane.getChildren().add(decks);
+        AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
+        AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
         // TODO: still need render the deck and discard piles in center of pane
 
         // TODO: initialize and use properties file for text

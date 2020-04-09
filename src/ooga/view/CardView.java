@@ -13,6 +13,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import ooga.cards.Card;
 
+import static ooga.view.SetupView.DEFAULT_STAGE_WIDTH;
+
 public class CardView extends StackPane {
     private Card myCard;
 

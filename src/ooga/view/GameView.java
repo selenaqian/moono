@@ -52,7 +52,6 @@ public class GameView implements GameViewInterface {
         mainPane.getChildren().add(decks);
         AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
-        // TODO: still need render the deck and discard piles in center of pane
 
         // TODO: initialize and use properties file for text
     }
@@ -98,7 +97,7 @@ public class GameView implements GameViewInterface {
     public void updateHand(List<Card> cards) {
         player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            player1Hand.getChildren().add(new CardView(c, mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getHeight()/4));
+            player1Hand.getChildren().add(new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4));
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();
@@ -120,7 +119,7 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateDiscardPile(Card card) {
-        // replace the rendering of the current discard with a new one
+        // TODO: replace the rendering of the current discard with a new one
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.
@@ -131,5 +130,13 @@ public class GameView implements GameViewInterface {
      */
     public List<Text> getAllPlayersCardsLeft() {
         return allPlayersCardsLeft;
+    }
+
+    /**
+     * Used for testing. Allows test to access the box containing CardView objects for comparison to expected values.
+     * @return the HBox with children CardView nodes representing player 1's hand.
+     */
+    public HBox getPlayer1Hand() {
+        return player1Hand;
     }
 }

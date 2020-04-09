@@ -91,7 +91,10 @@ class GameViewTest extends DukeApplicationTest {
 
     @Test
     void testUpdateDiscardPile() {
+        javafxRun(() -> gameView.updateDiscardPile(new Card(Suit.D, Value.SEVEN)));
+        sleep(2, TimeUnit.SECONDS);
 
+        assertEquals(0, new Card(Suit.D, Value.SEVEN).compareTo(gameView.getDiscardView().getCard()));
     }
 
 

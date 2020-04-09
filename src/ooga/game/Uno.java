@@ -22,6 +22,7 @@ public class Uno implements GameModel {
     private GameSettings mySettings;
     private UnoController unoController;
     private UnoTurnManager turnManager;
+    private List<Player> players;
     private Player currentPlayer;
     private Player user; //the human player
 
@@ -37,8 +38,8 @@ public class Uno implements GameModel {
     public Uno(GameSettings settings){
         view = new GameView(); //TODO: change to interface
         mySettings = settings;
-        turnManager = new UnoTurnManager();
         addPlayers();
+        turnManager = new UnoTurnManager(players);
     }
 
     @Override
@@ -136,7 +137,7 @@ public class Uno implements GameModel {
      */
     private void addPlayers(){
         for (int i = 0; i < mySettings.getNumPlayers(); i++){
-            turnManager.addPlayer(new Player());
+            players.add(new Player());
         }
     }
 

@@ -18,8 +18,8 @@ public class UnoTurnManager implements TurnManager {
 
     private Player current; //the player making the turn
 
-    public UnoTurnManager(){
-        this.players = new ArrayList<Player>();
+    public UnoTurnManager(List<Player> players){
+        this.players = players;
         iterator = players.listIterator();
         current = getFirstPlayer();
         direction = CW;

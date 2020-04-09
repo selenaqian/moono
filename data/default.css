@@ -1,6 +1,9 @@
 .title {
     -fx-font-size: 72pt;
 }
+.subtitle {
+    -fx-font-size: 36pt;
+}
 .button {
     -fx-font-size: 12pt;
 }

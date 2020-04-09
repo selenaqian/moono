@@ -108,6 +108,10 @@ public class Uno implements GameModel {
         return discPile.showTopCard();
     }
 
+    public int getNumCardsInPlayerHand(int playerNum){
+        return players.get(playerNum - 1).hand().size();
+    }
+
     private void endTurn(){
         //check if a player has no more cards
         /** uncomment if (currentPlayer.hand().size() == 0){

@@ -4,6 +4,10 @@
 .button {
     -fx-font-size: 12pt;
 }
+.cardText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
 .A {
     -fx-fill: red;
     -fx-stroke: black;

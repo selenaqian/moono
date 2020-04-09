@@ -19,9 +19,10 @@ import java.util.List;
 import static ooga.view.SetupView.*;
 
 public class GameView implements GameViewInterface {
+    public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
     private List<Pane> playerViews;
-    private BorderPane mainPane;
+    private Pane mainPane;
     private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
 
     public GameView() {
@@ -30,20 +31,16 @@ public class GameView implements GameViewInterface {
 
     public GameView(int numPlayers, int startCards, List<Card> player1Cards, Card discardFirst, Stage stage) {
         mainStage = stage;
-        mainPane = new BorderPane();
+        mainPane = new AnchorPane();
+        allPlayersCardsLeft = new ArrayList<>();
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
 
-        allPlayersCardsLeft = new ArrayList<>();
         playerViews = makePlayerStatuses(numPlayers, startCards);
-        updateHand(player1Cards);
         positionPlayerViews();
-        // TODO: figure out why alignment isn't working
-        for (Pane p : playerViews) {
-            mainPane.setAlignment(p, Pos.CENTER);
-        }
+        updateHand(player1Cards);
 
         // TODO: still need render the deck and discard piles in center of pane
 
@@ -51,10 +48,20 @@ public class GameView implements GameViewInterface {
     }
 
     private void positionPlayerViews() {
-        mainPane.setBottom(playerViews.get(0));
-        mainPane.setLeft(playerViews.get(1));
-        if (playerViews.size()>2) mainPane.setTop(playerViews.get(2));
-        if (playerViews.size()>3) mainPane.setRight(playerViews.get(3));
+        positionPlayer1();
+
+        VBox allPlayersNot1 = new VBox(10);
+        for(int i=1; i<playerViews.size(); i++) {
+            allPlayersNot1.getChildren().add(playerViews.get(i));
+        }
+        mainPane.getChildren().add(allPlayersNot1);
+        AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
+        AnchorPane.setBottomAnchor(allPlayersNot1, mainStage.getHeight()/2);
+    }
+
+    private void positionPlayer1() {
+        mainPane.getChildren().add(playerViews.get(0));
+        AnchorPane.setBottomAnchor(playerViews.get(0), 0.0);
     }
 
     private List<Pane> makePlayerStatuses(int numPlayers, int startCards) {
@@ -73,34 +80,38 @@ public class GameView implements GameViewInterface {
 
             playersList.add(playerBox);
         }
-        Rectangle player1Base = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
-        VBox player1Box = new VBox();
-        player1Box.getChildren().addAll(playersList.get(0), player1Base);
-        player1Box.setAlignment(Pos.CENTER); //TODO: alignment still a problem here too
-        playersList.remove(0);
-        playersList.add(0, player1Box);
+
         return playersList;
     }
 
     @Override
     public void updateHand(List<Card> cards) {
-        HBox player1Hand = new HBox(5);
+        HBox player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            player1Hand.getChildren().add(generateCardView(c));
+            player1Hand.getChildren().add(generateCardView(c, mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getHeight()/4));
         }
-        // generate viewable nodes for the cards - should be scalable based on window
-        // put the cards in an hbox
-        // put that hbox on top of a white rectangle - inside a stackpane
-        // add this stackpane into the playerViews list
+        VBox player1Box = new VBox();
+        StackPane player1Base = new StackPane();
+        Rectangle player1Mat = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
+        player1Base.getChildren().addAll(player1Mat, player1Hand);
+
+        player1Box.getChildren().addAll(playerViews.get(0), player1Base);
+        player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
+        playerViews.remove(0);
+        playerViews.add(0, player1Box);
+        positionPlayer1();
     }
 
-    private Node generateCardView(Card c) {
+    private Node generateCardView(Card c, double width, double height) {
         StackPane cardView = new StackPane();
-        Rectangle cardViewBase = new Rectangle();
-
+        Rectangle cardViewBase = new Rectangle(width, height);
         cardViewBase.getStyleClass().add(c.getSuit().toString());
-        // make text
-        // put cardViewBase and text in cardView
+
+        Text cardViewText = new Text("" + c.getValue().getNumericValue());
+        cardViewText.getStyleClass().add("cardText");
+
+        cardView.getChildren().addAll(cardViewBase, cardViewText);
+        cardView.setAlignment(Pos.CENTER);
         return cardView;
     }
 

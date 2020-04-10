@@ -127,6 +127,7 @@ public class Uno implements GameModel {
         return discPile.showTopCard();
     }
 
+    //used temporarily for sprint 1
     public int getNumCardsInPlayerHand(int playerNum){
         return players.get(playerNum - 1).hand().getCardCount();
     }

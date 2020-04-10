@@ -90,11 +90,13 @@ public class Uno implements GameModel {
             if (card.equals(getTopDiscardCard())) {
                 hasPlayableCard = true;
                 playCard(card);
+                endTurn();
             }
         }
 
         if (!hasPlayableCard) {
             drawCard();
+            endTurn();
         }
     }
 

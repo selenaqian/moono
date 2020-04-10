@@ -73,7 +73,7 @@ public class GameView implements GameViewInterface {
         discardView = new CardView(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardView);
         mainPane.getChildren().add(decks);
-        AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
+        AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
         nextTurn = new Button("next");
@@ -94,7 +94,7 @@ public class GameView implements GameViewInterface {
         setBoxAllPlayersNot1();
         mainPane.getChildren().add(allPlayersNot1);
         AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
-        AnchorPane.setBottomAnchor(allPlayersNot1, mainStage.getHeight()/2);
+        AnchorPane.setTopAnchor(allPlayersNot1, mainStage.getHeight()/4);
     }
 
     private void setBoxAllPlayersNot1() {

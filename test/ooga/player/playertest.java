@@ -5,13 +5,12 @@ import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.piles.Hand;
 import ooga.player.*;
-import org.junit.Test;
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class playertest {
 

@@ -81,6 +81,7 @@ public class GameView implements GameViewInterface {
 
         decks = new HBox(DEFAULT_SPACING);
         deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
+        deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
         discardView = new CardView(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardView);
         mainPane.getChildren().add(decks);

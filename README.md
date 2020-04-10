@@ -21,7 +21,7 @@ Hours Spent Together: 12 hours
 Individual:
 - Tess Hours: 11 hours 45 mins
 - Mary Hours: 
-- Selena Hours: 15 hours
+- Selena Hours: 15.5 hours
 - Suomo Hours:
 
 ### Primary Roles
@@ -33,6 +33,8 @@ Individual:
 - [Uno Variations - special cards in themed decks](http://unovariations.blogspot.com/p/special-wild-cards.html)
 - [XML into Java Objects](https://www.javatpoint.com/jaxb-unmarshalling-example)
 - [JavaFX Slider Example](https://docs.oracle.com/javafx/2/ui_controls/slider.htm)
+- [JavaFX Layouts](https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm)
+- [Java Documentation](https://docs.oracle.com/javase/8/docs/)
 
 ### Running the Program
 

@@ -17,6 +17,7 @@ public class UnoTurnManager implements TurnManager {
     final int CCW = -1;
 
     private Player current; //the player making the turn
+    private int currentId;
 
     public UnoTurnManager(List<Player> players){
         this.players = players;
@@ -34,23 +35,27 @@ public class UnoTurnManager implements TurnManager {
     @Override
     public Player getFirstPlayer() {
         //TODO: randomize this
+        currentId = 0;
         return players.get(0);
     }
 
     @Override
     public void nextPlayer() {
-
-        if (direction == CCW){
-            current = iterator.previous();
-        } else if (iterator.hasNext()){
-            iterator.next();
-            current = iterator.next();
-        } else if (!iterator.hasPrevious()){
-            iterator = players.listIterator(players.size());
-        } else {
-            //reset iterator to beginning after looping through all players
-            iterator = players.listIterator();
+        if (currentId < players.size() - 1){
+            currentId++;
+        } else if (currentId == 3){
+            currentId = 0;
         }
+        current = players.get(currentId);
+//        if (iterator.hasNext()){
+//            iterator.next();
+//            current = iterator.next();
+//        } else if (!iterator.hasPrevious()){
+//            iterator = players.listIterator(players.size());
+//        } else {
+//            //reset iterator to beginning after looping through all players
+//            iterator = players.listIterator();
+//        }
     }
 
     @Override
@@ -63,7 +68,7 @@ public class UnoTurnManager implements TurnManager {
     public int getPlayerId(Player player){
         for (Player p : players){
             if(player == p){
-                return players.indexOf(p);
+                return players.indexOf(p) + 1;
             }
         }
 

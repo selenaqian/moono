@@ -65,8 +65,6 @@ public class UnoController implements GameController{
     public void handleAIPlay(){
         uno.playCard();
         gameView.updateDiscardPile(uno.getTopDiscardCard());
-//        Player currentPlayer = turnManager.getCurrentPlayer();
-//        gameView.updateHand(turnManager.getPlayerId(currentPlayer), currentPlayer.hand().getCardCount());
         checkGameEnd();
     }
 

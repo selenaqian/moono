@@ -141,6 +141,7 @@ public class Uno implements GameModel {
     
     private void endTurn(){
       turnManager.nextPlayer();
+      currentPlayer = turnManager.getCurrentPlayer();
     }
 
     /**

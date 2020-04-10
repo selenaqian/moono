@@ -2,16 +2,18 @@ package ooga.game;
 
 import javafx.stage.Stage;
 import ooga.cards.Card;
+import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
-
+import ooga.game.TurnManager;
 public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
     GameView gameView;
     Stage mainStage;
     Uno uno;
+    UnoTurnManager turnManager;
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -24,6 +26,7 @@ public class UnoController implements GameController{
         uno = new Uno(settings);
         uno.start();
         gameView = new GameView(uno, this, mainStage); //TODO: change to interface
+        turnManager = uno.getTurnManager();
     }
 
     @Override
@@ -61,7 +64,9 @@ public class UnoController implements GameController{
      */
     public void handleAIPlay(){
         uno.playCard();
-        //TODO: update game view to update number of cards
+        gameView.updateDiscardPile(uno.getTopDiscardCard());
+//        Player currentPlayer = turnManager.getCurrentPlayer();
+//        gameView.updateHand(turnManager.getPlayerId(currentPlayer), currentPlayer.hand().getCardCount());
         checkGameEnd();
     }
 

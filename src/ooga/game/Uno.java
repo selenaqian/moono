@@ -86,7 +86,7 @@ public class Uno implements GameModel {
     public void playCard() {
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
-            if (card.equals(getTopDiscardCard())) {
+            if (rule.isValid(discPile.showTopCard(), card)) {
                 playCard(card);
                 return;
             }
@@ -164,6 +164,10 @@ public class Uno implements GameModel {
         for (int i = 0; i < mySettings.getNumPlayers(); i++){
             players.add(new Player());
         }
+    }
+
+    public UnoTurnManager getTurnManager(){
+        return turnManager;
     }
 
 //    /**

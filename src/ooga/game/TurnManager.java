@@ -30,5 +30,11 @@ public interface TurnManager{
      */
     Player getCurrentPlayer();
 
+    /**
+     * Get "id" of player
+     * @return
+     */
+    int getPlayerId(Player player);
+
 
 }

@@ -8,14 +8,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.game.UnoController;
 
+import java.util.ResourceBundle;
+
 import static ooga.view.SetupView.*;
 
 public class EndView {
     private Stage mainStage;
     private Button newGameButton;
+    private ResourceBundle myResources;
 
     public EndView(Stage stage) {
         mainStage = stage;
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
         showEndScene();
     }
 
@@ -23,12 +27,12 @@ public class EndView {
         VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
 
-        Text gameComplete = new Text("game complete.\nstart new game?"); // TODO: need a properties file for the text and css file for styling
+        Text gameComplete = new Text(myResources.getString("gameComplete")); // TODO: need a properties file for the text and css file for styling
         gameComplete.setId("gameCompleteText");
         gameComplete.getStyleClass().add("subtitle");
         //TODO: figure out who won and put that on this screen too
 
-        newGameButton = new Button("start new game");
+        newGameButton = new Button(myResources.getString("startNewGame"));
         newGameButton.setId("newGameButton");
         setNewGameActions(newGameButton);
         //TODO: will later also support multiple rounds so will later need a continue button or something

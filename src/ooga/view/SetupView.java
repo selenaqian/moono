@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import ooga.game.GameSettings;
 import ooga.game.UnoController;
 
+import java.util.ResourceBundle;
+
 public class SetupView {
     public static final int DEFAULT_STAGE_WIDTH = 1000;
     public static final int DEFAULT_STAGE_HEIGHT = 600;
@@ -34,6 +36,7 @@ public class SetupView {
     public static final int INCREMENT_50 = 50;
     public static final int DEFAULT_SPACING = 10;
     public static final String DEFAULT_STYLESHEET = "default.css";
+    public static final String DEFAULT_RESOURCES = "default";
 
     private GameSettings mySettings;
     private UnoController myController;
@@ -42,6 +45,7 @@ public class SetupView {
     private Slider cardsPerPlayerSlider;
     private Slider scoreToWinSlider;
     private Button welcomeOkButton;
+    private ResourceBundle myResources;
 
     public SetupView(Stage stage) {
         this(new UnoController(stage), new GameSettings(), stage);
@@ -59,9 +63,9 @@ public class SetupView {
         numberPlayersSlider = new Slider(MIN_PLAYERS, MAX_PLAYERS, DEFAULT_PLAYERS);
         cardsPerPlayerSlider = new Slider(MIN_CARDS, MAX_CARDS, DEFAULT_CARDS);
         scoreToWinSlider = new Slider(MIN_SCORE, MAX_SCORE, DEFAULT_SCORE);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 
         showWelcomeScene(mainStage);
-        //TODO: initialize properties file for text
     }
 
     /**
@@ -72,15 +76,15 @@ public class SetupView {
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
 
-        Text welcomeText = new Text("welcome to moono"); // TODO: need a properties file for the text and css file for styling
+        Text welcomeText = new Text(myResources.getString("welcomeText")); // TODO: need a properties file for the text and css file for styling
         welcomeText.getStyleClass().add("title");
         welcomeText.setId("welcomeText");
 
-        HBox numberPlayers = makeSlider(numberPlayersSlider, "# of players", DEFAULT_PLAYERS, INCREMENT_ONE);
-        HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, "# cards per player", DEFAULT_CARDS, INCREMENT_ONE);
-        HBox scoreToWin = makeSlider(scoreToWinSlider, "max. score to win", DEFAULT_SCORE, INCREMENT_50);
+        HBox numberPlayers = makeSlider(numberPlayersSlider, myResources.getString("numberPlayers"), DEFAULT_PLAYERS, INCREMENT_ONE);
+        HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, myResources.getString("cardsPerPlayer"), DEFAULT_CARDS, INCREMENT_ONE);
+        HBox scoreToWin = makeSlider(scoreToWinSlider, myResources.getString("scoreToWin"), DEFAULT_SCORE, INCREMENT_50);
 
-        welcomeOkButton = new Button("okay!");
+        welcomeOkButton = new Button(myResources.getString("okay"));
         welcomeOkButton.setOnAction(e -> welcomeOkPressed());
 
         root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton);

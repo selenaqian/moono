@@ -23,6 +23,7 @@ import ooga.game.UnoController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static ooga.view.SetupView.*;
 
@@ -42,6 +43,7 @@ public class GameView implements GameViewInterface {
     private GameSettings mySettings;
     private VBox allPlayersNot1;
     private Button nextTurn;
+    private ResourceBundle myResources;
 
     /**
      * Constructor for GameView. Sets the instance variables and initializes the scene with the images.
@@ -57,13 +59,13 @@ public class GameView implements GameViewInterface {
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
         initializeGameScene();
-        // TODO: initialize and use properties file for text
     }
 
     /**
@@ -85,7 +87,7 @@ public class GameView implements GameViewInterface {
         AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
-        nextTurn = new Button("next");
+        nextTurn = new Button(myResources.getString("next"));
         nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
         mainPane.getChildren().add(nextTurn);
         AnchorPane.setTopAnchor(nextTurn, 10.0);
@@ -148,8 +150,8 @@ public class GameView implements GameViewInterface {
         HBox playerBox = new HBox();
         VBox textBox = new VBox();
 
-        Text playerNumberText = new Text("Player " + playerNumber);
-        Text cardsLeft = new Text(numberCards + " left");
+        Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
+        Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
         if (allPlayersCardsLeft.size() >= playerNumber) allPlayersCardsLeft.remove(playerNumber-1);
         allPlayersCardsLeft.add(playerNumber-1, cardsLeft);
         textBox.getChildren().addAll(playerNumberText, cardsLeft);
@@ -159,6 +161,11 @@ public class GameView implements GameViewInterface {
         return playerBox;
     }
 
+    /**
+     * Changes coloring of the text and circle to indicate which player's turn it is.
+     * Called in the game package.
+     * @param playerNumber the number of the player whose turn it now is.
+     */
     public void myTurnColorChange(int playerNumber) {
         player1Label.getStyleClass().removeAll();
         for(int i=1; i<playerViews.size(); i++) {
@@ -182,7 +189,7 @@ public class GameView implements GameViewInterface {
         player1Base.getChildren().addAll(player1Mat, player1Hand);
 
         player1Box.getChildren().addAll(player1Label, player1Base);
-        allPlayersCardsLeft.get(0).setText(cards.size() + " left");
+        allPlayersCardsLeft.get(0).setText(cards.size() + myResources.getString("cardsLeft"));
         player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
         mainPane.getChildren().remove(playerViews.get(0));
         playerViews.remove(0);
@@ -192,7 +199,7 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + " left");
+        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + myResources.getString("cardsLeft"));
     }
 
     @Override

@@ -78,6 +78,9 @@ public class GameView implements GameViewInterface {
 
         nextTurn = new Button("next");
         nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
+        mainPane.getChildren().add(nextTurn);
+        AnchorPane.setTopAnchor(nextTurn, 10.0);
+        AnchorPane.setRightAnchor(nextTurn, 10.0);
     }
 
     private void positionPlayer1() {
@@ -128,7 +131,9 @@ public class GameView implements GameViewInterface {
     public void updateHand(List<Card> cards) {
         player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            player1Hand.getChildren().add(new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4));
+            CardView tempCardView = new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
+            player1Hand.getChildren().add(tempCardView);
+            tempCardView.setOnMouseClicked(e -> myController.handleCardClick(tempCardView.getCard()));
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();

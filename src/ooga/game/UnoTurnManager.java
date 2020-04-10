@@ -51,13 +51,23 @@ public class UnoTurnManager implements TurnManager {
             //reset iterator to beginning after looping through all players
             iterator = players.listIterator();
         }
-
     }
 
     @Override
     public Player getCurrentPlayer() {
         //TODO: add error handling for when there are no players added yet
         return current;
+    }
+
+
+    public int getPlayerId(Player player){
+        for (Player p : players){
+            if(player == p){
+                return players.indexOf(p);
+            }
+        }
+
+        return 0; //TODO: throw exception
     }
 
 

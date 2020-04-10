@@ -135,13 +135,13 @@ public class Uno implements GameModel {
         return players.get(playerNum - 1).hand().getCardCount();
     }
 
+    //get number of cards in current player's hand
+    public int getNumCardsInPlayerHand(){
+        return currentPlayer.hand().getCardCount();
+    }
+    
     private void endTurn(){
-        //check if a player has no more cards
-        /** uncomment if (currentPlayer.hand().size() == 0){
-            unoController.endGame();
-        } else {
-            turnManager.nextPlayer();
-        }*/
+      turnManager.nextPlayer();
     }
 
     /**

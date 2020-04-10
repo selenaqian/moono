@@ -45,7 +45,7 @@ public class UnoController implements GameController{
      */
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
-            uno.playCard(card);
+            uno.playCard(card, gameView);
             gameView.updateHand(uno.getUserHand());
             gameView.updateDiscardPile(uno.getTopDiscardCard());
             checkGameEnd();
@@ -66,7 +66,7 @@ public class UnoController implements GameController{
      */
     public void handleAIPlay(){
         if (!uno.isUserTurn()){
-            uno.playCard();
+            uno.playCard(gameView);
             gameView.updateDiscardPile(uno.getTopDiscardCard());
             checkGameEnd();
         }

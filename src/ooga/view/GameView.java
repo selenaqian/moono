@@ -45,6 +45,10 @@ public class GameView implements GameViewInterface {
     private Button nextTurn;
     private ResourceBundle myResources;
 
+    public GameView() {
+        this(new Uno(), new UnoController(new Stage()), new Stage());
+    }
+
     /**
      * Constructor for GameView. Sets the instance variables and initializes the scene with the images.
      * @param uno the Uno object passed to this class to allow for getting player hands.

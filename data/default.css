@@ -7,6 +7,9 @@
 .button {
     -fx-font-size: 12pt;
 }
+.myTurn {
+    -fx-fill: green;
+}
 .AText {
     -fx-fill: white;
     -fx-font-size: 24pt;

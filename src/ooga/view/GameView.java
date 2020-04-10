@@ -43,6 +43,12 @@ public class GameView implements GameViewInterface {
     private VBox allPlayersNot1;
     private Button nextTurn;
 
+    /**
+     * Constructor for GameView. Sets the instance variables and initializes the scene with the images.
+     * @param uno the Uno object passed to this class to allow for getting player hands.
+     * @param controller the UnoController object passed to this class to allow for calling methods when a button or card is clicked.
+     * @param stage the Stage passed to this class to keep everything loaded into one window.
+     */
     public GameView(Uno uno, UnoController controller, Stage stage) {
         myUno = uno;
         myController = controller;
@@ -60,7 +66,10 @@ public class GameView implements GameViewInterface {
         // TODO: initialize and use properties file for text
     }
 
-    public void initializeGameScene() {
+    /**
+     * Helper method for creating the initial view for the game.
+     */
+    private void initializeGameScene() {
         int numPlayers = mySettings.getNumPlayers();
         int startCards = mySettings.getHandSize();
 
@@ -85,11 +94,17 @@ public class GameView implements GameViewInterface {
         updateHand(myUno.getUserHand());
     }
 
+    /**
+     * Helper method to position the player1 objects in the proper place relative to the scene.
+     */
     private void positionPlayer1() {
         mainPane.getChildren().add(playerViews.get(0));
         AnchorPane.setBottomAnchor(playerViews.get(0), 0.0);
     }
 
+    /**
+     * Helper method to position other player display objects in the scene.
+     */
     private void positionPlayersNot1() {
         setBoxAllPlayersNot1();
         mainPane.getChildren().add(allPlayersNot1);
@@ -97,6 +112,9 @@ public class GameView implements GameViewInterface {
         AnchorPane.setTopAnchor(allPlayersNot1, mainStage.getHeight()/4);
     }
 
+    /**
+     * Helper method to put all of the non-player 1 player displays into a box together that can more easily be placed in the scene.
+     */
     private void setBoxAllPlayersNot1() {
         allPlayersNot1.getChildren().removeAll();
         for(int i=1; i<playerViews.size(); i++) {
@@ -104,6 +122,12 @@ public class GameView implements GameViewInterface {
         }
     }
 
+    /**
+     * Helper method to create all of the player displays.
+     * @param numPlayers the number of players in the game.
+     * @param startCards the number of cards the player starts with.
+     * @return a list with elements that are each of the player displays - player1 at element 0, etc.
+     */
     private List<Pane> makePlayerStatuses(int numPlayers, int startCards) {
         List<Pane> playersList = new ArrayList<>();
         for (int i = 0; i < numPlayers; i++) {
@@ -114,6 +138,12 @@ public class GameView implements GameViewInterface {
         return playersList;
     }
 
+    /**
+     * Helper method to create the player displays - actually creates the circle (for image?) and text objects displaying name and cards left.
+     * @param playerNumber the player number, used to create name for now.
+     * @param numberCards the number of cards the player has.
+     * @return an HBox containing the display info.
+     */
     private HBox makePlayerInfoDisplay(int playerNumber, int numberCards) {
         HBox playerBox = new HBox();
         VBox textBox = new VBox();
@@ -127,6 +157,15 @@ public class GameView implements GameViewInterface {
         Circle playerIcon = new Circle(10);
         playerBox.getChildren().addAll(playerIcon, textBox);
         return playerBox;
+    }
+
+    public void myTurnColorChange(int playerNumber) {
+        player1Label.getStyleClass().removeAll();
+        for(int i=1; i<playerViews.size(); i++) {
+            playerViews.get(i).getStyleClass().removeAll();
+        }
+        if(playerNumber==1) player1Label.getStyleClass().add("myTurn");
+        else playerViews.get(playerNumber-1).getStyleClass().add("myTurn");
     }
 
     @Override

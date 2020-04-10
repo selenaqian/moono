@@ -1,7 +1,8 @@
 package ooga.game;
 
 /**
- *
+ * Functions as a controller class
+ * Called in SetupView
  */
 public class GameSettings {
 

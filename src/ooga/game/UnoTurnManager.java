@@ -18,11 +18,12 @@ public class UnoTurnManager implements TurnManager {
 
     private Player current; //the player making the turn
 
-    public UnoTurnManager(){
-        this.players = new ArrayList<Player>();
+    public UnoTurnManager(List<Player> players){
+        this.players = players;
         iterator = players.listIterator();
-        current = getFirstPlayer();
+        current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
         direction = CW;
+
     }
 
     @Override
@@ -38,11 +39,19 @@ public class UnoTurnManager implements TurnManager {
 
     @Override
     public void nextPlayer() {
+
         if (direction == CCW){
             current = iterator.previous();
-        } else {
+        } else if (iterator.hasNext()){
+            iterator.next();
             current = iterator.next();
+        } else if (!iterator.hasPrevious()){
+            iterator = players.listIterator(players.size());
+        } else {
+            //reset iterator to beginning after looping through all players
+            iterator = players.listIterator();
         }
+
     }
 
     @Override

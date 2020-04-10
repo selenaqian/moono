@@ -11,7 +11,9 @@ import java.util.List;
  */
 public class Hand implements Pile {
 
-    private List<Card> myCards;
+    //I changed this from a List to an ArrayList so I could apply methods such as remove() and add()
+    //TODO: is there a way to keep this as an ArrayList but let methods accept Lists?
+    private ArrayList<Card> myCards;
 
     /**
      * Creates new empty Hand.
@@ -24,7 +26,7 @@ public class Hand implements Pile {
      * Creates new Hand with passed Cards.
      * @param initialCards
      */
-    public Hand(List<Card> initialCards){
+    public Hand(ArrayList<Card> initialCards){
         myCards = initialCards;
     }
 
@@ -75,12 +77,12 @@ public class Hand implements Pile {
     }
 
     /**
-     * Removes given Card from Hand.
+     * Removes given Card from Hand if present.
      * @param card
-     * @return Card
      */
     public void removeCard(Card card){
-        myCards.remove(card);
+        boolean ret = myCards.remove(card);
+        return;
     }
 
     @Override

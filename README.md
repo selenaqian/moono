@@ -16,12 +16,12 @@ Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent Together: 7 hours
+Hours Spent Together: 10 hours
 
 Individual:
-- Tess Hours: 8 hours
-- Mary Hours:
-- Selena Hours: 8 hours
+- Tess Hours: 11 hours 45 mins
+- Mary Hours: 
+- Selena Hours: 15 hours
 - Suomo Hours:
 
 ### Primary Roles

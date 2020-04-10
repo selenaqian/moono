@@ -63,9 +63,10 @@ public class Uno implements GameModel {
      * @param selectedCard the card selected by the player in the view or selected by the AI player
      */
     @Override
-    public void playCard(Card selectedCard, GameView gameView){
+    public boolean playCard(Card selectedCard, GameView gameView){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
+            boolean isOver = rule.isOver(getTopDiscardCard(), currentPlayer.hand());
             //make sure player updates their hand to remove the card
             currentPlayer.playCard(selectedCard);
 
@@ -77,25 +78,27 @@ public class Uno implements GameModel {
 
             //go to next player only when a valid card is played
             endTurn();
+            return isOver;
         }
+        return false;
     }
 
     /**
      * Method used for AI players to play a card
      * Temporary use for Sprint 1
      */
-    public void playCard(GameView gameView) {
+    public boolean playCard(GameView gameView) {
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
-                playCard(card, gameView);
-                return;
+                return playCard(card, gameView);
             }
         }
 
         //when no playable card is found
         drawCard();
         endTurn();
+        return false;
     }
 
     /**

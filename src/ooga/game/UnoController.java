@@ -36,7 +36,7 @@ public class UnoController implements GameController{
 
     @Override
     public void endGame() {
-        EndView endView = new EndView(mainStage);
+        new EndView(mainStage);
     }
 
     /**
@@ -45,10 +45,20 @@ public class UnoController implements GameController{
      */
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
-            uno.playCard(card, gameView);
+            if(uno.playCard(card, gameView)) {
+                gameView.updateHand(uno.getUserHand());
+                gameView.updateDiscardPile(uno.getTopDiscardCard());
+                try {
+                    Thread.sleep(2000);
+                }
+                catch (Exception e) {
+
+                }
+                endGame();
+            }
             gameView.updateHand(uno.getUserHand());
             gameView.updateDiscardPile(uno.getTopDiscardCard());
-            checkGameEnd();
+            //checkGameEnd();
         }
     }
 
@@ -64,11 +74,20 @@ public class UnoController implements GameController{
      * Called from view when player presses "next" button
      * Where it is called will be changed in future sprints
      */
-    public void handleAIPlay(){
+    public void handleAIPlay() {
         if (!uno.isUserTurn()){
-            uno.playCard(gameView);
+            if(uno.playCard(gameView)) {
+                gameView.updateDiscardPile(uno.getTopDiscardCard());
+                try {
+                    Thread.sleep(2000);
+                }
+                catch (Exception e) {
+
+                }
+                endGame();
+            }
             gameView.updateDiscardPile(uno.getTopDiscardCard());
-            checkGameEnd();
+            //checkGameEnd();
         }
 
 

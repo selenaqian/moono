@@ -200,7 +200,7 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + myResources.getString("cardsLeft"));
+        allPlayersCardsLeft.get(playerNumber).setText(cardsLeft + myResources.getString("cardsLeft"));
     }
 
     @Override

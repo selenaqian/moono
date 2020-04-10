@@ -7,6 +7,7 @@ package ooga.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -40,6 +41,7 @@ public class GameView implements GameViewInterface {
     private UnoController myController;
     private GameSettings mySettings;
     private VBox allPlayersNot1;
+    private Button nextTurn;
 
     public GameView(Uno uno, UnoController controller, Stage stage) {
         myUno = uno;
@@ -54,11 +56,11 @@ public class GameView implements GameViewInterface {
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
-        initializeGameScene(mySettings);
+        initializeGameScene();
         // TODO: initialize and use properties file for text
     }
 
-    public void initializeGameScene(GameSettings settings) {
+    public void initializeGameScene() {
         int numPlayers = mySettings.getNumPlayers();
         int startCards = mySettings.getHandSize();
 
@@ -73,6 +75,9 @@ public class GameView implements GameViewInterface {
         mainPane.getChildren().add(decks);
         AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
+
+        nextTurn = new Button("next");
+        nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
     }
 
     private void positionPlayer1() {
@@ -131,6 +136,7 @@ public class GameView implements GameViewInterface {
         player1Base.getChildren().addAll(player1Mat, player1Hand);
 
         player1Box.getChildren().addAll(player1Label, player1Base);
+        allPlayersCardsLeft.get(0).setText(cards.size() + " left");
         player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
         mainPane.getChildren().remove(playerViews.get(0));
         playerViews.remove(0);

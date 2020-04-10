@@ -84,20 +84,17 @@ public class Uno implements GameModel {
      * Temporary use for Sprint 1
      */
     public void playCard() {
-        boolean hasPlayableCard = false;
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (card.equals(getTopDiscardCard())) {
-                hasPlayableCard = true;
                 playCard(card);
-                endTurn();
+                return;
             }
         }
 
-        if (!hasPlayableCard) {
-            drawCard();
-            endTurn();
-        }
+        //when no playable card is found
+        drawCard();
+        endTurn();
     }
 
     /**

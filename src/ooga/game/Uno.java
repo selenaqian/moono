@@ -5,6 +5,7 @@ import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.Player;
+import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
@@ -39,6 +40,7 @@ public class Uno implements GameModel {
 
     public Uno(GameSettings settings){
         mySettings = settings;
+        rule = new ClassicRules();
         addPlayers();
         turnManager = new UnoTurnManager(players);
         currentPlayer = players.get(0);
@@ -46,6 +48,8 @@ public class Uno implements GameModel {
         discPile = new DiscardPile();
         drawPile = new DrawPile();
         dealCards();
+        //flip over the first card
+        discPile.addCard(drawPile.drawCard());
     }
 
     @Override

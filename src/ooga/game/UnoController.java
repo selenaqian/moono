@@ -50,7 +50,6 @@ public class UnoController implements GameController{
             gameView.updateDiscardPile(uno.getTopDiscardCard());
             checkGameEnd();
         }
-
     }
 
     /**
@@ -66,9 +65,12 @@ public class UnoController implements GameController{
      * Where it is called will be changed in future sprints
      */
     public void handleAIPlay(){
-        uno.playCard();
-        gameView.updateDiscardPile(uno.getTopDiscardCard());
-        checkGameEnd();
+        if (!uno.isUserTurn()){
+            uno.playCard();
+            gameView.updateDiscardPile(uno.getTopDiscardCard());
+            checkGameEnd();
+        }
+
 
     }
 

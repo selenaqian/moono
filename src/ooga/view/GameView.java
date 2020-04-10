@@ -81,6 +81,8 @@ public class GameView implements GameViewInterface {
         mainPane.getChildren().add(nextTurn);
         AnchorPane.setTopAnchor(nextTurn, 10.0);
         AnchorPane.setRightAnchor(nextTurn, 10.0);
+
+        updateHand(myUno.getUserHand());
     }
 
     private void positionPlayer1() {

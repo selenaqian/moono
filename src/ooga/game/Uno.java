@@ -84,18 +84,17 @@ public class Uno implements GameModel {
      * Temporary use for Sprint 1
      */
     public void playCard() {
-        boolean hasPlayableCard = false;
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
-            if (card.equals(getTopDiscardCard())) {
-                hasPlayableCard = true;
+            if (rule.isValid(discPile.showTopCard(), card)) {
                 playCard(card);
+                return;
             }
         }
 
-        if (!hasPlayableCard) {
-            drawCard();
-        }
+        //when no playable card is found
+        drawCard();
+        endTurn();
     }
 
     /**
@@ -165,6 +164,10 @@ public class Uno implements GameModel {
         for (int i = 0; i < mySettings.getNumPlayers(); i++){
             players.add(new Player());
         }
+    }
+
+    public UnoTurnManager getTurnManager(){
+        return turnManager;
     }
 
 //    /**

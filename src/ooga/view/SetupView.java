@@ -74,6 +74,7 @@ public class SetupView {
 
         Text welcomeText = new Text("welcome to moono"); // TODO: need a properties file for the text and css file for styling
         welcomeText.getStyleClass().add("title");
+        welcomeText.setId("welcomeText");
 
         HBox numberPlayers = makeSlider(numberPlayersSlider, "# of players", DEFAULT_PLAYERS, INCREMENT_ONE);
         HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, "# cards per player", DEFAULT_CARDS, INCREMENT_ONE);

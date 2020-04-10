@@ -41,7 +41,7 @@ public class Uno implements GameModel {
         mySettings = settings;
         addPlayers();
         turnManager = new UnoTurnManager(players);
-        currentPlayer = turnManager.getCurrentPlayer();
+        currentPlayer = players.get(0);
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
         discPile = new DiscardPile();
         drawPile = new DrawPile();
@@ -62,7 +62,6 @@ public class Uno implements GameModel {
     public void playCard(Card selectedCard){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
-
             //make sure player updates their hand to remove the card
             currentPlayer.playCard(selectedCard);
 
@@ -146,11 +145,10 @@ public class Uno implements GameModel {
      */
     private void dealCards(){
         for(int i = 0; i < mySettings.getNumPlayers(); i ++){
-            Player player = turnManager.getFirstPlayer();
+            Player player = players.get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = drawPile.drawCard();
                 player.takeCard(card);
-                turnManager.nextPlayer();
             }
         }
     }

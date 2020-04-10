@@ -69,6 +69,7 @@ public class Uno implements GameModel {
             //make sure player updates their hand to remove the card
             currentPlayer.playCard(selectedCard);
 
+
             //update the discard pile to add the card
             discPile.addCard(selectedCard);
 
@@ -115,7 +116,6 @@ public class Uno implements GameModel {
 
         //get player to accept the drawn card into their own hand of cards
         currentPlayer.takeCard(card);
-
         endTurn();
     }
 
@@ -169,6 +169,14 @@ public class Uno implements GameModel {
 
     public UnoTurnManager getTurnManager(){
         return turnManager;
+    }
+
+    public boolean isUserTurn(){
+        if(currentPlayer == user){
+            return true;
+        }
+
+        return false;
     }
 
 //    /**

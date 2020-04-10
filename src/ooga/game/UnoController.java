@@ -44,10 +44,13 @@ public class UnoController implements GameController{
      * @param card card that was clicked in the view
      */
     public void handleCardClick(Card card){
-        uno.playCard(card);
-        gameView.updateHand(uno.getUserHand());
-        gameView.updateDiscardPile(uno.getTopDiscardCard());
-        checkGameEnd();
+        if(uno.isUserTurn()){
+            uno.playCard(card);
+            gameView.updateHand(uno.getUserHand());
+            gameView.updateDiscardPile(uno.getTopDiscardCard());
+            checkGameEnd();
+        }
+
     }
 
     /**
@@ -66,6 +69,7 @@ public class UnoController implements GameController{
         uno.playCard();
         gameView.updateDiscardPile(uno.getTopDiscardCard());
         checkGameEnd();
+
     }
 
 

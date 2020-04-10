@@ -39,11 +39,14 @@ public class UnoTurnManager implements TurnManager {
 
     @Override
     public void nextPlayer() {
+
         if (direction == CCW){
             current = iterator.previous();
         } else if (iterator.hasNext()){
             iterator.next();
             current = iterator.next();
+        } else if (!iterator.hasPrevious()){
+            iterator = players.listIterator(players.size());
         } else {
             //reset iterator to beginning after looping through all players
             iterator = players.listIterator();

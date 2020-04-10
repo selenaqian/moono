@@ -41,10 +41,10 @@ class UnoTurnManagerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void getCurrentPlayer() {
+    void testGetCurrentPlayer() {
+        assertEquals(players.get(0), manager.getCurrentPlayer());
+        manager.nextPlayer();
+        assertEquals(players.get(1), manager.getCurrentPlayer());
     }
 
-    @org.junit.jupiter.api.Test
-    void changeDirection() {
-    }
 }

@@ -77,13 +77,31 @@ public class Uno implements GameModel {
     }
 
     /**
+     * Method used for AI players to play a card
+     * Temporary use for Sprint 1
+     */
+    public void playCard() {
+        boolean hasPlayableCard = false;
+        //go through each of the cards in the hand and try playing each card
+        for (Card card : currentPlayer.hand().getAllCards()) {
+            if (card.equals(getTopDiscardCard())) {
+                hasPlayableCard = true;
+                playCard(card);
+            }
+        }
+
+        if (!hasPlayableCard) {
+            drawCard();
+        }
+    }
+
+    /**
      * When a user isn't able to play a card and they take a card from the draw pile
      * Called from the view for human players
      * For AI players, must be called programmatically
      */
     @Override
     public void drawCard(){
-
         //when draw pile is empty, put discard pile cards into it
         if (drawPile.getCardCount() == 0){
             drawPile = new DrawPile(discPile.getAllCards());
@@ -101,8 +119,7 @@ public class Uno implements GameModel {
 
     @Override
     public List<Card> getUserHand() {
-        // uncomment return user.hand();
-        return new ArrayList<>(); //comment out
+        return user.hand().getAllCards();
     }
 
     @Override
@@ -110,6 +127,7 @@ public class Uno implements GameModel {
         return discPile.showTopCard();
     }
 
+    //used temporarily for sprint 1
     public int getNumCardsInPlayerHand(int playerNum){
         return players.get(playerNum - 1).hand().getCardCount();
     }

@@ -11,9 +11,7 @@ import java.util.List;
  */
 public class Hand implements Pile {
 
-    //I changed this from a List to an ArrayList so I could apply methods such as remove() and add()
-    //TODO: is there a way to keep this as an ArrayList but let methods accept Lists?
-    private ArrayList<Card> myCards;
+    private List<Card> myCards;
 
     /**
      * Creates new empty Hand.
@@ -26,7 +24,7 @@ public class Hand implements Pile {
      * Creates new Hand with passed Cards.
      * @param initialCards
      */
-    public Hand(ArrayList<Card> initialCards){
+    public Hand(List<Card> initialCards){
         myCards = initialCards;
     }
 
@@ -44,8 +42,6 @@ public class Hand implements Pile {
         }
         return count;
     }
-
-    //TODO: refactor, overlap between numSuit and numValue?
 
     /**
      * Counts the number of Cards of a given Value in the Hand.

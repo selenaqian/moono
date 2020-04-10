@@ -7,6 +7,7 @@ package ooga.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -36,83 +37,144 @@ public class GameView implements GameViewInterface {
     private CardView discardView;
     private Rectangle deckView;
     private HBox decks; // stores the view of both decks together
-    private Uno uno;
-    private UnoController controller;
+    private Uno myUno;
+    private UnoController myController;
     private GameSettings mySettings;
+    private VBox allPlayersNot1;
+    private Button nextTurn;
 
+    /**
+     * Constructor for GameView. Sets the instance variables and initializes the scene with the images.
+     * @param uno the Uno object passed to this class to allow for getting player hands.
+     * @param controller the UnoController object passed to this class to allow for calling methods when a button or card is clicked.
+     * @param stage the Stage passed to this class to keep everything loaded into one window.
+     */
     public GameView(Uno uno, UnoController controller, Stage stage) {
-        this.uno = uno; //model
-        this.controller = controller; //controller
+        myUno = uno;
+        myController = controller;
         mySettings = uno.getSettings();
         mainStage = stage;
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
+        allPlayersNot1 = new VBox(DEFAULT_SPACING);
+
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
-        initializeGameScene(mySettings);
+        initializeGameScene();
         // TODO: initialize and use properties file for text
     }
 
-    public void initializeGameScene(GameSettings settings) {
+    /**
+     * Helper method for creating the initial view for the game.
+     */
+    private void initializeGameScene() {
         int numPlayers = mySettings.getNumPlayers();
         int startCards = mySettings.getHandSize();
 
         playerViews = makePlayerStatuses(numPlayers, startCards);
-        positionPlayerViews();
+        positionPlayer1();
+        positionPlayersNot1();
 
         decks = new HBox(DEFAULT_SPACING);
         deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
         discardView = new CardView(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardView);
         mainPane.getChildren().add(decks);
-        AnchorPane.setBottomAnchor(decks,mainPane.getHeight()/2);
+        AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
+
+        nextTurn = new Button("next");
+        nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
+        mainPane.getChildren().add(nextTurn);
+        AnchorPane.setTopAnchor(nextTurn, 10.0);
+        AnchorPane.setRightAnchor(nextTurn, 10.0);
+
+        updateHand(myUno.getUserHand());
     }
 
-    private void positionPlayerViews() {
-        positionPlayer1();
-
-        VBox allPlayersNot1 = new VBox(10);
-        for(int i=1; i<playerViews.size(); i++) {
-            allPlayersNot1.getChildren().add(playerViews.get(i));
-        }
-        mainPane.getChildren().add(allPlayersNot1);
-        AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
-        AnchorPane.setBottomAnchor(allPlayersNot1, mainStage.getHeight()/2);
-    }
-
+    /**
+     * Helper method to position the player1 objects in the proper place relative to the scene.
+     */
     private void positionPlayer1() {
         mainPane.getChildren().add(playerViews.get(0));
         AnchorPane.setBottomAnchor(playerViews.get(0), 0.0);
     }
 
+    /**
+     * Helper method to position other player display objects in the scene.
+     */
+    private void positionPlayersNot1() {
+        setBoxAllPlayersNot1();
+        mainPane.getChildren().add(allPlayersNot1);
+        AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
+        AnchorPane.setTopAnchor(allPlayersNot1, mainStage.getHeight()/4);
+    }
+
+    /**
+     * Helper method to put all of the non-player 1 player displays into a box together that can more easily be placed in the scene.
+     */
+    private void setBoxAllPlayersNot1() {
+        allPlayersNot1.getChildren().removeAll();
+        for(int i=1; i<playerViews.size(); i++) {
+            allPlayersNot1.getChildren().add(playerViews.get(i));
+        }
+    }
+
+    /**
+     * Helper method to create all of the player displays.
+     * @param numPlayers the number of players in the game.
+     * @param startCards the number of cards the player starts with.
+     * @return a list with elements that are each of the player displays - player1 at element 0, etc.
+     */
     private List<Pane> makePlayerStatuses(int numPlayers, int startCards) {
         List<Pane> playersList = new ArrayList<>();
         for (int i = 0; i < numPlayers; i++) {
-            HBox playerBox = new HBox();
-            VBox textBox = new VBox();
-
-            Text playerNumber = new Text("Player " + (i+1));
-            Text cardsLeft = new Text(startCards + " left");
-            allPlayersCardsLeft.add(cardsLeft);
-            textBox.getChildren().addAll(playerNumber, cardsLeft);
-
-            Circle playerIcon = new Circle(10);
-            playerBox.getChildren().addAll(playerIcon, textBox);
-
+            HBox playerBox = makePlayerInfoDisplay(i+1, startCards);
             playersList.add(playerBox);
         }
         player1Label = playersList.get(0);
         return playersList;
     }
 
+    /**
+     * Helper method to create the player displays - actually creates the circle (for image?) and text objects displaying name and cards left.
+     * @param playerNumber the player number, used to create name for now.
+     * @param numberCards the number of cards the player has.
+     * @return an HBox containing the display info.
+     */
+    private HBox makePlayerInfoDisplay(int playerNumber, int numberCards) {
+        HBox playerBox = new HBox();
+        VBox textBox = new VBox();
+
+        Text playerNumberText = new Text("Player " + playerNumber);
+        Text cardsLeft = new Text(numberCards + " left");
+        if (allPlayersCardsLeft.size() >= playerNumber) allPlayersCardsLeft.remove(playerNumber-1);
+        allPlayersCardsLeft.add(playerNumber-1, cardsLeft);
+        textBox.getChildren().addAll(playerNumberText, cardsLeft);
+
+        Circle playerIcon = new Circle(10);
+        playerBox.getChildren().addAll(playerIcon, textBox);
+        return playerBox;
+    }
+
+    public void myTurnColorChange(int playerNumber) {
+        player1Label.getStyleClass().removeAll();
+        for(int i=1; i<playerViews.size(); i++) {
+            playerViews.get(i).getStyleClass().removeAll();
+        }
+        if(playerNumber==1) player1Label.getStyleClass().add("myTurn");
+        else playerViews.get(playerNumber-1).getStyleClass().add("myTurn");
+    }
+
     @Override
     public void updateHand(List<Card> cards) {
         player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            player1Hand.getChildren().add(new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4));
+            CardView tempCardView = new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
+            player1Hand.getChildren().add(tempCardView);
+            tempCardView.setOnMouseClicked(e -> myController.handleCardClick(tempCardView.getCard()));
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();
@@ -120,6 +182,7 @@ public class GameView implements GameViewInterface {
         player1Base.getChildren().addAll(player1Mat, player1Hand);
 
         player1Box.getChildren().addAll(player1Label, player1Base);
+        allPlayersCardsLeft.get(0).setText(cards.size() + " left");
         player1Box.setAlignment(Pos.CENTER); //TODO: alignment doesn't seem to be working
         mainPane.getChildren().remove(playerViews.get(0));
         playerViews.remove(0);
@@ -129,8 +192,7 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        allPlayersCardsLeft.remove(allPlayersCardsLeft.get(playerNumber - 1));
-        allPlayersCardsLeft.add(playerNumber - 1, new Text(cardsLeft + " left"));
+        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + " left");
     }
 
     @Override

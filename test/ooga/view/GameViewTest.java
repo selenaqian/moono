@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameViewTest extends DukeApplicationTest {
     private GameView gameView;
     private List<Card> cardList;
-    private Card discardStart;
     private UnoController controller;
 
     @Override
@@ -35,14 +34,14 @@ class GameViewTest extends DukeApplicationTest {
         for(int i=0; i<7; i++) {
             cardList.add(new Card(Suit.A, Value.ZERO));
         }
-        discardStart = new Card(Suit.A, Value.THREE);
         gameView = new GameView(new Uno(), controller, stage);
     }
 
     @Test
     void testUpdateHandCardsLeft() {
+        sleep(2, TimeUnit.SECONDS);
+        javafxRun(() -> gameView.updateHand(3, 10));
         sleep(5, TimeUnit.SECONDS);
-        gameView.updateHand(3, 10);
 
         assertEquals("10 left", gameView.getAllPlayersCardsLeft().get(3-1).getText());
     }

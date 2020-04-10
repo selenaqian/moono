@@ -5,6 +5,7 @@ import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.Player;
+import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
@@ -39,13 +40,16 @@ public class Uno implements GameModel {
 
     public Uno(GameSettings settings){
         mySettings = settings;
+        rule = new ClassicRules();
         addPlayers();
         turnManager = new UnoTurnManager(players);
-        currentPlayer = turnManager.getCurrentPlayer();
+        currentPlayer = players.get(0);
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
         discPile = new DiscardPile();
         drawPile = new DrawPile();
         dealCards();
+        //flip over the first card
+        discPile.addCard(drawPile.drawCard());
     }
 
     @Override
@@ -62,7 +66,6 @@ public class Uno implements GameModel {
     public void playCard(Card selectedCard){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
-
             //make sure player updates their hand to remove the card
             currentPlayer.playCard(selectedCard);
 
@@ -132,13 +135,13 @@ public class Uno implements GameModel {
         return players.get(playerNum - 1).hand().getCardCount();
     }
 
+    //get number of cards in current player's hand
+    public int getNumCardsInPlayerHand(){
+        return currentPlayer.hand().getCardCount();
+    }
+    
     private void endTurn(){
-        //check if a player has no more cards
-        /** uncomment if (currentPlayer.hand().size() == 0){
-            unoController.endGame();
-        } else {
-            turnManager.nextPlayer();
-        }*/
+      turnManager.nextPlayer();
     }
 
     /**
@@ -146,11 +149,10 @@ public class Uno implements GameModel {
      */
     private void dealCards(){
         for(int i = 0; i < mySettings.getNumPlayers(); i ++){
-            Player player = turnManager.getFirstPlayer();
+            Player player = players.get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = drawPile.drawCard();
                 player.takeCard(card);
-                turnManager.nextPlayer();
             }
         }
     }

@@ -44,6 +44,7 @@ public class UnoController implements GameController{
         uno.playCard(card);
         gameView.updateHand(uno.getUserHand());
         gameView.updateDiscardPile(uno.getTopDiscardCard());
+        checkGameEnd();
     }
 
     /**
@@ -61,5 +62,15 @@ public class UnoController implements GameController{
     public void handleAIPlay(){
         uno.playCard();
         //TODO: update game view to update number of cards
+        checkGameEnd();
     }
+
+
+    private void checkGameEnd(){
+        if(uno.getNumCardsInPlayerHand() == 0){
+            endGame();
+        }
+    }
+
+
 }

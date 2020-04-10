@@ -1,6 +1,7 @@
 package ooga.player;
 
 import ooga.cards.Card;
+
 import ooga.piles.Hand;
 
 import java.util.List;
@@ -51,5 +52,6 @@ public class Player {
     public void takeCard(Card card) {
         playerhand.addCard(card);
     }
+
 }
 

@@ -36,17 +36,20 @@ public class GameView implements GameViewInterface {
     private CardView discardView;
     private Rectangle deckView;
     private HBox decks; // stores the view of both decks together
-    private Uno uno;
-    private UnoController controller;
+    private Uno myUno;
+    private UnoController myController;
     private GameSettings mySettings;
+    private VBox allPlayersNot1;
 
     public GameView(Uno uno, UnoController controller, Stage stage) {
-        this.uno = uno; //model
-        this.controller = controller; //controller
+        myUno = uno;
+        myController = controller;
         mySettings = uno.getSettings();
         mainStage = stage;
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
+        allPlayersNot1 = new VBox(DEFAULT_SPACING);
+
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
@@ -60,7 +63,8 @@ public class GameView implements GameViewInterface {
         int startCards = mySettings.getHandSize();
 
         playerViews = makePlayerStatuses(numPlayers, startCards);
-        positionPlayerViews();
+        positionPlayer1();
+        positionPlayersNot1();
 
         decks = new HBox(DEFAULT_SPACING);
         deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
@@ -71,41 +75,48 @@ public class GameView implements GameViewInterface {
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
     }
 
-    private void positionPlayerViews() {
-        positionPlayer1();
-
-        VBox allPlayersNot1 = new VBox(10);
-        for(int i=1; i<playerViews.size(); i++) {
-            allPlayersNot1.getChildren().add(playerViews.get(i));
-        }
-        mainPane.getChildren().add(allPlayersNot1);
-        AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
-        AnchorPane.setBottomAnchor(allPlayersNot1, mainStage.getHeight()/2);
-    }
-
     private void positionPlayer1() {
         mainPane.getChildren().add(playerViews.get(0));
         AnchorPane.setBottomAnchor(playerViews.get(0), 0.0);
     }
 
+    private void positionPlayersNot1() {
+        setBoxAllPlayersNot1();
+        mainPane.getChildren().add(allPlayersNot1);
+        AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
+        AnchorPane.setBottomAnchor(allPlayersNot1, mainStage.getHeight()/2);
+    }
+
+    private void setBoxAllPlayersNot1() {
+        allPlayersNot1.getChildren().removeAll();
+        for(int i=1; i<playerViews.size(); i++) {
+            allPlayersNot1.getChildren().add(playerViews.get(i));
+        }
+    }
+
     private List<Pane> makePlayerStatuses(int numPlayers, int startCards) {
         List<Pane> playersList = new ArrayList<>();
         for (int i = 0; i < numPlayers; i++) {
-            HBox playerBox = new HBox();
-            VBox textBox = new VBox();
-
-            Text playerNumber = new Text("Player " + (i+1));
-            Text cardsLeft = new Text(startCards + " left");
-            allPlayersCardsLeft.add(cardsLeft);
-            textBox.getChildren().addAll(playerNumber, cardsLeft);
-
-            Circle playerIcon = new Circle(10);
-            playerBox.getChildren().addAll(playerIcon, textBox);
-
+            HBox playerBox = makePlayerInfoDisplay(i+1, startCards);
             playersList.add(playerBox);
         }
         player1Label = playersList.get(0);
         return playersList;
+    }
+
+    private HBox makePlayerInfoDisplay(int playerNumber, int numberCards) {
+        HBox playerBox = new HBox();
+        VBox textBox = new VBox();
+
+        Text playerNumberText = new Text("Player " + playerNumber);
+        Text cardsLeft = new Text(numberCards + " left");
+        if (allPlayersCardsLeft.size() >= playerNumber) allPlayersCardsLeft.remove(playerNumber-1);
+        allPlayersCardsLeft.add(playerNumber-1, cardsLeft);
+        textBox.getChildren().addAll(playerNumberText, cardsLeft);
+
+        Circle playerIcon = new Circle(10);
+        playerBox.getChildren().addAll(playerIcon, textBox);
+        return playerBox;
     }
 
     @Override
@@ -129,8 +140,7 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        allPlayersCardsLeft.remove(allPlayersCardsLeft.get(playerNumber - 1));
-        allPlayersCardsLeft.add(playerNumber - 1, new Text(cardsLeft + " left"));
+        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + " left");
     }
 
     @Override

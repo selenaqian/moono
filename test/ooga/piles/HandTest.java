@@ -23,7 +23,7 @@ class HandTest {
     @BeforeEach
     void setUp() {
         ArrayList<Card> cards = new ArrayList<>(Arrays.asList(card1, card2, card3));
-        h1 = new Hand();
+        h1 = new Hand(cards);
         emptyHand = new Hand();
     }
 

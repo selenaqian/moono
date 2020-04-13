@@ -1,7 +1,5 @@
 package ooga.game;
 
-import ooga.piles.Hand;
-
 public interface PlayerObserver {
-    void updatePlayerHand(int playerId, Hand hand);
+    void updatePlayerHand(int playerId, int cardsLeft);
 }

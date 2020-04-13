@@ -149,7 +149,7 @@ public class Uno implements GameModel {
     public void notifyPlayerObservers() {
         for (PlayerObserver o : playerObservers){
             //TODO: once player class supports ids, change this to get id directly from player
-            o.update(turnManager.getPlayerId(currentPlayer), currentPlayer.hand());
+            o.updatePlayerHand(turnManager.getPlayerId(currentPlayer), currentPlayer.hand().getCardCount());
         }
     }
 

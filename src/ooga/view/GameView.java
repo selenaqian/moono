@@ -21,7 +21,6 @@ import ooga.game.GameSettings;
 import ooga.game.PlayerObserver;
 import ooga.game.Uno;
 import ooga.game.UnoController;
-import ooga.piles.Hand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -249,7 +248,8 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
     //Testing code for observers
     @Override
-    public void updatePlayerHand(int playerId, Hand hand) {
+    public void updatePlayerHand(int playerId, int cardsLeft) {
+        allPlayersCardsLeft.get(playerId).setText(cardsLeft + myResources.getString("cardsLeft"));
 
     }
 }

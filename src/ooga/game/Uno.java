@@ -1,6 +1,5 @@
 package ooga.game;
 
-import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
@@ -8,9 +7,7 @@ import ooga.player.Player;
 import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 import ooga.view.GameView;
-import ooga.view.GameViewInterface;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,19 +136,20 @@ public class Uno implements GameModel {
     }
 
     @Override
-    public void registerObserver(PlayerObserver o) {
+    public void registerPlayerObserver(PlayerObserver o) {
         playerObservers.add(o);
     }
 
     @Override
-    public void removeObserver(PlayerObserver o) {
+    public void removePlayerObserver(PlayerObserver o) {
         playerObservers.remove(playerObservers.indexOf(o));
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyPlayerObservers() {
         for (PlayerObserver o : playerObservers){
-            o.update(currentPlayer.hand());
+            //TODO: once player class supports ids, change this to get id directly from player
+            o.update(turnManager.getPlayerId(currentPlayer), currentPlayer.hand());
         }
     }
 
@@ -166,6 +164,7 @@ public class Uno implements GameModel {
     }
     
     private void endTurn(){
+        notifyPlayerObservers(); //tells observers about update to player hand
       turnManager.nextPlayer();
       currentPlayer = turnManager.getCurrentPlayer();
     }

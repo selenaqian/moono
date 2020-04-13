@@ -20,9 +20,9 @@ public interface GameModel {
 
     Card getTopDiscardCard();
 
-    void registerObserver(PlayerObserver o);
+    void registerPlayerObserver(PlayerObserver o);
 
-    void removeObserver(PlayerObserver o);
+    void removePlayerObserver(PlayerObserver o);
 
-    void notifyObservers();
+    void notifyPlayerObservers();
 }

@@ -19,4 +19,10 @@ public interface GameModel {
     List<Card> getUserHand();
 
     Card getTopDiscardCard();
+
+    void registerObserver(PlayerObserver o);
+
+    void removeObserver(PlayerObserver o);
+
+    void notifyObservers();
 }

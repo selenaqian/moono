@@ -10,6 +10,7 @@ import ooga.rules.Rule;
 import ooga.view.GameView;
 import ooga.view.GameViewInterface;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
  * Equivalent to GamePlay interface from planning
  */
 public class Uno implements GameModel {
+
+    private ArrayList<PlayerObserver> playerObservers;
 
     private GameSettings mySettings;
     private UnoTurnManager turnManager;
@@ -39,6 +42,7 @@ public class Uno implements GameModel {
     }
 
     public Uno(GameSettings settings){
+        playerObservers = new ArrayList();
         mySettings = settings;
         rule = new ClassicRules();
         addPlayers();
@@ -132,6 +136,23 @@ public class Uno implements GameModel {
     @Override
     public Card getTopDiscardCard() {
         return discPile.showTopCard();
+    }
+
+    @Override
+    public void registerObserver(PlayerObserver o) {
+        playerObservers.add(o);
+    }
+
+    @Override
+    public void removeObserver(PlayerObserver o) {
+        playerObservers.remove(playerObservers.indexOf(o));
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (PlayerObserver o : playerObservers){
+            o.update(currentPlayer.hand());
+        }
     }
 
     //used temporarily for sprint 1

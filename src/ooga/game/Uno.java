@@ -25,6 +25,8 @@ public class Uno implements GameModel {
     private Player currentPlayer;
     private Player user; //the human player
 
+    private UnoActionApplier actionApplier; //contains methods for action cards
+
     private DiscardPile discPile;
     private DrawPile drawPile;
 
@@ -50,6 +52,8 @@ public class Uno implements GameModel {
         dealCards();
         //flip over the first card
         discPile.addCard(drawPile.drawCard());
+
+        actionApplier = new UnoActionApplier(this, turnManager);
     }
 
     @Override
@@ -182,6 +186,15 @@ public class Uno implements GameModel {
         }
 
         return false;
+    }
+
+    /**
+     * Sets the new color of the discard pile when a wild card is drawn
+     * May be used by controller and view to handle user selection of color
+     * @param color represents suit of selected wild card "color"
+     */
+    public void setWildColor(String color){
+
     }
 
 //    /**

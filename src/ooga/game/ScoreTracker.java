@@ -4,6 +4,8 @@ import ooga.player.Player;
 
 public interface ScoreTracker {
 
+
+
     void calculate();
 
     /**

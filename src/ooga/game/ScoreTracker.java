@@ -11,5 +11,5 @@ public interface ScoreTracker {
     /**
      * Get the total score of a player
      */
-    int calcPlayerScore(Player player);
+    void calcPlayerScore(Player player);
 }

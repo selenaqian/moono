@@ -14,7 +14,12 @@ public enum Value {
     SIX(6),
     SEVEN(7),
     EIGHT(8),
-    NINE(9);
+    NINE(9),
+    SKIP(10),
+    REVERSE(11),
+    DRAW2(12),
+    WILD(13),
+    WILD4(14);
 
     private final int myNumericValue;
 

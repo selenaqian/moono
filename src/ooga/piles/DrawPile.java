@@ -28,16 +28,15 @@ public class DrawPile extends Deck {
         shuffle();
     }
 
-//    /**
-//     * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
-//     * TODO: This will not be relevant until Sprint 2
-//     * @param values
-//     */
-//    public DrawPile(List<Value> values){
-//        CardBuilder build = new CardBuilder();
-//        myCards = build.makeDeck(values);
-//        shuffle();
-//    }
+    /**
+     * Creates a new shuffled DrawPile with standard Deck and additional action cards as specified.
+     * @param values
+     */
+    public DrawPile(List<Value> values){
+        CardBuilder build = new CardBuilder();
+        myCards = build.makeDeck(values);
+        shuffle();
+    }
 
     /**
      * Returns the top Card and removes it from the Pile.

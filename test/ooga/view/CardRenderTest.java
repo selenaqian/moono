@@ -5,6 +5,9 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import org.junit.jupiter.api.Test;
+import util.DukeApplicationTest;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,9 +21,9 @@ class CardRenderTest {
         assertEquals(0, card1.compareTo(card1View.getCard()));
         assertEquals(100, card1View.getCardViewBase().getWidth());
         assertEquals(200, card1View.getCardViewBase().getHeight());
-        assertEquals(Color.RED, card1View.getCardViewBase().getFill());
+        assertEquals("A", card1View.getCardViewBase().getStyleClass().get(0));
         assertEquals("0", card1View.getCardViewText().getText());
-        assertEquals(Color.WHITE, card1View.getCardViewText().getFill());
+        assertEquals("AText", card1View.getCardViewText().getStyleClass().get(0));
     }
 
     @Test
@@ -32,9 +35,9 @@ class CardRenderTest {
         assertEquals(0, card2.compareTo(card2View.getCard()));
         assertEquals(100, card2View.getCardViewBase().getWidth());
         assertEquals(200, card2View.getCardViewBase().getHeight());
-        assertEquals(Color.BLUE, card2View.getCardViewBase().getFill());
+        assertEquals("B", card2View.getCardViewBase().getStyleClass().get(0));
         assertEquals("2", card2View.getCardViewText().getText());
-        assertEquals(Color.WHITE, card2View.getCardViewText().getFill());
+        assertEquals("BText", card2View.getCardViewText().getStyleClass().get(0));
     }
 
     @Test
@@ -46,8 +49,8 @@ class CardRenderTest {
         assertEquals(0, card3.compareTo(card3View.getCard()));
         assertEquals(100, card3View.getCardViewBase().getWidth());
         assertEquals(200, card3View.getCardViewBase().getHeight());
-        assertEquals(Color.YELLOW, card3View.getCardViewBase().getFill());
+        assertEquals("D", card3View.getCardViewBase().getStyleClass().get(0));
         assertEquals("4", card3View.getCardViewText().getText());
-        assertEquals(Color.BLACK, card3View.getCardViewText().getFill());
+        assertEquals("DText", card3View.getCardViewText().getStyleClass().get(0));
     }
 }

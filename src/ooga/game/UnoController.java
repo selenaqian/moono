@@ -2,11 +2,10 @@ package ooga.game;
 
 import javafx.stage.Stage;
 import ooga.cards.Card;
-import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
-import ooga.game.TurnManager;
+
 public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;

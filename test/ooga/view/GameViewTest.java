@@ -1,9 +1,6 @@
 package ooga.view;
 
-import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.cards.Card;
@@ -18,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static ooga.view.SetupView.DEFAULT_CARDS;
-import static ooga.view.SetupView.DEFAULT_PLAYERS;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameViewTest extends DukeApplicationTest {
@@ -58,9 +53,9 @@ class GameViewTest extends DukeApplicationTest {
         sleep(2, TimeUnit.SECONDS);
 
         HBox hand = gameView.getPlayer1Hand();
-        List<CardView> cards = new ArrayList<>();
+        List<CardRender> cards = new ArrayList<>();
         for(int i=0; i< hand.getChildren().size(); i++) {
-            cards.add((CardView)hand.getChildren().get(i));
+            cards.add((CardRender)hand.getChildren().get(i));
         }
 
         assertEquals(0, new Card(Suit.B, Value.FIVE).compareTo(cards.get(0).getCard()));
@@ -78,9 +73,9 @@ class GameViewTest extends DukeApplicationTest {
         sleep(2, TimeUnit.SECONDS);
 
         HBox hand = gameView.getPlayer1Hand();
-        List<CardView> cards = new ArrayList<>();
+        List<CardRender> cards = new ArrayList<>();
         for(int i=0; i< hand.getChildren().size(); i++) {
-            cards.add((CardView)hand.getChildren().get(i));
+            cards.add((CardRender)hand.getChildren().get(i));
         }
 
         assertEquals(0, new Card(Suit.B, Value.FIVE).compareTo(cards.get(0).getCard()));
@@ -97,7 +92,7 @@ class GameViewTest extends DukeApplicationTest {
         javafxRun(() -> gameView.updateDiscardPile(new Card(Suit.D, Value.SEVEN)));
         sleep(2, TimeUnit.SECONDS);
 
-        assertEquals(0, new Card(Suit.D, Value.SEVEN).compareTo(gameView.getDiscardView().getCard()));
+        assertEquals(0, new Card(Suit.D, Value.SEVEN).compareTo(gameView.getDiscardRender().getCard()));
     }
 
 

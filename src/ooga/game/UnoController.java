@@ -57,11 +57,11 @@ public class UnoController implements GameController{
                 catch (Exception e) {
 
                 }
-                endGame();
+                checkRoundEnd();
+
             }
             gameView.updateHand(uno.getUserHand());
             gameView.updateDiscardPile(uno.getTopDiscardCard());
-            //checkGameEnd();
         }
     }
 
@@ -87,26 +87,30 @@ public class UnoController implements GameController{
                 catch (Exception e) {
 
                 }
-                endGame();
+                checkRoundEnd();
             }
             gameView.updateDiscardPile(uno.getTopDiscardCard());
             //checkGameEnd();
         }
 
-
     }
 
+    private void checkRoundEnd(){
+        if (turnManager.getCurrentPlayer().hand().getCardCount() == 0){
+            endRound();
+        }
+    }
 
     /**
      * Called from Uno when a user has no more cards left
      */
     private void endRound(){
-        for (Player player : turnManager.getAllPlayers()){
-            scoreTracker.calcPlayerScores(players);
+        scoreTracker.calculate(turnManager.getAllPlayers());
+        for (Player p : turnManager.getAllPlayers()){
+            if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
+                endGame();
+            }
         }
-//        if(uno.getNumCardsInPlayerHand() == 0){
-//            endGame();
-//        }
 
 
     }

@@ -5,6 +5,7 @@ import ooga.cards.Value;
 import ooga.player.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -24,12 +25,20 @@ public class UnoScoreTracker implements ScoreTracker {
     }
 
     @Override
-    public void calculate() {
+    public void calculate(List<Player> players) {
+        for (Player p : players){
+            calcPlayerScore(p);
+        }
 
     }
 
     @Override
-    public int calcPlayerScore(Player player) {
+    public int getPlayerScore(Player player){
+        //return playerScores.get(player.getID());
+        return 0
+    }
+
+    private int calcPlayerScore(Player player) {
         int score = 0;
         for (Card card : player.hand().getAllCards()) {
             String cardType = card.getValue().name();

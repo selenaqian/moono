@@ -87,4 +87,13 @@ public class UnoTurnManager implements TurnManager {
             direction = CW;
         }
     }
+
+    /**
+     * Returns all players a TurnManager is keeping track of
+     * Used in UnoController to calculate scores for all players
+     * @return
+     */
+    public List<Player> getAllPlayers(){
+        return players;
+    }
 }

@@ -97,7 +97,13 @@ public class UnoController implements GameController{
     }
 
 
-    private void checkGameEnd(){
+    /**
+     * Called from Uno when a user has no more cards left
+     */
+    private void endRound(){
+        for (Player player : turnManager.getAllPlayers()){
+            scoreTracker.calcPlayerScores(players);
+        }
 //        if(uno.getNumCardsInPlayerHand() == 0){
 //            endGame();
 //        }

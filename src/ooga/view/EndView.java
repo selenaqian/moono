@@ -12,12 +12,12 @@ import java.util.ResourceBundle;
 
 import static ooga.view.SetupView.*;
 
-public class EndScene {
+public class EndView {
     private Stage mainStage;
     private Button newGameButton;
     private ResourceBundle myResources;
 
-    public EndScene(Stage stage) {
+    public EndView(Stage stage) {
         mainStage = stage;
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
         showEndScene();

@@ -10,14 +10,14 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EndSceneTest extends DukeApplicationTest {
-    private EndScene endScene;
+class EndViewTest extends DukeApplicationTest {
+    private EndView endView;
     private Button newGameButton;
 
     @Override
     public void start(Stage stage) {
-        endScene = new EndScene(stage);
-        newGameButton = endScene.getNewGameButton();
+        endView = new EndView(stage);
+        newGameButton = endView.getNewGameButton();
     }
 
     @Test

@@ -250,6 +250,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
     @Override
     public void updatePlayerHand(int playerId, int cardsLeft) {
         allPlayersCardsLeft.get(playerId).setText(cardsLeft + myResources.getString("cardsLeft"));
-
+        //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
     }
 }

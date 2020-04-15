@@ -69,7 +69,8 @@ public class UnoController implements GameController{
      */
     public void handleDrawPileClick(){
         uno.drawCard();
-        gameView.updateHand(uno.getUserHand());
+        gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
+        //gameView.updatePlayerHand();
     }
 
     /**

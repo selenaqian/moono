@@ -15,14 +15,10 @@ import static ooga.view.SetupView.DEFAULT_RESOURCES;
 public class UnoScoreTracker implements ScoreTracker {
 
     public static final String SCORE_RESOURCES = "scoring";
-    private GameSettings settings;
-    private Uno game;
     private ResourceBundle scoreResources;
     private HashMap<String,Integer> playerScores;
 
-    public UnoScoreTracker(GameSettings settings, Uno game){
-        this.settings = settings;
-        this.game = game;
+    public UnoScoreTracker(){
         scoreResources = ResourceBundle.getBundle(SCORE_RESOURCES);
         playerScores = new HashMap<>();
     }

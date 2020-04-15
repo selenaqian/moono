@@ -26,7 +26,6 @@ public class Uno implements GameModel {
     private Player user; //the human player
 
     private UnoActionApplier actionApplier; //contains methods for action cards
-    private UnoScoreTracker scoreTracker;
 
     private DiscardPile discPile;
     private DrawPile drawPile;
@@ -55,8 +54,6 @@ public class Uno implements GameModel {
         discPile.addCard(drawPile.drawCard());
 
         actionApplier = new UnoActionApplier(this, turnManager);
-        scoreTracker = new UnoScoreTracker(mySettings, this);
-
     }
 
     @Override

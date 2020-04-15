@@ -13,7 +13,7 @@ class UnoScoreTrackerTest {
 
     Uno uno = new Uno();
     GameSettings settings = new GameSettings();
-    UnoScoreTracker scoreTracker = new UnoScoreTracker(settings, uno);
+    UnoScoreTracker scoreTracker = new UnoScoreTracker();
 
     Player player = new Player();
 

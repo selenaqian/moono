@@ -14,6 +14,7 @@ public class UnoController implements GameController{
     Stage mainStage;
     Uno uno;
     UnoTurnManager turnManager;
+    UnoScoreTracker scoreTracker;
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -27,6 +28,8 @@ public class UnoController implements GameController{
         uno.start();
         gameView = new GameView(uno, this, mainStage); //TODO: change to interface
         turnManager = uno.getTurnManager();
+        scoreTracker = new UnoScoreTracker();
+
     }
 
     @Override
@@ -95,9 +98,11 @@ public class UnoController implements GameController{
 
 
     private void checkGameEnd(){
-        if(uno.getNumCardsInPlayerHand() == 0){
-            endGame();
-        }
+//        if(uno.getNumCardsInPlayerHand() == 0){
+//            endGame();
+//        }
+
+
     }
 
 

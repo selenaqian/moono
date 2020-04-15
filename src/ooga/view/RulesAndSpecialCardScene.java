@@ -1,7 +1,7 @@
 /**
  * Helper class that creates the scene for selecting the rules. This class is package-private because only the SetupView
- * class needs to access anything in here. If the controller classes or model classes need to interact with the view, they
- * will do so through SetupView or GameView, not through this class.
+ * class needs to access any information from here. The goal of this class is to separate the creation of the scene, leaving
+ * SetupView to be something of an intermediate controller between the fully view classes and the game package.
  *
  * @author Selena Qian
  */
@@ -35,6 +35,10 @@ class RulesAndSpecialCardScene {
         specialCardOptions = new ArrayList<>();
     }
 
+    /**
+     * Called from SetupView when need to switch to this scene.
+     * @return a scene with GUI for selecting which rules to apply and special cards to include in the game.
+     */
     Scene makeSelectionScene() {
         VBox root = new VBox(DEFAULT_SPACING);
         HBox options = new HBox(DEFAULT_SPACING);
@@ -45,6 +49,11 @@ class RulesAndSpecialCardScene {
         return new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
     }
 
+    /**
+     * Helper method to create the rules selections part of the scene.
+     * @return a box with the rules listed in groups based on which rules are mutually exclusive.
+     * e.g. draw 1 card when you can't play a valid card vs. draw until you have a valid card.
+     */
     private VBox makeRulesBox() {
         VBox rulesBox = new VBox(DEFAULT_SPACING);
         Text rulesText = new Text(myResources.getString("rulesText"));
@@ -67,6 +76,11 @@ class RulesAndSpecialCardScene {
         return rulesBox;
     }
 
+    /**
+     * Helper method to create the special cards selection part of the scene.
+     * @return a box with the special cards all listed. Functionality for telling the backend which cards to include
+     * will be in SetupView, not here.
+     */
     private VBox makeSpecialCardsBox() {
         VBox specialCardsBox = new VBox(DEFAULT_SPACING);
         Text specialCardsText = new Text(myResources.getString("specialCardsText"));
@@ -82,7 +96,29 @@ class RulesAndSpecialCardScene {
         return specialCardsBox;
     }
 
+    /**
+     * Called in SetupView. Allows SetupView to access the button and know if it has been clicked, then call the correct
+     * interactions from there.
+     * @return the okay! button in the selection scene.
+     */
     Button getRulesAndSpecialCardsOkButton() {
         return rulesAndSpecialCardsOkButton;
+    }
+
+    /**
+     * Called in the SetupView. Allows SetupView to access the toggle groups that contain information about which rules
+     * the user wants to include during the game.
+     * @return the list of ToggleGroups that indicate which rules to use.
+     */
+    List<ToggleGroup> getRuleSelections() {
+        return ruleSelections;
+    }
+
+    /**
+     * Called in SetupView. Allows SetupView to access which special cards the user wants to include in the game.
+     * @return the list of CheckBoxes that can then be looked at to tell the model which special cards to use.
+     */
+    List<CheckBox> getSpecialCardSelections() {
+        return specialCardOptions;
     }
 }

@@ -32,13 +32,16 @@ class GameViewTest extends DukeApplicationTest {
         gameView = new GameView(new Uno(), controller, stage);
     }
 
+    /**
+     * Tests updating the visual of AI players' hands where cards aren't visible but the number of cards left is.
+     */
     @Test
     void testUpdateHandCardsLeft() {
         sleep(2, TimeUnit.SECONDS);
         javafxRun(() -> gameView.updateHand(3, 10));
         sleep(5, TimeUnit.SECONDS);
 
-        assertEquals("10 left", gameView.getAllPlayersCardsLeft().get(3-1).getText());
+        assertEquals("10 cards left", gameView.getAllPlayersCardsLeft().get(3-1).getText());
     }
 
     /**
@@ -63,6 +66,9 @@ class GameViewTest extends DukeApplicationTest {
         // will check rectangle appearance in CardViewTest
     }
 
+    /**
+     * Tests the creation of the visual of a hand for human player with multiple cards in it.
+     */
     @Test
     void testUpdateHandMultipleNew() {
         sleep(2, TimeUnit.SECONDS);
@@ -87,6 +93,9 @@ class GameViewTest extends DukeApplicationTest {
         }
     }
 
+    /**
+     * Tests updating the visual of the discard pile which gets called when any player plays a card.
+     */
     @Test
     void testUpdateDiscardPile() {
         javafxRun(() -> gameView.updateDiscardPile(new Card(Suit.D, Value.SEVEN)));
@@ -95,5 +104,10 @@ class GameViewTest extends DukeApplicationTest {
         assertEquals(0, new Card(Suit.D, Value.SEVEN).compareTo(gameView.getDiscardRender().getCard()));
     }
 
+    @Test
+    void testUpdateScore() {
+        javafxRun(() -> gameView.updateScore(1, 10));
 
+        assertEquals("score: 10", gameView.getAllPlayersScore().get(0).getText());
+    }
 }

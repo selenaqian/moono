@@ -37,4 +37,12 @@ public interface GameViewInterface {
      * @param card the new card for the top of the discard pile.
      */
     public void updateDiscardPile(Card card);
+
+    /**
+     * Called by the controller. Updates the view of the score for the given player.
+     *
+     * @param playerNumber the player to update the score for.
+     * @param score the new score of the player.
+     */
+    public void updateScore(int playerNumber, int score);
 }

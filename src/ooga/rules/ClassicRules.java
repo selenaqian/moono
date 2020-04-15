@@ -5,11 +5,13 @@ import ooga.cards.Value;
 import ooga.piles.Hand;
 
 /**
- * This class follows the classic uno rules: (WHICH IS ONLY USING BASIC CARDS FOR SPRINT 1)
+ * This class follows the classic uno rules:
  *      Must play a card that is either of same Suit or Value as the Card on top of DiscardPile (unless it's Wild).
  *      Game is over when the last card in a player's hand is valid.
  */
 public class ClassicRules implements Rule {
+
+    public static final int ONE_LEFT = 1;
 
     /**
      * Create new ClassicRules object.
@@ -30,7 +32,7 @@ public class ClassicRules implements Rule {
 
     @Override
     public boolean isOver(Card discard, Hand hand) {
-        if(hand.getCardCount() == 1 && isValid(discard, hand.getAllCards().get(0))){
+        if(hand.getCardCount() == ONE_LEFT && isValid(discard, hand.getAllCards().get(0))){
             return true;
         }
         return false;

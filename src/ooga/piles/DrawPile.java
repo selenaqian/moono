@@ -11,6 +11,8 @@ import java.util.*;
  */
 public class DrawPile extends Deck {
 
+    public static final int EMPTY = 0;
+
     /**
      * Creates a new shuffled DrawPile with a full standard Deck.
      */
@@ -43,7 +45,7 @@ public class DrawPile extends Deck {
      * @return Card
      */
     public Card drawCard(){
-        if(myCards.size() == 0){
+        if(myCards.size() == EMPTY){
             return null;
         }
         return myCards.pop();
@@ -57,7 +59,7 @@ public class DrawPile extends Deck {
     public List<Card> drawCards(int numCards){
         List<Card> out = new ArrayList<>();
         for(int i = 0; i < numCards; i++){
-            if(myCards.size() == 0){
+            if(myCards.size() == EMPTY){
                 break;
             }
             out.add(myCards.pop());

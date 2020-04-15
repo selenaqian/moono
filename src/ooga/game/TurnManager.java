@@ -1,5 +1,5 @@
 package ooga.game;
-import ooga.player.Playeryrdeujhfgk;
+import ooga.player.Player;
 
 /**
  * Keeps track of players and delegates turns
@@ -11,13 +11,13 @@ public interface TurnManager{
      * Can be called when initializing a new game
      * @param player new player to add
      */
-    void addPlayer(Playeryrdeujhfgk player);
+    void addPlayer(Player player);
 
     /**
      * Determines the first player to play at the start of a new game or round
      * @return Player who gets to take the first turn
      */
-    Playeryrdeujhfgk getFirstPlayer();
+    Player getFirstPlayer();
 
     /**
      * Once the current player is done, called to set currentPlayer as the next player
@@ -28,7 +28,7 @@ public interface TurnManager{
      * The player currently making the play
      * Can also be called from the view to visually indicate who's turn it is
      */
-    Playeryrdeujhfgk getCurrentPlayer();
+    Player getCurrentPlayer();
 
     /**
      * Get "id" of player

@@ -63,7 +63,6 @@ public class UnoActionApplier {
      */
     private void applySkip(){
         turnManager.nextPlayer();
-        turnManager.nextPlayer();
     }
 
     /**
@@ -82,7 +81,6 @@ public class UnoActionApplier {
         for(int i=0;i<TWO;i++){
             uno.drawCard();
         }
-        turnManager.nextPlayer();
     }
 
     /**

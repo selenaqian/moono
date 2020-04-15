@@ -44,12 +44,19 @@ public class UnoScoreTracker implements ScoreTracker {
                 score += card.getValue().getNumericValue();
             }
         }
-
+        //updatePlayerScore(player.getID(), score);
         return score;
     }
 
 
     private void updatePlayerScore(String playerID, int addedScore){
+        //TODO: change playerID to integer if necessary
+        if (playerScores.containsKey(playerID)){
+            playerScores.putIfAbsent(playerID, addedScore);
+        } else {
+            int oldScore = playerScores.get(playerID);
+            playerScores.put(playerID, oldScore + addedScore);
+        }
 
     }
 }

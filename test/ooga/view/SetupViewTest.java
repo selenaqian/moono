@@ -1,6 +1,7 @@
 package ooga.view;
 
 import javafx.stage.Stage;
+import ooga.game.UnoController;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -11,16 +12,16 @@ class SetupViewTest extends DukeApplicationTest {
 
     @Override
     public void start(Stage stage) {
-        startView = new SetupView();
+        startView = new SetupView(stage);
     }
 
     @Test
     void testSetValuesDefault() {
         clickOn(startView.getWelcomeOkButton());
 
-        assertEquals(4, startView.getSettings().getNumPlayers());
-        assertEquals(7, startView.getSettings().getHandSize());
-        assertEquals(500, startView.getSettings().getWinningScore());
+        assertEquals(4, startView.getMySettings().getNumPlayers());
+        assertEquals(7, startView.getMySettings().getHandSize());
+        assertEquals(500, startView.getMySettings().getWinningScore());
     }
 
     @Test
@@ -30,9 +31,9 @@ class SetupViewTest extends DukeApplicationTest {
         setValue(startView.getScoreToWinSlider(), 300);
         clickOn(startView.getWelcomeOkButton());
 
-        assertEquals(3, startView.getSettings().getNumPlayers());
-        assertEquals(10, startView.getSettings().getHandSize());
-        assertEquals(300, startView.getSettings().getWinningScore());
+        assertEquals(3, startView.getMySettings().getNumPlayers());
+        assertEquals(10, startView.getMySettings().getHandSize());
+        assertEquals(300, startView.getMySettings().getWinningScore());
     }
 
 }

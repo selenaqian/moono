@@ -3,6 +3,8 @@ package ooga;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import ooga.game.Uno;
+import ooga.game.UnoController;
 import ooga.view.SetupView;
 
 /**
@@ -11,7 +13,7 @@ import ooga.view.SetupView;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        SetupView startView = new SetupView();
+        new UnoController(primaryStage);
     }
 
     /**

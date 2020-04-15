@@ -43,8 +43,6 @@ public class Hand implements Pile {
         return count;
     }
 
-    //TODO: refactor, overlap between numSuit and numValue?
-
     /**
      * Counts the number of Cards of a given Value in the Hand.
      * @param value
@@ -75,12 +73,12 @@ public class Hand implements Pile {
     }
 
     /**
-     * Removes given Card from Hand.
+     * Removes given Card from Hand if present.
      * @param card
-     * @return Card
      */
     public void removeCard(Card card){
-        myCards.remove(card);
+        boolean ret = myCards.remove(card);
+        return;
     }
 
     @Override

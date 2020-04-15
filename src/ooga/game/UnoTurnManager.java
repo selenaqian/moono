@@ -17,12 +17,14 @@ public class UnoTurnManager implements TurnManager {
     final int CCW = -1;
 
     private Player current; //the player making the turn
+    private int currentId = 0;
 
-    public UnoTurnManager(){
-        this.players = new ArrayList<Player>();
+    public UnoTurnManager(List<Player> players){
+        this.players = players;
         iterator = players.listIterator();
-        current = getFirstPlayer();
+        current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
         direction = CW;
+
     }
 
     @Override
@@ -38,17 +40,38 @@ public class UnoTurnManager implements TurnManager {
 
     @Override
     public void nextPlayer() {
-        if (direction == CCW){
-            current = iterator.previous();
-        } else {
-            current = iterator.next();
+        if (currentId < players.size() - 1){
+            currentId++;
+        } else if (currentId == players.size() - 1){
+            currentId = 0;
         }
+        current = players.get(currentId);
+//        if (iterator.hasNext()){
+//            iterator.next();
+//            current = iterator.next();
+//        } else if (!iterator.hasPrevious()){
+//            iterator = players.listIterator(players.size());
+//        } else {
+//            //reset iterator to beginning after looping through all players
+//            iterator = players.listIterator();
+//        }
     }
 
     @Override
     public Player getCurrentPlayer() {
         //TODO: add error handling for when there are no players added yet
         return current;
+    }
+
+    @Override
+    public int getPlayerId(Player player){
+        for (Player p : players){
+            if(player == p){
+                return players.indexOf(p);
+            }
+        }
+
+        return 0; //TODO: throw exception
     }
 
 

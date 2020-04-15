@@ -1,3 +1,8 @@
+/**
+ * Class that builds the welcome scenes GUI and gets user input to set up the game.
+ *
+ * @author Selena Qian
+ */
 package ooga.view;
 
 import javafx.beans.value.ChangeListener;
@@ -11,8 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.game.GameSettings;
+import ooga.game.UnoController;
 
-import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class SetupView {
     public static final int DEFAULT_STAGE_WIDTH = 1000;
@@ -29,28 +35,37 @@ public class SetupView {
     public static final int INCREMENT_ONE = 1;
     public static final int INCREMENT_50 = 50;
     public static final int DEFAULT_SPACING = 10;
+    public static final String DEFAULT_STYLESHEET = "default.css";
+    public static final String DEFAULT_RESOURCES = "default";
 
-    private GameSettings settings;
+    private GameSettings mySettings;
+    private UnoController myController;
     private Stage mainStage;
     private Slider numberPlayersSlider;
     private Slider cardsPerPlayerSlider;
     private Slider scoreToWinSlider;
     private Button welcomeOkButton;
+    private ResourceBundle myResources;
+
+    public SetupView(Stage stage) {
+        this(new UnoController(stage), new GameSettings(), stage);
+    }
 
     /**
      * Initializes the SetupView object by initializing all of its instance variables.
      * Also displays the first scene.
      */
-    public SetupView() {
-        settings = new GameSettings();
-        mainStage = new Stage();
+    public SetupView(UnoController controller, GameSettings settings, Stage stage) {
+        myController = controller;
+        mySettings = settings;
+        mainStage = stage;
 
         numberPlayersSlider = new Slider(MIN_PLAYERS, MAX_PLAYERS, DEFAULT_PLAYERS);
         cardsPerPlayerSlider = new Slider(MIN_CARDS, MAX_CARDS, DEFAULT_CARDS);
         scoreToWinSlider = new Slider(MIN_SCORE, MAX_SCORE, DEFAULT_SCORE);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 
         showWelcomeScene(mainStage);
-        //TODO: initialize properties file for text
     }
 
     /**
@@ -58,21 +73,24 @@ public class SetupView {
      * @param stage this object's stage where the scene will be shown.
      */
     private void showWelcomeScene(Stage stage) {
-        VBox root = new VBox();
+        VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
 
-        Text welcomeText = new Text("welcome to moono"); // TODO: need a properties file for the text and css file for styling
+        Text welcomeText = new Text(myResources.getString("welcomeText")); // TODO: need a properties file for the text and css file for styling
+        welcomeText.getStyleClass().add("title");
+        welcomeText.setId("welcomeText");
 
-        HBox numberPlayers = makeSlider(numberPlayersSlider, "# of players", DEFAULT_PLAYERS, INCREMENT_ONE);
-        HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, "# cards per player", DEFAULT_CARDS, INCREMENT_ONE);
-        HBox scoreToWin = makeSlider(scoreToWinSlider, "max. score to win", DEFAULT_SCORE, INCREMENT_50);
+        HBox numberPlayers = makeSlider(numberPlayersSlider, myResources.getString("numberPlayers"), DEFAULT_PLAYERS, INCREMENT_ONE);
+        HBox cardsPerPlayer = makeSlider(cardsPerPlayerSlider, myResources.getString("cardsPerPlayer"), DEFAULT_CARDS, INCREMENT_ONE);
+        HBox scoreToWin = makeSlider(scoreToWinSlider, myResources.getString("scoreToWin"), DEFAULT_SCORE, INCREMENT_50);
 
-        welcomeOkButton = new Button("okay!");
+        welcomeOkButton = new Button(myResources.getString("okay"));
         welcomeOkButton.setOnAction(e -> welcomeOkPressed());
 
         root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton);
 
         Scene welcomeScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        welcomeScene.getStylesheets().add(DEFAULT_STYLESHEET);
         stage.setScene(welcomeScene);
         stage.show();
     }
@@ -81,12 +99,14 @@ public class SetupView {
      * Helper method to handle actions once the okay! button is pressed on the welcome scene.
      */
     private void welcomeOkPressed() {
-        settings.setHandSize((int) cardsPerPlayerSlider.getValue());
-        settings.setNumPlayers((int) numberPlayersSlider.getValue());
-        settings.setWinningScore((int) scoreToWinSlider.getValue());
+        mySettings.setHandSize((int) cardsPerPlayerSlider.getValue());
+        mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
+        mySettings.setWinningScore((int) scoreToWinSlider.getValue());
+        RulesAndSpecialCardScene rulesAndSpecialCards = new RulesAndSpecialCardScene();
+        Scene rulesAndSpecialScene = rulesAndSpecialCards.makeSelectionScene();
+        mainStage.setScene(rulesAndSpecialScene);
 
-        new GameView(settings.getNumPlayers(), settings.getHandSize(), new ArrayList<>(), mainStage);
-        //TODO: transition to next scene
+        //myController.start();
     }
 
     /**
@@ -131,8 +151,8 @@ public class SetupView {
      * Used for testing. Allows test to access the gameSettings object to check that values have updated appropriately.
      * @return the gameSettings object instance in this.
      */
-    public GameSettings getSettings() {
-        return settings;
+    public GameSettings getMySettings() {
+        return mySettings;
     }
 
     /**

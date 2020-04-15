@@ -16,12 +16,12 @@ Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent Together: 7 hours
+Hours Spent Together: 13 hours
 
 Individual:
-- Tess Hours: 8 hours
-- Mary Hours:
-- Selena Hours: 8 hours
+- Tess Hours: 13 hours
+- Mary Hours: 
+- Selena Hours: 17 hours
 - Suomo Hours:
 
 ### Primary Roles
@@ -33,6 +33,8 @@ Individual:
 - [Uno Variations - special cards in themed decks](http://unovariations.blogspot.com/p/special-wild-cards.html)
 - [XML into Java Objects](https://www.javatpoint.com/jaxb-unmarshalling-example)
 - [JavaFX Slider Example](https://docs.oracle.com/javafx/2/ui_controls/slider.htm)
+- [JavaFX Layouts](https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm)
+- [Java Documentation](https://docs.oracle.com/javase/8/docs/)
 
 ### Running the Program
 

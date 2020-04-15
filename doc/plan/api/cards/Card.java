@@ -22,6 +22,9 @@ public interface Card /*implements Comparable<Card>*/ {
     @Override
     String toString ();
 
+    @Override
+    boolean equals ();
+
     /*@Override*/
     int compareTo (Card o);
 }

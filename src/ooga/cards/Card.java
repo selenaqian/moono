@@ -6,6 +6,8 @@ package ooga.cards;
  * @author Tess Noonan (tcn6)
  */
 public class Card implements Comparable<Card> {
+    public static final int EQUAL = 0;
+
     private final Suit mySuit;
     private final Value myValue;
 
@@ -41,13 +43,21 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card c = (Card) o;
+        return this.getSuit() == c.getSuit() && this.getValue() == c.getValue();
+    }
+
+    @Override
     public int compareTo (Card o) {
         int valueComp = myValue.compareTo(o.myValue);
         int suitComp = mySuit.compareTo(o.mySuit);
-        if(valueComp == 0 && suitComp == 0){
-            return 0;
+        if(valueComp == EQUAL && suitComp == EQUAL){
+            return EQUAL;
         }
-        else if(valueComp != 0){
+        else if(valueComp != EQUAL){
             return valueComp;
         }
         return suitComp;

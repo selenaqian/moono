@@ -102,11 +102,21 @@ public class SetupView {
         mySettings.setHandSize((int) cardsPerPlayerSlider.getValue());
         mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
         mySettings.setWinningScore((int) scoreToWinSlider.getValue());
+
         RulesAndSpecialCardScene rulesAndSpecialCards = new RulesAndSpecialCardScene();
         Scene rulesAndSpecialScene = rulesAndSpecialCards.makeSelectionScene();
         mainStage.setScene(rulesAndSpecialScene);
 
-        //myController.start();
+        rulesAndSpecialCards.getRulesAndSpecialCardsOkButton().setOnAction(e -> rulesOkClicked());
+    }
+
+    /**
+     * Helper method to handle actions once the okay! button is pressed on the rules and special cards selection scene.
+     */
+    private void rulesOkClicked() {
+        //TODO: set the proper rules and special cards to be on
+
+        myController.start();
     }
 
     /**

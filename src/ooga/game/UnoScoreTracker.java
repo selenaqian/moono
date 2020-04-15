@@ -33,19 +33,19 @@ public class UnoScoreTracker implements ScoreTracker {
     }
 
     @Override
-    public void calcPlayerScore(Player player) {
+    public int calcPlayerScore(Player player) {
         int score = 0;
-        for (Card card : player.hand().getAllCards()){
+        for (Card card : player.hand().getAllCards()) {
             String cardType = card.getValue().name();
-            String cardVal = scoreResources.getString(cardType);
-            if (cardVal != null){ //for special cards
+            if (scoreResources.containsKey(cardType)) {
+                String cardVal = scoreResources.getString(cardType);
                 score += Integer.parseInt(cardVal);
             } else { //for normal cards, add the value of the card to the score
                 score += card.getValue().getNumericValue();
             }
         }
 
-        //updatePlayerScore(player.getID(), score);
+        return score;
     }
 
 

@@ -1,6 +1,5 @@
 package ooga.view;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -11,14 +10,14 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EndViewTest extends DukeApplicationTest {
-    private EndView endView;
+class EndSceneTest extends DukeApplicationTest {
+    private EndScene endScene;
     private Button newGameButton;
 
     @Override
     public void start(Stage stage) {
-        endView = new EndView(stage);
-        newGameButton = endView.getNewGameButton();
+        endScene = new EndScene(stage);
+        newGameButton = endScene.getNewGameButton();
     }
 
     @Test

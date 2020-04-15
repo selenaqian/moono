@@ -8,6 +8,7 @@
 
 package ooga.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -41,7 +42,9 @@ class RulesAndSpecialCardScene {
      */
     Scene makeSelectionScene() {
         VBox root = new VBox(DEFAULT_SPACING);
+        root.setAlignment(Pos.CENTER);
         HBox options = new HBox(DEFAULT_SPACING);
+        options.setAlignment(Pos.CENTER);
         options.getChildren().addAll(makeRulesBox(), makeSpecialCardsBox());
 
         rulesAndSpecialCardsOkButton = new Button(myResources.getString("okay"));

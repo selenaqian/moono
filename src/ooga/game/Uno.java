@@ -61,6 +61,16 @@ public class Uno implements GameModel {
 
     }
 
+    @Override
+    public void restart() {
+        //TODO: add method here to clear cards from player hands
+        discPile = new DiscardPile();
+        drawPile = new DrawPile();
+        dealCards();
+        //flip over the first card
+        discPile.addCard(drawPile.drawCard());
+    }
+
     /**
      * Handle behavior when a user selects a card to play it
      * Called from the view

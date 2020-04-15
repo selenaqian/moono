@@ -109,6 +109,8 @@ public class UnoController implements GameController{
         for (Player p : turnManager.getAllPlayers()){
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 endGame();
+            } else {
+                uno.restart(); //play a new round
             }
         }
 

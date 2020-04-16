@@ -96,6 +96,7 @@ public class Uno implements GameModel {
     /**
      * Method used for AI players to play a card
      * Temporary use for Sprint 1
+     * modified for sprint 2- should be smart now(sna19)
      */
     public boolean playCard(GameView gameView) {
         currentPlayer.hand().sortedHand(currentPlayer.hand().getAllCards());

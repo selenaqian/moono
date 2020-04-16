@@ -8,7 +8,7 @@ import ooga.piles.Hand;
  *      Must play a card that is either of same Suit or Value as the Card on top of DiscardPile (unless it's any Special Card).
  *      Game is over when a player does not have a valid move.
  */
-public class DeadlyRules implements Rule {
+public class DeadlyRules extends Rule {
 
     public static final int SPECIAL_THRESHOLD = 10;
 
@@ -31,6 +31,9 @@ public class DeadlyRules implements Rule {
 
     @Override
     public boolean isOver(Card discard, Hand hand) {
+        if(super.isOver(discard, hand)){
+            return true;
+        }
         for(Card c : hand.getAllCards()){
             if(isValid(discard, c)){
                 return false;

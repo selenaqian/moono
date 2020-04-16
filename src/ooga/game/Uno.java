@@ -81,11 +81,15 @@ public class Uno implements GameModel {
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
             boolean isOver = rule.isOver(getTopDiscardCard(), currentPlayer.hand());
+
             //make sure player updates their hand to remove the card
             currentPlayer.playCard(selectedCard);
 
             //update the discard pile to add the card
             discPile.addCard(selectedCard);
+
+            //apply associated action
+            actionApplier.applyAction(selectedCard.getValue());
 
             //TODO: make call to handleAction() once special cards are implemented
             gameView.updateHand(getTurnManager().getPlayerId(getTurnManager().getCurrentPlayer()), getNumCardsInPlayerHand());
@@ -201,9 +205,10 @@ public class Uno implements GameModel {
     /**
      * Sets the new color of the discard pile when a wild card is drawn
      * May be used by controller and view to handle user selection of color
-     * @param color represents suit of selected wild card "color"
+     * //Hi Tess here I removed the color parameter based on how I think it's used by the ActionApplier
+     * //@param color represents suit of selected wild card "color"
      */
-    public void setWildColor(String color){
+    public void setWildColor(){
 
     }
 

@@ -10,6 +10,8 @@ import java.util.Stack;
  */
 public class DiscardPile extends Deck {
 
+    public static final int EMPTY = 0;
+
     /**
      * Creates a new empty DiscardPile.
      */
@@ -32,7 +34,7 @@ public class DiscardPile extends Deck {
      * @return Card
      */
     public Card showTopCard(){
-        if(myCards.size() == 0){
+        if(myCards.size() == EMPTY){
             return null;
         }
         return myCards.peek();

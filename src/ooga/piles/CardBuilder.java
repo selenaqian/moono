@@ -11,6 +11,8 @@ import java.util.Stack;
  */
 public class CardBuilder {
 
+    public static final int BASIC_THRESHOLD = 9;
+
     /**
      * Creates new CardBuilder.
      */
@@ -25,7 +27,7 @@ public class CardBuilder {
     public Stack<Card> makeFullDeck(){
         Stack<Card> out = new Stack<>();
         for(Value v : Value.values()){
-            if(v.getNumericValue() > 9){
+            if(v.getNumericValue() > BASIC_THRESHOLD){
                 continue;
             }
             for(Suit s : Suit.values()){
@@ -45,7 +47,7 @@ public class CardBuilder {
     public Stack<Card> makeDeck(List<Value> values){
         Stack<Card> out = makeFullDeck();
         for(Value v : values){
-            if(v.getNumericValue() <= 9){
+            if(v.getNumericValue() <= BASIC_THRESHOLD){
                 continue;
             }
             for(Suit s : Suit.values()){

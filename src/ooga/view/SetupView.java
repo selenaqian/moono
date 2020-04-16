@@ -73,7 +73,7 @@ public class SetupView {
      * @param stage this object's stage where the scene will be shown.
      */
     private void showWelcomeScene(Stage stage) {
-        VBox root = new VBox(10);
+        VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
 
         Text welcomeText = new Text(myResources.getString("welcomeText")); // TODO: need a properties file for the text and css file for styling
@@ -102,7 +102,11 @@ public class SetupView {
         mySettings.setHandSize((int) cardsPerPlayerSlider.getValue());
         mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
         mySettings.setWinningScore((int) scoreToWinSlider.getValue());
-        myController.start();
+        RulesAndSpecialCardScene rulesAndSpecialCards = new RulesAndSpecialCardScene();
+        Scene rulesAndSpecialScene = rulesAndSpecialCards.makeSelectionScene();
+        mainStage.setScene(rulesAndSpecialScene);
+
+        //myController.start();
     }
 
     /**

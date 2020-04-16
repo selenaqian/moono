@@ -13,12 +13,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import ooga.cards.Card;
 
-public class CardView extends StackPane {
+public class CardRender extends StackPane {
     private Card myCard;
     private Rectangle cardViewBase;
     private Text cardViewText;
 
-    CardView(Card c, double width, double height) {
+    CardRender(Card c, double width, double height) {
         myCard = c;
         renderCard(width, height);
     }

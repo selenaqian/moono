@@ -11,8 +11,6 @@ import java.util.*;
  */
 public class DrawPile extends Deck {
 
-    public static final int EMPTY = 0;
-
     /**
      * Creates a new shuffled DrawPile with a full standard Deck.
      */
@@ -38,17 +36,6 @@ public class DrawPile extends Deck {
         CardBuilder build = new CardBuilder();
         myCards = build.makeDeck(values);
         shuffle();
-    }
-
-    /**
-     * Returns the top Card and removes it from the Pile.
-     * @return Card
-     */
-    public Card drawCard(){
-        if(myCards.size() == EMPTY){
-            return null;
-        }
-        return myCards.pop();
     }
 
     /**

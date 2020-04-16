@@ -15,3 +15,4 @@ the view needs to know which player to update the hand view of in that method.
 6. (4/8/2020) Added equals() method Override in Card.
 7. (4/15/2020) Added updateScore(int playerNumber, int score) method in GameViewInterface. Needed to be able to change the
 display of player scores - forgot about this functionality in the original plan.
+8. (4/16/2020) Moved drawCard() method from DrawPile to Deck so that DiscardPile also has access to it.

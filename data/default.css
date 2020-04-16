@@ -38,3 +38,16 @@
 .D {
     -fx-fill: yellow;
 }
+.themeOption:hover {
+    -fx-stroke: aqua;
+    -fx-stroke-width: 3pt;
+    -fx-fill: blue;
+}
+.themeOption:selected {
+    -fx-stroke: aqua;
+    -fx-stroke-width: 3pt;
+    -fx-fill: blue;
+}
+.themeOption {
+    -fx-fill: green;
+}

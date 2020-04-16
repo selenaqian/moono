@@ -169,8 +169,8 @@ public class Uno implements GameModel {
     @Override
     public void notifyPlayerObservers() {
         for (PlayerObserver o : playerObservers){
-            //TODO: once player class supports ids, change this to get id directly from player
-            o.updatePlayerHand(turnManager.getPlayerId(currentPlayer), currentPlayer.hand().getCardCount());
+            //FIXME: possibly pass in a hand instead of a list of cards?
+            o.updatePlayerHand(currentPlayer.getID(), currentPlayer.hand().getAllCards());
         }
     }
 

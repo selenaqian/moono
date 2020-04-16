@@ -18,6 +18,7 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.game.GameSettings;
+import ooga.game.PlayerObserver;
 import ooga.game.Uno;
 import ooga.game.UnoController;
 
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 
 import static ooga.view.SetupView.*;
 
-public class GameView implements GameViewInterface {
+public class GameView implements GameViewInterface, PlayerObserver {
     public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
     private List<Pane> playerViews;
@@ -65,11 +66,15 @@ public class GameView implements GameViewInterface {
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 
+        //registering observer(s)
+        myUno.registerPlayerObserver(this);
+
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
         initializeGameScene();
+
     }
 
     /**
@@ -238,5 +243,13 @@ public class GameView implements GameViewInterface {
      */
     public CardRender getDiscardRender() {
         return discardRender;
+    }
+
+
+    //Testing code for observers
+    @Override
+    public void updatePlayerHand(int playerId, int cardsLeft) {
+        allPlayersCardsLeft.get(playerId).setText(cardsLeft + myResources.getString("cardsLeft"));
+        //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
     }
 }

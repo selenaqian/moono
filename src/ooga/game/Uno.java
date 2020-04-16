@@ -1,6 +1,5 @@
 package ooga.game;
 
-import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
@@ -8,7 +7,6 @@ import ooga.player.Player;
 import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 import ooga.view.GameView;
-import ooga.view.GameViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,8 @@ import java.util.List;
  * Equivalent to GamePlay interface from planning
  */
 public class Uno implements GameModel {
+
+    private ArrayList<PlayerObserver> playerObservers;
 
     private GameSettings mySettings;
     private UnoTurnManager turnManager;
@@ -42,6 +42,7 @@ public class Uno implements GameModel {
     }
 
     public Uno(GameSettings settings){
+        playerObservers = new ArrayList();
         mySettings = settings;
         rule = mySettings.getRule();
         specialCards = mySettings.getSpecialCards();
@@ -155,6 +156,24 @@ public class Uno implements GameModel {
         return discPile.showTopCard();
     }
 
+    @Override
+    public void registerPlayerObserver(PlayerObserver o) {
+        playerObservers.add(o);
+    }
+
+    @Override
+    public void removePlayerObserver(PlayerObserver o) {
+        playerObservers.remove(playerObservers.indexOf(o));
+    }
+
+    @Override
+    public void notifyPlayerObservers() {
+        for (PlayerObserver o : playerObservers){
+            //TODO: once player class supports ids, change this to get id directly from player
+            o.updatePlayerHand(turnManager.getPlayerId(currentPlayer), currentPlayer.hand().getCardCount());
+        }
+    }
+
     //used temporarily for sprint 1
     public int getNumCardsInPlayerHand(int playerNum){
         return players.get(playerNum - 1).hand().getCardCount();
@@ -166,6 +185,7 @@ public class Uno implements GameModel {
     }
     
     private void endTurn(){
+        notifyPlayerObservers(); //tells observers about update to player hand
       turnManager.nextPlayer();
       currentPlayer = turnManager.getCurrentPlayer();
     }

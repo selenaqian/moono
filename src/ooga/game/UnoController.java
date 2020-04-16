@@ -42,6 +42,8 @@ public class UnoController implements GameController{
         new EndView(mainStage);
     }
 
+
+
     /**
      * Called when a user selects a card from their hand
      * @param card card that was clicked in the view
@@ -70,7 +72,8 @@ public class UnoController implements GameController{
      */
     public void handleDrawPileClick(){
         uno.drawCard();
-        gameView.updateHand(uno.getUserHand());
+        gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
+        //gameView.updatePlayerHand();
     }
 
     /**

@@ -58,6 +58,16 @@ class ClassicRulesTest {
     }
 
     /**
+     * Tests isValid when given a Wild card when Suit/Value does and doesn't match.
+     */
+    @Test
+    void isValidTrueWild(){
+        assertTrue(myRules.isValid(card1, new Card(Suit.A, Value.WILD)));
+        assertTrue(myRules.isValid(card1, new Card(Suit.C, Value.WILD4)));
+        assertTrue(myRules.isValid(new Card(Suit.D, Value.WILD4), new Card(Suit.C, Value.WILD4)));
+    }
+
+    /**
      * Tests isOver when there's one valid Card in the Hand.
      */
     @Test

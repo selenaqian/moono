@@ -172,6 +172,7 @@ public class Uno implements GameModel {
         for (PlayerObserver o : playerObservers){
             //FIXME: possibly pass in a hand instead of a list of cards?
             o.updatePlayerHand(currentPlayer.getID(), currentPlayer.hand().getAllCards());
+            o.updateDiscardPile(discPile.showTopCard());
         }
     }
     

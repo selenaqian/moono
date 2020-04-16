@@ -212,6 +212,8 @@ public class GameView implements GameViewInterface, PlayerObserver {
         allPlayersCardsLeft.get(playerNumber).setText(cardsLeft + myResources.getString("cardsLeft"));
     }
 
+
+    //this is now overriding a method in PlayerObserver
     @Override
     public void updateDiscardPile(Card card) {
         decks.getChildren().remove(discardRender);
@@ -252,4 +254,5 @@ public class GameView implements GameViewInterface, PlayerObserver {
         allPlayersCardsLeft.get(playerId).setText(cardsLeft + myResources.getString("cardsLeft"));
         //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
     }
+
 }

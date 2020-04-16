@@ -50,7 +50,7 @@ public class UnoController implements GameController{
      */
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
-            if(uno.playCard(card, gameView)) {
+            if(uno.playCard(card)) {
                 gameView.updateHand(uno.getUserHand());
                 gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {

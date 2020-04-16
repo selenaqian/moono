@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PlayerObserver {
     void updatePlayerHand(int playerId, List<Card> cardsLeft);
+    void updateDiscardPile(Card card);
 }

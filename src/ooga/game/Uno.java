@@ -91,7 +91,8 @@ public class Uno implements GameModel {
     public boolean playCard(Card selectedCard){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
-            boolean isOver = rule.isOver(getTopDiscardCard(), currentPlayer.hand());
+            //make sure a player with one valid card left has called uno
+            checkUno();
 
             //make sure player updates their hand to remove the card
             currentPlayer.playCard(selectedCard);
@@ -104,7 +105,6 @@ public class Uno implements GameModel {
 
             //go to next player only when a valid card is played
             endTurn(); //contains call to observers to update the view
-            return isOver;
         }
         return false;
     }
@@ -180,7 +180,6 @@ public class Uno implements GameModel {
     }
     
     private void endTurn(){
-        checkUno();
         notifyPlayerObservers(); //tells observers about update to player hand
         turnManager.nextPlayer();
         currentPlayer = turnManager.getCurrentPlayer();
@@ -271,6 +270,11 @@ public class Uno implements GameModel {
                 currentPlayer.takeCard(drawPile.drawCard());
             }
         }
+    }
+
+    public boolean isOver(){
+        return rule.isOver(getTopDiscardCard(), currentPlayer.hand());
+
     }
 
 }

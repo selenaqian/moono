@@ -51,6 +51,7 @@ public class UnoController implements GameController{
      */
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
+            checkRoundEnd();
             if(uno.playCard(card)) {
                 gameView.updateHand(uno.getUserHand());
                 gameView.updateDiscardPile(uno.getTopDiscardCard());
@@ -83,6 +84,7 @@ public class UnoController implements GameController{
      */
     public void handleAIPlay() {
         if (!uno.isUserTurn()){
+            checkRoundEnd();
             if(uno.playCard(gameView)) {
                 gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
@@ -91,7 +93,6 @@ public class UnoController implements GameController{
                 catch (Exception e) {
 
                 }
-                checkRoundEnd();
             }
             gameView.updateDiscardPile(uno.getTopDiscardCard());
             //checkGameEnd();
@@ -100,7 +101,7 @@ public class UnoController implements GameController{
     }
 
     private void checkRoundEnd(){
-        if (turnManager.getCurrentPlayer().hand().getCardCount() == 0){
+        if (uno.isOver()){
             endRound();
         }
     }

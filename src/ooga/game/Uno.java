@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class Uno implements GameModel {
 
+    public static final int UNO_PENALTY = 4;
+
     private ArrayList<PlayerObserver> playerObservers;
 
     private GameSettings mySettings;
@@ -32,6 +34,8 @@ public class Uno implements GameModel {
 
     private Rule rule;
     private List<Card> specialCards;
+
+    private Boolean didCallUno = false;
 
     public Uno(){
         this(new GameSettings());
@@ -172,9 +176,11 @@ public class Uno implements GameModel {
     }
     
     private void endTurn(){
-        notifyPlayerObservers(); //tells observers about update to player hand (in the view)
-         turnManager.nextPlayer();
-         currentPlayer = turnManager.getCurrentPlayer();
+        checkUno();
+        notifyPlayerObservers(); //tells observers about update to player hand
+        turnManager.nextPlayer();
+        currentPlayer = turnManager.getCurrentPlayer();
+        didCallUno = false;
     }
 
     /**
@@ -236,16 +242,18 @@ public class Uno implements GameModel {
      * Called from view class when the "uno" button is clicked
      */
     public void callUno(){
-
+        didCallUno = true;
     }
 
     /**
-     * Once a player has no cards left, check if they have declared uno
-     * If a player has not declared, then they must pick up more cards
+     * Check if user has declared uno
+     * If user has not declared, then they must pick up more cards
      */
     public void checkUno(){
-        if (currentPlayer.hand().getCardCount() == 1){
-
+        if (currentPlayer.hand().getCardCount() == 1 && didCallUno == false){
+            for (int i = 0; i < UNO_PENALTY; i++){
+                currentPlayer.takeCard(drawPile.drawCard());
+            }
         }
     }
 

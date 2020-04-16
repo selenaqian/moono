@@ -7,7 +7,10 @@ import ooga.piles.Hand;
  * A Ruleset defines how a game is to be played, as in what moves are legal, how the game ends,
  * and the consequences of special Cards.
  */
-public interface Rule {
+public abstract class Rule {
+
+    public static final int ONE_LEFT = 1;
+
 
     /**
      * This method determines whether or not a move is legal based on
@@ -16,15 +19,20 @@ public interface Rule {
      * @param playedCard
      * @return boolean
      */
-    boolean isValid(Card discard, Card playedCard);
+    abstract public boolean isValid(Card discard, Card playedCard);
 
     /**
      * Checks if a game is over based on a given Player's hand.
-     * (for example, Classic Uno ends when someone has 1 Card left that is valid
-     *               Deadly Uno ends when someone has 0 valid Cards)
+     * All games end if a Player has 1 valid Card left.
+     * Other versions, for example Deadly Uno, can also end when someone has 0 valid Cards.
      * @param discard
      * @param hand
      * @return boolean
      */
-    boolean isOver(Card discard, Hand hand);
+    public boolean isOver(Card discard, Hand hand) {
+        if(hand.getCardCount() == ONE_LEFT && isValid(discard, hand.getAllCards().get(0))){
+            return true;
+        }
+        return false;
+    }
 }

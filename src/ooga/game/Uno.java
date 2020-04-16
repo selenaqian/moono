@@ -178,7 +178,7 @@ public class Uno implements GameModel {
             o.updateDiscardPile(discPile.showTopCard());
         }
     }
-    
+
     private void endTurn(){
         notifyPlayerObservers(); //tells observers about update to player hand
         turnManager.nextPlayer();

@@ -13,8 +13,8 @@ public class UnoTurnManager implements TurnManager {
 
     // Direction of "rotation" to the next player
     private int direction;
-    final int CW = 1;
-    final int CCW = -1;
+    public static final int CW = 1;
+    public static final int CCW = -1;
 
     private Player current; //the player making the turn
     private int currentId = 0;
@@ -93,7 +93,14 @@ public class UnoTurnManager implements TurnManager {
      * Used in UnoController to calculate scores for all players
      * @return
      */
-    public List<Player> getAllPlayers(){
+    public List<Player> getAllPlayers() {
         return players;
+    }
+
+     /** Gives current direction.
+     * THIS IS USED JUST FOR TESTING PURPOSES
+     */
+    public int getDirection(){
+        return direction;
     }
 }

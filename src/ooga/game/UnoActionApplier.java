@@ -15,7 +15,7 @@ import ooga.cards.Value;
 public class UnoActionApplier {
 
     public static final int FOUR = 4;
-    final int TWO = 2;
+    public static final int TWO = 2;
 
     private UnoTurnManager turnManager;
     private Uno uno;
@@ -85,7 +85,6 @@ public class UnoActionApplier {
      */
     private void applySkip(){
         turnManager.nextPlayer();
-        turnManager.nextPlayer();
     }
 
     /**
@@ -104,7 +103,6 @@ public class UnoActionApplier {
         for(int i=0;i<TWO;i++){
             uno.drawCard();
         }
-        turnManager.nextPlayer();
     }
 
     /**

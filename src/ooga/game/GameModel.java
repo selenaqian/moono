@@ -9,7 +9,7 @@ import java.util.List;
 public interface GameModel {
     void start();
     void restart();
-    boolean playCard(Card selectedCard, GameView gameView);
+    boolean playCard(Card selectedCard);
     void drawCard();
 
     /**

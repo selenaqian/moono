@@ -81,7 +81,7 @@ public class Uno implements GameModel {
      * @param selectedCard the card selected by the player in the view or selected by the AI player
      */
     @Override
-    public boolean playCard(Card selectedCard, GameView gameView){
+    public boolean playCard(Card selectedCard){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
             boolean isOver = rule.isOver(getTopDiscardCard(), currentPlayer.hand());
@@ -95,8 +95,8 @@ public class Uno implements GameModel {
             //apply associated action
             actionApplier.applyAction(selectedCard.getValue());
 
-            //TODO: make call to handleAction() once special cards are implemented
-            gameView.updateHand(getTurnManager().getPlayerId(getTurnManager().getCurrentPlayer()), getNumCardsInPlayerHand());
+            //update the view
+            notifyPlayerObservers();
 
             //go to next player only when a valid card is played
             endTurn();
@@ -113,7 +113,7 @@ public class Uno implements GameModel {
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
-                return playCard(card, gameView);
+                return playCard(card);
             }
         }
 

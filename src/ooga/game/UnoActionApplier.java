@@ -15,6 +15,7 @@ import ooga.cards.Value;
 public class UnoActionApplier {
 
     public static final int FOUR = 4;
+    public static final int TWO = 2;
 
     private UnoTurnManager turnManager;
     private Uno uno;
@@ -61,13 +62,14 @@ public class UnoActionApplier {
      * Skips turn of next player.
      */
     private void applySkip(){
-
+        turnManager.nextPlayer();
     }
 
     /**
      * Reverses direction of the play.
      */
     private void applyReverse(){
+        turnManager.changeDirection();
 
     }
 
@@ -75,7 +77,10 @@ public class UnoActionApplier {
      * Draws 2 cards to the next player and skips their turn.
      */
     private void applyDraw2(){
-
+        turnManager.nextPlayer();
+        for(int i=0;i<TWO;i++){
+            uno.drawCard();
+        }
     }
 
     /**

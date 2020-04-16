@@ -151,7 +151,7 @@ public class Uno implements GameModel {
     public int getNumCardsInPlayerHand(){
         return currentPlayer.hand().getCardCount();
     }
-    
+
     private void endTurn(){
       turnManager.nextPlayer();
       currentPlayer = turnManager.getCurrentPlayer();

@@ -23,6 +23,15 @@ class DrawPileTest {
     }
 
     /**
+     * Tests that when passed special Values, the constructor makes the extended Deck of 100 Cards.
+     */
+    @Test
+    void specialConstructor() {
+        DrawPile dp = new DrawPile(Arrays.asList(Value.values()));
+        assertEquals(100, dp.getCardCount());
+    }
+
+    /**
      * Tests drawCard() when the DrawPile is empty.
      * Makes sure it returns null.
      */

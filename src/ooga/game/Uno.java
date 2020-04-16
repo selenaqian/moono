@@ -31,6 +31,7 @@ public class Uno implements GameModel {
     private DrawPile drawPile;
 
     private Rule rule;
+    private int direction;
 
     public Uno(){
         this(new GameSettings());
@@ -153,7 +154,7 @@ public class Uno implements GameModel {
     }
     
     private void endTurn(){
-      turnManager.nextPlayer();
+      turnManager.nextPlayer(direction);
       currentPlayer = turnManager.getCurrentPlayer();
     }
 

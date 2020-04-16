@@ -38,9 +38,12 @@ public class UnoTurnManager implements TurnManager {
     }
 
     @Override
-    public void nextPlayer() {
-        if (currentId < players.size() - 1){
-            currentId++;
+    public void nextPlayer(int direction) {
+        if(currentId==0 && direction<0){
+            currentId=players.size()-1;
+        }
+        else if (currentId < players.size() - 1){
+            currentId=currentId+direction;
         } else if (currentId == players.size() - 1){
             currentId = 0;
         }

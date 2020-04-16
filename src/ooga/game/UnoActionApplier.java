@@ -19,6 +19,7 @@ public class UnoActionApplier {
 
     private UnoTurnManager turnManager;
     private Uno uno;
+    private int direction;
 
     /**
      * Create new UnoActionApplier
@@ -62,7 +63,7 @@ public class UnoActionApplier {
      * Skips turn of next player.
      */
     private void applySkip(){
-        turnManager.nextPlayer();
+        turnManager.nextPlayer(direction);
     }
 
     /**
@@ -70,6 +71,7 @@ public class UnoActionApplier {
      */
     private void applyReverse(){
         turnManager.changeDirection();
+        turnManager.nextPlayer(direction);
 
     }
 
@@ -77,7 +79,7 @@ public class UnoActionApplier {
      * Draws 2 cards to the next player and skips their turn.
      */
     private void applyDraw2(){
-        turnManager.nextPlayer();
+        turnManager.nextPlayer(direction);
         for(int i=0;i<TWO;i++){
             uno.drawCard();
         }
@@ -95,7 +97,7 @@ public class UnoActionApplier {
      */
     private void applyWild4(){
         uno.setWildColor();
-        turnManager.nextPlayer();
+        turnManager.nextPlayer(direction);
         for(int i = 0; i < FOUR; i++){
             uno.drawCard();
         }

@@ -1,8 +1,8 @@
 package ooga.player;
 
-public class AI_PLayer extends Player {
+public class AI_Player extends Player {
     @Override
-    String playerName(String name) {
+    String playerName() {
         return null;
     }
 }

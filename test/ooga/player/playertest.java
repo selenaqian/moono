@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class playertest {
 
     private Hand myhand = new Hand();
-    private Player testplayer = new Player();
+    private Player testplayer = new AI_Player();
     private Card card1 = new Card(Suit.A, Value.ZERO);
     private Card card2 = new Card(Suit.A, Value.ZERO);
     private Card card3 = new Card(Suit.A, Value.ONE);

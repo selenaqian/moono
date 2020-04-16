@@ -2,7 +2,7 @@ package ooga.player;
 
 import java.util.Scanner;
 
-public class ManualPLayer extends Player {
+public class ManualPlayer extends Player {
 
     @Override
     String playerName() {

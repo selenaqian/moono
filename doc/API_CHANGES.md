@@ -13,3 +13,5 @@ on the view when actions in the backend occurred.
 the view needs to know which player to update the hand view of in that method.
 5. (4/7/2020) Renamed and modified GamePlay to GameModel as it will be referenced in the View. The interface is now specific to card games and includes methods to manage drawing and playing cards.
 6. (4/8/2020) Added equals() method Override in Card.
+7. (4/15/2020) Added updateScore(int playerNumber, int score) method in GameViewInterface. Needed to be able to change the
+display of player scores - forgot about this functionality in the original plan.

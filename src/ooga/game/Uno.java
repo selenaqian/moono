@@ -1,14 +1,14 @@
 package ooga.game;
 
-import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
+import ooga.player.AI_Player;
+import ooga.player.ManualPlayer;
 import ooga.player.Player;
 import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 import ooga.view.GameView;
-import ooga.view.GameViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,8 +175,9 @@ public class Uno implements GameModel {
      * TODO: Refactor this - have another class to manage/initialize players?
      */
     private void addPlayers(){
-        for (int i = 0; i < mySettings.getNumPlayers(); i++){
-            players.add(new Player());
+        players.add(new ManualPlayer());
+        for (int i = 1; i < mySettings.getNumPlayers(); i++){
+            players.add(new AI_Player());
         }
     }
 

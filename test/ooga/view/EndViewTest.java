@@ -23,8 +23,12 @@ class EndViewTest extends DukeApplicationTest {
     @Test
     void endViewElementsTest() {
         Text gameCompleteText = lookup("#gameCompleteText").query();
-        assertEquals("game complete.\nstart new game?", gameCompleteText.getText());
-        assertEquals("start new game", newGameButton.getText());
+        Text winnerText = lookup("#winnerText").query();
+        Text startNewGameText = lookup("#startNewGameText").query();
+        assertEquals("game complete.", gameCompleteText.getText());
+        assertEquals("congratulations player ", winnerText.getText());
+        assertEquals("start new game?", startNewGameText.getText());
+        assertEquals("new game", newGameButton.getText());
     }
 
     @Test

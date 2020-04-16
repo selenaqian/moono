@@ -1,5 +1,7 @@
 package ooga.game;
 
+import ooga.player.AI_Player;
+import ooga.player.ManualPlayer;
 import ooga.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -17,10 +19,10 @@ class UnoTurnManagerTest {
     @BeforeEach
     void setUp(){
         players = new ArrayList<>();
-        players.add(new Player());
-        players.add(new Player());
-        players.add(new Player());
-        players.add(new Player());
+        players.add(new ManualPlayer());
+        players.add(new AI_Player());
+        players.add(new AI_Player());
+        players.add(new AI_Player());
         manager = new UnoTurnManager(players);
     }
 

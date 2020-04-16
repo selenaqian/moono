@@ -131,6 +131,14 @@ public class UnoController implements GameController{
 
     }
 
+    /**
+     * Called from view when a user selects a wildcard color
+     */
+    public void setWildColor(String selectedColor){
+
+        uno.setWildColor();
+    }
+
 
 
 

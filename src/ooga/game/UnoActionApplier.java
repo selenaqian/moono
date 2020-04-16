@@ -20,6 +20,8 @@ public class UnoActionApplier {
     private UnoTurnManager turnManager;
     private Uno uno;
 
+    private WildcardObserver observer;
+
     /**
      * Create new UnoActionApplier
      * @param uno
@@ -28,7 +30,17 @@ public class UnoActionApplier {
     public UnoActionApplier(Uno uno, UnoTurnManager turnManager){
         this.turnManager = turnManager;
         this.uno = uno;
+
     }
+
+    public void registerWildObserver(WildcardObserver o){
+        this.observer = o;
+    }
+
+    public void notifyWildObserver(){
+        observer.updateColor();
+    }
+
 
     /**
      * Applies the action if it's a special Card
@@ -89,7 +101,7 @@ public class UnoActionApplier {
      * Changes color of play.
      */
     private void applyWild(){
-        uno.setWildColor();
+        notifyWildObserver();
     }
 
     /**

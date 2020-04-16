@@ -1,6 +1,7 @@
 package ooga.game;
 
 import ooga.cards.Card;
+import ooga.cards.Suit;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.Player;
@@ -229,8 +230,8 @@ public class Uno implements GameModel {
      * //Hi Tess here I removed the color parameter based on how I think it's used by the ActionApplier
      * //@param color represents suit of selected wild card "color"
      */
-    public void setWildColor(){
-
+    public void setWildColor(Suit color){
+        //discPile.showTopCard().setSuit(color);
     }
 
 //    /**

@@ -1,7 +1,8 @@
 package ooga.config;
 
+import ooga.game.GameSettings;
+import ooga.game.TurnManager;
 import ooga.piles.*;
-import ooga.rules.Rule;
 
 import java.util.List;
 
@@ -11,42 +12,45 @@ import java.util.List;
  */
 public class GameInfo {
 
-    private List<Hand> playerHands;
+    private TurnManager turnManager;
+    private GameSettings gameSettings;
     private DrawPile drawPile;
     private DiscardPile discardPile;
-    private int currentTurnPlayerID;
-    private int direction;
     private List<Integer> playerPoints;
-    private Rule rules;
     //TODO: save the theme when that becomes applicable
 
     /**
      * Stores all the given info in a new GameInfo object.
-     * @param playerHands
+     * @param turnManager
+     * @param gameSettings
      * @param drawPile
      * @param discardPile
-     * @param currentTurn
-     * @param direction
      * @param points
-     * @param rule
      */
-    public GameInfo(List<Hand> playerHands, DrawPile drawPile, DiscardPile discardPile, int currentTurn, int direction,
-                    List<Integer> points, Rule rule){
-        this.playerHands = playerHands;
+    public GameInfo(TurnManager turnManager, GameSettings gameSettings, DrawPile drawPile, DiscardPile discardPile,
+                    List<Integer> points){
+        this.turnManager = turnManager;
+        this.gameSettings = gameSettings;
         this.drawPile = drawPile;
         this.discardPile = discardPile;
-        this.currentTurnPlayerID = currentTurn;
-        this.direction = direction;
         this.playerPoints = points;
-        this.rules = rule;
+
     }
 
     /**
-     * Get playerHands.
-     * @return List<Hand>
+     * Get turnManager.
+     * @return TurnManager
      */
-    public List<Hand> getPlayerHands() {
-        return playerHands;
+    public TurnManager getTurnManager() {
+        return turnManager;
+    }
+
+    /**
+     * Get gameSettings.
+     * @return GameSettings
+     */
+    public GameSettings getGameSettings() {
+        return gameSettings;
     }
 
     /**
@@ -66,34 +70,10 @@ public class GameInfo {
     }
 
     /**
-     * Get currentTurnPlayerID.
-     * @return int
-     */
-    public int getCurrentTurnPlayerID() {
-        return currentTurnPlayerID;
-    }
-
-    /**
-     * Get direction.
-     * @return int
-     */
-    public int getDirection() {
-        return direction;
-    }
-
-    /**
      * Get playerPoints.
      * @return List<Integer>
      */
     public List<Integer> getPlayerPoints() {
         return playerPoints;
-    }
-
-    /**
-     * Get rules.
-     * @return Rule
-     */
-    public Rule getRules() {
-        return rules;
     }
 }

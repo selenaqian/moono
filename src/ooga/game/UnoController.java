@@ -119,9 +119,14 @@ public class UnoController implements GameController{
     }
 
     /**
-     * Called from view when user clicks call Uno
+     * Called from view when user clicks call Uno for themselves
      */
     public void callUno(){
+        if (uno.isUserTurn()){
+            uno.callUno();
+
+            //TODO: something here in the view to give feedback to user when they call uno
+        }
 
     }
 

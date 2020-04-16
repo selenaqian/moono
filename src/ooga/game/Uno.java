@@ -31,6 +31,7 @@ public class Uno implements GameModel {
     private DrawPile drawPile;
 
     private Rule rule;
+    private List<Card> specialCards;
 
     public Uno(){
         this(new GameSettings());
@@ -42,7 +43,9 @@ public class Uno implements GameModel {
 
     public Uno(GameSettings settings){
         mySettings = settings;
-        rule = new ClassicRules();
+        rule = mySettings.getRule();
+        specialCards = mySettings.getSpecialCards();
+
         addPlayers();
         turnManager = new UnoTurnManager(players);
         currentPlayer = players.get(0);

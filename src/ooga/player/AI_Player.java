@@ -8,12 +8,12 @@ import java.util.ResourceBundle;
 public class AI_PLayer extends Player {
     private ResourceBundle myResources=ResourceBundle.getBundle("default");
     private GameSettings mySettings;
+    private ArrayList<Integer> AIIDs= new ArrayList<>();
 
-    //myResources = ResourceBundle.getBundle();
 
 
     @Override
-    String playerName() {
+    String manualplayerName() {
         return null;
     }
 
@@ -25,5 +25,11 @@ public class AI_PLayer extends Player {
         ainames.add(myResources.getString("AInames"));
 
         return ainames;
+    }
+
+    void setAIIDs(){
+        AIIDs.add(2);
+        AIIDs.add(3);
+        AIIDs.add(4);
     }
 }

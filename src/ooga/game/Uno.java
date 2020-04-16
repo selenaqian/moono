@@ -11,6 +11,7 @@ import ooga.view.GameView;
 import ooga.view.GameViewInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -74,7 +75,7 @@ public class Uno implements GameModel {
             boolean isOver = rule.isOver(getTopDiscardCard(), currentPlayer.hand());
 
             //make sure player updates their hand to remove the card
-            currentPlayer.playCard(selectedCard);
+            currentPlayer.removecard(selectedCard);
 
             //update the discard pile to add the card
             discPile.addCard(selectedCard);
@@ -97,6 +98,7 @@ public class Uno implements GameModel {
      * Temporary use for Sprint 1
      */
     public boolean playCard(GameView gameView) {
+        currentPlayer.hand().sortedHand(currentPlayer.hand().getAllCards());
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
@@ -127,7 +129,7 @@ public class Uno implements GameModel {
         Card card = drawPile.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        currentPlayer.takeCard(card);
+        currentPlayer.takecard(card);
         //TODO: get the visual updating to work here too:
         // gameView.updateHand(getTurnManager().getPlayerId(getTurnManager().getCurrentPlayer()), getNumCardsInPlayerHand());
         endTurn();
@@ -166,7 +168,7 @@ public class Uno implements GameModel {
             Player player = players.get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = drawPile.drawCard();
-                player.takeCard(card);
+                player.takecard(card);
             }
         }
     }

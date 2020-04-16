@@ -3,6 +3,7 @@ package ooga.piles;
 import ooga.cards.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -99,5 +100,14 @@ public class Hand implements Pile {
     @Override
     public int getCardCount(){
         return myCards.size();
+    }
+
+    /*
+    sorts hand
+     */
+    public void sortedHand(List<Card> initialCards){
+        myCards= initialCards;
+        Collections.sort(myCards);
+        Collections.reverse(myCards);
     }
 }

@@ -1,17 +1,16 @@
 package ooga.game;
 
-import javafx.stage.Stage;
 import ooga.cards.Card;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
+import ooga.player.AI_Player;
+import ooga.player.ManualPlayer;
 import ooga.player.Player;
 import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 import ooga.view.GameView;
-import ooga.view.GameViewInterface;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,7 +31,6 @@ public class Uno implements GameModel {
     private DrawPile drawPile;
 
     private Rule rule;
-    private int direction;
 
     public Uno(){
         this(new GameSettings());
@@ -96,10 +94,8 @@ public class Uno implements GameModel {
     /**
      * Method used for AI players to play a card
      * Temporary use for Sprint 1
-     * modified for sprint 2- should be smart now(sna19)
      */
     public boolean playCard(GameView gameView) {
-        currentPlayer.hand().sortedHand(currentPlayer.hand().getAllCards());
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
@@ -157,8 +153,8 @@ public class Uno implements GameModel {
     }
 
     private void endTurn(){
-      turnManager.nextPlayer(direction);
-      currentPlayer = turnManager.getCurrentPlayer();
+        turnManager.nextPlayer(turnManager.getDirection());
+        currentPlayer = turnManager.getCurrentPlayer();
     }
 
     /**
@@ -179,8 +175,9 @@ public class Uno implements GameModel {
      * TODO: Refactor this - have another class to manage/initialize players?
      */
     private void addPlayers(){
-        for (int i = 0; i < mySettings.getNumPlayers(); i++){
-            players.add(new Player());
+        players.add(new ManualPlayer());
+        for (int i = 1; i < mySettings.getNumPlayers(); i++){
+            players.add(new AI_Player());
         }
     }
 

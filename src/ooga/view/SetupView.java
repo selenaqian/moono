@@ -116,7 +116,10 @@ public class SetupView {
     private void rulesOkClicked() {
         //TODO: set the proper rules and special cards to be on
 
-        myController.start();
+        ThemeSelectionScene themeSelection = new ThemeSelectionScene();
+        Scene themeScene = themeSelection.makeThemeSelectionScene();
+        mainStage.setScene(themeScene);
+        //myController.start();
     }
 
     /**

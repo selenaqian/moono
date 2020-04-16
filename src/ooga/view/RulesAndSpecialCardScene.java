@@ -49,7 +49,9 @@ class RulesAndSpecialCardScene {
 
         rulesAndSpecialCardsOkButton = new Button(myResources.getString("okay"));
         root.getChildren().addAll(options, rulesAndSpecialCardsOkButton);
-        return new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        Scene ruleSelectionScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        ruleSelectionScene.getStylesheets().add(DEFAULT_STYLESHEET);
+        return ruleSelectionScene;
     }
 
     /**

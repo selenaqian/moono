@@ -5,6 +5,7 @@ import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.rules.Rule;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -54,11 +55,21 @@ public class GameSettings {
             Value cardVal = Value.valueOf(s);
             specialCards.add(new Card(Suit.A, cardVal)); //suit doesn't matter here for special cards
         }
-
     }
 
-    public void setRules(String rule){
-        //TODO: implement java reflection
+    public void setRules(String ruleString){
+        //TODO: test if relfection works
+        try {
+            Class<?> clazz = ruleString.getClass();
+            Object o = clazz.getDeclaredConstructor().newInstance();
+            rule = (Rule) o;
+        }
+
+        catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            // FIXME: do something with this exception
+            e.printStackTrace();
+        }
+
     }
 
     public Rule getRule(){

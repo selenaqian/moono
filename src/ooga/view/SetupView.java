@@ -46,6 +46,8 @@ public class SetupView {
     private Slider scoreToWinSlider;
     private Button welcomeOkButton;
     private ResourceBundle myResources;
+    private RulesAndSpecialCardScene rulesAndSpecialCards;
+    private ThemeSelectionScene themeSelection;
 
     public SetupView(Stage stage) {
         this(new UnoController(stage), new GameSettings(), stage);
@@ -103,7 +105,7 @@ public class SetupView {
         mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
         mySettings.setWinningScore((int) scoreToWinSlider.getValue());
 
-        RulesAndSpecialCardScene rulesAndSpecialCards = new RulesAndSpecialCardScene();
+        rulesAndSpecialCards = new RulesAndSpecialCardScene();
         Scene rulesAndSpecialScene = rulesAndSpecialCards.makeSelectionScene();
         mainStage.setScene(rulesAndSpecialScene);
 
@@ -116,7 +118,7 @@ public class SetupView {
     private void rulesOkClicked() {
         //TODO: set the proper rules and special cards to be on
 
-        ThemeSelectionScene themeSelection = new ThemeSelectionScene();
+        themeSelection = new ThemeSelectionScene();
         Scene themeScene = themeSelection.makeThemeSelectionScene();
         mainStage.setScene(themeScene);
 
@@ -196,5 +198,21 @@ public class SetupView {
      */
     public Slider getScoreToWinSlider() {
         return scoreToWinSlider;
+    }
+
+    /**
+     * Used for testing. Allows test to access the okay! button in the rules selection scene.
+     * @return the okay! button in rules and special cards selection scene.
+     */
+    public Button getRulesOkButton() {
+        return rulesAndSpecialCards.getRulesAndSpecialCardsOkButton();
+    }
+
+    /**
+     * Used for testing. Allows test to access the okay! button in the theme selection scene.
+     * @return the okay! button in theme selection scene.
+     */
+    public Button getThemeOkButton() {
+        return themeSelection.getThemeOkButton();
     }
 }

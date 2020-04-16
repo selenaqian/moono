@@ -29,11 +29,14 @@ class ThemeSelectionScene {
     private Button themeOkButton;
     private List<Rectangle> backgroundBoxes;
     private List<Rectangle> colorBoxes;
+    private String[] allThemeFiles;
+    private int selectedThemeIndex;
 
     ThemeSelectionScene() {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
         backgroundBoxes = new ArrayList<>();
         colorBoxes = new ArrayList<>();
+        allThemeFiles = myResources.getString("themeFileNames").split(",");
     }
 
     /**
@@ -88,8 +91,8 @@ class ThemeSelectionScene {
                 for(Rectangle r : backgroundBoxes) {
                     r.getStyleClass().removeAll(r.getStyleClass());
                 }
-                int newIndex = index/4;
-                backgroundBoxes.get(newIndex).getStyleClass().add("themeOptionSelected");
+                selectedThemeIndex = index/4;
+                backgroundBoxes.get(selectedThemeIndex).getStyleClass().add("themeOptionSelected");
             });
         }
     }
@@ -101,5 +104,13 @@ class ThemeSelectionScene {
      */
     Button getThemeOkButton() {
         return themeOkButton;
+    }
+
+    /**
+     * Allows other parts of view to see the desired changes to the stylesheet.
+     * @return the file name for the stylesheet of the selected theme.
+     */
+    String getSelectedTheme() {
+        return allThemeFiles[selectedThemeIndex];
     }
 }

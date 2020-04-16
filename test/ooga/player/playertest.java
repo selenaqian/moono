@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class playertest {
 
     private Hand myhand = new Hand();
-    private Player testplayer = new Player();
+    private Player testplayer = new AI_Player();
     private Card card1 = new Card(Suit.A, Value.ZERO);
     private Card card2 = new Card(Suit.A, Value.ZERO);
     private Card card3 = new Card(Suit.A, Value.ONE);
@@ -58,7 +58,7 @@ tests that a card is removed from the hand after play
         myhand.addCard(card5);
 
 
-        testplayer.playCard(card5);
+        testplayer.removecard(card5);
 
 
         assertEquals(false, testplayer.hand().contains(card5));
@@ -78,7 +78,7 @@ tests that a card is added to the hand after drawing from the drawpile
 
         assertEquals(false,testplayer.hand().contains(card3));
 
-        testplayer.takeCard(card3);
+        testplayer.takecard(card3);
 
 
         assertEquals(4,testplayer.hand().getCardCount());

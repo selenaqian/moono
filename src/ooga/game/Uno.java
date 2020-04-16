@@ -216,6 +216,15 @@ public class Uno implements GameModel {
         return turnManager;
     }
 
+    /**
+     * Returns the action applier object for use in the WildcardObserver
+     * Called from GameView to initialize a WildColorSelectorView
+     * @return
+     */
+    public UnoActionApplier getActionApplier(){
+        return actionApplier;
+    }
+
     public boolean isUserTurn(){
         if(currentPlayer == user){
             return true;
@@ -230,8 +239,9 @@ public class Uno implements GameModel {
      * //Hi Tess here I removed the color parameter based on how I think it's used by the ActionApplier
      * //@param color represents suit of selected wild card "color"
      */
-    public void setWildColor(Suit color){
-        //discPile.showTopCard().setSuit(color);
+    public void setWildColor(String color){
+        Suit cardColor = Suit.valueOf(color);
+        //TODO: add setSuit() method to call something like discPile.showTopCard().setSuit(color);
     }
 
 //    /**

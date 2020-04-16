@@ -37,10 +37,20 @@ public class UnoActionApplier {
         this.observer = o;
     }
 
+    /**
+     * Notifies observers to make WildColorSelectorView show up
+     */
     public void notifyWildObserver(){
-        observer.updateColor();
+        observer.showColorSelector();
     }
 
+    /**
+     * Called from WildColorSelectorView
+     * @param selectedColor color that was clicked on by the user in the view
+     */
+    public void setWildColor(String selectedColor){
+        uno.setWildColor(selectedColor);
+    }
 
     /**
      * Applies the action if it's a special Card

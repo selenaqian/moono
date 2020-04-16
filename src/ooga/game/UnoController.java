@@ -2,6 +2,7 @@ package ooga.game;
 
 import javafx.stage.Stage;
 import ooga.cards.Card;
+import ooga.cards.Suit;
 import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
@@ -130,15 +131,6 @@ public class UnoController implements GameController{
         }
 
     }
-
-    /**
-     * Called from view when a user selects a wildcard color
-     */
-    public void setWildColor(String selectedColor){
-
-        uno.setWildColor();
-    }
-
 
 
 

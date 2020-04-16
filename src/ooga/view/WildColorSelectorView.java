@@ -6,7 +6,7 @@ import ooga.game.WildcardObserver;
 
 public class WildColorSelectorView implements WildcardObserver {
 
-    private UnoActionApplier actionApplier;
+    private UnoActionApplier actionApplier; //call getActionApplier() from Uno
 
     public WildColorSelectorView(UnoActionApplier actionApplier){
         actionApplier.registerWildObserver(this);
@@ -15,6 +15,8 @@ public class WildColorSelectorView implements WildcardObserver {
     @Override
     public void showColorSelector() {
         //TODO: initialize javafx components here to represent the different colors
+
+        //When color is clicked call actionApplier.setWildColor(stringThatMatchesSuitEnum);
 
 
     }

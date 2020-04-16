@@ -240,6 +240,7 @@ public class Uno implements GameModel {
      */
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
+        //TODO: change color of the discard pile's top card
         //TODO: add setSuit() method to call something like discPile.showTopCard().setSuit(color);
     }
 

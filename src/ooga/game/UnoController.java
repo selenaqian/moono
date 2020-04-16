@@ -16,6 +16,7 @@ public class UnoController implements GameController{
     Uno uno;
     UnoTurnManager turnManager;
     UnoScoreTracker scoreTracker;
+    Player winner;
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -40,7 +41,9 @@ public class UnoController implements GameController{
 
     @Override
     public void endGame() {
+        //TODO: pass in the winner info to the view
         new EndView(mainStage);
+
     }
 
 
@@ -113,6 +116,7 @@ public class UnoController implements GameController{
         scoreTracker.calculate(turnManager.getAllPlayers());
         for (Player p : turnManager.getAllPlayers()){
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
+                winner = p;
                 endGame();
             } else {
                 uno.restart(); //play a new round

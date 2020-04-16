@@ -1,6 +1,7 @@
 package ooga.game;
 
 import ooga.cards.Card;
+import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.rules.Rule;
 
@@ -49,7 +50,10 @@ public class GameSettings {
     }
 
     public void setSpecialCards(List<String> specialCardValues){
-        //TODO get values enum from string
+        for (String s : specialCardValues){
+            Value cardVal = Value.valueOf(s);
+            specialCards.add(new Card(Suit.A, cardVal)); //suit doesn't matter here for special cards
+        }
 
     }
 

@@ -8,6 +8,10 @@ import java.util.List;
 
 public class Player {
     private Hand playerhand = new Hand();
+    private int Id;
+
+    public Player(){
+    }
 
 
     /**
@@ -51,6 +55,14 @@ public class Player {
 
     public void takeCard(Card card) {
         playerhand.addCard(card);
+    }
+
+    public void setID(int Id){
+        this.Id = Id;
+    }
+
+    public int getID(){
+        return Id;
     }
 
 }

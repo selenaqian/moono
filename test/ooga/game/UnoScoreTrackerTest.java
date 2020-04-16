@@ -29,7 +29,8 @@ class UnoScoreTrackerTest {
 
     @Test
     void calcPlayerScore() {
-        assertEquals(73, scoreTracker.calcPlayerScore(player));
+
+        assertEquals(73, scoreTracker.getPlayerScore(player));
 
     }
 }

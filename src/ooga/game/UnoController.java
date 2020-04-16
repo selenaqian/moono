@@ -2,6 +2,7 @@ package ooga.game;
 
 import javafx.stage.Stage;
 import ooga.cards.Card;
+import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;

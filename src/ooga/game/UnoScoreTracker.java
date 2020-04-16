@@ -17,7 +17,7 @@ public class UnoScoreTracker implements ScoreTracker {
 
     public static final String SCORE_RESOURCES = "scoring";
     private ResourceBundle scoreResources;
-    private HashMap<String,Integer> playerScores;
+    private HashMap<Integer,Integer> playerScores;
 
     public UnoScoreTracker(){
         scoreResources = ResourceBundle.getBundle(SCORE_RESOURCES);
@@ -34,11 +34,10 @@ public class UnoScoreTracker implements ScoreTracker {
 
     @Override
     public int getPlayerScore(Player player){
-        //return playerScores.get(player.getID());
-        return 0;
+        return playerScores.get(player.getID());
     }
 
-    private int calcPlayerScore(Player player) {
+    public int calcPlayerScore(Player player) {
         int score = 0;
         for (Card card : player.hand().getAllCards()) {
             String cardType = card.getValue().name();
@@ -49,12 +48,12 @@ public class UnoScoreTracker implements ScoreTracker {
                 score += card.getValue().getNumericValue();
             }
         }
-        //updatePlayerScore(player.getID(), score);
+        updatePlayerScore(player.getID(), score);
         return score;
     }
 
 
-    private void updatePlayerScore(String playerID, int addedScore){
+    private void updatePlayerScore(int playerID, int addedScore){
         //TODO: change playerID to integer if necessary
         if (playerScores.containsKey(playerID)){
             playerScores.putIfAbsent(playerID, addedScore);

@@ -1,6 +1,9 @@
 package ooga.game;
 
+import ooga.cards.Suit;
 import ooga.cards.Value;
+
+import java.util.Random;
 
 /**
  * Helper class to apply action card effects to the game of uno
@@ -41,7 +44,14 @@ public class UnoActionApplier {
      * Notifies observers to make WildColorSelectorView show up
      */
     public void notifyWildObserver(){
-        observer.showColorSelector();
+        if (uno.isUserTurn()){
+            observer.showColorSelector();
+        } else {
+            //pick a random suit to set the wildcard color to for AI players that can't interact with the view
+            //TODO: possibly have a method in the Suit enum to return a random suit
+            int rnd = new Random().nextInt(Value.values().length);
+            uno.setWildColor(Suit.values()[rnd].toString());
+        }
     }
 
     /**

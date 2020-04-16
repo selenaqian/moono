@@ -119,7 +119,13 @@ public class SetupView {
         ThemeSelectionScene themeSelection = new ThemeSelectionScene();
         Scene themeScene = themeSelection.makeThemeSelectionScene();
         mainStage.setScene(themeScene);
-        //myController.start();
+
+        themeSelection.getThemeOkButton().setOnAction(e -> themeOkClicked());
+    }
+
+    private void themeOkClicked() {
+        //TODO: set theme info for GameView - need decide how want to do this
+        myController.start();
     }
 
     /**

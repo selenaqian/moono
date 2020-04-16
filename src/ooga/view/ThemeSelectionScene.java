@@ -73,4 +73,13 @@ class ThemeSelectionScene {
         themeSelectionScene.getStylesheets().add(DEFAULT_STYLESHEET);
         return themeSelectionScene;
     }
+
+    /**
+     * Called in SetupView. Allows SetupView to access the button and know if it has been clicked, then call the correct
+     * interactions from there.
+     * @return the okay! button in the theme selection scene.
+     */
+    Button getThemeOkButton() {
+        return themeOkButton;
+    }
 }

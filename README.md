@@ -35,10 +35,11 @@ Individual:
 - [JavaFX Slider Example](https://docs.oracle.com/javafx/2/ui_controls/slider.htm)
 - [JavaFX Layouts](https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm)
 - [Java Documentation](https://docs.oracle.com/javase/8/docs/)
+- [XML De/Encoding](https://howtodoinjava.com/java/serialization/xmlencoder-and-xmldecoder-example/)
 
 ### Running the Program
 
-Main class:
+Main class: Main.java
 
 Data files needed: 
 

@@ -34,7 +34,8 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private List<Pane> playerViews;
     private Pane player1Label; // store the user label separate from the others as well
     private Pane mainPane;
-    private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
+    private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left, used to easily update
+    private List<Text> allPlayersScore; // similar function to allPlayersCardsLeft but for the score
     private HBox player1Hand; // store the card nodes for the user's hand
     private CardRender discardRender;
     private Rectangle deckView;
@@ -63,6 +64,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         mainStage = stage;
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
+        allPlayersScore = new ArrayList<>();
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 
@@ -162,9 +164,15 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
         Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
         Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
-        if (allPlayersCardsLeft.size() >= playerNumber) allPlayersCardsLeft.remove(playerNumber-1);
+        Text score = new Text(numberCards + myResources.getString("score") + 0);
+
+        if (allPlayersCardsLeft.size() >= playerNumber) {
+            allPlayersCardsLeft.remove(playerNumber-1);
+            allPlayersScore.remove(playerNumber-1);
+        }
         allPlayersCardsLeft.add(playerNumber-1, cardsLeft);
-        textBox.getChildren().addAll(playerNumberText, cardsLeft);
+        allPlayersScore.add(playerNumber-1, score);
+        textBox.getChildren().addAll(playerNumberText, cardsLeft, score);
 
         Circle playerIcon = new Circle(10);
         playerBox.getChildren().addAll(playerIcon, textBox);
@@ -209,7 +217,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        allPlayersCardsLeft.get(playerNumber).setText(cardsLeft + myResources.getString("cardsLeft"));
+        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + myResources.getString("cardsLeft"));
     }
 
 
@@ -221,14 +229,28 @@ public class GameView implements GameViewInterface, PlayerObserver {
         decks.getChildren().add(discardRender);
     }
 
+    @Override
+    public void updateScore(int playerNumber, int score) {
+        Text scoreDisplay = allPlayersScore.get(playerNumber-1);
+        scoreDisplay.setText(myResources.getString("score") + score);
+    }
+
     // Methods below primarily used for testing - to get objects and check their displayed values.
 
     /**
      * Used for testing. Allows test to access the list of text objects that state how many cards each player has left.
-     * @return the list of text objects where the text object at a certain index corresponds to the text display to player number index+1.
+     * @return the list of text objects where the text object at a certain index corresponds to the text display of player number index+1.
      */
     public List<Text> getAllPlayersCardsLeft() {
         return allPlayersCardsLeft;
+    }
+
+    /**
+     * Used for testing. Allows test to access the list of text objects that state each players' score.
+     * @return the list of text objects where the text object at a certain index corresponds to the text display of player number index+1.
+     */
+    public List<Text> getAllPlayersScore() {
+        return allPlayersScore;
     }
 
     /**

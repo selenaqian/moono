@@ -4,6 +4,8 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
+import ooga.player.AI_Player;
+import ooga.player.ManualPlayer;
 import ooga.player.Player;
 import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
@@ -49,7 +51,8 @@ public class Uno implements GameModel {
     public Uno(GameSettings settings){
         playerObservers = new ArrayList();
         mySettings = settings;
-        rule = mySettings.getRule();
+        //rule = mySettings.getRule();
+        rule = new ClassicRules();
         specialCards = mySettings.getSpecialCards();
 
         addPlayers();
@@ -204,10 +207,9 @@ public class Uno implements GameModel {
      * TODO: Refactor this - have another class to manage/initialize players?
      */
     private void addPlayers(){
-        for (int i = 0; i < mySettings.getNumPlayers(); i++){
-            Player newPlayer = new Player();
-            newPlayer.setID(i + 1); //IDs start at 1
-            players.add(newPlayer);
+        players.add(new ManualPlayer());
+        for (int i = 1; i < mySettings.getNumPlayers(); i++){
+            players.add(new AI_Player());
         }
     }
 

@@ -3,6 +3,7 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.player.AI_Player;
 import ooga.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class UnoScoreTrackerTest {
     GameSettings settings = new GameSettings();
     UnoScoreTracker scoreTracker = new UnoScoreTracker();
 
-    Player player = new Player();
+    AI_Player player = new AI_Player();
 
 
     @BeforeEach

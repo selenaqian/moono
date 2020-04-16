@@ -6,7 +6,7 @@ import ooga.piles.Hand;
 
 import java.util.List;
 
-public class Player {
+public abstract class Player {
     private Hand playerhand = new Hand();
     private int Id;
 
@@ -40,7 +40,7 @@ public class Player {
      * for manual player, string input
      * @return the player's chosen name
      */
-    //abstract String playerName();
+    abstract String playerName();
 
 
     /**

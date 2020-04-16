@@ -120,6 +120,7 @@ public class UnoController implements GameController{
 
     /**
      * Called from view when user clicks call Uno for themselves
+     * A user should click call uno when it is their turn but before making a play that would leave them with 1 card
      */
     public void callUno(){
         if (uno.isUserTurn()){

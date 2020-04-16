@@ -205,7 +205,9 @@ public class Uno implements GameModel {
      */
     private void addPlayers(){
         for (int i = 0; i < mySettings.getNumPlayers(); i++){
-            players.add(new Player());
+            Player newPlayer = new Player();
+            newPlayer.setID(i + 1); //IDs start at 1
+            players.add(newPlayer);
         }
     }
 

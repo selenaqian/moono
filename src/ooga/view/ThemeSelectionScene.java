@@ -9,7 +9,6 @@
 package ooga.view;
 
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -19,6 +18,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static ooga.view.SetupView.*;
@@ -26,9 +27,13 @@ import static ooga.view.SetupView.*;
 class ThemeSelectionScene {
     private ResourceBundle myResources;
     private Button themeOkButton;
+    private List<Rectangle> backgroundBoxes;
+    private List<Rectangle> colorBoxes;
 
     ThemeSelectionScene() {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
+        backgroundBoxes = new ArrayList<>();
+        colorBoxes = new ArrayList<>();
     }
 
     /**
@@ -55,23 +60,38 @@ class ThemeSelectionScene {
             VBox colors = new VBox();
             colors.setAlignment(Pos.CENTER);
             Rectangle colorsBackground = new Rectangle(DEFAULT_STAGE_WIDTH/4, DEFAULT_STAGE_HEIGHT/2);
-            colorsBackground.getStyleClass().add("themeOption");
             colorWrapper.getChildren().addAll(colorsBackground, colors);
+            backgroundBoxes.add(colorsBackground);
 
-            /**for(String color : myResources.getString(theme).split(",")) {
+            for(String color : myResources.getString(theme).split(",")) {
                 Rectangle oneColor = new Rectangle(DEFAULT_STAGE_WIDTH/4, DEFAULT_STAGE_HEIGHT/8);
                 oneColor.setFill(Paint.valueOf(color));
                 colors.getChildren().add(oneColor);
-            }*/
+                colorBoxes.add(oneColor);
+            }
             //figure out the on hover thing - use for selection
             Text themeText = new Text(theme);
             selection.getChildren().addAll(colorWrapper,themeText);
             themes.getChildren().add(selection);
         }
 
+        setClickStyling();
         Scene themeSelectionScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         themeSelectionScene.getStylesheets().add(DEFAULT_STYLESHEET);
         return themeSelectionScene;
+    }
+
+    private void setClickStyling() {
+        for(int i=0; i < colorBoxes.size(); i++) {
+            int index = i;
+            colorBoxes.get(index).setOnMouseClicked(e -> {
+                for(Rectangle r : backgroundBoxes) {
+                    r.getStyleClass().removeAll(r.getStyleClass());
+                }
+                int newIndex = index/4;
+                backgroundBoxes.get(newIndex).getStyleClass().add("themeOptionSelected");
+            });
+        }
     }
 
     /**

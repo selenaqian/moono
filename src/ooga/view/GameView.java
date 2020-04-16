@@ -46,6 +46,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private VBox allPlayersNot1;
     private Button nextTurn;
     private ResourceBundle myResources;
+    private WildColorSelectorView wildColorSelector;
 
     public GameView() {
         this(new Uno(), new UnoController(new Stage()), new Stage());
@@ -67,6 +68,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         allPlayersScore = new ArrayList<>();
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
+        wildColorSelector = new WildColorSelectorView(myUno.getActionApplier());
 
         //registering observer(s)
         myUno.registerPlayerObserver(this);

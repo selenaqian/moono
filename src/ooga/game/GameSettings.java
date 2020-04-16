@@ -6,6 +6,7 @@ import ooga.cards.Value;
 import ooga.rules.Rule;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class GameSettings {
         numPlayers = 4;
         handSize = 7;
         winningScore = 500;
+        specialCards = new ArrayList<>();
     }
 
     public int getNumPlayers(){

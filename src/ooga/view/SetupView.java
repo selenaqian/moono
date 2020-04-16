@@ -9,8 +9,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -18,6 +17,7 @@ import javafx.stage.Stage;
 import ooga.game.GameSettings;
 import ooga.game.UnoController;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SetupView {
@@ -116,7 +116,13 @@ public class SetupView {
      * Helper method to handle actions once the okay! button is pressed on the rules and special cards selection scene.
      */
     private void rulesOkClicked() {
-        //TODO: set the proper rules and special cards to be on
+        List<String> ruleSelections = rulesAndSpecialCards.getRuleSelections();
+        for(String s : ruleSelections) {
+            System.out.println(s);
+            mySettings.setRules(s);
+        }
+
+        mySettings.setSpecialCards(rulesAndSpecialCards.getSpecialCardSelections());
 
         themeSelection = new ThemeSelectionScene();
         Scene themeScene = themeSelection.makeThemeSelectionScene();

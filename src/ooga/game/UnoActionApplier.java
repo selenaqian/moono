@@ -15,7 +15,7 @@ import ooga.cards.Value;
 public class UnoActionApplier {
 
     public static final int FOUR = 4;
-    final int TWO = 2;
+    public static final int TWO = 2;
 
     private UnoTurnManager turnManager;
     private Uno uno;

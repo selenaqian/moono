@@ -4,7 +4,6 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.piles.Hand;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,17 +12,17 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This tests the ClassicRules class.
+ * This tests the DeadlyRules class.
  * @author Tess Noonan (tcn6)
  */
-class ClassicRulesTest {
+class DeadlyRulesTest {
 
     private Card card1 = new Card(Suit.A, Value.ZERO);
     private Card card2 = new Card(Suit.A, Value.ONE);
     private Card card3 = new Card(Suit.B, Value.ZERO);
     private Card card4 = new Card(Suit.B, Value.ONE);
 
-    private Rule myRules = new ClassicRules();
+    private Rule myRules = new DeadlyRules();
 
     /**
      * Tests isValid when both the Suit and the Value match.
@@ -61,50 +60,48 @@ class ClassicRulesTest {
      * Tests isValid when given a Wild card when Suit/Value does and doesn't match.
      */
     @Test
-    void isValidTrueWild(){
-        assertTrue(myRules.isValid(card1, new Card(Suit.A, Value.WILD)));
+    void isValidTrueSpecial(){
+        assertTrue(myRules.isValid(card1, new Card(Suit.A, Value.DRAW2)));
         assertTrue(myRules.isValid(card1, new Card(Suit.C, Value.WILD4)));
-        assertTrue(myRules.isValid(new Card(Suit.D, Value.WILD4), new Card(Suit.C, Value.WILD4)));
+        assertTrue(myRules.isValid(new Card(Suit.D, Value.SKIP), new Card(Suit.C, Value.SKIP)));
+    }
+
+    /**
+     * Tests isOver when there's only invalid Cards in the Hand.
+     */
+    @Test
+    void isOverTrue() {
+        ArrayList<Card> al = new ArrayList<>(Arrays.asList(card4));
+        Hand hand = new Hand(al);
+        assertTrue(myRules.isOver(card1, hand));
     }
 
     /**
      * Tests isOver when there's one valid Card in the Hand.
      */
     @Test
-    void isOverTrue() {
+    void isOverTrueOneLeft() {
         ArrayList<Card> al = new ArrayList<>(Arrays.asList(card2));
         Hand hand = new Hand(al);
         assertTrue(myRules.isOver(card1, hand));
     }
 
     /**
-     * Tests isOver when there are more than one valid Card in the Hand.
+     * Tests isOver when there are valid and invalid Cards in the Hand.
      */
     @Test
-    void isOverFalseBigHand() {
+    void isOverFalseMixed() {
+        ArrayList<Card> al = new ArrayList<>(Arrays.asList(card4, card2, card3, new Card(Suit.C, Value.NINE)));
+        Hand hand = new Hand(al);
+        assertFalse(myRules.isOver(card1, hand));
+    }
+
+    /**
+     * Tests isOver when there are multiple valid Cards in the Hand.
+     */
+    @Test
+    void isOverFalseAll() {
         ArrayList<Card> al = new ArrayList<>(Arrays.asList(card2, card3));
-        Hand hand = new Hand(al);
-        assertFalse(myRules.isOver(card1, hand));
-    }
-
-    /**
-     * Tests isOver when there's one invalid Card in the Hand.
-     */
-    @Test
-    void isOverFalseNotValid() {
-        ArrayList<Card> al = new ArrayList<>(Arrays.asList(card4));
-        Hand hand = new Hand(al);
-        assertFalse(myRules.isOver(card1, hand));
-    }
-
-    /**
-     * Tests isOver when there are multiple invalid Cards in the Hand.
-     */
-    @Test
-    void isOverFalseBoth() {
-        Card card5 = new Card(Suit.C, Value.TWO);
-        Card card6 = new Card(Suit.D, Value.THREE);
-        ArrayList<Card> al = new ArrayList<>(Arrays.asList(card4, card5, card6));
         Hand hand = new Hand(al);
         assertFalse(myRules.isOver(card1, hand));
     }

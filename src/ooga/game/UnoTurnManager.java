@@ -11,8 +11,8 @@ public class UnoTurnManager implements TurnManager {
 
     // Direction of "rotation" to the next player
     private int direction;
-    final int CW = 1;
-    final int CCW = -1;
+    public static final int CW = 1;
+    public static final int CCW = -1;
 
     private Player current; //the player making the turn
     private int currentId = 0;
@@ -88,5 +88,13 @@ public class UnoTurnManager implements TurnManager {
         } else {
             direction = CW;
         }
+    }
+
+    /**
+     * Gives current direction.
+     * THIS IS USED JUST FOR TESTING PURPOSES
+     */
+    public int getDirection(){
+        return direction;
     }
 }

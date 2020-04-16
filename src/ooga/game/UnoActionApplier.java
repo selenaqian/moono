@@ -108,7 +108,7 @@ public class UnoActionApplier {
      * Changes color of play, draws 4 cards to the next player, and skips their turn.
      */
     private void applyWild4(){
-        uno.setWildColor();
+        applyWild();
         turnManager.nextPlayer();
         for(int i = 0; i < FOUR; i++){
             uno.drawCard();

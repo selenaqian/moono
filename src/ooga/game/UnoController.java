@@ -113,9 +113,16 @@ public class UnoController implements GameController{
                 uno.restart(); //play a new round
             }
         }
+    }
 
+    /**
+     * Called from view when user clicks call Uno
+     */
+    public void callUno(){
 
     }
+
+
 
 
 }

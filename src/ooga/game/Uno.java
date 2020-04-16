@@ -223,21 +223,21 @@ public class Uno implements GameModel {
 //    public void handleAction(){
 //
 //    }
-//
-//    /**
-//     * Allows the human player to declare uno
-//     * Called from view class when the "uno" button is clicked
-//     */
-//    public void callUno(){
-//
-//    }
-//
-//    /**
-//     * Once a player has no cards left, check if they have declared uno
-//     * If a player has not declared, then they must pick up more cards
-//     */
-//    public void checkUno(){
-//
-//    }
+
+    /**
+     * Allows the human player to declare uno
+     * Called from view class when the "uno" button is clicked
+     */
+    public void callUno(){
+
+    }
+
+    /**
+     * Once a player has no cards left, check if they have declared uno
+     * If a player has not declared, then they must pick up more cards
+     */
+    public void checkUno(){
+
+    }
 
 }

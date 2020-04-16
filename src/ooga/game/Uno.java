@@ -95,11 +95,8 @@ public class Uno implements GameModel {
             //apply associated action
             actionApplier.applyAction(selectedCard.getValue());
 
-            //update the view
-            notifyPlayerObservers();
-
             //go to next player only when a valid card is played
-            endTurn();
+            endTurn(); //contains call to observers to update the view
             return isOver;
         }
         return false;
@@ -173,21 +170,11 @@ public class Uno implements GameModel {
             o.updatePlayerHand(currentPlayer.getID(), currentPlayer.hand().getAllCards());
         }
     }
-
-    //used temporarily for sprint 1
-    public int getNumCardsInPlayerHand(int playerNum){
-        return players.get(playerNum - 1).hand().getCardCount();
-    }
-
-    //get number of cards in current player's hand
-    public int getNumCardsInPlayerHand(){
-        return currentPlayer.hand().getCardCount();
-    }
     
     private void endTurn(){
-        notifyPlayerObservers(); //tells observers about update to player hand
-      turnManager.nextPlayer();
-      currentPlayer = turnManager.getCurrentPlayer();
+        notifyPlayerObservers(); //tells observers about update to player hand (in the view)
+         turnManager.nextPlayer();
+         currentPlayer = turnManager.getCurrentPlayer();
     }
 
     /**
@@ -257,7 +244,9 @@ public class Uno implements GameModel {
      * If a player has not declared, then they must pick up more cards
      */
     public void checkUno(){
+        if (currentPlayer.hand().getCardCount() == 1){
 
+        }
     }
 
 }

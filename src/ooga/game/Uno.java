@@ -61,12 +61,14 @@ public class Uno implements GameModel {
         //flip over the first card
         discPile.addCard(drawPile.drawCard());
 
+        //update everything in view when game is first started
+        notifyPlayerObservers();
+
         actionApplier = new UnoActionApplier(this, turnManager);
     }
 
     @Override
     public void start() {
-
     }
 
     @Override

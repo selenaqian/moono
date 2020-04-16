@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CardViewTest {
+class CardRenderTest {
     @Test
     void createCardSimpleTest1() {
         Card card1 = new Card(Suit.A, Value.ZERO);
 
-        CardView card1View = new CardView(card1, 100, 200);
+        CardRender card1View = new CardRender(card1, 100, 200);
 
         assertEquals(0, card1.compareTo(card1View.getCard()));
         assertEquals(100, card1View.getCardViewBase().getWidth());
@@ -27,7 +27,7 @@ class CardViewTest {
     void createCardSimpleTest2() {
         Card card2 = new Card(Suit.B, Value.TWO);
 
-        CardView card2View = new CardView(card2, 100, 200);
+        CardRender card2View = new CardRender(card2, 100, 200);
 
         assertEquals(0, card2.compareTo(card2View.getCard()));
         assertEquals(100, card2View.getCardViewBase().getWidth());
@@ -41,7 +41,7 @@ class CardViewTest {
     void createCardSimpleTest3() {
         Card card3 = new Card(Suit.D, Value.FOUR);
 
-        CardView card3View = new CardView(card3, 100, 200);
+        CardRender card3View = new CardRender(card3, 100, 200);
 
         assertEquals(0, card3.compareTo(card3View.getCard()));
         assertEquals(100, card3View.getCardViewBase().getWidth());

@@ -35,7 +35,7 @@ public class GameView implements GameViewInterface {
     private Pane mainPane;
     private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
     private HBox player1Hand; // store the card nodes for the user's hand
-    private CardView discardView;
+    private CardRender discardRender;
     private Rectangle deckView;
     private HBox decks; // stores the view of both decks together
     private Uno myUno;
@@ -86,8 +86,8 @@ public class GameView implements GameViewInterface {
         decks = new HBox(DEFAULT_SPACING);
         deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
         deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
-        discardView = new CardView(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
-        decks.getChildren().addAll(deckView, discardView);
+        discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
+        decks.getChildren().addAll(deckView, discardRender);
         mainPane.getChildren().add(decks);
         AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
@@ -184,9 +184,9 @@ public class GameView implements GameViewInterface {
     public void updateHand(List<Card> cards) {
         player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            CardView tempCardView = new CardView(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
-            player1Hand.getChildren().add(tempCardView);
-            tempCardView.setOnMouseClicked(e -> myController.handleCardClick(tempCardView.getCard()));
+            CardRender tempCardRender = new CardRender(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
+            player1Hand.getChildren().add(tempCardRender);
+            tempCardRender.setOnMouseClicked(e -> myController.handleCardClick(tempCardRender.getCard()));
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();
@@ -209,9 +209,9 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateDiscardPile(Card card) {
-        decks.getChildren().remove(discardView);
-        discardView = new CardView(card, discardView.getWidth(), discardView.getHeight());
-        decks.getChildren().add(discardView);
+        decks.getChildren().remove(discardRender);
+        discardRender = new CardRender(card, discardRender.getWidth(), discardRender.getHeight());
+        decks.getChildren().add(discardRender);
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.
@@ -236,7 +236,7 @@ public class GameView implements GameViewInterface {
      * Used for testing. Allows test to access the CardView of the discardPile for comparison to expected values.
      * @return the CardView object representing the discard pile.
      */
-    public CardView getDiscardView() {
-        return discardView;
+    public CardRender getDiscardRender() {
+        return discardRender;
     }
 }

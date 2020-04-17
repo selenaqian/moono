@@ -104,6 +104,7 @@ public class Hand implements Pile {
 
     /*
     sorts hand
+    sna19
      */
     public void sortedHand(List<Card> initialCards){
         myCards= initialCards;

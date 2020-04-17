@@ -48,7 +48,7 @@ public abstract class Player {
      *governs what card a player can play
      * @return
      */
-    public void removecard(Card handcard){
+    public void removecard(Card handcard) {
         playerhand.removeCard(handcard);
     }
 
@@ -57,8 +57,7 @@ public abstract class Player {
         playerhand.addCard(card);
     }
 
-<<<<<<< HEAD
-=======
+
     public void setID(int Id){
         this.Id = Id;
     }
@@ -66,7 +65,7 @@ public abstract class Player {
     public int getID(){
         return Id;
     }
->>>>>>> 494f1fac140a5776e4420d34ac6dc497b0f679f8
+
 
 }
 

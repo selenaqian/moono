@@ -3,7 +3,7 @@ package ooga.game;
 import ooga.player.Player;
 import java.util.List;
 import java.util.ListIterator;
-
+import java.util.Random;
 public class UnoTurnManager implements TurnManager {
 
     private List<Player> players;
@@ -33,8 +33,11 @@ public class UnoTurnManager implements TurnManager {
 
     @Override
     public Player getFirstPlayer() {
-        //TODO: randomize this
-        return players.get(0);
+        //TODO: randomize this(sna19)
+        int playersize = players.size();
+        Random rand = new Random();
+        int randstarter = rand.nextInt(playersize);
+        return players.get(randstarter);
     }
 
     @Override
@@ -101,6 +104,7 @@ public class UnoTurnManager implements TurnManager {
 
      /** Gives current direction.
      * THIS IS USED JUST FOR TESTING PURPOSES
+      * refactored uno to use this method(sna19) since it makes it easier to work with the direction
      */
     public int getDirection(){
         return direction;

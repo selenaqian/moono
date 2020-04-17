@@ -34,7 +34,7 @@ public class DiscardPile extends Deck {
      * @return Card
      */
     public Card showTopCard(){
-        if(myCards.size() == EMPTY){
+        if(myCards.isEmpty()){
             return null;
         }
         return myCards.peek();

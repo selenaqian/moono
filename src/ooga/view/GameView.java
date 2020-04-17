@@ -47,9 +47,10 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private Button nextTurn;
     private ResourceBundle myResources;
     private WildColorSelectorView wildColorSelector;
+    private String myStylesheet;
 
     public GameView() {
-        this(new Uno(), new UnoController(new Stage()), new Stage());
+        this(new Uno(), new UnoController(new Stage()), new Stage(), DEFAULT_STYLESHEET);
     }
 
     /**
@@ -58,7 +59,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
      * @param controller the UnoController object passed to this class to allow for calling methods when a button or card is clicked.
      * @param stage the Stage passed to this class to keep everything loaded into one window.
      */
-    public GameView(Uno uno, UnoController controller, Stage stage) {
+    public GameView(Uno uno, UnoController controller, Stage stage, String stylesheet) {
         myUno = uno;
         myController = controller;
         mySettings = uno.getSettings();
@@ -69,12 +70,13 @@ public class GameView implements GameViewInterface, PlayerObserver {
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
         wildColorSelector = new WildColorSelectorView(myUno.getActionApplier());
+        myStylesheet = stylesheet;
 
         //registering observer(s)
         myUno.registerPlayerObserver(this);
 
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
-        mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
+        mainScene.getStylesheets().add(myStylesheet);
         mainStage.setScene(mainScene);
         mainStage.show();
         initializeGameScene();

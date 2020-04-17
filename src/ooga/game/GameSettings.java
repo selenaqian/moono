@@ -9,6 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ooga.view.SetupView.DEFAULT_STYLESHEET;
+
 /**
  * Functions as a controller class
  * Called in SetupView
@@ -20,12 +22,14 @@ public class GameSettings {
     private int winningScore; //default 500 for uno
     private List<Card> specialCards;
     private Rule rule;
+    private String theme;
 
     public GameSettings(){
         numPlayers = 4;
         handSize = 7;
         winningScore = 500;
         specialCards = new ArrayList<>();
+        theme = DEFAULT_STYLESHEET;
     }
 
     public int getNumPlayers(){
@@ -82,5 +86,11 @@ public class GameSettings {
         return specialCards;
     }
 
-    //TODO: add setters and getters for: Rules, Themes, Special cards
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String themeName) {
+        theme = themeName;
+    }
 }

@@ -28,7 +28,7 @@ public class UnoController implements GameController{
     public void start() {
         uno = new Uno(settings);
         uno.start();
-        gameView = new GameView(uno, this, mainStage); //TODO: change to interface
+        gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         turnManager = uno.getTurnManager();
         scoreTracker = new UnoScoreTracker();
 

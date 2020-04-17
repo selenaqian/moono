@@ -210,7 +210,7 @@ public class Uno implements GameModel {
     private void addPlayers(){
         //FIXME: pass id into player constructor
         Player manPlayer = new ManualPlayer();
-        manPlayer.setID(0);
+        manPlayer.setID(1);
         players.add(manPlayer);
         for (int i = 2; i < mySettings.getNumPlayers(); i++){
             Player aiPlayer = new AI_Player();

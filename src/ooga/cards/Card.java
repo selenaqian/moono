@@ -8,7 +8,7 @@ package ooga.cards;
 public class Card implements Comparable<Card> {
     public static final int EQUAL = 0;
 
-    private final Suit mySuit;
+    private Suit mySuit;
     private final Value myValue;
 
     /**
@@ -19,6 +19,10 @@ public class Card implements Comparable<Card> {
     public Card (Suit suit, Value value) {
         mySuit = suit;
         myValue = value;
+    }
+
+    public void setSuit (Suit newSuit) {
+        mySuit = newSuit;
     }
 
     /**

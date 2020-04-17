@@ -21,10 +21,10 @@ class UnoScoreTrackerTest {
 
     @BeforeEach
     void setUpPlayerHand(){
-        player.takeCard(new Card(Suit.A, Value.ONE));
-        player.takeCard(new Card(Suit.A, Value.TWO));
-        player.takeCard(new Card(Suit.A, Value.REVERSE));
-        player.takeCard(new Card(Suit.A, Value.WILD));
+        player.takecard(new Card(Suit.A, Value.ONE));
+        player.takecard(new Card(Suit.A, Value.TWO));
+        player.takecard(new Card(Suit.A, Value.REVERSE));
+        player.takecard(new Card(Suit.A, Value.WILD));
 
     }
 

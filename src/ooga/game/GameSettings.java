@@ -5,7 +5,7 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.rules.Rule;
-
+import java.util.ResourceBundle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class GameSettings {
     private int winningScore; //default 500 for uno
     private List<Card> specialCards;
     private Rule rule;
-
+    private ResourceBundle myResources = ResourceBundle.getBundle("default");
     public GameSettings(){
         numPlayers = 4;
         handSize = 7;
@@ -58,7 +58,7 @@ public class GameSettings {
         }
     }
 
-    public void setRules(String ruleString){
+    public void setRules(String ruleString) throws OOGAException {
         //TODO: test if relfection works
         try {
             Class<?> clazz = ruleString.getClass();
@@ -67,9 +67,9 @@ public class GameSettings {
         }
 
         catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            throw new OOGAException(myResources.getString("NoNext"));
+            throw new OOGAException(myResources.getString("NoSuch"),e);
             // FIXME: do something with this exception
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }

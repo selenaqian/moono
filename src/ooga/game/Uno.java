@@ -2,6 +2,7 @@ package ooga.game;
 
 import ooga.cards.Card;
 import ooga.cards.Suit;
+import ooga.cards.Value;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.AI_Player;
@@ -242,8 +243,10 @@ public class Uno implements GameModel {
      */
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
-        //TODO: change color of the discard pile's top card
-        //TODO: add setSuit() method to call something like discPile.showTopCard().setSuit(color);
+        //remove wild card that was just placed
+        discPile.drawCard();
+        //FIXME: uh oh this only accounts for wild cards, not wild4
+        discPile.addCard(new Card(cardColor, Value.WILD));
     }
 
 //    /**

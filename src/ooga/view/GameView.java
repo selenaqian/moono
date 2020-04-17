@@ -228,9 +228,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     //this is now overriding a method in PlayerObserver
     @Override
     public void updateDiscardPile(Card card) {
-        decks.getChildren().remove(discardRender);
-        discardRender = new CardRender(card, discardRender.getWidth(), discardRender.getHeight());
-        decks.getChildren().add(discardRender);
+        discardRender.updateCardRender(card);
     }
 
     @Override

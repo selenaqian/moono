@@ -32,11 +32,29 @@ public class CardRender extends StackPane {
         cardViewBase = new Rectangle(width, height);
         cardViewBase.getStyleClass().add(myCard.getSuit().toString());
 
-        cardViewText = new Text("" + myCard.getValue().getNumericValue());
+        int cardValue = myCard.getValue().getNumericValue();
+        if(cardValue < 10) {
+            cardViewText = new Text("" + myCard.getValue().getNumericValue());
+        }
+        else cardViewText = new Text(myCard.getValue().toString());
         cardViewText.getStyleClass().add(myCard.getSuit() + "Text");
 
         this.getChildren().addAll(cardViewBase, cardViewText);
         this.setAlignment(Pos.CENTER);
+    }
+
+    public void updateCardRender(Card card) {
+        myCard = card;
+        cardViewBase.getStyleClass().removeAll(cardViewBase.getStyleClass());
+        cardViewBase.getStyleClass().add(myCard.getSuit().toString());
+
+        int cardValue = myCard.getValue().getNumericValue();
+        if(cardValue < 10) {
+            cardViewText.setText("" + myCard.getValue().getNumericValue());
+        }
+        else cardViewText.setText(myCard.getValue().toString());
+        cardViewText.getStyleClass().removeAll(cardViewText.getStyleClass());
+        cardViewText.getStyleClass().add(myCard.getSuit() + "Text");
     }
 
     /**

@@ -88,6 +88,12 @@ public class Uno implements GameModel {
         //TODO: add method here to clear cards from player hands
         discPile = new DiscardPile();
         makeDrawPile();
+
+        //clear player hands
+        for (Player p : players){
+            p.reset();
+        }
+
         dealCards();
         //flip over the first card
         discPile.addCard(drawPile.drawCard());

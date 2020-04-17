@@ -220,7 +220,7 @@ public class Uno implements GameModel {
         Player manPlayer = new ManualPlayer();
         manPlayer.setID(1);
         players.add(manPlayer);
-        for (int i = 2; i < mySettings.getNumPlayers(); i++){
+        for (int i = 2; i < mySettings.getNumPlayers()+1; i++){
             Player aiPlayer = new AI_Player();
             aiPlayer.setID(i);
             players.add(aiPlayer);

@@ -119,7 +119,7 @@ public class SetupView {
     private void rulesOkClicked() {
         List<String> ruleSelections = rulesAndSpecialCards.getRuleSelections();
         for(String s : ruleSelections) {
-            System.out.println(s);
+            //System.out.println(s); //was used for checking before getting reflection working
             //mySettings.setRules(s); TODO: fix reflection
         }
 

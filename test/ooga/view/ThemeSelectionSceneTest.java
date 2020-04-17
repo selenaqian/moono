@@ -26,7 +26,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
     @Test
     void getSelectedThemeTestDefault() {
         goToThemeView();
-        javafxRun(() -> clickOn(startView.getThemeOkButton()));
+        clickOn(startView.getThemeOkButton());
 
         assertEquals("default.css", startView.getMySettings().getTheme());
     }
@@ -34,9 +34,9 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
     @Test
     void getSelectedThemeTestDuke() {
         goToThemeView();
-        javafxRun(() -> clickOn(colorBoxes.get(4)));
+        clickOn(colorBoxes.get(4));
         sleep(2, TimeUnit.SECONDS);
-        javafxRun(() -> clickOn(startView.getThemeOkButton()));
+        clickOn(startView.getThemeOkButton());
 
         assertEquals("duke.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(1).getStroke());
@@ -45,9 +45,9 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
     @Test
     void getSelectedThemeTestSpace() {
         goToThemeView();
-        javafxRun(() -> clickOn(colorBoxes.get(8)));
+        clickOn(colorBoxes.get(8));
         sleep(2, TimeUnit.SECONDS);
-        javafxRun(() -> clickOn(startView.getThemeOkButton()));
+        clickOn(startView.getThemeOkButton());
 
         assertEquals("space.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(2).getStroke());
@@ -56,14 +56,14 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
     @Test
     void getSelectedThemeTestMultipleClicks() {
         goToThemeView();
-        javafxRun(() -> clickOn(colorBoxes.get(4)));
+        clickOn(colorBoxes.get(4));
         sleep(2, TimeUnit.SECONDS);
-        javafxRun(() -> clickOn(colorBoxes.get(0)));
+        clickOn(colorBoxes.get(0));
         sleep(2, TimeUnit.SECONDS);
-        javafxRun(() -> clickOn(colorBoxes.get(4)));
+        clickOn(colorBoxes.get(4));
         sleep(2, TimeUnit.SECONDS);
 
-        javafxRun(() -> clickOn(startView.getThemeOkButton()));
+        clickOn(startView.getThemeOkButton());
 
         assertEquals("duke.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(1).getStroke());
@@ -75,7 +75,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
      */
     private void goToThemeView() {
         Button rulesOk = startView.getRulesOkButton();
-        javafxRun(() -> clickOn(rulesOk));
+        clickOn(rulesOk);
         backgroundBoxes = startView.getThemeSelection().getBackgroundBoxes();
         colorBoxes = startView.getThemeSelection().getColorBoxes();
     }

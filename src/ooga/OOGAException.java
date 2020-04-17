@@ -20,8 +20,8 @@ public class OOGAException extends RuntimeException {
     /**
      * Create an exception based on an issue in our code.
      */
-    public OOGAException(String message, Object ... values) {
-        super(String.format(message, values));
+    public OOGAException(String message,Throwable exception ) {
+        super(String.format(message, exception));
     }
 
 

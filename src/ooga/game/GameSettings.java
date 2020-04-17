@@ -1,5 +1,6 @@
 package ooga.game;
 
+import ooga.OOGAException;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
@@ -66,6 +67,7 @@ public class GameSettings {
         }
 
         catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            throw new OOGAException(myResources.getString("NoNext"));
             // FIXME: do something with this exception
             e.printStackTrace();
         }

@@ -91,7 +91,15 @@ public class UnoTurnManager implements TurnManager {
     }
 
     /**
-     * Gives current direction.
+     * Returns all players a TurnManager is keeping track of
+     * Used in UnoController to calculate scores for all players
+     * @return
+     */
+    public List<Player> getAllPlayers() {
+        return players;
+    }
+
+     /** Gives current direction.
      * THIS IS USED JUST FOR TESTING PURPOSES
      */
     public int getDirection(){

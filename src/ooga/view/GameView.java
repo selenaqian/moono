@@ -18,6 +18,7 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.game.GameSettings;
+import ooga.game.PlayerObserver;
 import ooga.game.Uno;
 import ooga.game.UnoController;
 
@@ -27,13 +28,14 @@ import java.util.ResourceBundle;
 
 import static ooga.view.SetupView.*;
 
-public class GameView implements GameViewInterface {
+public class GameView implements GameViewInterface, PlayerObserver {
     public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
     private List<Pane> playerViews;
     private Pane player1Label; // store the user label separate from the others as well
     private Pane mainPane;
-    private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left
+    private List<Text> allPlayersCardsLeft; // stores text objects for all players in order that state how many cards that player has left, used to easily update
+    private List<Text> allPlayersScore; // similar function to allPlayersCardsLeft but for the score
     private HBox player1Hand; // store the card nodes for the user's hand
     private CardRender discardRender;
     private Rectangle deckView;
@@ -62,14 +64,19 @@ public class GameView implements GameViewInterface {
         mainStage = stage;
         mainPane = new AnchorPane();
         allPlayersCardsLeft = new ArrayList<>();
+        allPlayersScore = new ArrayList<>();
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
+
+        //registering observer(s)
+        myUno.registerPlayerObserver(this);
 
         Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(mainScene);
         mainStage.show();
         initializeGameScene();
+
     }
 
     /**
@@ -157,9 +164,15 @@ public class GameView implements GameViewInterface {
 
         Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
         Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
-        if (allPlayersCardsLeft.size() >= playerNumber) allPlayersCardsLeft.remove(playerNumber-1);
+        Text score = new Text(numberCards + myResources.getString("score") + 0);
+
+        if (allPlayersCardsLeft.size() >= playerNumber) {
+            allPlayersCardsLeft.remove(playerNumber-1);
+            allPlayersScore.remove(playerNumber-1);
+        }
         allPlayersCardsLeft.add(playerNumber-1, cardsLeft);
-        textBox.getChildren().addAll(playerNumberText, cardsLeft);
+        allPlayersScore.add(playerNumber-1, score);
+        textBox.getChildren().addAll(playerNumberText, cardsLeft, score);
 
         Circle playerIcon = new Circle(10);
         playerBox.getChildren().addAll(playerIcon, textBox);
@@ -204,9 +217,11 @@ public class GameView implements GameViewInterface {
 
     @Override
     public void updateHand(int playerNumber, int cardsLeft) {
-        allPlayersCardsLeft.get(playerNumber).setText(cardsLeft + myResources.getString("cardsLeft"));
+        allPlayersCardsLeft.get(playerNumber-1).setText(cardsLeft + myResources.getString("cardsLeft"));
     }
 
+
+    //this is now overriding a method in PlayerObserver
     @Override
     public void updateDiscardPile(Card card) {
         decks.getChildren().remove(discardRender);
@@ -214,14 +229,28 @@ public class GameView implements GameViewInterface {
         decks.getChildren().add(discardRender);
     }
 
+    @Override
+    public void updateScore(int playerNumber, int score) {
+        Text scoreDisplay = allPlayersScore.get(playerNumber-1);
+        scoreDisplay.setText(myResources.getString("score") + score);
+    }
+
     // Methods below primarily used for testing - to get objects and check their displayed values.
 
     /**
      * Used for testing. Allows test to access the list of text objects that state how many cards each player has left.
-     * @return the list of text objects where the text object at a certain index corresponds to the text display to player number index+1.
+     * @return the list of text objects where the text object at a certain index corresponds to the text display of player number index+1.
      */
     public List<Text> getAllPlayersCardsLeft() {
         return allPlayersCardsLeft;
+    }
+
+    /**
+     * Used for testing. Allows test to access the list of text objects that state each players' score.
+     * @return the list of text objects where the text object at a certain index corresponds to the text display of player number index+1.
+     */
+    public List<Text> getAllPlayersScore() {
+        return allPlayersScore;
     }
 
     /**
@@ -239,4 +268,13 @@ public class GameView implements GameViewInterface {
     public CardRender getDiscardRender() {
         return discardRender;
     }
+
+
+    //Testing code for observers
+    @Override
+    public void updatePlayerHand(int playerId, List<Card> cardsLeft) {
+        allPlayersCardsLeft.get(playerId).setText(cardsLeft + myResources.getString("cardsLeft"));
+        //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
+    }
+
 }

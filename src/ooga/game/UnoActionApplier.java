@@ -1,6 +1,9 @@
 package ooga.game;
 
+import ooga.cards.Suit;
 import ooga.cards.Value;
+
+import java.util.Random;
 
 /**
  * Helper class to apply action card effects to the game of uno
@@ -21,6 +24,8 @@ public class UnoActionApplier {
     private Uno uno;
     private int direction;
 
+    private WildcardObserver observer;
+
     /**
      * Create new UnoActionApplier
      * @param uno
@@ -29,6 +34,33 @@ public class UnoActionApplier {
     public UnoActionApplier(Uno uno, UnoTurnManager turnManager){
         this.turnManager = turnManager;
         this.uno = uno;
+
+    }
+
+    public void registerWildObserver(WildcardObserver o){
+        this.observer = o;
+    }
+
+    /**
+     * Notifies observers to make WildColorSelectorView show up
+     */
+    public void notifyWildObserver(){
+        if (uno.isUserTurn()){
+            observer.showColorSelector();
+        } else {
+            //pick a random suit to set the wildcard color to for AI players that can't interact with the view
+            //TODO: possibly have a method in the Suit enum to return a random suit
+            int rnd = new Random().nextInt(Value.values().length);
+            uno.setWildColor(Suit.values()[rnd].toString());
+        }
+    }
+
+    /**
+     * Called from WildColorSelectorView
+     * @param selectedColor color that was clicked on by the user in the view
+     */
+    public void setWildColor(String selectedColor){
+        uno.setWildColor(selectedColor);
     }
 
     /**
@@ -89,14 +121,14 @@ public class UnoActionApplier {
      * Changes color of play.
      */
     private void applyWild(){
-        uno.setWildColor();
+        notifyWildObserver();
     }
 
     /**
      * Changes color of play, draws 4 cards to the next player, and skips their turn.
      */
     private void applyWild4(){
-        uno.setWildColor();
+        applyWild();
         turnManager.nextPlayer(direction);
         for(int i = 0; i < FOUR; i++){
             uno.drawCard();

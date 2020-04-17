@@ -9,6 +9,10 @@ import java.util.List;
 
 public abstract class Player {
     private Hand playerhand = new Hand();
+    private int Id;
+
+    public Player(){
+    }
 
     /**
      * returns a list of the player's hand
@@ -53,6 +57,16 @@ public abstract class Player {
         playerhand.addCard(card);
     }
 
+<<<<<<< HEAD
+=======
+    public void setID(int Id){
+        this.Id = Id;
+    }
+
+    public int getID(){
+        return Id;
+    }
+>>>>>>> 494f1fac140a5776e4420d34ac6dc497b0f679f8
 
 }
 

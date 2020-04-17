@@ -1,6 +1,7 @@
 package ooga.game;
 
 import ooga.cards.Card;
+import ooga.cards.Suit;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.AI_Player;
@@ -19,6 +20,10 @@ import java.util.List;
  */
 public class Uno implements GameModel {
 
+    public static final int UNO_PENALTY = 4;
+
+    private ArrayList<PlayerObserver> playerObservers;
+
     private GameSettings mySettings;
     private UnoTurnManager turnManager;
     private List<Player> players = new ArrayList<Player>();
@@ -31,6 +36,9 @@ public class Uno implements GameModel {
     private DrawPile drawPile;
 
     private Rule rule;
+    private List<Card> specialCards;
+
+    private Boolean didCallUno = false;
 
     public Uno(){
         this(new GameSettings());
@@ -41,8 +49,12 @@ public class Uno implements GameModel {
     }
 
     public Uno(GameSettings settings){
+        playerObservers = new ArrayList();
         mySettings = settings;
+        //rule = mySettings.getRule();
         rule = new ClassicRules();
+        specialCards = mySettings.getSpecialCards();
+
         addPlayers();
         turnManager = new UnoTurnManager(players);
         currentPlayer = players.get(0);
@@ -53,12 +65,24 @@ public class Uno implements GameModel {
         //flip over the first card
         discPile.addCard(drawPile.drawCard());
 
+        //update everything in view when game is first started
+        notifyPlayerObservers();
+
         actionApplier = new UnoActionApplier(this, turnManager);
     }
 
     @Override
     public void start() {
+    }
 
+    @Override
+    public void restart() {
+        //TODO: add method here to clear cards from player hands
+        discPile = new DiscardPile();
+        drawPile = new DrawPile();
+        dealCards();
+        //flip over the first card
+        discPile.addCard(drawPile.drawCard());
     }
 
     /**
@@ -67,10 +91,11 @@ public class Uno implements GameModel {
      * @param selectedCard the card selected by the player in the view or selected by the AI player
      */
     @Override
-    public boolean playCard(Card selectedCard, GameView gameView){
+    public boolean playCard(Card selectedCard){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
-            boolean isOver = rule.isOver(getTopDiscardCard(), currentPlayer.hand());
+            //make sure a player with one valid card left has called uno
+            checkUno();
 
             //make sure player updates their hand to remove the card
             currentPlayer.removecard(selectedCard);
@@ -81,12 +106,8 @@ public class Uno implements GameModel {
             //apply associated action
             actionApplier.applyAction(selectedCard.getValue());
 
-            //TODO: make call to handleAction() once special cards are implemented
-            gameView.updateHand(getTurnManager().getPlayerId(getTurnManager().getCurrentPlayer()), getNumCardsInPlayerHand());
-
             //go to next player only when a valid card is played
-            endTurn();
-            return isOver;
+            endTurn(); //contains call to observers to update the view
         }
         return false;
     }
@@ -99,7 +120,7 @@ public class Uno implements GameModel {
         //go through each of the cards in the hand and try playing each card
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
-                return playCard(card, gameView);
+                return playCard(card);
             }
         }
 
@@ -142,19 +163,30 @@ public class Uno implements GameModel {
         return discPile.showTopCard();
     }
 
-    //used temporarily for sprint 1
-    public int getNumCardsInPlayerHand(int playerNum){
-        return players.get(playerNum - 1).hand().getCardCount();
+    @Override
+    public void registerPlayerObserver(PlayerObserver o) {
+        playerObservers.add(o);
     }
 
-    //get number of cards in current player's hand
-    public int getNumCardsInPlayerHand(){
-        return currentPlayer.hand().getCardCount();
+    @Override
+    public void removePlayerObserver(PlayerObserver o) {
+        playerObservers.remove(playerObservers.indexOf(o));
+    }
+
+    @Override
+    public void notifyPlayerObservers() {
+        for (PlayerObserver o : playerObservers){
+            //FIXME: possibly pass in a hand instead of a list of cards?
+            o.updatePlayerHand(currentPlayer.getID(), currentPlayer.hand().getAllCards());
+            o.updateDiscardPile(discPile.showTopCard());
+        }
     }
 
     private void endTurn(){
+        notifyPlayerObservers(); //tells observers about update to player hand
         turnManager.nextPlayer(turnManager.getDirection());
         currentPlayer = turnManager.getCurrentPlayer();
+        didCallUno = false;
     }
 
     /**
@@ -185,6 +217,15 @@ public class Uno implements GameModel {
         return turnManager;
     }
 
+    /**
+     * Returns the action applier object for use in the WildcardObserver
+     * Called from GameView to initialize a WildColorSelectorView
+     * @return
+     */
+    public UnoActionApplier getActionApplier(){
+        return actionApplier;
+    }
+
     public boolean isUserTurn(){
         if(currentPlayer == user){
             return true;
@@ -199,8 +240,10 @@ public class Uno implements GameModel {
      * //Hi Tess here I removed the color parameter based on how I think it's used by the ActionApplier
      * //@param color represents suit of selected wild card "color"
      */
-    public void setWildColor(){
-
+    public void setWildColor(String color){
+        Suit cardColor = Suit.valueOf(color);
+        //TODO: change color of the discard pile's top card
+        //TODO: add setSuit() method to call something like discPile.showTopCard().setSuit(color);
     }
 
 //    /**
@@ -211,21 +254,30 @@ public class Uno implements GameModel {
 //    public void handleAction(){
 //
 //    }
-//
-//    /**
-//     * Allows the human player to declare uno
-//     * Called from view class when the "uno" button is clicked
-//     */
-//    public void callUno(){
-//
-//    }
-//
-//    /**
-//     * Once a player has no cards left, check if they have declared uno
-//     * If a player has not declared, then they must pick up more cards
-//     */
-//    public void checkUno(){
-//
-//    }
+
+    /**
+     * Allows the human player to declare uno
+     * Called from view class when the "uno" button is clicked
+     */
+    public void callUno(){
+        didCallUno = true;
+    }
+
+    /**
+     * Check if user has declared uno
+     * If user has not declared, then they must pick up more cards
+     */
+    public void checkUno(){
+        if (currentPlayer.hand().getCardCount() == 1 && didCallUno == false){
+            for (int i = 0; i < UNO_PENALTY; i++){
+                currentPlayer.takecard(drawPile.drawCard());
+            }
+        }
+    }
+
+    public boolean isOver(){
+        return rule.isOver(getTopDiscardCard(), currentPlayer.hand());
+
+    }
 
 }

@@ -1,4 +1,5 @@
 package ooga.player;
+<<<<<<< HEAD
 import ooga.game.GameSettings;
 
 import java.util.ArrayList;
@@ -32,4 +33,12 @@ public class AI_Player extends Player {
         AIIDs.add(3);
         AIIDs.add(4);
     }
+=======
+
+public class AI_Player extends Player {
+    @Override
+    String playerName() {
+        return null;
+    }
+>>>>>>> 494f1fac140a5776e4420d34ac6dc497b0f679f8
 }

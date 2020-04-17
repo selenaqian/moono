@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface GameModel {
     void start();
-    boolean playCard(Card selectedCard, GameView gameView);
+    void restart();
+    boolean playCard(Card selectedCard);
     void drawCard();
 
     /**
@@ -19,4 +20,10 @@ public interface GameModel {
     List<Card> getUserHand();
 
     Card getTopDiscardCard();
+
+    void registerPlayerObserver(PlayerObserver o);
+
+    void removePlayerObserver(PlayerObserver o);
+
+    void notifyPlayerObservers();
 }

@@ -27,18 +27,25 @@ public class EndView {
         VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
 
-        Text gameComplete = new Text(myResources.getString("gameComplete")); // TODO: need a properties file for the text and css file for styling
+        Text gameComplete = new Text(myResources.getString("gameComplete"));
         gameComplete.setId("gameCompleteText");
         gameComplete.getStyleClass().add("subtitle");
-        //TODO: figure out who won and put that on this screen too
 
-        newGameButton = new Button(myResources.getString("startNewGame"));
+        Text winner = new Text(myResources.getString("winner")); //TODO: figure out who won and put that on this screen too
+        winner.setId("winnerText");
+        winner.getStyleClass().add("subtitle");
+
+        Text startNewGame = new Text(myResources.getString("startNewGame"));
+        startNewGame.setId("startNewGameText");
+        startNewGame.getStyleClass().add("subtitle");
+
+        newGameButton = new Button(myResources.getString("newGameButton"));
         newGameButton.setId("newGameButton");
         setNewGameActions(newGameButton);
         //TODO: will later also support multiple rounds so will later need a continue button or something
         // distinct from new game
 
-        root.getChildren().addAll(gameComplete, newGameButton);
+        root.getChildren().addAll(gameComplete, winner, startNewGame, newGameButton);
         Scene endScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         endScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(endScene);

@@ -2,6 +2,8 @@ package ooga.game;
 
 import javafx.stage.Stage;
 import ooga.cards.Card;
+import ooga.cards.Suit;
+import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
@@ -13,6 +15,8 @@ public class UnoController implements GameController{
     Stage mainStage;
     Uno uno;
     UnoTurnManager turnManager;
+    UnoScoreTracker scoreTracker;
+    Player winner;
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -26,6 +30,8 @@ public class UnoController implements GameController{
         uno.start();
         gameView = new GameView(uno, this, mainStage); //TODO: change to interface
         turnManager = uno.getTurnManager();
+        scoreTracker = new UnoScoreTracker();
+
     }
 
     @Override
@@ -35,8 +41,12 @@ public class UnoController implements GameController{
 
     @Override
     public void endGame() {
+        //TODO: pass in the winner info to the view
         new EndView(mainStage);
+
     }
+
+
 
     /**
      * Called when a user selects a card from their hand
@@ -44,7 +54,8 @@ public class UnoController implements GameController{
      */
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
-            if(uno.playCard(card, gameView)) {
+            checkRoundEnd();
+            if(uno.playCard(card)) {
                 gameView.updateHand(uno.getUserHand());
                 gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
@@ -53,11 +64,11 @@ public class UnoController implements GameController{
                 catch (Exception e) {
 
                 }
-                endGame();
+                checkRoundEnd();
+
             }
             gameView.updateHand(uno.getUserHand());
             gameView.updateDiscardPile(uno.getTopDiscardCard());
-            //checkGameEnd();
         }
     }
 
@@ -66,7 +77,8 @@ public class UnoController implements GameController{
      */
     public void handleDrawPileClick(){
         uno.drawCard();
-        gameView.updateHand(uno.getUserHand());
+        gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
+        //gameView.updatePlayerHand();
     }
 
     /**
@@ -75,6 +87,7 @@ public class UnoController implements GameController{
      */
     public void handleAIPlay() {
         if (!uno.isUserTurn()){
+            checkRoundEnd();
             if(uno.playCard(gameView)) {
                 gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
@@ -83,21 +96,47 @@ public class UnoController implements GameController{
                 catch (Exception e) {
 
                 }
-                endGame();
             }
             gameView.updateDiscardPile(uno.getTopDiscardCard());
             //checkGameEnd();
         }
 
-
     }
 
-
-    private void checkGameEnd(){
-        if(uno.getNumCardsInPlayerHand() == 0){
-            endGame();
+    private void checkRoundEnd(){
+        if (uno.isOver()){
+            endRound();
         }
     }
+
+    /**
+     * Called from Uno when a user has no more cards left
+     */
+    private void endRound(){
+        scoreTracker.calculate(turnManager.getAllPlayers());
+        for (Player p : turnManager.getAllPlayers()){
+            if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
+                winner = p;
+                endGame();
+            } else {
+                uno.restart(); //play a new round
+            }
+        }
+    }
+
+    /**
+     * Called from view when user clicks call Uno for themselves
+     * A user should click call uno when it is their turn but before making a play that would leave them with 1 card
+     */
+    public void callUno(){
+        if (uno.isUserTurn()){
+            uno.callUno();
+
+            //TODO: something here in the view to give feedback to user when they call uno
+        }
+
+    }
+
 
 
 }

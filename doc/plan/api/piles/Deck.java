@@ -10,4 +10,10 @@ public interface Deck /*implements Pile*/ {
      * Shuffle the order of the Cards.
      */
     void shuffle();
+
+    /**
+     * Returns the top Card and removes it from the Pile.
+     * @return Card
+     */
+    Card drawCard();
 }

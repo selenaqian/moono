@@ -13,6 +13,8 @@ import java.util.Stack;
  */
 public abstract class Deck implements Pile {
 
+    public static final int EMPTY = 0;
+
     protected Stack<Card> myCards; //TODO: protected so subclass has access -- is there better way?
 
     /**
@@ -40,6 +42,17 @@ public abstract class Deck implements Pile {
         for(Card c : cards){
             myCards.push(c);
         }
+    }
+
+    /**
+     * Returns the top Card and removes it from the Pile.
+     * @return Card
+     */
+    public Card drawCard(){
+        if(myCards.size() == EMPTY){
+            return null;
+        }
+        return myCards.pop();
     }
 
     @Override

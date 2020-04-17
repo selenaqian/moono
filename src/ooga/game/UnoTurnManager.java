@@ -15,7 +15,7 @@ public class UnoTurnManager implements TurnManager {
     public static final int CCW = -1;
 
     private Player current; //the player making the turn
-    private int currentId = 0;
+    private int currentId = 1;
 
     public UnoTurnManager(List<Player> players){
         this.players = players;
@@ -42,13 +42,13 @@ public class UnoTurnManager implements TurnManager {
 
     @Override
     public void nextPlayer(int direction) {
-        if(currentId==0 && direction<0){
+        if(currentId==1 && direction<0){
             currentId=players.size()-1;
         }
         else if (currentId < players.size() - 1){
             currentId=currentId+direction;
         } else if (currentId == players.size() - 1){
-            currentId = 0;
+            currentId = 1;
         }
         current = players.get(currentId);
 //        if (iterator.hasNext()){

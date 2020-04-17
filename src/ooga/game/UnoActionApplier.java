@@ -49,7 +49,7 @@ public class UnoActionApplier {
         } else {
             //pick a random suit to set the wildcard color to for AI players that can't interact with the view
             //TODO: possibly have a method in the Suit enum to return a random suit
-            int rnd = new Random().nextInt(Value.values().length);
+            int rnd = new Random().nextInt(Suit.values().length);
             uno.setWildColor(Suit.values()[rnd].toString());
         }
     }

@@ -2,6 +2,7 @@ package ooga.game;
 
 import ooga.cards.Card;
 import ooga.cards.Suit;
+import ooga.cards.Value;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.AI_Player;
@@ -207,9 +208,14 @@ public class Uno implements GameModel {
      * TODO: Refactor this - have another class to manage/initialize players?
      */
     private void addPlayers(){
-        players.add(new ManualPlayer());
-        for (int i = 1; i < mySettings.getNumPlayers(); i++){
-            players.add(new AI_Player());
+        //FIXME: pass id into player constructor
+        Player manPlayer = new ManualPlayer();
+        manPlayer.setID(1);
+        players.add(manPlayer);
+        for (int i = 2; i < mySettings.getNumPlayers(); i++){
+            Player aiPlayer = new AI_Player();
+            aiPlayer.setID(i);
+            players.add(aiPlayer);
         }
     }
 
@@ -242,8 +248,10 @@ public class Uno implements GameModel {
      */
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
-        //TODO: change color of the discard pile's top card
-        //TODO: add setSuit() method to call something like discPile.showTopCard().setSuit(color);
+        //remove wild card that was just placed
+        discPile.drawCard();
+        //FIXME: uh oh this only accounts for wild cards, not wild4
+        discPile.addCard(new Card(cardColor, Value.WILD));
     }
 
 //    /**

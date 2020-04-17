@@ -26,7 +26,7 @@ import static ooga.view.SetupView.*;
 
 class RulesAndSpecialCardScene {
     ResourceBundle myResources;
-    List<ToggleGroup> ruleSelections;
+    List<RadioButton> ruleSelections;
     List<CheckBox> specialCardOptions;
     Button rulesAndSpecialCardsOkButton;
 
@@ -69,11 +69,12 @@ class RulesAndSpecialCardScene {
             rulesBox.getChildren().add(ruleHeader);
 
             ToggleGroup group = new ToggleGroup();
-            ruleSelections.add(group);
 
             String[] individualRules = myResources.getString(ruleType).split(",");
-            for (String rule : individualRules) {
-                RadioButton radioButton = new RadioButton(rule);
+            for (int i=0; i < individualRules.length; i++) {
+                RadioButton radioButton = new RadioButton(individualRules[i]);
+                if(i==0) radioButton.setSelected(true);
+                ruleSelections.add(radioButton);
                 radioButton.setToggleGroup(group);
                 rulesBox.getChildren().add(radioButton);
             }
@@ -111,19 +112,26 @@ class RulesAndSpecialCardScene {
     }
 
     /**
-     * Called in the SetupView. Allows SetupView to access the toggle groups that contain information about which rules
-     * the user wants to include during the game.
-     * @return the list of ToggleGroups that indicate which rules to use.
+     * Called in the SetupView. Allows SetupView to access which rules the user wants to use in the game.
+     * @return the list of Strings that indicate which rules to use.
      */
-    List<ToggleGroup> getRuleSelections() {
-        return ruleSelections;
+    List<String> getRuleSelections() {
+        List<String> selectedRules = new ArrayList<>();
+        for(RadioButton r : ruleSelections) {
+            if(r.isSelected()) selectedRules.add(myResources.getString(r.getText()));
+        }
+        return selectedRules;
     }
 
     /**
      * Called in SetupView. Allows SetupView to access which special cards the user wants to include in the game.
-     * @return the list of CheckBoxes that can then be looked at to tell the model which special cards to use.
+     * @return the list of Strings that tell the model which special cards to use.
      */
-    List<CheckBox> getSpecialCardSelections() {
-        return specialCardOptions;
+    List<String> getSpecialCardSelections() {
+        List<String> selectedSpecialCards = new ArrayList<>();
+        for(CheckBox b : specialCardOptions) {
+            if(b.isSelected()) selectedSpecialCards.add(myResources.getString(b.getText()));
+        }
+        return selectedSpecialCards;
     }
 }

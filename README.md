@@ -20,7 +20,7 @@ Hours Spent Together: 16 hours
 
 Individual:
 - Tess Hours: 15.5 hours
-- Mary Hours: 
+- Mary Hours: 21.5 hours
 - Selena Hours: 20 hours
 - Suomo Hours:12 hours
 

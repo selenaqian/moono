@@ -13,6 +13,9 @@ on the view when actions in the backend occurred.
 the view needs to know which player to update the hand view of in that method.
 5. (4/7/2020) Renamed and modified GamePlay to GameModel as it will be referenced in the View. The interface is now specific to card games and includes methods to manage drawing and playing cards.
 6. (4/8/2020) Added equals() method Override in Card.
-7. (4/15/2020) Added updateScore(int playerNumber, int score) method in GameViewInterface. Needed to be able to change the
+7. (4/14/2020) Created new interfaces to implement observer pattern (PlayerObserver to update the view when a player's hand changes
+and WildCardObserver when a wild card is played)
+8. (4/15/2020) Added updateScore(int playerNumber, int score) method in GameViewInterface. Needed to be able to change the
 display of player scores - forgot about this functionality in the original plan.
-8. (4/16/2020) Moved drawCard() method from DrawPile to Deck so that DiscardPile also has access to it.
+9. (4/15/2020) GameSettings (formerly SettingsController) now has getters for the rule and special cards so that they can be called in the game model
+10. (4/16/2020) Moved drawCard() method from DrawPile to Deck so that DiscardPile also has access to it.

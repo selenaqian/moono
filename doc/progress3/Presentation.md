@@ -16,7 +16,20 @@
 ### What we learned during this Sprint and the implementation plan for the next Sprint:
 
 ##### Completed planned features:
-* [will update later after actually getting things connected]
+* special cards
+    * skip
+    * reverse
+    * draw 2
+    * wild draw 4
+    * wild
+* change color of play (wild cards)
+* update ClassicRules to include special cards
+* implement Deadly Uno rule - immediately lose if can't play
+* multiple rounds of gameplay with score calculation
+* display scores for all players
+* rules selection
+* special cards selection
+* color theme selection
 
 ##### Features original planned for Sprint 2 that are now moved to Complete
 * Drafted classes to save/load a game but we need to integrate them with the rest of the project
@@ -52,6 +65,7 @@
 * Different visual skins with images - Selena
 * Ability for players to give themselves names / have custom names - Suomo
 * Additional special cards - Tess and Suomo
+* “Select all” checkbox for special card selection - Selena
 * Ascending uno rules - Tess
 * Game area editor/preferences selection - Selena
 

@@ -40,17 +40,26 @@ public class UnoTurnManager implements TurnManager {
         return players.get(randstarter);
     }
 
+
+    /**
+     * Player ids begin at 1 instead of 0
+     * @param direction
+     */
     @Override
     public void nextPlayer(int direction) {
-        if(currentId==1 && direction<0){
-            currentId=players.size()-1;
+
+        //FIXME: use iterator or clean this up
+        int currID = current.getID();
+        if(currID == 1 && direction == CCW){
+            current = players.get(players.size()-1);
+        } else if (currID < players.size() && direction == CW){
+            current = players.get(currID);
+        } else if (currID == players.size() && direction == CW){
+            current = players.get(0);
+        } else if (currID <= players.size() && direction == CCW){
+            current = players.get(currID - 2);
         }
-        else if (currentId < players.size() - 1){
-            currentId=currentId+direction;
-        } else if (currentId == players.size() - 1){
-            currentId = 1;
-        }
-        current = players.get(currentId);
+
 //        if (iterator.hasNext()){
 //            iterator.next();
 //            current = iterator.next();

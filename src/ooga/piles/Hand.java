@@ -106,9 +106,12 @@ public class Hand implements Pile {
     sorts hand
     sna19
      */
-    public void sortedHand(List<Card> initialCards){
-        myCards= initialCards;
-        Collections.sort(myCards);
-        Collections.reverse(myCards);
+    public void sortedHand(List<Card> Cards){
+        Collections.sort(Cards);
+        Collections.reverse(Cards);
+    }
+
+    public void reset(){
+        myCards.clear();
     }
 }

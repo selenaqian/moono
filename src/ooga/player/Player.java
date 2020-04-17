@@ -66,6 +66,12 @@ public abstract class Player {
         return Id;
     }
 
+    /*
+    *resets the player hand
+     */
+    public void reset(){
+        playerhand.reset();
+    }
 
 }
 

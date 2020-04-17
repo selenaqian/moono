@@ -1,13 +1,14 @@
 package ooga.game;
 
 import javafx.stage.Stage;
+import ooga.OOGAException;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
-
+import java.util.ResourceBundle;
 public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
@@ -17,6 +18,7 @@ public class UnoController implements GameController{
     UnoTurnManager turnManager;
     UnoScoreTracker scoreTracker;
     Player winner;
+    private ResourceBundle myResources = ResourceBundle.getBundle("default");
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -62,7 +64,7 @@ public class UnoController implements GameController{
                     Thread.sleep(2000);
                 }
                 catch (Exception e) {
-
+                    throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
                 checkRoundEnd();
 
@@ -94,7 +96,7 @@ public class UnoController implements GameController{
                     Thread.sleep(2000);
                 }
                 catch (Exception e) {
-
+                    throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
             }
             gameView.updateDiscardPile(uno.getTopDiscardCard());

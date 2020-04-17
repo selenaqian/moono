@@ -61,6 +61,8 @@ public class SetupView {
         myController = controller;
         mySettings = settings;
         mainStage = stage;
+        rulesAndSpecialCards = new RulesAndSpecialCardScene();
+        themeSelection = new ThemeSelectionScene();
 
         numberPlayersSlider = new Slider(MIN_PLAYERS, MAX_PLAYERS, DEFAULT_PLAYERS);
         cardsPerPlayerSlider = new Slider(MIN_CARDS, MAX_CARDS, DEFAULT_CARDS);
@@ -105,7 +107,6 @@ public class SetupView {
         mySettings.setNumPlayers((int) numberPlayersSlider.getValue());
         mySettings.setWinningScore((int) scoreToWinSlider.getValue());
 
-        rulesAndSpecialCards = new RulesAndSpecialCardScene();
         Scene rulesAndSpecialScene = rulesAndSpecialCards.makeSelectionScene();
         mainStage.setScene(rulesAndSpecialScene);
 
@@ -119,12 +120,11 @@ public class SetupView {
         List<String> ruleSelections = rulesAndSpecialCards.getRuleSelections();
         for(String s : ruleSelections) {
             System.out.println(s);
-            mySettings.setRules(s);
+            //mySettings.setRules(s); TODO: fix reflection
         }
 
         mySettings.setSpecialCards(rulesAndSpecialCards.getSpecialCardSelections());
 
-        themeSelection = new ThemeSelectionScene();
         Scene themeScene = themeSelection.makeThemeSelectionScene();
         mainStage.setScene(themeScene);
 
@@ -132,7 +132,7 @@ public class SetupView {
     }
 
     private void themeOkClicked() {
-        //TODO: set theme info for GameView - need decide how want to do this
+        mySettings.setTheme(themeSelection.getSelectedTheme());
         myController.start();
     }
 
@@ -220,5 +220,14 @@ public class SetupView {
      */
     public Button getThemeOkButton() {
         return themeSelection.getThemeOkButton();
+    }
+
+    /**
+     * Used for testing. Allows test to access the theme selection object and the methods for getting different parts of the scene.
+     * @return the ThemeSelection object that can then access other parts of the scene - see the ThemeSelection class for more
+     * details on what the test needs to access.
+     */
+    public ThemeSelectionScene getThemeSelection() {
+        return themeSelection;
     }
 }

@@ -39,6 +39,16 @@ public class CardRender extends StackPane {
         this.setAlignment(Pos.CENTER);
     }
 
+    public void updateCardRender(Card card) {
+        myCard = card;
+        cardViewBase.getStyleClass().removeAll(cardViewBase.getStyleClass());
+        cardViewBase.getStyleClass().add(myCard.getSuit().toString());
+
+        cardViewText.setText("" + myCard.getValue().getNumericValue());
+        cardViewText.getStyleClass().removeAll(cardViewText.getStyleClass());
+        cardViewText.getStyleClass().add(myCard.getSuit() + "Text");
+    }
+
     /**
      * Allows other classes in the view package to access what card this CardView is tied to.
      * Useful for playing card action and updating styling.

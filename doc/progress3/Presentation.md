@@ -52,6 +52,7 @@
 * Different visual skins with images - Selena
 * Ability for players to give themselves names / have custom names - Suomo
 * Additional special cards - Tess and Suomo
+* “Select all” checkbox for special card selection - Selena
 * Ascending uno rules - Tess
 * Game area editor/preferences selection - Selena
 

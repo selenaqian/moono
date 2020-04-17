@@ -1,0 +1,44 @@
+.title {
+    -fx-font-size: 72pt;
+}
+.subtitle {
+    -fx-font-size: 36pt;
+}
+.button {
+    -fx-font-size: 12pt;
+}
+.myTurn {
+    -fx-fill: green;
+}
+.AText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.BText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.CText {
+    -fx-fill: white;
+    -fx-font-size: 24pt;
+}
+.DText {
+    -fx-fill: black;
+    -fx-font-size: 24pt;
+}
+.A {
+    -fx-fill: purple;
+}
+.B {
+    -fx-fill: darkblue;
+}
+.C {
+    -fx-fill: violet;
+}
+.D {
+    -fx-fill: pink;
+}
+.themeOptionSelected {
+    -fx-stroke: aqua;
+    -fx-stroke-width: 10pt;
+}

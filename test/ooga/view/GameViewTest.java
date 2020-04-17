@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static ooga.view.SetupView.DEFAULT_STYLESHEET;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameViewTest extends DukeApplicationTest {
@@ -29,7 +30,7 @@ class GameViewTest extends DukeApplicationTest {
         for(int i=0; i<7; i++) {
             cardList.add(new Card(Suit.A, Value.ZERO));
         }
-        gameView = new GameView(new Uno(), controller, stage);
+        gameView = new GameView(new Uno(), controller, stage, DEFAULT_STYLESHEET);
     }
 
     /**

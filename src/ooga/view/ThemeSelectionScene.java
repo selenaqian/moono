@@ -1,6 +1,6 @@
 /**
  * Helper class that creates the scene for selecting the initial theme. This scene will include options for the classic Uno
- * colors, as well as the Duke theme and the Space theme. TODO: (later) add functionality for these extra themes via stylesheets and add images
+ * colors, as well as the Duke theme and the Space theme. TODO: (later) add images
  * This class is package-private because only SetupView needs to access it.
  *
  * @author Selena Qian
@@ -66,8 +66,9 @@ class ThemeSelectionScene {
             colorWrapper.getChildren().addAll(colorsBackground, colors);
             backgroundBoxes.add(colorsBackground);
 
-            for(String color : myResources.getString(theme).split(",")) {
-                Rectangle oneColor = new Rectangle(DEFAULT_STAGE_WIDTH/4, DEFAULT_STAGE_HEIGHT/8);
+            String[] themeColors = myResources.getString(theme).split(",");
+            for(String color : themeColors) {
+                Rectangle oneColor = new Rectangle(DEFAULT_STAGE_WIDTH/(allThemes.length+1), DEFAULT_STAGE_HEIGHT/(themeColors.length*2));
                 oneColor.setFill(Paint.valueOf(color));
                 colors.getChildren().add(oneColor);
                 colorBoxes.add(oneColor);
@@ -112,5 +113,23 @@ class ThemeSelectionScene {
      */
     String getSelectedTheme() {
         return allThemeFiles[selectedThemeIndex];
+    }
+
+    //Methods below used in testing.
+
+    /**
+     * Used in testing. Allows test to check that the color values of these boxes updates properly.
+     * @return the list of rectangles associated with the background boxes that add a border when selected.
+     */
+    public List<Rectangle> getBackgroundBoxes() {
+        return backgroundBoxes;
+    }
+
+    /**
+     * Used in testing. Allows test to find these boxes and click on the nodes, as well as check their color values.
+     * @return the list of rectangles associated with the color boxes that display the colors of the theme.
+     */
+    public List<Rectangle> getColorBoxes() {
+        return colorBoxes;
     }
 }

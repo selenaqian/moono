@@ -189,13 +189,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
      * @param playerNumber the number of the player whose turn it now is.
      */
     public void myTurnColorChange(int playerNumber) {
-        player1Label.getStyleClass().removeAll();
+        player1Label.getStyleClass().removeAll(player1Label.getStyleClass());
         for(int i=1; i<playerViews.size(); i++) {
-            playerViews.get(i).getStyleClass().removeAll();
+            playerViews.get(i).getStyleClass().removeAll(playerViews.get(i).getStyleClass());
         }
         if(playerNumber==1) player1Label.getStyleClass().add("myTurn");
         else {
-            player1Label.getStyleClass().removeAll(player1Label.getStyleClass());
             playerViews.get(playerNumber-1).getStyleClass().add("myTurn");
         }
     }

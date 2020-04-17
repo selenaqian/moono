@@ -56,8 +56,8 @@ public class UnoController implements GameController{
         if(uno.isUserTurn()){
             checkRoundEnd();
             if(uno.playCard(card)) {
-                gameView.updateHand(uno.getUserHand());
-                gameView.updateDiscardPile(uno.getTopDiscardCard());
+                //gameView.updateHand(uno.getUserHand());
+                //gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
                     Thread.sleep(2000);
                 }
@@ -67,8 +67,8 @@ public class UnoController implements GameController{
                 checkRoundEnd();
 
             }
-            gameView.updateHand(uno.getUserHand());
-            gameView.updateDiscardPile(uno.getTopDiscardCard());
+            //gameView.updateHand(uno.getUserHand());
+            //gameView.updateDiscardPile(uno.getTopDiscardCard());
         }
     }
 
@@ -77,7 +77,7 @@ public class UnoController implements GameController{
      */
     public void handleDrawPileClick(){
         uno.drawCard();
-        gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
+        //gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
         //gameView.updatePlayerHand();
     }
 
@@ -89,7 +89,7 @@ public class UnoController implements GameController{
         if (!uno.isUserTurn()){
             checkRoundEnd();
             if(uno.playCard(gameView)) {
-                gameView.updateDiscardPile(uno.getTopDiscardCard());
+                //gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
                     Thread.sleep(2000);
                 }
@@ -97,7 +97,7 @@ public class UnoController implements GameController{
 
                 }
             }
-            gameView.updateDiscardPile(uno.getTopDiscardCard());
+            //gameView.updateDiscardPile(uno.getTopDiscardCard());
             //checkGameEnd();
         }
 
@@ -115,6 +115,7 @@ public class UnoController implements GameController{
     private void endRound(){
         scoreTracker.calculate(turnManager.getAllPlayers());
         for (Player p : turnManager.getAllPlayers()){
+            gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 winner = p;
                 endGame();

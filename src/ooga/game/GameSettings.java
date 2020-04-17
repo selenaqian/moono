@@ -3,6 +3,8 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.rules.ClassicRules;
+import ooga.rules.DeadlyRules;
 import ooga.rules.Rule;
 
 import java.lang.reflect.InvocationTargetException;
@@ -58,17 +60,25 @@ public class GameSettings {
     }
 
     public void setRules(String ruleString){
-        //TODO: test if relfection works
-        try {
-            Class<?> clazz = ruleString.getClass();
-            Object o = clazz.getDeclaredConstructor().newInstance();
-            rule = (Rule) o;
+
+        //FIXME: get reflection working to get rid of this
+        if(ruleString.equals("ClassicRules")){
+            rule = new ClassicRules();
+        } else if (ruleString.equals("DeadlyRules")){
+            rule = new DeadlyRules();
         }
 
-        catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            // FIXME: do something with this exception
-            e.printStackTrace();
-        }
+//        //TODO: test if relfection works
+//        try {
+//            Class<?> clazz = ruleString.getClass();
+//            Object o = clazz.getDeclaredConstructor().newInstance();
+//            rule = (Rule) o;
+//        }
+//
+//        catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+//            // FIXME: do something with this exception
+//            e.printStackTrace();
+//        }
 
     }
 

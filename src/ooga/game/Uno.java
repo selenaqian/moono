@@ -263,9 +263,9 @@ public class Uno implements GameModel {
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
         //remove wild card that was just placed
-        discPile.drawCard();
+        Value wildValue = discPile.drawCard().getValue();
         //FIXME: uh oh this only accounts for wild cards, not wild4
-        discPile.addCard(new Card(cardColor, Value.WILD));
+        discPile.addCard(new Card(cardColor, wildValue));
     }
 
 //    /**

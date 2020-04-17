@@ -43,11 +43,11 @@ public class UnoTurnManager implements TurnManager {
     @Override
     public void nextPlayer(int direction) {
         if(currentId==1 && direction<0){
-            currentId=players.size()-1;
+            currentId=players.size();
         }
-        else if (currentId < players.size() - 1){
+        else if (currentId < players.size()-1){
             currentId=currentId+direction;
-        } else if (currentId == players.size() - 1){
+        } else if (currentId == players.size()-1){
             currentId = 1;
         }
         current = players.get(currentId);

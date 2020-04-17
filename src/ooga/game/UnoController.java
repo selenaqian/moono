@@ -115,12 +115,16 @@ public class UnoController implements GameController{
     private void endRound(){
         scoreTracker.calculate(turnManager.getAllPlayers());
         for (Player p : turnManager.getAllPlayers()){
+            //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
+
+            //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 winner = p;
                 endGame();
             } else {
-                uno.restart(); //play a new round
+                //play a new round
+                uno.restart();
             }
         }
     }

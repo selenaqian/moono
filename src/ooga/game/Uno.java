@@ -54,13 +54,12 @@ public class Uno implements GameModel {
         //rule = mySettings.getRule();
         rule = new ClassicRules();
         specialCards = mySettings.getSpecialCards();
-
         addPlayers();
         turnManager = new UnoTurnManager(players);
         currentPlayer = players.get(0);
         user = currentPlayer; //TODO: change this so that the human doesn't always start first
         discPile = new DiscardPile();
-        drawPile = new DrawPile();
+        makeDrawPile();
         dealCards();
         //flip over the first card
         discPile.addCard(drawPile.drawCard());
@@ -71,6 +70,15 @@ public class Uno implements GameModel {
         actionApplier = new UnoActionApplier(this, turnManager);
     }
 
+    private void makeDrawPile(){
+        List<Value> specialCardValues = new ArrayList<Value>();
+        for (Card specialCard : specialCards){
+            specialCardValues.add(specialCard.getValue());
+        }
+
+        drawPile = new DrawPile(specialCardValues);
+    }
+
     @Override
     public void start() {
     }
@@ -79,7 +87,7 @@ public class Uno implements GameModel {
     public void restart() {
         //TODO: add method here to clear cards from player hands
         discPile = new DiscardPile();
-        drawPile = new DrawPile();
+        makeDrawPile();
         dealCards();
         //flip over the first card
         discPile.addCard(drawPile.drawCard());
@@ -212,7 +220,7 @@ public class Uno implements GameModel {
         Player manPlayer = new ManualPlayer();
         manPlayer.setID(1);
         players.add(manPlayer);
-        for (int i = 2; i < mySettings.getNumPlayers(); i++){
+        for (int i = 2; i < mySettings.getNumPlayers()+1; i++){
             Player aiPlayer = new AI_Player();
             aiPlayer.setID(i);
             players.add(aiPlayer);

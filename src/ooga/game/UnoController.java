@@ -7,6 +7,7 @@ import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
+import ooga.game.GameSettings;
 
 public class UnoController implements GameController{
     GameSettings settings; //equivalent to model in MVC

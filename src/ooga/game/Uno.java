@@ -208,9 +208,14 @@ public class Uno implements GameModel {
      * TODO: Refactor this - have another class to manage/initialize players?
      */
     private void addPlayers(){
-        players.add(new ManualPlayer());
-        for (int i = 1; i < mySettings.getNumPlayers(); i++){
-            players.add(new AI_Player());
+        //FIXME: pass id into player constructor
+        Player manPlayer = new ManualPlayer();
+        manPlayer.setID(0);
+        players.add(manPlayer);
+        for (int i = 2; i < mySettings.getNumPlayers(); i++){
+            Player aiPlayer = new AI_Player();
+            aiPlayer.setID(i);
+            players.add(aiPlayer);
         }
     }
 

@@ -5,7 +5,7 @@ import ooga.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
+import java.util.Random;
 public class UnoTurnManager implements TurnManager {
 
     private List<Player> players;
@@ -34,8 +34,11 @@ public class UnoTurnManager implements TurnManager {
 
     @Override
     public Player getFirstPlayer() {
-        //TODO: randomize this
-        return players.get(0);
+        //TODO: randomize this(sna19)
+        int playersize = players.size();
+        Random rand = new Random();
+        int randstarter = rand.nextInt(playersize);
+        return players.get(randstarter);
     }
 
     @Override

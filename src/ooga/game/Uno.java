@@ -98,7 +98,7 @@ public class Uno implements GameModel {
             checkUno();
 
             //make sure player updates their hand to remove the card
-            currentPlayer.playCard(selectedCard);
+            currentPlayer.removecard(selectedCard);
 
             //update the discard pile to add the card
             discPile.addCard(selectedCard);

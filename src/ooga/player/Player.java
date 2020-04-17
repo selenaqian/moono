@@ -48,7 +48,7 @@ public abstract class Player {
      *
      * @return
      */
-    public void playCard(Card handcard) {
+    public void removecard(Card handcard) {
         playerhand.removeCard(handcard);
     }
 

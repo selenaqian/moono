@@ -4,11 +4,7 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.piles.Hand;
-import ooga.player.*;
-import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
-
-import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -58,7 +54,7 @@ tests that a card is removed from the hand after play
         myhand.addCard(card5);
 
 
-        testplayer.playCard(card5);
+        testplayer.removecard(card5);
 
 
         assertEquals(false, testplayer.hand().contains(card5));

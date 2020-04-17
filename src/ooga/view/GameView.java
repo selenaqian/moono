@@ -194,7 +194,10 @@ public class GameView implements GameViewInterface, PlayerObserver {
             playerViews.get(i).getStyleClass().removeAll();
         }
         if(playerNumber==1) player1Label.getStyleClass().add("myTurn");
-        else playerViews.get(playerNumber-1).getStyleClass().add("myTurn");
+        else {
+            player1Label.getStyleClass().removeAll(player1Label.getStyleClass());
+            playerViews.get(playerNumber-1).getStyleClass().add("myTurn");
+        }
     }
 
     @Override

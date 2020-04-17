@@ -55,7 +55,7 @@ public class UnoScoreTracker implements ScoreTracker {
 
     private void updatePlayerScore(int playerID, int addedScore){
         //TODO: change playerID to integer if necessary
-        if (playerScores.containsKey(playerID)){
+        if (!playerScores.containsKey(playerID)){
             playerScores.putIfAbsent(playerID, addedScore);
         } else {
             int oldScore = playerScores.get(playerID);

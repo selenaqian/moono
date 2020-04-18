@@ -69,8 +69,8 @@ public class GameView implements GameViewInterface, PlayerObserver {
         allPlayersScore = new ArrayList<>();
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
-        wildColorSelector = new WildColorSelectorView(myUno.getActionApplier());
         myStylesheet = stylesheet;
+        wildColorSelector = new WildColorSelectorView(myUno.getActionApplier(), myStylesheet);
 
         //registering observer(s)
         myUno.registerPlayerObserver(this);
@@ -205,7 +205,11 @@ public class GameView implements GameViewInterface, PlayerObserver {
         for (Card c : cards) {
             CardRender tempCardRender = new CardRender(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
             player1Hand.getChildren().add(tempCardRender);
-            tempCardRender.setOnMouseClicked(e -> myController.handleCardClick(tempCardRender.getCard()));
+            tempCardRender.setOnMouseClicked(e -> {
+                //if wild card then need call wildcolor.show
+                if(tempCardRender.getCard().getValue()==Value.WILD) wildColorSelector.showColorSelector();
+                else myController.handleCardClick(tempCardRender.getCard());
+            });
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();

@@ -99,6 +99,12 @@ class RulesAndSpecialCardScene {
             specialCardOptions.add(checkBox);
             specialCardsBox.getChildren().add(checkBox);
         }
+        /**CheckBox selectAll = new CheckBox("select all");
+        if(selectAll.isSelected()) {
+            for(CheckBox option : specialCardOptions) {
+                option.setSelected(true);
+            }
+        }*/
         return specialCardsBox;
     }
 

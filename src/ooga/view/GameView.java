@@ -69,8 +69,8 @@ public class GameView implements GameViewInterface, PlayerObserver {
         allPlayersScore = new ArrayList<>();
         allPlayersNot1 = new VBox(DEFAULT_SPACING);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
-        wildColorSelector = new WildColorSelectorView(myUno.getActionApplier());
         myStylesheet = stylesheet;
+        wildColorSelector = new WildColorSelectorView(myUno.getActionApplier(), myStylesheet);
 
         //registering observer(s)
         myUno.registerPlayerObserver(this);
@@ -168,7 +168,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
         Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
         Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
-        Text score = new Text(numberCards + myResources.getString("score") + 0);
+        Text score = new Text(myResources.getString("score") + 0);
 
         if (allPlayersCardsLeft.size() >= playerNumber) {
             allPlayersCardsLeft.remove(playerNumber-1);
@@ -189,13 +189,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
      * @param playerNumber the number of the player whose turn it now is.
      */
     public void myTurnColorChange(int playerNumber) {
-        player1Label.getStyleClass().removeAll();
+        player1Label.getStyleClass().removeAll(player1Label.getStyleClass());
         for(int i=1; i<playerViews.size(); i++) {
-            playerViews.get(i).getStyleClass().removeAll();
+            playerViews.get(i).getStyleClass().removeAll(playerViews.get(i).getStyleClass());
         }
         if(playerNumber==1) player1Label.getStyleClass().add("myTurn");
         else {
-            player1Label.getStyleClass().removeAll(player1Label.getStyleClass());
             playerViews.get(playerNumber-1).getStyleClass().add("myTurn");
         }
     }
@@ -206,7 +205,11 @@ public class GameView implements GameViewInterface, PlayerObserver {
         for (Card c : cards) {
             CardRender tempCardRender = new CardRender(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
             player1Hand.getChildren().add(tempCardRender);
-            tempCardRender.setOnMouseClicked(e -> myController.handleCardClick(tempCardRender.getCard()));
+            tempCardRender.setOnMouseClicked(e -> {
+                //if wild card then need call wildcolor.show
+                if(tempCardRender.getCard().getValue()==Value.WILD) wildColorSelector.showColorSelector();
+                else myController.handleCardClick(tempCardRender.getCard());
+            });
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();
@@ -280,6 +283,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void updatePlayerHand(int playerId, List<Card> cardsLeft) {
         allPlayersCardsLeft.get(playerId-1).setText(cardsLeft.size() + myResources.getString("cardsLeft"));
         if(playerId == 1) updateHand(cardsLeft);
+        myTurnColorChange(playerId);
         //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
     }
 

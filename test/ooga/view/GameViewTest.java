@@ -107,6 +107,7 @@ class GameViewTest extends DukeApplicationTest {
 
     @Test
     void testUpdateScore() {
+        assertEquals("score: 0", gameView.getAllPlayersScore().get(0).getText());
         javafxRun(() -> gameView.updateScore(1, 10));
 
         assertEquals("score: 10", gameView.getAllPlayersScore().get(0).getText());

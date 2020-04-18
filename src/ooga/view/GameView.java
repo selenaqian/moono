@@ -168,7 +168,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
         Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
         Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
-        Text score = new Text(numberCards + myResources.getString("score") + 0);
+        Text score = new Text(myResources.getString("score") + 0);
 
         if (allPlayersCardsLeft.size() >= playerNumber) {
             allPlayersCardsLeft.remove(playerNumber-1);

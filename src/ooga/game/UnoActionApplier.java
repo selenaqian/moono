@@ -102,7 +102,7 @@ public class UnoActionApplier {
      */
     private void applyReverse(){
         turnManager.changeDirection();
-        turnManager.nextPlayer(turnManager.getDirection());
+        //turnManager.nextPlayer(turnManager.getDirection());
 
     }
 

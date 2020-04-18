@@ -12,19 +12,19 @@
 }
 .AText {
     -fx-fill: white;
-    -fx-font-size: 24pt;
+    -fx-font-size: 20pt;
 }
 .BText {
     -fx-fill: white;
-    -fx-font-size: 24pt;
+    -fx-font-size: 20pt;
 }
 .CText {
     -fx-fill: white;
-    -fx-font-size: 24pt;
+    -fx-font-size: 20pt;
 }
 .DText {
     -fx-fill: black;
-    -fx-font-size: 24pt;
+    -fx-font-size: 20pt;
 }
 .A {
     -fx-fill: purple;

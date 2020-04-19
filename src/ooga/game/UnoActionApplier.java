@@ -2,6 +2,7 @@ package ooga.game;
 
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.player.Player;
 
 import java.util.Random;
 
@@ -94,7 +95,7 @@ public class UnoActionApplier {
      * Skips turn of next player.
      */
     private void applySkip(){
-        turnManager.nextPlayer(turnManager.getDirection());
+        turnManager.getNextPlayer();
     }
 
     /**
@@ -102,7 +103,6 @@ public class UnoActionApplier {
      */
     private void applyReverse(){
         turnManager.changeDirection();
-        //turnManager.nextPlayer(turnManager.getDirection());
 
     }
 
@@ -110,9 +110,9 @@ public class UnoActionApplier {
      * Draws 2 cards to the next player and skips their turn.
      */
     private void applyDraw2(){
-        turnManager.nextPlayer(turnManager.getDirection());
+        Player nextPlayer = turnManager.getNextPlayer();
         for(int i=0;i<TWO;i++){
-            uno.drawCard();
+            nextPlayer.takecard(uno.drawPile.drawCard());
         }
     }
 
@@ -128,10 +128,9 @@ public class UnoActionApplier {
      */
     private void applyWild4(){
         applyWild();
-        turnManager.nextPlayer(turnManager.getDirection());
+        turnManager.getNextPlayer();
         for(int i = 0; i < FOUR; i++){
             uno.drawCard();
         }
     }
-
 }

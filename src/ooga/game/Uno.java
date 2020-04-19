@@ -199,7 +199,7 @@ public class Uno implements GameModel {
 
     private void endTurn(){
         notifyPlayerObservers(); //tells observers about update to player hand
-        turnManager.nextPlayer(turnManager.getDirection());
+        turnManager.nextPlayer();
         currentPlayer = turnManager.getCurrentPlayer();
         didCallUno = false;
     }

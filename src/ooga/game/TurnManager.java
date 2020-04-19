@@ -22,7 +22,7 @@ public interface TurnManager{
     /**
      * Once the current player is done, called to set currentPlayer as the next player
      */
-    void nextPlayer(int direction);
+    void nextPlayer();
 
     /**
      * The player currently making the play

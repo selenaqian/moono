@@ -46,7 +46,7 @@ public class UnoTurnManager implements TurnManager {
      * @param direction
      */
     @Override
-    public void nextPlayer(int direction) {
+    public void nextPlayer() {
 
         //FIXME: use iterator or clean this up
         int currID = current.getID();
@@ -92,7 +92,6 @@ public class UnoTurnManager implements TurnManager {
     /**
      * Changes the direction, affecting which player has the next turn
      * Typically called when an uno reverse card is played
-     * @see getNextPlayer()
      */
     public void changeDirection(){
         if (direction == CW) {

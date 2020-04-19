@@ -132,7 +132,7 @@ public class Uno implements GameModel {
      */
     public boolean playCard(GameView gameView) {
         //go through each of the cards in the hand and try playing each card
-        currentPlayer.hand().sortedHand(currentPlayer.hand().getAllCards()); //sna19-order card so highest possible is played always
+        currentPlayer.hand().sortHand(); //sna19-order card so highest possible is played always
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
                 return playCard(card);

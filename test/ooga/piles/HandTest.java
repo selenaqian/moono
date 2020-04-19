@@ -192,4 +192,50 @@ class HandTest {
     void getCardCountEmptyDeck() {
         assertEquals(0, emptyHand.getCardCount());
     }
+
+    /**
+     * Tests reset() when a Hand is already empty.
+     */
+    @Test
+    void resetEmpty() {
+        assertEquals(0, emptyHand.getCardCount());
+        emptyHand.reset();
+        assertEquals(0, emptyHand.getCardCount());
+    }
+
+    /**
+     * Tests reset() when a Hand is not yet empty.
+     */
+    @Test
+    void resetPopulated() {
+        assertEquals(3, h1.getCardCount());
+        h1.reset();
+        assertEquals(0, h1.getCardCount());
+    }
+
+    /**
+     * Tests sortHand() when the Cards are originally out of order.
+     */
+    @Test
+    void sortHandChanges(){
+        assertEquals(card1, h1.getAllCards().get(0));
+        h1.sortHand();
+        assertEquals(card2, h1.getAllCards().get(0));
+    }
+
+    /**
+     * Tests sortHand() when the Cards are already in order.
+     */
+    @Test
+    void sortHandSame() {
+        Hand h2 = new Hand(Arrays.asList(card2, card3, card1));
+        assertEquals(card2, h2.getAllCards().get(0));
+        assertEquals(card3, h2.getAllCards().get(1));
+        assertEquals(card1, h2.getAllCards().get(2));
+
+        h2.sortHand();
+        assertEquals(card2, h2.getAllCards().get(0));
+        assertEquals(card3, h2.getAllCards().get(1));
+        assertEquals(card1, h2.getAllCards().get(2));
+    }
 }

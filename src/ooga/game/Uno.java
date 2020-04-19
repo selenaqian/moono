@@ -34,7 +34,7 @@ public class Uno implements GameModel {
     private UnoActionApplier actionApplier; //contains methods for action cards
 
     private DiscardPile discPile;
-    private DrawPile drawPile;
+    public DrawPile drawPile;
     private Rule rule;
     private List<Card> specialCards;
 
@@ -199,8 +199,7 @@ public class Uno implements GameModel {
 
     private void endTurn(){
         notifyPlayerObservers(); //tells observers about update to player hand
-        turnManager.nextPlayer();
-        currentPlayer = turnManager.getCurrentPlayer();
+        currentPlayer = turnManager.getNextPlayer();
         didCallUno = false;
     }
 

@@ -94,7 +94,6 @@ public class UnoController implements GameController{
         if (!uno.isUserTurn()){
             checkRoundEnd();
             if(uno.playCard(gameView)) {
-                //gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
                     Thread.sleep(2000);
                 }

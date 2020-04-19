@@ -15,7 +15,6 @@ public class UnoTurnManager implements TurnManager {
     public static final int CCW = -1;
 
     private Player current; //the player making the turn
-    private int currentId = 1;
 
     public UnoTurnManager(List<Player> players){
         this.players = players;

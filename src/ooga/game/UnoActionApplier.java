@@ -128,11 +128,9 @@ public class UnoActionApplier {
      */
     private void applyWild4(){
         applyWild();
-        turnManager.getNextPlayer(
-        );
+        turnManager.getNextPlayer();
         for(int i = 0; i < FOUR; i++){
             uno.drawCard();
         }
     }
-
 }

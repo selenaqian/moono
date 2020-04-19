@@ -32,7 +32,6 @@ public class Uno implements GameModel {
     private Player user; //the human player
 
     private UnoActionApplier actionApplier; //contains methods for action cards
-
     private DiscardPile discPile;
     public DrawPile drawPile;
     private Rule rule;

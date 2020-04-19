@@ -30,7 +30,7 @@ public class AscendingRules extends Rule {
             return true;
         }
         if(playedCard.getValue().getNumericValue() > discard.getValue().getNumericValue() &&
-                playedCard.getSuit() == playedCard.getSuit()){
+                playedCard.getSuit() == discard.getSuit()){
             return true;
         }
         return false;

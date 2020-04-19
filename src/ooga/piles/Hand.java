@@ -102,15 +102,19 @@ public class Hand implements Pile {
         return myCards.size();
     }
 
-    /*
-    sorts hand
-    sna19
+    /**
+     * Sorts hand.
+     * @author sna19
      */
-    public void sortedHand(List<Card> Cards){
-        Collections.sort(Cards);
-        Collections.reverse(Cards);
+    public void sortHand(){
+        Collections.sort(myCards);
+        Collections.reverse(myCards);
     }
 
+    /**
+     * Resets hand.
+     * @author sna19
+     */
     public void reset(){
         myCards.clear();
     }

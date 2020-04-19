@@ -6,6 +6,7 @@
 package ooga.view;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -48,6 +49,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private ResourceBundle myResources;
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
+    private Button callUno;
 
     public GameView() {
         this(new Uno(), new UnoController(new Stage()), new Stage(), DEFAULT_STYLESHEET);
@@ -102,6 +104,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
         mainPane.getChildren().add(decks);
         AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
+
+        callUno = new Button(myResources.getString("callUno"));
+        callUno.setOnMouseClicked(e -> myController.callUno());
+        mainPane.getChildren().add(callUno);
+        AnchorPane.setTopAnchor(callUno, mainPane.getHeight()*5/8);
+        AnchorPane.setLeftAnchor(callUno, mainPane.getWidth()/2 - callUno.getWidth());
 
         nextTurn = new Button(myResources.getString("next"));
         nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
@@ -189,11 +197,33 @@ public class GameView implements GameViewInterface, PlayerObserver {
      * @param playerNumber the number of the player whose turn it now is.
      */
     public void myTurnColorChange(int playerNumber) {
-        player1Label.getStyleClass().removeAll(player1Label.getStyleClass());
-        for(int i=0; i<allPlayersCardsLeft.size(); i++) {
-            allPlayersCardsLeft.get(i).getStyleClass().removeAll(allPlayersCardsLeft.get(i).getStyleClass());
+        Node player1Circle = player1Label.getChildren().get(0); // the circle
+        player1Circle.getStyleClass().removeAll(player1Circle.getStyleClass());
+        VBox player1AllText = (VBox)player1Label.getChildren().get(1);
+        for(Node n : player1AllText.getChildren()) {
+            n.getStyleClass().removeAll(n.getStyleClass());
         }
-        allPlayersCardsLeft.get(playerNumber-1).getStyleClass().add("myTurn");
+        for(int i=1; i<playerViews.size(); i++) {
+            Node playerCircle = playerViews.get(i).getChildren().get(0); // the circle
+            playerCircle.getStyleClass().removeAll(playerCircle.getStyleClass());
+            VBox playerAllText = (VBox)playerViews.get(i).getChildren().get(1);
+            for(Node n : playerAllText.getChildren()) {
+                n.getStyleClass().removeAll(n.getStyleClass());
+            }
+        }
+        if(playerNumber == 1) {
+            player1Circle.getStyleClass().add("myTurn");
+            for(Node n : player1AllText.getChildren()) {
+                n.getStyleClass().add("myTurn");
+            }
+            return;
+        }
+        Node playerNumberCircle = playerViews.get(playerNumber-1).getChildren().get(0);
+        playerNumberCircle.getStyleClass().add("myTurn");
+        VBox playerNumberAllText = (VBox)playerViews.get(playerNumber-1).getChildren().get(1);
+        for(Node n : playerNumberAllText.getChildren()) {
+            n.getStyleClass().add("myTurn");
+        }
     }
 
     @Override

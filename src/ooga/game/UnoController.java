@@ -16,8 +16,7 @@ import ooga.game.GameSettings;
 
 
 public class UnoController implements GameController {
-    public static final int FRAMES_PER_SECOND = 60;
-    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    public static final double SECOND_DELAY = 1.5;
     private Timeline myAnimation = new Timeline();
 
     GameSettings settings; //equivalent to model in MVC
@@ -44,10 +43,10 @@ public class UnoController implements GameController {
         turnManager = uno.getTurnManager();
         scoreTracker = new UnoScoreTracker();
 
-//        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-//        myAnimation.setCycleCount(Timeline.INDEFINITE);
-//        myAnimation.getKeyFrames().add(frame);
-//        myAnimation.play();
+        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(frame);
+        myAnimation.play();
 
 
     }
@@ -67,7 +66,6 @@ public class UnoController implements GameController {
 
     private void step(double elapsedTime){
         if(!turnManager.isHumanTurn()){
-            System.out.println("stepping");
             handleAIPlay();
         }
     }
@@ -123,7 +121,6 @@ public class UnoController implements GameController {
     }
 
     private void endTurn(){
-        System.out.println("ended turn for " + turnManager.getCurrentPlayer().getID());
         checkRoundEnd();
     }
 

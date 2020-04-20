@@ -13,6 +13,7 @@ import java.io.IOException;
 public class JavaToXML {
 
     //TODO: transfer these Strings to a properties file instead.
+    public static final String FILE_PATH = "data/";
     public static final String EXCEPTION_TEXT = "Exception! :";
 
     /**
@@ -29,7 +30,7 @@ public class JavaToXML {
      * @throws IOException
      */
     public void encode(GameInfo gameInfo, String fileName) throws IOException {
-        FileOutputStream fos = new FileOutputStream(fileName);
+        FileOutputStream fos = new FileOutputStream(FILE_PATH + fileName);
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener(new ExceptionListener() {
             public void exceptionThrown(Exception e) {

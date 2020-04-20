@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests GameInfo class.
  * There is only one test per method because the methods are all basic getters.
+ * @author Tess Noonan (tcn6)
  */
 class GameInfoTest {
 

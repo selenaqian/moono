@@ -120,12 +120,12 @@ public class UnoTurnManager implements TurnManager {
         return direction;
     }
 
-    public void setHumanPlayer(int playerID){
-        humanPlayer = players.get(playerID - 1);
+    public void setHumanPlayer(Player player){
+        humanPlayer = player;
     }
 
-    public boolean isHumanTurn(Player player){
-        if (player.getID() == humanPlayer.getID()) {
+    public boolean isHumanTurn(){
+        if (current.getID() == humanPlayer.getID()) {
             return true;
         }
 

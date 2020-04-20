@@ -52,8 +52,9 @@ public class UnoController implements GameController{
     }
 
     void step(){
-
-
+        if(!turnManager.isHumanTurn()){
+            handleAIPlay();
+        }
     }
 
 
@@ -109,6 +110,10 @@ public class UnoController implements GameController{
             //gameView.updateDiscardPile(uno.getTopDiscardCard());
             //checkGameEnd();
         }
+
+    }
+
+    private void endTurn(){
 
     }
 

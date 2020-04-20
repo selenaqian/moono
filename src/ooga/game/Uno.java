@@ -54,8 +54,7 @@ public class Uno implements GameModel {
         specialCards = mySettings.getSpecialCards();
         addPlayers();
         turnManager = new UnoTurnManager(players);
-        currentPlayer = players.get(0);
-        user = currentPlayer; //TODO: change this so that the human doesn't always start first
+        turnManager.setHumanPlayer(players.get(0));
         discPile = new DiscardPile();
         makeDrawPile();
         dealCards();

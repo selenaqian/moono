@@ -1,9 +1,12 @@
 package ooga.config;
 
+
+
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * This class encodes a GameInfo instance to an XML file.
@@ -11,10 +14,11 @@ import java.io.IOException;
  * @author Tess Noonan
  */
 public class JavaToXML {
+    private ResourceBundle myResources = ResourceBundle.getBundle("errors");
 
     //TODO: transfer these Strings to a properties file instead.
     public static final String FILE_PATH = "data/";
-    public static final String EXCEPTION_TEXT = "Exception! :";
+    //public static final String EXCEPTION_TEXT = "Exception! :"; sna19(modified this to use the error properties file so that error messages are not hardcoded
 
     /**
      * Creates new JavaToXML object.
@@ -34,7 +38,7 @@ public class JavaToXML {
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener(new ExceptionListener() {
             public void exceptionThrown(Exception e) {
-                System.out.println(EXCEPTION_TEXT + e.toString());
+                System.out.println(myResources.getString("Exception") + e.toString());
             }
         });
         encoder.writeObject(gameInfo);

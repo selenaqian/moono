@@ -1,6 +1,9 @@
 package ooga.game;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import ooga.OOGAException;
 import ooga.cards.Card;
 import ooga.cards.Suit;
@@ -12,7 +15,11 @@ import java.util.ResourceBundle;
 import ooga.game.GameSettings;
 
 
-public class UnoController implements GameController{
+public class UnoController implements GameController {
+    public static final int FRAMES_PER_SECOND = 60;
+    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    private Timeline myAnimation = new Timeline();
+
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
     GameView gameView;
@@ -37,6 +44,12 @@ public class UnoController implements GameController{
         turnManager = uno.getTurnManager();
         scoreTracker = new UnoScoreTracker();
 
+        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(frame);
+        myAnimation.play();
+
+
     }
 
     @Override
@@ -51,7 +64,8 @@ public class UnoController implements GameController{
 
     }
 
-    void step(){
+
+    private void step(double elapsedTime){
         if(!turnManager.isHumanTurn()){
             handleAIPlay();
         }

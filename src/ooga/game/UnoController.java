@@ -1,15 +1,13 @@
 package ooga.game;
 
 import javafx.stage.Stage;
-import ooga.OOGAException;
+import ooga.exceptions.OOGAException;
 import ooga.cards.Card;
-import ooga.cards.Suit;
 import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
 import java.util.ResourceBundle;
-import ooga.game.GameSettings;
 
 
 public class UnoController implements GameController{

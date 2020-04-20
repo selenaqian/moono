@@ -65,21 +65,16 @@ public class UnoController implements GameController{
      */
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
-            checkRoundEnd();
             if(uno.playCard(card, turnManager.getCurrentPlayer())) {
-                //gameView.updateHand(uno.getUserHand());
-                //gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
                     Thread.sleep(2000);
                 }
                 catch (Exception e) {
                     throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
-                checkRoundEnd();
 
+                endTurn();
             }
-            //gameView.updateHand(uno.getUserHand());
-            //gameView.updateDiscardPile(uno.getTopDiscardCard());
         }
     }
 
@@ -88,8 +83,7 @@ public class UnoController implements GameController{
      */
     public void handleDrawPileClick(){
         uno.drawCard(turnManager.getCurrentPlayer());
-        //gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
-        //gameView.updatePlayerHand();
+        endTurn();
     }
 
     /**
@@ -106,15 +100,16 @@ public class UnoController implements GameController{
                 catch (Exception e) {
                     throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
+
+                endTurn();
             }
-            //gameView.updateDiscardPile(uno.getTopDiscardCard());
-            //checkGameEnd();
         }
 
     }
 
     private void endTurn(){
-
+        turnManager.nextPlayer();
+        checkRoundEnd();
     }
 
     private void checkRoundEnd(){

@@ -44,10 +44,10 @@ public class UnoController implements GameController {
         turnManager = uno.getTurnManager();
         scoreTracker = new UnoScoreTracker();
 
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
+//        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
+//        myAnimation.setCycleCount(Timeline.INDEFINITE);
+//        myAnimation.getKeyFrames().add(frame);
+//        myAnimation.play();
 
 
     }
@@ -67,6 +67,7 @@ public class UnoController implements GameController {
 
     private void step(double elapsedTime){
         if(!turnManager.isHumanTurn()){
+            System.out.println("stepping");
             handleAIPlay();
         }
     }
@@ -78,7 +79,7 @@ public class UnoController implements GameController {
      * @param card card that was clicked in the view
      */
     public void handleCardClick(Card card){
-        if(uno.isUserTurn()){
+        if(turnManager.isHumanTurn()){
             if(uno.playCard(card, turnManager.getCurrentPlayer())) {
                 try {
                     Thread.sleep(2000);
@@ -105,7 +106,7 @@ public class UnoController implements GameController {
      * Where it is called will be changed in future sprints
      */
     public void handleAIPlay() {
-        if (!uno.isUserTurn()){
+        if (!turnManager.isHumanTurn()){
             checkRoundEnd();
             if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
@@ -157,7 +158,7 @@ public class UnoController implements GameController {
      * A user should click call uno when it is their turn but before making a play that would leave them with 1 card
      */
     public void callUno(){
-        if (uno.isUserTurn()){
+        if (turnManager.isHumanTurn()){
             uno.callUno();
 
             //TODO: something here in the view to give feedback to user when they call uno

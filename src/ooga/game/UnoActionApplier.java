@@ -45,7 +45,7 @@ public class UnoActionApplier {
      * Notifies observers to make WildColorSelectorView show up
      */
     public void notifyWildObserver(){
-        if (uno.isUserTurn()){
+        if (turnManager.isHumanTurn()){
             observer.showColorSelector();
         } else {
             //pick a random suit to set the wildcard color to for AI players that can't interact with the view

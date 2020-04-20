@@ -148,6 +148,10 @@ public class UnoTurnManager implements TurnManager {
         humanPlayer = player;
     }
 
+    public Player getHumanPlayer(){
+        return humanPlayer;
+    }
+
     public boolean isHumanTurn(){
         if (current.getID() == humanPlayer.getID()) {
             return true;

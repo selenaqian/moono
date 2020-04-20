@@ -27,8 +27,6 @@ public class Uno implements GameModel {
     private GameSettings mySettings;
     private UnoTurnManager turnManager;
     private List<Player> players = new ArrayList<Player>();
-    private Player currentPlayer;
-    private Player user; //the human player
 
     private UnoActionApplier actionApplier; //contains methods for action cards
     private DiscardPile discPile;
@@ -132,8 +130,8 @@ public class Uno implements GameModel {
      */
     public boolean playCard(Player player) {
         //go through each of the cards in the hand and try playing each card
-        currentPlayer.hand().sortHand(); //sna19-order card so highest possible is played always
-        for (Card card : currentPlayer.hand().getAllCards()) {
+        turnManager.getCurrentPlayer().hand().sortHand(); //sna19-order card so highest possible is played always
+        for (Card card : turnManager.getCurrentPlayer().hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
                 return playCard(card, player);
             }
@@ -168,7 +166,7 @@ public class Uno implements GameModel {
 
     @Override
     public List<Card> getUserHand() {
-        return user.hand().getAllCards();
+        return turnManager.getHumanPlayer().hand().getAllCards();
     }
 
     @Override
@@ -239,13 +237,6 @@ public class Uno implements GameModel {
         return actionApplier;
     }
 
-    public boolean isUserTurn(){
-        if(currentPlayer == user){
-            return true;
-        }
-
-        return false;
-    }
 
     /**
      * Sets the new color of the discard pile when a wild card is drawn
@@ -284,15 +275,15 @@ public class Uno implements GameModel {
      * If user has not declared, then they must pick up more cards
      */
     public void checkUno(){
-        if (currentPlayer.hand().getCardCount() == 1 && didCallUno == false){
+        if (turnManager.getCurrentPlayer().hand().getCardCount() == 1 && didCallUno == false){
             for (int i = 0; i < UNO_PENALTY; i++){
-                currentPlayer.takecard(drawPile.drawCard());
+                turnManager.getCurrentPlayer().takecard(drawPile.drawCard());
             }
         }
     }
 
     public boolean isOver(){
-        return rule.isOver(getTopDiscardCard(), currentPlayer.hand());
+        return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
 
     }
 

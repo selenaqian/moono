@@ -22,7 +22,6 @@ public class UnoTurnManager implements TurnManager {
         iterator = players.listIterator();
         current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
         direction = CW;
-
     }
 
     @Override

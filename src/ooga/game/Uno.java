@@ -139,7 +139,6 @@ public class Uno implements GameModel {
 
         //when no playable card is found
         drawCard(player);
-        endTurn();
         return false;
     }
 
@@ -161,6 +160,8 @@ public class Uno implements GameModel {
 
         //get player to accept the drawn card into their own hand of cards
         player.takecard(card);
+
+        turnManager.nextPlayer();
         endTurn();
     }
 

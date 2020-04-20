@@ -87,8 +87,6 @@ public class UnoController implements GameController {
                 catch (Exception e) {
                     throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
-
-                endTurn();
             }
         }
     }
@@ -97,8 +95,11 @@ public class UnoController implements GameController {
      * Called when a user clicks on the draw pile
      */
     public void handleDrawPileClick(){
-        uno.drawCard(turnManager.getCurrentPlayer());
-        endTurn();
+        if(turnManager.isHumanTurn()){
+            uno.drawCard(turnManager.getCurrentPlayer());
+            endTurn();
+        }
+
     }
 
     /**
@@ -107,23 +108,22 @@ public class UnoController implements GameController {
      */
     public void handleAIPlay() {
         if (!turnManager.isHumanTurn()){
-            checkRoundEnd();
             if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
+                    endTurn();
                     Thread.sleep(2000);
                 }
                 catch (Exception e) {
                     throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
 
-                endTurn();
             }
+            endTurn();
         }
-
     }
 
     private void endTurn(){
-        turnManager.nextPlayer();
+        System.out.println("ended turn for " + turnManager.getCurrentPlayer().getID());
         checkRoundEnd();
     }
 

@@ -52,13 +52,13 @@ public class UnoTurnManager implements TurnManager {
         //FIXME: use iterator or clean this up
         int currID = current.getID();
         if(currID == 1 && direction == CCW){
-            current =  players.get(players.size()-1);
+            return players.get(players.size()-1);
         } else if (currID < players.size() && direction == CW){
-            current = players.get(currID);
+            return players.get(currID);
         } else if (currID == players.size() && direction == CW){
-            current =  players.get(0);
+            return players.get(0);
         } else if (currID <= players.size() && direction == CCW){
-            current =  players.get(currID - 2);
+            return players.get(currID - 2);
         }
         return current;
 
@@ -77,6 +77,31 @@ public class UnoTurnManager implements TurnManager {
     public Player getCurrentPlayer() {
         //TODO: add error handling for when there are no players added yet
         return current;
+    }
+
+    @Override
+    public void nextPlayer() {
+        //FIXME: use iterator or clean this up
+        int currID = current.getID();
+        if(currID == 1 && direction == CCW){
+            current =  players.get(players.size()-1);
+        } else if (currID < players.size() && direction == CW){
+            current = players.get(currID);
+        } else if (currID == players.size() && direction == CW){
+            current =  players.get(0);
+        } else if (currID <= players.size() && direction == CCW){
+            current =  players.get(currID - 2);
+        }
+
+//        if (iterator.hasNext()){
+//            iterator.next();
+//            current = iterator.next();
+//        } else if (!iterator.hasPrevious()){
+//            iterator = players.listIterator(players.size());
+//        } else {
+//            //reset iterator to beginning after looping through all players
+//            iterator = players.listIterator();
+//        }
     }
 
     @Override

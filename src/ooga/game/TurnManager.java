@@ -26,6 +26,13 @@ public interface TurnManager{
     Player getNextPlayer();
 
     /**
+     * Moves turnManager to the next player so that getCurrentPlayer can be called later
+     * Used when a turn is ended
+     */
+    void nextPlayer();
+
+
+    /**
      * The player currently making the play
      * Can also be called from the view to visually indicate who's turn it is
      */

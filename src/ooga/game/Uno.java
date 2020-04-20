@@ -65,7 +65,6 @@ public class Uno implements GameModel {
 
         //update everything in view when game is first started
         notifyPlayerObservers();
-
         actionApplier = new UnoActionApplier(this, turnManager);
     }
 
@@ -76,6 +75,10 @@ public class Uno implements GameModel {
         }
 
         drawPile = new DrawPile(specialCardValues);
+    }
+
+    public UnoTurnManager getTurnManager(){
+        return turnManager;
     }
 
     @Override
@@ -199,7 +202,6 @@ public class Uno implements GameModel {
 
     private void endTurn(){
         notifyPlayerObservers(); //tells observers about update to player hand
-        currentPlayer = turnManager.getNextPlayer();
         didCallUno = false;
     }
 
@@ -230,10 +232,6 @@ public class Uno implements GameModel {
             aiPlayer.setID(i);
             players.add(aiPlayer);
         }
-    }
-
-    public UnoTurnManager getTurnManager(){
-        return turnManager;
     }
 
     /**

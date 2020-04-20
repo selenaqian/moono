@@ -104,14 +104,14 @@ public class Uno implements GameModel {
      * @param selectedCard the card selected by the player in the view or selected by the AI player
      */
     @Override
-    public boolean playCard(Card selectedCard){
+    public boolean playCard(Card selectedCard, Player player){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
             //make sure a player with one valid card left has called uno
             checkUno();
 
             //make sure player updates their hand to remove the card
-            currentPlayer.removecard(selectedCard);
+            player.removecard(selectedCard);
 
             //update the discard pile to add the card
             discPile.addCard(selectedCard);
@@ -129,17 +129,17 @@ public class Uno implements GameModel {
      * Method used for AI players to play a card
      * Temporary use for Sprint 1
      */
-    public boolean playCard(GameView gameView) {
+    public boolean playCard(GameView gameView, Player player) {
         //go through each of the cards in the hand and try playing each card
         currentPlayer.hand().sortHand(); //sna19-order card so highest possible is played always
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
-                return playCard(card);
+                return playCard(card, player);
             }
         }
 
         //when no playable card is found
-        drawCard();
+        drawCard(player);
         endTurn();
         return false;
     }
@@ -150,7 +150,7 @@ public class Uno implements GameModel {
      * For AI players, must be called programmatically
      */
     @Override
-    public void drawCard(){
+    public void drawCard(Player player){
         //when draw pile is empty, put discard pile cards into it
         if (drawPile.getCardCount() == 0){
             drawPile = new DrawPile(discPile.getAllCards());
@@ -161,7 +161,7 @@ public class Uno implements GameModel {
         Card card = drawPile.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        currentPlayer.takecard(card);
+        player.takecard(card);
         //TODO: get the visual updating to work here too:
         // gameView.updateHand(getTurnManager().getPlayerId(getTurnManager().getCurrentPlayer()), getNumCardsInPlayerHand());
         endTurn();
@@ -190,8 +190,9 @@ public class Uno implements GameModel {
     @Override
     public void notifyPlayerObservers() {
         for (PlayerObserver o : playerObservers){
-            //FIXME: possibly pass in a hand instead of a list of cards?
-            o.updatePlayerHand(currentPlayer.getID(), currentPlayer.hand().getAllCards());
+            for (Player player : players){
+                o.updatePlayerHand(player.getID(), player.hand().getAllCards());
+            }
             o.updateDiscardPile(discPile.showTopCard());
         }
     }

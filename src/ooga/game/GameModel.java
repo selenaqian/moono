@@ -9,8 +9,8 @@ import java.util.List;
 public interface GameModel {
     void start();
     void restart();
-    boolean playCard(Card selectedCard);
-    void drawCard();
+    boolean playCard(Card selectedCard, Player player);
+    void drawCard(Player player);
 
     /**
      * Returns list of cards the user (the human player) has in their hand

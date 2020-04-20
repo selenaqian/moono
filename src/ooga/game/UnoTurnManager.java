@@ -8,6 +8,7 @@ public class UnoTurnManager implements TurnManager {
 
     private List<Player> players;
     private ListIterator<Player> iterator;
+    private Player humanPlayer;
 
     // Direction of "rotation" to the next player
     private int direction;
@@ -118,4 +119,17 @@ public class UnoTurnManager implements TurnManager {
     public int getDirection(){
         return direction;
     }
+
+    public void setHumanPlayer(int playerID){
+        humanPlayer = players.get(playerID - 1);
+    }
+
+    public boolean isHumanTurn(Player player){
+        if (player.getID() == humanPlayer.getID()) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

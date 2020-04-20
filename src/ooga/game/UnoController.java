@@ -51,6 +51,11 @@ public class UnoController implements GameController{
 
     }
 
+    void step(){
+
+
+    }
+
 
 
     /**
@@ -60,7 +65,7 @@ public class UnoController implements GameController{
     public void handleCardClick(Card card){
         if(uno.isUserTurn()){
             checkRoundEnd();
-            if(uno.playCard(card)) {
+            if(uno.playCard(card, turnManager.getCurrentPlayer())) {
                 //gameView.updateHand(uno.getUserHand());
                 //gameView.updateDiscardPile(uno.getTopDiscardCard());
                 try {
@@ -81,7 +86,7 @@ public class UnoController implements GameController{
      * Called when a user clicks on the draw pile
      */
     public void handleDrawPileClick(){
-        uno.drawCard();
+        uno.drawCard(turnManager.getCurrentPlayer());
         //gameView.updateHand(uno.getUserHand()); //TODO: delete this and use updatePlayerHand for observer pattern
         //gameView.updatePlayerHand();
     }
@@ -93,7 +98,7 @@ public class UnoController implements GameController{
     public void handleAIPlay() {
         if (!uno.isUserTurn()){
             checkRoundEnd();
-            if(uno.playCard(gameView)) {
+            if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
                     Thread.sleep(2000);
                 }

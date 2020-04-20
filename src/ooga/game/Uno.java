@@ -10,7 +10,6 @@ import ooga.player.ManualPlayer;
 import ooga.player.Player;
 import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
-import ooga.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +131,7 @@ public class Uno implements GameModel {
      * Method used for AI players to play a card
      * Temporary use for Sprint 1
      */
-    public boolean playCard(GameView gameView, Player player) {
+    public boolean playCard(Player player) {
         //go through each of the cards in the hand and try playing each card
         currentPlayer.hand().sortHand(); //sna19-order card so highest possible is played always
         for (Card card : currentPlayer.hand().getAllCards()) {
@@ -165,8 +164,6 @@ public class Uno implements GameModel {
 
         //get player to accept the drawn card into their own hand of cards
         player.takecard(card);
-        //TODO: get the visual updating to work here too:
-        // gameView.updateHand(getTurnManager().getPlayerId(getTurnManager().getCurrentPlayer()), getNumCardsInPlayerHand());
         endTurn();
     }
 

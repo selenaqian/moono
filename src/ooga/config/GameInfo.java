@@ -1,7 +1,6 @@
 package ooga.config;
 
-import ooga.game.GameSettings;
-import ooga.game.TurnManager;
+import ooga.game.*;
 import ooga.piles.*;
 
 import java.util.List;
@@ -16,8 +15,7 @@ public class GameInfo {
     private GameSettings gameSettings;
     private DrawPile drawPile;
     private DiscardPile discardPile;
-    private List<Integer> playerPoints;
-    //TODO: save the theme when that becomes applicable
+    private ScoreTracker scoreTracker;
 
     /**
      * Stores all the given info in a new GameInfo object.
@@ -25,15 +23,15 @@ public class GameInfo {
      * @param gameSettings
      * @param drawPile
      * @param discardPile
-     * @param points
+     * @param scoreTracker
      */
     public GameInfo(TurnManager turnManager, GameSettings gameSettings, DrawPile drawPile, DiscardPile discardPile,
-                    List<Integer> points){
+                    ScoreTracker scoreTracker){
         this.turnManager = turnManager;
         this.gameSettings = gameSettings;
         this.drawPile = drawPile;
         this.discardPile = discardPile;
-        this.playerPoints = points;
+        this.scoreTracker = scoreTracker;
 
     }
 
@@ -70,10 +68,10 @@ public class GameInfo {
     }
 
     /**
-     * Get playerPoints.
-     * @return List<Integer>
+     * Get scoreTracker.
+     * @return ScoreTracker
      */
-    public List<Integer> getPlayerPoints() {
-        return playerPoints;
+    public ScoreTracker getScoreTracker() {
+        return scoreTracker;
     }
 }

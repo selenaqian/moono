@@ -1,6 +1,5 @@
 package ooga.game;
 
-import ooga.OOGAException;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
@@ -8,7 +7,6 @@ import ooga.rules.ClassicRules;
 import ooga.rules.DeadlyRules;
 import ooga.rules.Rule;
 import java.util.ResourceBundle;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 

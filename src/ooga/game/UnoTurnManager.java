@@ -47,6 +47,7 @@ public class UnoTurnManager implements TurnManager {
     @Override
     public Player getNextPlayer() {
 
+
         //FIXME: use iterator or clean this up
         int currID = current.getID();
         if(currID == 1 && direction == CCW){

@@ -4,15 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import ooga.OOGAException;
 import ooga.cards.Card;
-import ooga.cards.Suit;
+import ooga.exceptions.OOGAException;
 import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
 import java.util.ResourceBundle;
-import ooga.game.GameSettings;
 
 
 public class UnoController implements GameController {

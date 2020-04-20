@@ -32,9 +32,8 @@ public class Uno implements GameModel {
     private Player user; //the human player
 
     private UnoActionApplier actionApplier; //contains methods for action cards
-
     private DiscardPile discPile;
-    private DrawPile drawPile;
+    public DrawPile drawPile;
     private Rule rule;
     private List<Card> specialCards;
 
@@ -132,7 +131,7 @@ public class Uno implements GameModel {
      */
     public boolean playCard(GameView gameView) {
         //go through each of the cards in the hand and try playing each card
-        currentPlayer.hand().sortedHand(currentPlayer.hand().getAllCards()); //sna19-order card so highest possible is played always
+        currentPlayer.hand().sortHand(); //sna19-order card so highest possible is played always
         for (Card card : currentPlayer.hand().getAllCards()) {
             if (rule.isValid(discPile.showTopCard(), card)) {
                 return playCard(card);
@@ -199,8 +198,7 @@ public class Uno implements GameModel {
 
     private void endTurn(){
         notifyPlayerObservers(); //tells observers about update to player hand
-        turnManager.nextPlayer(turnManager.getDirection());
-        currentPlayer = turnManager.getCurrentPlayer();
+        currentPlayer = turnManager.getNextPlayer();
         didCallUno = false;
     }
 
@@ -262,9 +260,11 @@ public class Uno implements GameModel {
      */
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
+        System.out.println(color);
         //remove wild card that was just placed and get the value (whether it was WILD or WILD4)
         Value wildValue = discPile.drawCard().getValue();
         discPile.addCard(new Card(cardColor, wildValue));
+        notifyPlayerObservers();
     }
 
 //    /**

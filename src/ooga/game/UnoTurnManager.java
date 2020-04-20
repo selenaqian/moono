@@ -15,7 +15,6 @@ public class UnoTurnManager implements TurnManager {
     public static final int CCW = -1;
 
     private Player current; //the player making the turn
-    private int currentId = 1;
 
     public UnoTurnManager(List<Player> players){
         this.players = players;
@@ -43,21 +42,25 @@ public class UnoTurnManager implements TurnManager {
 
     /**
      * Player ids begin at 1 instead of 0
-     * @param direction
+     *
+     * @return
      */
     @Override
-    public void nextPlayer(int direction) {
+    public Player getNextPlayer() {
+
+
         //FIXME: use iterator or clean this up
         int currID = current.getID();
         if(currID == 1 && direction == CCW){
-            current = players.get(players.size()-1);
+            current =  players.get(players.size()-1);
         } else if (currID < players.size() && direction == CW){
             current = players.get(currID);
         } else if (currID == players.size() && direction == CW){
-            current = players.get(0);
+            current =  players.get(0);
         } else if (currID <= players.size() && direction == CCW){
-            current = players.get(currID - 2);
+            current =  players.get(currID - 2);
         }
+        return current;
 
 //        if (iterator.hasNext()){
 //            iterator.next();
@@ -91,7 +94,6 @@ public class UnoTurnManager implements TurnManager {
     /**
      * Changes the direction, affecting which player has the next turn
      * Typically called when an uno reverse card is played
-     * @see getNextPlayer()
      */
     public void changeDirection(){
         if (direction == CW) {

@@ -1,4 +1,4 @@
-package ooga;
+package ooga.exceptions;
 
 /**
  * Represents an exceptional situation specific to this project.

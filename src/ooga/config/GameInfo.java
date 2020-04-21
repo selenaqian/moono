@@ -3,11 +3,11 @@ package ooga.config;
 import ooga.game.*;
 import ooga.piles.*;
 
-import java.util.List;
-
 /**
  * This class will hold all the different information needed to save a game.
  * @author Tess Noonan (tcn6)
+ *
+ * I had to add the default constructor and getters in order to adhere to JavaBeans conventions (required by XMLEncoder)
  */
 public class GameInfo {
 
@@ -16,6 +16,13 @@ public class GameInfo {
     private DrawPile drawPile;
     private DiscardPile discardPile;
     private ScoreTracker scoreTracker;
+
+    /**
+     * Creates new GameInfo object. Default constructor required for JavaBeans conventions.
+     */
+    public GameInfo() {
+
+    }
 
     /**
      * Stores all the given info in a new GameInfo object.
@@ -33,6 +40,46 @@ public class GameInfo {
         this.discardPile = discardPile;
         this.scoreTracker = scoreTracker;
 
+    }
+
+    /**
+     * Set TurnManager.
+     * @param turnManager
+     */
+    public void setTurnManager(TurnManager turnManager) {
+        this.turnManager = turnManager;
+    }
+
+    /**
+     * Set GameSettings.
+     * @param gameSettings
+     */
+    public void setGameSettings(GameSettings gameSettings) {
+        this.gameSettings = gameSettings;
+    }
+
+    /**
+     * Set DrawPile.
+     * @param drawPile
+     */
+    public void setDrawPile(DrawPile drawPile) {
+        this.drawPile = drawPile;
+    }
+
+    /**
+     * Set DiscardPile.
+     * @param discardPile
+     */
+    public void setDiscardPile(DiscardPile discardPile) {
+        this.discardPile = discardPile;
+    }
+
+    /**
+     * Set ScoreTracker.
+     * @param scoreTracker
+     */
+    public void setScoreTracker(ScoreTracker scoreTracker) {
+        this.scoreTracker = scoreTracker;
     }
 
     /**

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,25 +19,34 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JavaToXMLTest {
 
-    public static final String FILE_NAME = "saved_game.xml";
+    public static final String PROPERTIES = "xml_strings";
+    private ResourceBundle myResources = ResourceBundle.getBundle(PROPERTIES);
 
     private DiscardPile discard = new DiscardPile();
     private DrawPile draw = new DrawPile();
     private TurnManager tm = new UnoTurnManager(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player()));
     private GameSettings gs = new GameSettings();
     private ScoreTracker st = new UnoScoreTracker();
-    private GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
 
     private JavaToXML toXML = new JavaToXML();
 
     /**
-     * Tests encode().
-     * @throws IOException
-     * TODO: At the moment this is throwing two exceptions.
-     * TODO: An XML file is being saved but it's empty
+     * Tests that encode() works for a GameInfo class with instantiated instance variables by checking that no exception
+     * is thrown.
      */
     @Test
-    void encode() throws IOException {
-        toXML.encode(basicGI, FILE_NAME);
+    void encodeBasic() {
+        GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
+        assertDoesNotThrow(() -> toXML.encode(basicGI, myResources.getString("testBasicGame")));
+    }
+
+    /**
+     * Tests that encode() works for a GameInfo class without instantiated instance variables by checking that no
+     * exception is thrown.
+     */
+    @Test
+    void encodeDefault() throws IOException {
+        GameInfo emptyGI = new GameInfo();
+        assertDoesNotThrow(() -> toXML.encode(emptyGI, myResources.getString("testEmptyGame")));
     }
 }

@@ -37,6 +37,7 @@ Individual:
 - [JavaFX Layouts](https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm)
 - [Java Documentation](https://docs.oracle.com/javase/8/docs/)
 - [XML De/Encoding](https://howtodoinjava.com/java/serialization/xmlencoder-and-xmldecoder-example/)
+- [Encoder Stack Exchange Help](https://stackoverflow.com/questions/24725368/java-lang-instantiation-exception-while-using-xmlencoder)
 
 ### Running the Program
 

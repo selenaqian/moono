@@ -17,11 +17,30 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(List<Player> players){
+        setPlayers(players);
+        direction = CW;
+
+    }
+
+    //NOTE FROM TESS: for the XMLEncoder I needed to add a default constructor plus setters/getters
+
+    /**
+     * Creates new default UnoTurnManager required for XML.
+     * @author Tess Noonan (tcn6)
+     */
+    public UnoTurnManager() {
+        direction = CW;
+    }
+
+    /**
+     * Sets initial list of players.
+     * @param players
+     * @author Tess Noonan (tcn6)
+     */
+    public void setPlayers(List<Player> players){
         this.players = players;
         iterator = players.listIterator();
         current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
-        direction = CW;
-
     }
 
     @Override

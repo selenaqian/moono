@@ -1,3 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="13.0.1-BellSoft" class="java.beans.XMLDecoder">
+ <object class="ooga.config.GameInfo">
+  <void property="discardPile">
+   <object class="ooga.piles.DiscardPile"/>
+  </void>
+  <void property="drawPile">
+   <object class="ooga.piles.DrawPile"/>
+  </void>
+  <void property="gameSettings">
+   <object class="ooga.game.GameSettings"/>
+  </void>
+  <void property="scoreTracker">
+   <object class="ooga.game.UnoScoreTracker"/>
+  </void>
+  <void property="turnManager">
+   <object class="ooga.game.UnoTurnManager"/>
+  </void>
+ </object>
 </java>

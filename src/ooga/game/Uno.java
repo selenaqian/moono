@@ -13,6 +13,7 @@ import ooga.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Model class for handling play of Uno
@@ -20,7 +21,8 @@ import java.util.List;
  */
 public class Uno implements GameModel {
 
-    public static final int UNO_PENALTY = 4;
+    public static final int UNO_PENALTY = 2;
+    public static final double AI_UNO_PROB = 0.5;
 
     private ArrayList<PlayerObserver> playerObservers;
 
@@ -106,8 +108,6 @@ public class Uno implements GameModel {
     public boolean playCard(Card selectedCard, Player player){
         //check if played card can be played on top of the discard pile top card
         if (rule.isValid(discPile.showTopCard(), selectedCard)) {
-            //make sure a player with one valid card left has called uno
-            checkUno();
 
             //make sure player updates their hand to remove the card
             player.removecard(selectedCard);
@@ -197,7 +197,6 @@ public class Uno implements GameModel {
 
     private void endTurn(){
         notifyPlayerObservers(); //tells observers about update to player hand
-        didCallUno = false;
     }
 
     /**
@@ -275,15 +274,27 @@ public class Uno implements GameModel {
      * Check if user has declared uno
      * If user has not declared, then they must pick up more cards
      */
-    public void checkUno(){
+    public boolean checkUno(){
+
         if (turnManager.getCurrentPlayer().hand().getCardCount() == 1 && didCallUno == false){
+           // System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
                 turnManager.getCurrentPlayer().takecard(drawPile.drawCard());
             }
+            return true;
+        }
+        didCallUno = false;
+        return false;
+    }
+
+    public void AIDeclareUno(){
+        if (Math.random() < AI_UNO_PROB){
+            didCallUno = true;
         }
     }
 
     public boolean isOver(){
+
         return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
 
     }

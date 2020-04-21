@@ -76,6 +76,7 @@ public class UnoController implements GameController {
      */
     public void handleCardClick(Card card){
         if(turnManager.isHumanTurn()){
+            uno.checkUno();
             if(uno.playCard(card, turnManager.getCurrentPlayer())) {
                 try {
                     Thread.sleep(2000);
@@ -104,6 +105,8 @@ public class UnoController implements GameController {
      */
     public void handleAIPlay() {
         if (!turnManager.isHumanTurn()){
+            uno.AIDeclareUno();
+            uno.checkUno();
             if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
                     endTurn();
@@ -119,6 +122,7 @@ public class UnoController implements GameController {
     }
 
     private void endTurn(){
+
         checkRoundEnd();
     }
 

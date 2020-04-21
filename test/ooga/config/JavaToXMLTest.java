@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JavaToXMLTest {
 
-    public static final String FILE_NAME = "saved_game.xml";
-    public static final String FILE_NAME2 = "empty_game.xml";
+    public static final String FILE_NAME = "saved_game_test.xml";
+    public static final String FILE_NAME2 = "empty_game_test.xml";
 
     private DiscardPile discard = new DiscardPile();
     private DrawPile draw = new DrawPile();

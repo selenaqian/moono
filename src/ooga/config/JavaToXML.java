@@ -4,6 +4,7 @@ import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * This class encodes a GameInfo instance to an XML file.
@@ -12,9 +13,8 @@ import java.io.IOException;
  */
 public class JavaToXML {
 
-    //TODO: transfer these Strings to a properties file instead.
-    public static final String FILE_PATH = "data/";
-    public static final String EXCEPTION_TEXT = "Exception! :";
+    public static final String PROPERTIES = "xml_strings";
+    private ResourceBundle myResources = ResourceBundle.getBundle(PROPERTIES);
 
     /**
      * Creates new JavaToXML object.
@@ -30,11 +30,11 @@ public class JavaToXML {
      * @throws IOException
      */
     public void encode(GameInfo gameInfo, String fileName) throws IOException {
-        FileOutputStream fos = new FileOutputStream(FILE_PATH + fileName);
+        FileOutputStream fos = new FileOutputStream(myResources.getString("filePath") + fileName);
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener(new ExceptionListener() {
             public void exceptionThrown(Exception e) {
-                System.out.println(EXCEPTION_TEXT + e.toString());
+                System.out.println(myResources.getString("exceptionText") + e.toString());
             }
         });
         encoder.writeObject(gameInfo);

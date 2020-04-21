@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JavaToXMLTest {
 
-    public static final String FILE_NAME = "saved_game_test.xml";
-    public static final String FILE_NAME2 = "empty_game_test.xml";
+    public static final String PROPERTIES = "xml_strings";
+    private ResourceBundle myResources = ResourceBundle.getBundle(PROPERTIES);
 
     private DiscardPile discard = new DiscardPile();
     private DrawPile draw = new DrawPile();
@@ -36,7 +37,7 @@ class JavaToXMLTest {
     @Test
     void encodeBasic() {
         GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
-        assertDoesNotThrow(() -> toXML.encode(basicGI, FILE_NAME));
+        assertDoesNotThrow(() -> toXML.encode(basicGI, myResources.getString("testBasicGame")));
     }
 
     /**
@@ -46,6 +47,6 @@ class JavaToXMLTest {
     @Test
     void encodeDefault() throws IOException {
         GameInfo emptyGI = new GameInfo();
-        assertDoesNotThrow(() -> toXML.encode(emptyGI, FILE_NAME2));
+        assertDoesNotThrow(() -> toXML.encode(emptyGI, myResources.getString("testEmptyGame")));
     }
 }

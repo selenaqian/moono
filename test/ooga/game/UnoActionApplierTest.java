@@ -55,13 +55,19 @@ class UnoActionApplierTest {
      */
     @Test
     void applyActionDraw2() {
+        assertEquals(7, uno.getTurnManager().getNextPlayer().hand().getCardCount());
+        actionApplier.applyAction(Value.DRAW2);
+        assertEquals(9, uno.getTurnManager().getNextPlayer().hand().getCardCount());
     }
+
+    //TODO: Hi Tess here. I am not sure how to test the Wild cards with the observer.
 
     /**
      * Tests the applied action for Wild.
      */
     @Test
     void applyActionWild() {
+//        actionApplier.applyAction(Value.WILD);
     }
 
     /**
@@ -69,6 +75,7 @@ class UnoActionApplierTest {
      */
     @Test
     void applyActionWild4() {
+//        actionApplier.applyAction(Value.WILD4);
     }
 
     /**
@@ -76,6 +83,11 @@ class UnoActionApplierTest {
      */
     @Test
     void applyActionBasic() {
+        assertEquals(UnoTurnManager.CW, uno.getTurnManager().getDirection());
+        assertEquals(7, uno.getTurnManager().getNextPlayer().hand().getCardCount());
 
+        actionApplier.applyAction(Value.ONE);
+        assertEquals(UnoTurnManager.CW, uno.getTurnManager().getDirection());
+        assertEquals(7, uno.getTurnManager().getCurrentPlayer().hand().getCardCount());
     }
 }

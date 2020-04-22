@@ -16,8 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UnoActionApplierTest {
 
-    //TODO: This class doesn't work yet, make sure all code is compiling and working properly.
-
     private Uno uno;
     private UnoActionApplier actionApplier;
 
@@ -29,12 +27,17 @@ class UnoActionApplierTest {
 
     /**
      * Tests the applied action for Skip.
+     * Note: The first player is randomized
      */
     @Test
     void applyActionSkip() {
-        assertEquals(0, uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer()));
+        int firstPlayer = uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer());
+        int nextPlayer = 0;
+        if(firstPlayer < uno.getTurnManager().getAllPlayers().size()){
+            nextPlayer = firstPlayer++;
+        }
         actionApplier.applyAction(Value.SKIP);
-        assertEquals(1, uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer()));
+        assertEquals(nextPlayer, uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer()));
     }
 
     /**

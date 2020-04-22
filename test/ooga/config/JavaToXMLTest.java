@@ -1,10 +1,9 @@
 package ooga.config;
 
+import ooga.cards.*;
 import ooga.game.*;
-import ooga.piles.DiscardPile;
-import ooga.piles.DrawPile;
-import ooga.player.AI_Player;
-import ooga.player.ManualPlayer;
+import ooga.piles.*;
+import ooga.player.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -36,6 +35,7 @@ class JavaToXMLTest {
      */
     @Test
     void encodeBasic() {
+        discard.addCard(new Card(Suit.A, Value.ZERO));
         GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
         assertDoesNotThrow(() -> toXML.encode(basicGI, myResources.getString("testBasicGame")));
     }

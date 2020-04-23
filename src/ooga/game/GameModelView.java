@@ -19,6 +19,10 @@ public interface GameModelView {
 
     Card getTopDiscardCard();
 
+    /**
+     * Can be called to indicate in the view which player is currently active
+     * @return
+     */
     Player getCurrentPlayer();
 
     void registerPlayerObserver(PlayerObserver o);

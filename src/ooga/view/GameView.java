@@ -310,7 +310,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void updatePlayerHand(int playerId, List<Card> cardsLeft) {
         allPlayersCardsLeft.get(playerId-1).setText(cardsLeft.size() + myResources.getString("cardsLeft"));
         if(playerId == 1) updateHand(cardsLeft);
-        myTurnColorChange(playerId);
         //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
     }
 

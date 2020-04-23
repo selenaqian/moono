@@ -19,7 +19,7 @@ import java.util.Random;
  * Model class for handling play of Uno
  * Equivalent to GamePlay interface from planning
  */
-public class Uno implements GameModel {
+public class Uno implements GameModel, GameModelView {
 
     public static final int UNO_PENALTY = 2;
     public static final double AI_UNO_PROB = 0.5;
@@ -153,6 +153,11 @@ public class Uno implements GameModel {
     @Override
     public Card getTopDiscardCard() {
         return piles.showTopCard();
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return turnManager.getCurrentPlayer();
     }
 
     @Override

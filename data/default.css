@@ -6,6 +6,7 @@
 }
 .button {
     -fx-font-size: 12pt;
+    -fx-text-alignment: center;
 }
 .myTurn {
     -fx-fill: green;

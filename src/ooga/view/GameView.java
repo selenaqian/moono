@@ -50,6 +50,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
     private Button callUno;
+    private Button callUnoOther;
 
     public GameView() {
         this(new Uno(), new UnoController(new Stage()), new Stage(), DEFAULT_STYLESHEET);
@@ -101,15 +102,26 @@ public class GameView implements GameViewInterface, PlayerObserver {
         deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
         discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardRender);
-        mainPane.getChildren().add(decks);
-        AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
-        AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
+        //mainPane.getChildren().add(decks);
+        //AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
+        //AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
         callUno = new Button(myResources.getString("callUno"));
+        callUno.setAlignment(Pos.CENTER);
         callUno.setOnMouseClicked(e -> myController.callUno());
-        mainPane.getChildren().add(callUno);
-        AnchorPane.setTopAnchor(callUno, mainPane.getHeight()*5/8);
-        AnchorPane.setLeftAnchor(callUno, mainPane.getWidth()/2 - callUno.getWidth());
+        callUnoOther = new Button(myResources.getString("callUnoOther"));
+        callUnoOther.setAlignment(Pos.CENTER);
+        //callUnoOther.setOnMouseClicked(e -> myController.); todo: add call to handle calling uno for someone else
+        HBox unoButtons = new HBox(DEFAULT_SPACING);
+        unoButtons.setAlignment(Pos.CENTER);
+        unoButtons.getChildren().addAll(callUnoOther, callUno);
+
+        VBox decksAndCallUno = new VBox(DEFAULT_SPACING);
+        decksAndCallUno.setAlignment(Pos.CENTER);
+        decksAndCallUno.getChildren().addAll(decks, unoButtons);
+        mainPane.getChildren().add(decksAndCallUno);
+        AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
+        AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - deckView.getWidth());
 
         nextTurn = new Button(myResources.getString("next"));
         nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());

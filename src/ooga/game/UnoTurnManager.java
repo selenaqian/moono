@@ -176,7 +176,7 @@ public class UnoTurnManager implements TurnManager {
     }
 
     public boolean isHumanTurn(){
-        if (current.getID() == humanPlayer.getID()) {
+        if (current instanceof ManualPlayer) {
             return true;
         }
 

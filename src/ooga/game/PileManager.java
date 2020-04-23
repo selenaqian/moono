@@ -39,7 +39,7 @@ public class PileManager {
         makeDrawPile(specialCards);
 
         //flip over the first card
-        discPile.addCard(drawPile.drawCard());
+git        discPile.addCard(drawPile.drawCard());
     }
 
     public DiscardPile getDiscPile(){

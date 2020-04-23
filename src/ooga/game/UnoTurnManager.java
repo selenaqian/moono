@@ -1,9 +1,11 @@
 package ooga.game;
 
+import ooga.player.AI_Player;
+import ooga.player.ManualPlayer;
 import ooga.player.Player;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Random;
+
+import java.util.*;
+
 public class UnoTurnManager implements TurnManager {
 
     private List<Player> players;
@@ -27,8 +29,11 @@ public class UnoTurnManager implements TurnManager {
     /**
      * Creates new default UnoTurnManager required for XML.
      * @author Tess Noonan (tcn6)
+     * NOTE: I have set the default players list as 1 human, 3 bots because xml can't save the players because List is
+     * not serializable.
      */
     public UnoTurnManager() {
+        setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
         direction = CW;
     }
 
@@ -136,6 +141,7 @@ public class UnoTurnManager implements TurnManager {
      * Changes the direction, affecting which player has the next turn
      * Typically called when an uno reverse card is played
      */
+    @Override
     public void changeDirection(){
         if (direction == CW) {
             direction = CCW;
@@ -147,11 +153,9 @@ public class UnoTurnManager implements TurnManager {
     /**
      * Returns all players a TurnManager is keeping track of
      * Used in UnoController to calculate scores for all players
-     * NOTE FROM TESS: I renamed this "getPlayers" instead of "getAllPlayers" so it matches the setter as required
-     * by the XML Encoder
      * @return
      */
-    public List<Player> getPlayers() {
+    public List<Player> getAllPlayers() {
         return players;
     }
 

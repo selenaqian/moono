@@ -97,7 +97,11 @@ public class GameSettings {
 //    }
 
 
-    public void setRules (String ruleString) {
+    /**
+     * Note from Tess: I renamed this "setRule" so it matches for XML requires
+     * @param ruleString
+     */
+    public void setRule(String ruleString) {
 
         //FIXME: get reflection working to get rid of this
         if (ruleString.equals("ClassicRules")) {

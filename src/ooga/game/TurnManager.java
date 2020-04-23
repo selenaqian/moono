@@ -52,6 +52,13 @@ public interface TurnManager{
      * @return
      * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
      */
-    List<Player> getPlayers();
+    List<Player> getAllPlayers();
+
+    /**
+     * Changes the direction, affecting which player has the next turn
+     * Typically called when an uno reverse card is played
+     * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
+     */
+    void changeDirection();
 
 }

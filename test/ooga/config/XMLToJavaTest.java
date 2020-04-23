@@ -39,7 +39,7 @@ class XMLToJavaTest {
         assertTrue(loadedGame.getTurnManager() instanceof TurnManager);
         assertTrue(loadedGame.getGameSettings() instanceof GameSettings);
 
-        List<Player> players = loadedGame.getTurnManager().getPlayers();
+        List<Player> players = loadedGame.getTurnManager().getAllPlayers();
         assertNull(players);    // this should not be passing
 
         assertEquals(80, loadedGame.getDrawPile().getCardCount());

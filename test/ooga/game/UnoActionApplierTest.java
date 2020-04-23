@@ -29,7 +29,7 @@ class UnoActionApplierTest {
     void applyActionSkip() {
         int firstPlayer = uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer());
         int nextPlayer = 0;
-        if(firstPlayer < uno.getTurnManager().getPlayers().size()){
+        if(firstPlayer < uno.getTurnManager().getAllPlayers().size()){
             nextPlayer = firstPlayer++;
         }
         actionApplier.applyAction(Value.SKIP);

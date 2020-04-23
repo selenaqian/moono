@@ -63,6 +63,7 @@ public class UnoController implements GameController {
 
     private void step(double elapsedTime){
         gameView.myTurnColorChange(turnManager.getCurrentPlayer().getID());
+        uno.checkUno();
 
         if(uno.isOver()){
             System.out.println(uno.isOver());
@@ -70,9 +71,9 @@ public class UnoController implements GameController {
         }
 
         if(!turnManager.isHumanTurn()){
+            uno.AIDeclareUno();
             handleAIPlay();
         }
-
 
 
     }
@@ -85,7 +86,6 @@ public class UnoController implements GameController {
      */
     public void handleCardClick(Card card){
         if(turnManager.isHumanTurn()){
-            uno.checkUno();
             if(uno.playCard(card, turnManager.getCurrentPlayer())) {
                 try {
                     Thread.sleep(2000);
@@ -114,8 +114,6 @@ public class UnoController implements GameController {
      */
     public void handleAIPlay() {
         if (!turnManager.isHumanTurn()){
-            uno.AIDeclareUno();
-            uno.checkUno();
             if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
                     Thread.sleep(2000);

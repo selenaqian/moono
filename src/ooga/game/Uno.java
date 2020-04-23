@@ -255,9 +255,8 @@ public class Uno implements GameModel, GameModelView {
      * If user has not declared, then they must pick up more cards
      */
     public boolean checkUno(){
-
         if (turnManager.getCurrentPlayer().hand().getCardCount() == 1 && didCallUno == false){
-           // System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
+            //System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
                 turnManager.getCurrentPlayer().takecard(piles.drawCard());
             }

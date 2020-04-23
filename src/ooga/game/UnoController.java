@@ -62,9 +62,15 @@ public class UnoController implements GameController {
 
 
     private void step(double elapsedTime){
+        if(uno.isOver()){
+            System.out.println(uno.isOver());
+            endRound();
+        }
+
         if(!turnManager.isHumanTurn()){
             handleAIPlay();
         }
+
     }
 
 
@@ -117,15 +123,6 @@ public class UnoController implements GameController {
         }
     }
 
-    private void endTurn(){
-        checkRoundEnd();
-    }
-
-    private void checkRoundEnd(){
-        if (uno.isOver()){
-            endRound();
-        }
-    }
 
     /**
      * Called from Uno when a user has no more cards left

@@ -86,8 +86,7 @@ public class UnoActionApplier {
                 applyWild4();
                 break;
             default:
-                //this is a normal card
-                turnManager.nextPlayer();
+                //this is a normal card: do nothing
                 return;
         }
     }

@@ -46,7 +46,6 @@ public class UnoController implements GameController {
         myAnimation.getKeyFrames().add(frame);
         myAnimation.play();
 
-
     }
 
     @Override
@@ -94,7 +93,7 @@ public class UnoController implements GameController {
     public void handleDrawPileClick(){
         if(turnManager.isHumanTurn()){
             uno.drawCard(turnManager.getCurrentPlayer());
-            endTurn();
+            uno.endTurn();
         }
 
     }
@@ -109,15 +108,12 @@ public class UnoController implements GameController {
             uno.checkUno();
             if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
-                    endTurn();
                     Thread.sleep(2000);
                 }
                 catch (Exception e) {
                     throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
-
             }
-            endTurn();
         }
     }
 
@@ -139,6 +135,8 @@ public class UnoController implements GameController {
         for (Player p : turnManager.getAllPlayers()){
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
+
+            //TODO: show a new round screen in the view
 
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){

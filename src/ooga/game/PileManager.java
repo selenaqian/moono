@@ -42,6 +42,14 @@ public class PileManager {
         discPile.addCard(drawPile.drawCard());
     }
 
+    public DiscardPile getDiscPile(){
+        return discPile;
+    }
+
+    public DrawPile getDrawPile(){
+        return drawPile;
+    }
+
     public Card drawCard(){
         //when draw pile is empty, put discard pile cards into it
         if (drawPile.getCardCount() == 0){

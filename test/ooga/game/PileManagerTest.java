@@ -16,6 +16,7 @@ class PileManagerTest {
 
     Stack<Card> testCards = new Stack<Card>();
     DrawPile drawPile;
+    PileManager piles;
 
     @BeforeEach
     void makePiles(){
@@ -24,10 +25,22 @@ class PileManagerTest {
         testCards.add(new Card(Suit.C, Value.THREE));
 
         drawPile = new DrawPile(testCards);
+        piles = new PileManager(drawPile);
 
     }
     @Test
-    void testDrawCard(){
+    void testFinishDrawPile(){
+        piles.discardCard(piles.drawCard());
+        assertEquals(2, piles.getDrawPile().getCardCount());
+
+        piles.discardCard(piles.drawCard());
+        assertEquals(1, piles.getDrawPile().getCardCount());
+
+        piles.discardCard(piles.drawCard());
+        assertEquals(0, piles.getDrawPile().getCardCount());
+
+        piles.discardCard(piles.drawCard());
+        assertEquals(3, piles.getDrawPile().getCardCount());
 
     }
 

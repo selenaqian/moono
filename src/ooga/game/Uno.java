@@ -12,7 +12,9 @@ import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Model class for handling play of Uno
@@ -288,4 +290,44 @@ public class Uno implements GameModel {
 
     }
 
+    public void tradehands(Player player1,Player player2){
+        int size = player2.hand().getCardCount();
+        List<Card> tempholder = new ArrayList<>();
+        for(Card card:player1.hand().getAllCards()){
+            player2.hand().addCard(card);
+            tempholder.add(card);
+        }
+
+        for(Card card:tempholder){
+            player1.hand().removeCard(card);
+        }
+
+        for(int i = 0;i<size-1;i++){
+            player1.hand().addCard(player2.hand().getcard(i));
+            player2.hand().removeCard(player2.hand().getcard(i));
+        }
+//        int j=0;
+//        Iterator iter = player2.hand().getAllCards().iterator();
+//        while(iter.hasNext()){
+//            if(j<size-1){
+//            iter.remove();}
+//            j++;
+//        }
+
+    }
+
+
+    public void cardswap(Card card, Player chosenswap, Player swapper){
+        Random random = new Random();
+        chosenswap.hand().addCard(card);
+        swapper.hand().removeCard(card);
+        int rand_int = random.nextInt(chosenswap.hand().getCardCount());
+        swapper.hand().addCard(chosenswap.hand().getcard(rand_int));
+    }
+
+
+
+    public Card getUserHande() {
+        return turnManager.getHumanPlayer().hand().getAllCards().get(1);
+    }
 }

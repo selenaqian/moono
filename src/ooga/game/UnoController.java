@@ -161,6 +161,23 @@ public class UnoController implements GameController {
 
     }
 
+    /**
+     * Called from view when player presses "swap" button
+     */
+    public void handleswapclick(Card card, Player player){
+        if(turnManager.isHumanTurn()){
+            uno.cardswap(card,player,turnManager.getCurrentPlayer());
+        }
+    }
+
+    /**
+     * Called from view when player presses "trade" button
+     */
+    public void handletradeclick(Player player){
+        if(turnManager.isHumanTurn()){
+            uno.tradehands(player, turnManager.getCurrentPlayer());
+        }
+    }
 
 
 }

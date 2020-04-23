@@ -11,5 +11,5 @@ public interface GameModel {
     void restart();
     boolean playCard(Card selectedCard, Player player);
     void drawCard(Player player);
-
+    boolean isOver();
 }

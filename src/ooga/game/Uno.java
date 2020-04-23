@@ -273,8 +273,8 @@ public class Uno implements GameModel, GameModelView {
         }
     }
 
+    @Override
     public boolean isOver(){
-
         return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
 
     }

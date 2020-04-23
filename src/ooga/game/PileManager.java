@@ -48,7 +48,7 @@ public class PileManager {
     }
 
     public void discardCard(Card card){
-        drawPile.addCard(card);
+        discPile.addCard(card);
     }
 
     private void makeDrawPile(ArrayList<Card> specialCards){

@@ -95,7 +95,7 @@ public class UnoActionApplier {
      * Skips turn of next player.
      */
     private void applySkip(){
-        turnManager.getNextPlayer();
+        turnManager.nextPlayer();
     }
 
     /**

@@ -61,4 +61,11 @@ public interface TurnManager{
      */
     void changeDirection();
 
+    /** Gives current direction.
+     * THIS IS USED JUST FOR TESTING PURPOSES
+     * refactored uno to use this method(sna19) since it makes it easier to work with the direction
+     * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
+     */
+    int getDirection();
+
 }

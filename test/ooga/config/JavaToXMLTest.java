@@ -26,7 +26,7 @@ class JavaToXMLTest {
 
     private DiscardPile discard = new DiscardPile();
     private DrawPile draw = new DrawPile();
-    private TurnManager tm = new UnoTurnManager(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player()));
+    private TurnManager tm = new UnoTurnManager();
     private GameSettings gs = new GameSettings();
     private ScoreTracker st = new UnoScoreTracker();
 

@@ -3,11 +3,9 @@ package ooga.config;
 import ooga.cards.*;
 import ooga.game.*;
 import ooga.piles.*;
-import ooga.player.Player;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,15 +37,18 @@ class XMLToJavaTest {
         assertTrue(loadedGame.getTurnManager() instanceof TurnManager);
         assertTrue(loadedGame.getGameSettings() instanceof GameSettings);
 
-        List<Player> players = loadedGame.getTurnManager().getAllPlayers();
-        assertNull(players);    // this should not be passing
+        assertEquals(300, loadedGame.getScoreTracker().getScores().get(1));
+
+        assertEquals(new Card(Suit.C, Value.SIX), loadedGame.getDiscardPile().getAllCards().peek());
+        assertEquals(1, loadedGame.getDiscardPile().getCardCount());
 
         assertEquals(80, loadedGame.getDrawPile().getCardCount());
 
-        //The below tests are not passing when they should
-//        assertEquals(3, loadedGame.getTurnManager().getAllPlayers().size());
-        assertEquals(new Card(Suit.C, Value.SIX), loadedGame.getDiscardPile().getAllCards().peek());
-        assertEquals(1, loadedGame.getDiscardPile().getCardCount());
+        assertEquals(4, loadedGame.getTurnManager().getAllPlayers().size());
+        assertEquals(UnoTurnManager.CCW, loadedGame.getTurnManager().getDirection());
+
+        assertEquals(8, loadedGame.getGameSettings().getHandSize());
+
     }
 
     /**

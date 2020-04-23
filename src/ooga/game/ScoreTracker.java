@@ -26,4 +26,11 @@ public interface ScoreTracker {
      * @author Tess Noonan (tcn6)
      */
     void setScores(HashMap<Integer, Integer> scores);
+
+    /**
+     * Sets scores.
+     * THIS METHOD IS USED IN XMLEncoder TESTING
+     * @return playerScores.
+     */
+    HashMap<Integer, Integer> getScores();
 }

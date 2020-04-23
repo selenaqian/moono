@@ -160,5 +160,16 @@ public class UnoController implements GameController {
     }
 
 
+    /**
+     * Used to change settings during a game
+     * Changing score to play up until, access file saving/loading
+     * @param updatedSettings
+     */
+    public void accessSettings(GameSettings updatedSettings){
+        settings = updatedSettings;
+
+    }
+
+
 
 }

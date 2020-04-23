@@ -37,7 +37,11 @@ public class JavaToXML {
                 System.out.println(myResources.getString("exceptionText") + e.toString());
             }
         });
-        encoder.writeObject(gameInfo);
+        encoder.writeObject(gameInfo.getDiscardPile());
+        encoder.writeObject(gameInfo.getDrawPile());
+        encoder.writeObject(gameInfo.getTurnManager());
+        encoder.writeObject(gameInfo.getScoreTracker());
+        encoder.writeObject(gameInfo.getGameSettings());
         encoder.close();
         fos.close();
     }

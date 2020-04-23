@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="13.0.1-BellSoft" class="java.beans.XMLDecoder">
- <object class="ooga.config.GameInfo"/>
+ <null/>
+ <null/>
+ <null/>
+ <null/>
+ <null/>
 </java>

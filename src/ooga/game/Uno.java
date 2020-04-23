@@ -246,11 +246,9 @@ public class Uno implements GameModel {
      */
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
-        System.out.println(color);
         //remove wild card that was just placed and get the value (whether it was WILD or WILD4)
         Value wildValue = discPile.drawCard().getValue();
         discPile.addCard(new Card(cardColor, wildValue));
-        notifyPlayerObservers();
     }
 
 //    /**

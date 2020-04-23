@@ -27,12 +27,11 @@ public class Uno implements GameModel {
     private ArrayList<PlayerObserver> playerObservers;
 
     private GameSettings mySettings;
+    private PileManager piles;
     private UnoTurnManager turnManager;
     private List<Player> players = new ArrayList<Player>();
 
-    private UnoActionApplier actionApplier; //contains methods for action cards
-    private DiscardPile discPile;
-    public DrawPile drawPile;
+    private UnoActionApplier actionApplier; //contains methods for action cards]
     private Rule rule;
     private List<Card> specialCards;
 
@@ -46,33 +45,24 @@ public class Uno implements GameModel {
         return mySettings;
     }
 
+    public PileManager getPileManager(){
+        return piles;
+    }
+
     public Uno(GameSettings settings){
         playerObservers = new ArrayList();
         mySettings = settings;
+        piles = new PileManager(mySettings.getSpecialCards());
         //rule = mySettings.getRule();
         rule = new ClassicRules();
         specialCards = mySettings.getSpecialCards();
         addPlayers();
         turnManager = new UnoTurnManager(players);
         turnManager.setHumanPlayer(players.get(0));
-        discPile = new DiscardPile();
-        makeDrawPile();
         dealCards();
-        //flip over the first card
-        discPile.addCard(drawPile.drawCard());
-
         //update everything in view when game is first started
         notifyPlayerObservers();
         actionApplier = new UnoActionApplier(this, turnManager);
-    }
-
-    private void makeDrawPile(){
-        List<Value> specialCardValues = new ArrayList<Value>();
-        for (Card specialCard : specialCards){
-            specialCardValues.add(specialCard.getValue());
-        }
-
-        drawPile = new DrawPile(specialCardValues);
     }
 
     public UnoTurnManager getTurnManager(){
@@ -85,18 +75,13 @@ public class Uno implements GameModel {
 
     @Override
     public void restart() {
-        //TODO: add method here to clear cards from player hands
-        discPile = new DiscardPile();
-        makeDrawPile();
-
+        piles.init();
         //clear player hands
         for (Player p : players){
             p.reset();
         }
 
         dealCards();
-        //flip over the first card
-        discPile.addCard(drawPile.drawCard());
     }
 
     /**
@@ -107,13 +92,13 @@ public class Uno implements GameModel {
     @Override
     public boolean playCard(Card selectedCard, Player player){
         //check if played card can be played on top of the discard pile top card
-        if (rule.isValid(discPile.showTopCard(), selectedCard)) {
+        if (rule.isValid(piles.showTopCard(), selectedCard)) {
 
             //make sure player updates their hand to remove the card
             player.removecard(selectedCard);
 
             //update the discard pile to add the card
-            discPile.addCard(selectedCard);
+            piles.discardCard(selectedCard);
 
             //apply associated action
             actionApplier.applyAction(selectedCard.getValue());
@@ -130,7 +115,7 @@ public class Uno implements GameModel {
         //go through each of the cards in the hand and try playing each card
         turnManager.getCurrentPlayer().hand().sortHand(); //sna19-order card so highest possible is played always
         for (Card card : turnManager.getCurrentPlayer().hand().getAllCards()) {
-            if (rule.isValid(discPile.showTopCard(), card)) {
+            if (rule.isValid(piles.showTopCard(), card)) {
                 return playCard(card, player);
             }
         }
@@ -148,14 +133,8 @@ public class Uno implements GameModel {
      */
     @Override
     public void drawCard(Player player){
-        //when draw pile is empty, put discard pile cards into it
-        if (drawPile.getCardCount() == 0){
-            drawPile = new DrawPile(discPile.getAllCards());
-            discPile = new DiscardPile();
-        }
-
         //take the top card from the discard pile, make sure it is removed from the discard pile
-        Card card = drawPile.drawCard();
+        Card card = piles.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
         player.takecard(card);
@@ -173,7 +152,7 @@ public class Uno implements GameModel {
 
     @Override
     public Card getTopDiscardCard() {
-        return discPile.showTopCard();
+        return piles.showTopCard();
     }
 
     @Override
@@ -192,7 +171,7 @@ public class Uno implements GameModel {
             for (Player player : players){
                 o.updatePlayerHand(player.getID(), player.hand().getAllCards());
             }
-            o.updateDiscardPile(discPile.showTopCard());
+            o.updateDiscardPile(piles.showTopCard());
         }
     }
 
@@ -204,7 +183,7 @@ public class Uno implements GameModel {
         for(int i = 0; i < mySettings.getNumPlayers(); i ++){
             Player player = players.get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
-                Card card = drawPile.drawCard();
+                Card card = piles.drawCard();
                 player.takecard(card);
             }
         }
@@ -245,8 +224,8 @@ public class Uno implements GameModel {
     public void setWildColor(String color){
         Suit cardColor = Suit.valueOf(color);
         //remove wild card that was just placed and get the value (whether it was WILD or WILD4)
-        Value wildValue = discPile.drawCard().getValue();
-        discPile.addCard(new Card(cardColor, wildValue));
+        Value wildValue = piles.drawCard().getValue();
+        piles.discardCard(new Card(cardColor, wildValue));
     }
 
 //    /**
@@ -275,7 +254,7 @@ public class Uno implements GameModel {
         if (turnManager.getCurrentPlayer().hand().getCardCount() == 1 && didCallUno == false){
            // System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
-                turnManager.getCurrentPlayer().takecard(drawPile.drawCard());
+                turnManager.getCurrentPlayer().takecard(piles.drawCard());
             }
             return true;
         }

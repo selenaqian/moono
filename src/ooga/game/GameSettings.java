@@ -21,7 +21,7 @@ public class GameSettings {
     private int numPlayers; //set to default 4 players
     private int handSize; //number of cards per player, set to default 7
     private int winningScore; //default 500 for uno
-    private List<Card> specialCards;
+    private ArrayList<Card> specialCards;
     private Rule rule;
     private ResourceBundle myResources = ResourceBundle.getBundle("default");
     private String theme;
@@ -112,7 +112,7 @@ public class GameSettings {
         return rule;
     }
 
-    public List<Card> getSpecialCards () {
+    public ArrayList<Card> getSpecialCards () {
         return specialCards;
     }
 

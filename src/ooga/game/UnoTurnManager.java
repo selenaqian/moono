@@ -147,9 +147,11 @@ public class UnoTurnManager implements TurnManager {
     /**
      * Returns all players a TurnManager is keeping track of
      * Used in UnoController to calculate scores for all players
+     * NOTE FROM TESS: I renamed this "getPlayers" instead of "getAllPlayers" so it matches the setter as required
+     * by the XML Encoder
      * @return
      */
-    public List<Player> getAllPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -175,6 +177,25 @@ public class UnoTurnManager implements TurnManager {
         }
 
         return false;
+    }
+
+    //XMLEncoder requires matching setters and getters, so here all the ones we still need:
+    //@author Tess Noonan (tcn6)
+
+    /**
+     * Set direction.
+     * @param dir
+     */
+    public void setDirection(int dir) {
+        direction = dir;
+    }
+
+    /**
+     * Set current.
+     * @param curr
+     */
+    public void setCurrentPlayer(Player curr) {
+        current = curr;
     }
 
 }

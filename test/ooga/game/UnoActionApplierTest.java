@@ -1,12 +1,8 @@
 package ooga.game;
 
 import ooga.cards.Value;
-import ooga.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,7 +29,7 @@ class UnoActionApplierTest {
     void applyActionSkip() {
         int firstPlayer = uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer());
         int nextPlayer = 0;
-        if(firstPlayer < uno.getTurnManager().getAllPlayers().size()){
+        if(firstPlayer < uno.getTurnManager().getPlayers().size()){
             nextPlayer = firstPlayer++;
         }
         actionApplier.applyAction(Value.SKIP);

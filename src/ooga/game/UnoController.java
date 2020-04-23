@@ -128,8 +128,8 @@ public class UnoController implements GameController {
      * Called from Uno when a user has no more cards left
      */
     private void endRound(){
-        scoreTracker.calculate(turnManager.getAllPlayers());
-        for (Player p : turnManager.getAllPlayers()){
+        scoreTracker.calculate(turnManager.getPlayers());
+        for (Player p : turnManager.getPlayers()){
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
 

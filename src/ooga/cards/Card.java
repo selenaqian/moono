@@ -8,8 +8,9 @@ package ooga.cards;
 public class Card implements Comparable<Card> {
     public static final int EQUAL = 0;
 
-    private final Suit mySuit;
-    private final Value myValue;
+    //These properties were originally going to be final but the encoder requires a default constructor with setter/getters
+    private Suit mySuit;
+    private Value myValue;
 
     /**
      * Create a new Card.
@@ -19,6 +20,12 @@ public class Card implements Comparable<Card> {
     public Card (Suit suit, Value value) {
         mySuit = suit;
         myValue = value;
+    }
+
+    /**
+     * Default constructor required by XMLEncoder
+     */
+    public Card () {
     }
 
     /**
@@ -35,6 +42,22 @@ public class Card implements Comparable<Card> {
      */
     public Value getValue () {
         return myValue;
+    }
+
+    /**
+     * Set Suit (required by encoder)
+     * @param suit
+     */
+    public void setSuit (Suit suit) {
+        mySuit = suit;
+    }
+
+    /**
+     * Set Value (required by encoder)
+     * @param val
+     */
+    public void setValue (Value val) {
+        myValue = val;
     }
 
     @Override

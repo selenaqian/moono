@@ -52,6 +52,6 @@ public interface TurnManager{
      * @return
      * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
      */
-    List<Player> getAllPlayers();
+    List<Player> getPlayers();
 
 }

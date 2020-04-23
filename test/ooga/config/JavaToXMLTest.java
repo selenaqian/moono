@@ -35,7 +35,7 @@ class JavaToXMLTest {
      */
     @Test
     void encodeBasic() {
-        discard.addCard(new Card(Suit.A, Value.ZERO));
+        discard.addCard(new Card(Suit.C, Value.SIX));
         GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
         assertDoesNotThrow(() -> toXML.encode(basicGI, myResources.getString("testBasicGame")));
     }

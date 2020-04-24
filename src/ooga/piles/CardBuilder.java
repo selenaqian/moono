@@ -3,6 +3,7 @@ package ooga.piles;
 import ooga.cards.*;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Stack;
 
 /**
@@ -13,6 +14,9 @@ public class CardBuilder {
 
     public static final int BASIC_THRESHOLD = 9;
 
+    public static final String DEFAULT = "deck_size";
+    private ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT);
+
     /**
      * Creates new CardBuilder.
      */
@@ -21,7 +25,7 @@ public class CardBuilder {
 
     /**
      * This method creates a full Deck of basic Cards:
-     * 8 of every Card with 0 <= Value <= 9 (2 per suit)
+     * X per Suit of every Card with 0 <= Value <= 9 (where X is defined in myResources)
      * @return full deck of basic cards
      */
     public Stack<Card> makeFullDeck(){
@@ -31,8 +35,10 @@ public class CardBuilder {
                 continue;
             }
             for(Suit s : Suit.values()){
-                out.push(new Card(s, v));
-                out.push(new Card(s, v));
+                int perSuit = Integer.parseInt(myResources.getString("basic"));
+                for(int i = 0; i < perSuit; i++){
+                    out.push(new Card(s, v));
+                }
             }
         }
         return out;
@@ -40,8 +46,9 @@ public class CardBuilder {
 
     /**
      * This method creates a Deck using Cards with the given (special) Values.
-     * There will be 8 of every Card with 0 <= Value <= 9 (2 per suit)
-     * There will be 4 of every Card without 10 <= Value (1 per suit)
+     * X per Suit of every Card with 0 <= Value <= 9
+     * Y per Suit of every Card without 10 <= Value
+     * (where X and Y are defined in myResources)
      * @return custom deck of cards
      */
     public Stack<Card> makeDeck(List<Value> values){
@@ -51,7 +58,10 @@ public class CardBuilder {
                 continue;
             }
             for(Suit s : Suit.values()){
-                out.push(new Card(s, v));
+                int perSuit = Integer.parseInt(myResources.getString("special"));
+                for(int i = 0; i < perSuit; i++){
+                    out.push(new Card(s, v));
+                }
             }
         }
         return out;

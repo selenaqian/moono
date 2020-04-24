@@ -5,9 +5,6 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import org.junit.jupiter.api.Test;
-import util.DukeApplicationTest;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,5 +49,28 @@ class CardRenderTest {
         assertEquals("D", card3View.getCardViewBase().getStyleClass().get(0));
         assertEquals("4", card3View.getCardViewText().getText());
         assertEquals("DText", card3View.getCardViewText().getStyleClass().get(0));
+    }
+
+    @Test
+    void updateCardRenderTest() {
+        Card original = new Card(Suit.C, Value.SKIP);
+        CardRender cardView = new CardRender(original, 100, 200);
+
+        assertEquals(0, original.compareTo(cardView.getCard()));
+        assertEquals(100, cardView.getCardViewBase().getWidth());
+        assertEquals(200, cardView.getCardViewBase().getHeight());
+        assertEquals("C", cardView.getCardViewBase().getStyleClass().get(0));
+        assertEquals("SKIP", cardView.getCardViewText().getText());
+        assertEquals("CText", cardView.getCardViewText().getStyleClass().get(0));
+
+        Card replacement = new Card(Suit.A, Value.ZERO);
+        cardView.updateCardRender(replacement);
+
+        assertEquals(0, replacement.compareTo(cardView.getCard()));
+        assertEquals(100, cardView.getCardViewBase().getWidth());
+        assertEquals(200, cardView.getCardViewBase().getHeight());
+        assertEquals("A", cardView.getCardViewBase().getStyleClass().get(0));
+        assertEquals("0", cardView.getCardViewText().getText());
+        assertEquals("AText", cardView.getCardViewText().getStyleClass().get(0));
     }
 }

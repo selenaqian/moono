@@ -16,8 +16,8 @@ import java.util.ResourceBundle;
 
 
 public class UnoController implements GameController {
-    public static final double SECOND_DELAY = 1.5;
     private Timeline myAnimation = new Timeline();
+    private int speed;
 
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
@@ -45,7 +45,8 @@ public class UnoController implements GameController {
         turnManager = uno.getTurnManager();
         scoreTracker = new UnoScoreTracker();
 
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
+        speed = settings.getSpeed();
+        KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
         myAnimation.play();

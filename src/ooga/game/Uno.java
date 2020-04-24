@@ -12,6 +12,7 @@ import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -255,7 +256,7 @@ public class Uno implements GameModel, GameModelView {
      * If user has not declared, then they must pick up more cards
      */
     public boolean checkUno(){
-        if (turnManager.getCurrentPlayer().hand().getCardCount() == 1 && didCallUno == false){
+        if (hasUno() && didCallUno == false){
             //System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
                 turnManager.getCurrentPlayer().takecard(piles.drawCard());
@@ -266,10 +267,24 @@ public class Uno implements GameModel, GameModelView {
         return false;
     }
 
-    public void AIDeclareUno(){
-        if (Math.random() < AI_UNO_PROB){
-            didCallUno = true;
+
+    public boolean AIDeclareUno(){
+        if ((hasUno() && Math.random() < AI_UNO_PROB)){
+            callUno();
+            return true;
         }
+
+        return false;
+    }
+
+    private boolean hasUno(){
+        Player current = turnManager.getCurrentPlayer();
+        if(current.hand().getCardCount() == 1){
+            if (rule.isValid(piles.showTopCard(), current.hand().getAllCards().get(0))){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -279,4 +294,13 @@ public class Uno implements GameModel, GameModelView {
     }
 
 
+
+    public Card getUserHande() {
+        return turnManager.getHumanPlayer().hand().getAllCards().get(1);
+    }
+
+    public List<Player> getaiPlayers() {
+        players.remove(0);
+        return players;
+    }
 }

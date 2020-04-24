@@ -24,5 +24,12 @@ public class OOGAException extends RuntimeException {
         super(String.format(message, exception));
     }
 
+    /**
+     * Create an exception based on a caught exception, with no additional message.
+     */
+
+    public OOGAException(String message){
+        super(message);
+    }
 
 }

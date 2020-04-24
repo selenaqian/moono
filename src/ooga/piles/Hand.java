@@ -118,4 +118,14 @@ public class Hand implements Pile {
     public void reset(){
         myCards.clear();
     }
+
+
+    public Card getcard(int position){
+        return myCards.get(position);
+    }
+
+    public int getcardindex(Card card){
+        int index = myCards.indexOf(card);
+        return index;
+    }
 }

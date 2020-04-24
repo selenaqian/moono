@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.cards.Card;
@@ -51,7 +52,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
     private Button callUno;
-    private Button callUnoOther;
 
     public GameView() {
         this(new Uno(), new UnoController(new Stage()), new Stage(), DEFAULT_STYLESHEET);
@@ -116,16 +116,10 @@ public class GameView implements GameViewInterface, PlayerObserver {
         callUno = new Button(myResources.getString("callUno"));
         callUno.setAlignment(Pos.CENTER);
         callUno.setOnMouseClicked(e -> myController.callUno());
-        callUnoOther = new Button(myResources.getString("callUnoOther"));
-        callUnoOther.setAlignment(Pos.CENTER);
-        //callUnoOther.setOnMouseClicked(e -> myController.); todo: add call to handle calling uno for someone else
-        HBox unoButtons = new HBox(DEFAULT_SPACING);
-        unoButtons.setAlignment(Pos.CENTER);
-        unoButtons.getChildren().addAll(callUnoOther, callUno);
 
         VBox decksAndCallUno = new VBox(DEFAULT_SPACING);
         decksAndCallUno.setAlignment(Pos.CENTER);
-        decksAndCallUno.getChildren().addAll(decks, unoButtons);
+        decksAndCallUno.getChildren().addAll(decks, callUno);
         mainPane.getChildren().add(decksAndCallUno);
         AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - 2*deckView.getWidth());

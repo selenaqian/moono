@@ -11,12 +11,14 @@ import ooga.view.EndGameView;
 import ooga.view.EndRoundView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
+import ooga.view.SoundPlayer;
+
 import java.util.ResourceBundle;
 
 
 public class UnoController implements GameController {
-    public static final double SECOND_DELAY = 1.5;
     private Timeline myAnimation = new Timeline();
+    private int speed;
 
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
@@ -27,11 +29,13 @@ public class UnoController implements GameController {
     UnoScoreTracker scoreTracker;
     Player winner;
     private ResourceBundle myResources = ResourceBundle.getBundle("default");
+    private SoundPlayer soundPlayer;
 
     public UnoController(Stage stage){
         mainStage = stage;
         this.settings = new GameSettings();
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
+        soundPlayer = new SoundPlayer();
     }
 
     @Override
@@ -42,7 +46,8 @@ public class UnoController implements GameController {
         turnManager = uno.getTurnManager();
         scoreTracker = new UnoScoreTracker();
 
-        KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY), e -> step(SECOND_DELAY));
+        speed = settings.getSpeed();
+        KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
         myAnimation.play();
@@ -64,7 +69,6 @@ public class UnoController implements GameController {
 
     private void step(double elapsedTime){
         gameView.myTurnColorChange(turnManager.getCurrentPlayer().getID());
-        uno.checkUno();
 
         if(uno.isOver()){
             System.out.println(uno.isOver());
@@ -72,10 +76,12 @@ public class UnoController implements GameController {
         }
 
         if(!turnManager.isHumanTurn()){
-            uno.AIDeclareUno();
+            if(uno.AIDeclareUno()){
+                soundPlayer.playSound(String.valueOf(turnManager.getCurrentPlayer().getID()));
+            }
             handleAIPlay();
         }
-
+        uno.checkUno();
 
     }
 
@@ -155,7 +161,7 @@ public class UnoController implements GameController {
     public void callUno(){
         if (turnManager.isHumanTurn()){
             uno.callUno();
-
+            soundPlayer.playSound(String.valueOf(turnManager.getCurrentPlayer().getID()));
             //TODO: something here in the view to give feedback to user when they call uno
         }
 

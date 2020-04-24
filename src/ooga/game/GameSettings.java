@@ -25,6 +25,7 @@ public class GameSettings {
     private Rule rule;
     private ResourceBundle myResources = ResourceBundle.getBundle("default");
     private String theme;
+    private int speed; //rate the timeline is run at in seconds
 
 
     public GameSettings() {
@@ -33,6 +34,7 @@ public class GameSettings {
         winningScore = 500;
         specialCards = new ArrayList<>();
         theme = DEFAULT_STYLESHEET;
+        speed = 2;
     }
 
     public int getNumPlayers() {
@@ -126,5 +128,13 @@ public class GameSettings {
 
     public void setTheme (String themeName){
         theme = themeName;
+    }
+
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+
+    public int getSpeed(){
+        return speed;
     }
 }

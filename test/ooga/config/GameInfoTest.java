@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests GameInfo class.
- * There is only one test per method because the methods are all basic getters.
+ * There is only one test per method because the methods are all basic setters/getters.
  * @author Tess Noonan (tcn6)
  */
 class GameInfoTest {
@@ -24,6 +24,7 @@ class GameInfoTest {
     private GameSettings gs = new GameSettings();
     private ScoreTracker st = new UnoScoreTracker();
     private GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
+    private GameInfo empty = new GameInfo();
 
     /**
      * Tests getTurnManager().
@@ -68,5 +69,50 @@ class GameInfoTest {
     void getScoreTracker() {
         assertTrue(basicGI.getScoreTracker() instanceof ScoreTracker);
         assertEquals(st, basicGI.getScoreTracker());
+    }
+
+    /**
+     * Tests setDiscardPile().
+     */
+    @Test
+    void setDiscardPile() {
+        empty.setDiscardPile(discard);
+        assertEquals(discard, empty.getDiscardPile());
+    }
+
+    /**
+     * Tests setScoreTracker().
+     */
+    @Test
+    void setScoreTracker() {
+        empty.setScoreTracker(st);
+        assertEquals(st, empty.getScoreTracker());
+    }
+
+    /**
+     * Tests setTurnManager().
+     */
+    @Test
+    void setTurnManager() {
+        empty.setTurnManager(tm);
+        assertEquals(tm, empty.getTurnManager());
+    }
+
+    /**
+     * Tests setGameSettings().
+     */
+    @Test
+    void setGameSettings() {
+        empty.setGameSettings(gs);
+        assertEquals(gs, empty.getGameSettings());
+    }
+
+    /**
+     * Tests setDrawPile().
+     */
+    @Test
+    void setDrawPile() {
+        empty.setDrawPile(draw);
+        assertEquals(draw, empty.getDrawPile());
     }
 }

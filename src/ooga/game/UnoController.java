@@ -46,7 +46,6 @@ public class UnoController implements GameController {
         myAnimation.getKeyFrames().add(frame);
         myAnimation.play();
 
-
     }
 
     @Override
@@ -63,9 +62,20 @@ public class UnoController implements GameController {
 
 
     private void step(double elapsedTime){
+        gameView.myTurnColorChange(turnManager.getCurrentPlayer().getID());
+        uno.checkUno();
+
+        if(uno.isOver()){
+            System.out.println(uno.isOver());
+            endRound();
+        }
+
         if(!turnManager.isHumanTurn()){
+            uno.AIDeclareUno();
             handleAIPlay();
         }
+
+
     }
 
 
@@ -93,7 +103,7 @@ public class UnoController implements GameController {
     public void handleDrawPileClick(){
         if(turnManager.isHumanTurn()){
             uno.drawCard(turnManager.getCurrentPlayer());
-            endTurn();
+            uno.endTurn();
         }
 
     }
@@ -106,27 +116,15 @@ public class UnoController implements GameController {
         if (!turnManager.isHumanTurn()){
             if(uno.playCard(turnManager.getCurrentPlayer())) {
                 try {
-                    endTurn();
                     Thread.sleep(2000);
                 }
                 catch (Exception e) {
                     throw new OOGAException(myResources.getString("NoSuch"),e);
                 }
-
             }
-            endTurn();
         }
     }
 
-    private void endTurn(){
-        checkRoundEnd();
-    }
-
-    private void checkRoundEnd(){
-        if (uno.isOver()){
-            endRound();
-        }
-    }
 
     /**
      * Called from Uno when a user has no more cards left
@@ -136,6 +134,8 @@ public class UnoController implements GameController {
         for (Player p : turnManager.getAllPlayers()){
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
+
+            //TODO: show a new round screen in the view
 
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
@@ -161,23 +161,17 @@ public class UnoController implements GameController {
 
     }
 
-    /**
-     * Called from view when player presses "swap" button
-     */
-    public void handleswapclick(Card card, Player player){
-        if(turnManager.isHumanTurn()){
-            uno.cardswap(card,player,turnManager.getCurrentPlayer());
-        }
-    }
 
     /**
-     * Called from view when player presses "trade" button
+     * Used to change settings during a game
+     * Changing score to play up until, access file saving/loading
+     * @param updatedSettings
      */
-    public void handletradeclick(Player player){
-        if(turnManager.isHumanTurn()){
-            uno.tradehands(player, turnManager.getCurrentPlayer());
-        }
+    public void accessSettings(GameSettings updatedSettings){
+        settings = updatedSettings;
+
     }
+
 
 
 }

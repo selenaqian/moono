@@ -1,5 +1,11 @@
 package ooga.config;
 
+import ooga.game.GameSettings;
+import ooga.game.ScoreTracker;
+import ooga.game.TurnManager;
+import ooga.piles.DiscardPile;
+import ooga.piles.DrawPile;
+
 import java.beans.XMLDecoder;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,9 +32,15 @@ public class XMLToJava {
     public GameInfo decode(String fileName) throws IOException {
         FileInputStream fis = new FileInputStream(fileName);
         XMLDecoder decoder = new XMLDecoder(fis);
-        GameInfo decodedInfo = (GameInfo) decoder.readObject();
+        DiscardPile discard = (DiscardPile) decoder.readObject();
+        DrawPile draw = (DrawPile) decoder.readObject();
+        TurnManager tm = (TurnManager) decoder.readObject();
+        ScoreTracker st = (ScoreTracker) decoder.readObject();
+        GameSettings gs = (GameSettings) decoder.readObject();
         decoder.close();
         fis.close();
+
+        GameInfo decodedInfo = new GameInfo(tm, gs, draw, discard, st);
         return decodedInfo;
     }
 }

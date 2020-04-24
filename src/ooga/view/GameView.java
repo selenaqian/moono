@@ -46,8 +46,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private UnoController myController;
     private GameSettings mySettings;
     private VBox allPlayersNot1;
-    private Button trade;
-    private Button swap;
     private ResourceBundle myResources;
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
@@ -112,19 +110,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
         mainPane.getChildren().add(callUno);
         AnchorPane.setTopAnchor(callUno, mainPane.getHeight()*5/8);
         AnchorPane.setLeftAnchor(callUno, mainPane.getWidth()/2 - callUno.getWidth());
-
-        trade = new Button(myResources.getString("trade"));
-        trade.setOnMouseClicked(e -> myController.handletradeclick(myUno.getTurnManager().getNextPlayer()));
-        mainPane.getChildren().add(trade);
-        AnchorPane.setTopAnchor(trade, 10.0);
-        AnchorPane.setRightAnchor(trade, 10.0);
-
-        swap = new Button(myResources.getString("swap"));
-        swap.setOnMouseClicked(e -> myController.handleswapclick(myUno.getUserHande(),myUno.getTurnManager().getNextPlayer()));
-        mainPane.getChildren().add(swap);
-        AnchorPane.setTopAnchor(swap, 50.0);
-        AnchorPane.setRightAnchor(swap, 10.0);
-
 
         updateHand(myUno.getUserHand());
     }
@@ -319,7 +304,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void updatePlayerHand(int playerId, List<Card> cardsLeft) {
         allPlayersCardsLeft.get(playerId-1).setText(cardsLeft.size() + myResources.getString("cardsLeft"));
         if(playerId == 1) updateHand(cardsLeft);
-        myTurnColorChange(playerId);
         //TODO: check playerID and call appropriate methods to handle view updates for the user and other players
     }
 

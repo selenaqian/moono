@@ -31,7 +31,6 @@ public class UnoScoreTracker implements ScoreTracker {
         }
 
     }
-
     @Override
     public int getPlayerScore(Player player){
         return playerScores.get(player.getID());
@@ -52,7 +51,6 @@ public class UnoScoreTracker implements ScoreTracker {
         return score;
     }
 
-
     private void updatePlayerScore(int playerID, int addedScore){
         //TODO: change playerID to integer if necessary
         if (!playerScores.containsKey(playerID)){
@@ -63,5 +61,24 @@ public class UnoScoreTracker implements ScoreTracker {
         }
     }
 
+    //XML Encoding requires setters/getters for the instances we want to save
+    //@author Tess Noonan (tcn6)
+
+    /**
+     * Sets scores.
+     * @return playerScores.
+     */
+    public HashMap<Integer, Integer> getScores() {
+        return playerScores;
+    }
+
+    /**
+     * Gets scores.
+     * @param scores
+     */
+    @Override
+    public void setScores(HashMap<Integer, Integer> scores){
+        playerScores = scores;
+    }
 
 }

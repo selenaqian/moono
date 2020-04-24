@@ -1,9 +1,12 @@
 package ooga.game;
 
+import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.player.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,6 +20,11 @@ import java.util.Random;
  * @author Suomo Ammah (sna19)
  */
 public class UnoActionApplier {
+    Card card;
+    Player chosenswap;
+    Player swapper;
+    Player player1;
+    Player player2;
 
     public static final int FOUR = 4;
     public static final int TWO = 2;
@@ -69,6 +77,7 @@ public class UnoActionApplier {
      * @param value
      */
     public void applyAction(Value value){
+
         switch(value){
             case SKIP:
                 applySkip();
@@ -85,9 +94,12 @@ public class UnoActionApplier {
             case WILD4:
                 applyWild4();
                 break;
+            case SWAP:
+                applySwap(card, chosenswap, swapper);
+            case TRADE:
+                applyTrade(player1, player2);
             default:
-                //this is a normal card
-                turnManager.nextPlayer();
+                //this is a normal card: do nothing
                 return;
         }
     }
@@ -96,7 +108,7 @@ public class UnoActionApplier {
      * Skips turn of next player.
      */
     private void applySkip(){
-        turnManager.getNextPlayer();
+        turnManager.nextPlayer();
     }
 
     /**
@@ -113,7 +125,7 @@ public class UnoActionApplier {
     private void applyDraw2(){
         Player nextPlayer = turnManager.getNextPlayer();
         for(int i=0;i<TWO;i++){
-            nextPlayer.takecard(uno.drawPile.drawCard());
+            nextPlayer.takecard(uno.getPileManager().drawCard());
         }
     }
 
@@ -122,16 +134,53 @@ public class UnoActionApplier {
      */
     private void applyWild(){
         notifyWildObserver();
+        turnManager.nextPlayer();
     }
 
     /**
      * Changes color of play, draws 4 cards to the next player, and skips their turn.
      */
     private void applyWild4(){
-        applyWild();
+        notifyWildObserver();
         Player nextPlayer = turnManager.getNextPlayer();
         for(int i = 0; i < FOUR; i++){
             uno.drawCard(nextPlayer);
         }
+        turnManager.nextPlayer();
+    }
+
+
+    /**
+     * allows the manual player to swap a card with an AI player of choice
+     * */
+    private void applySwap(Card card, Player chosenswap, Player swapper){
+        Random random = new Random();
+        chosenswap.hand().addCard(card);
+        swapper.hand().removeCard(card);
+        int rand_int = random.nextInt(chosenswap.hand().getCardCount());
+        swapper.hand().addCard(chosenswap.hand().getcard(rand_int));
+    }
+
+    /**
+     * allows the manual player to trade hands with an AI player
+     */
+    private void applyTrade(Player player1,Player player2){
+        Random random = new Random();
+        int randon = random.nextInt(uno.getPlayers().size())+1;
+        player2 = uno.getPlayers().get(randon);
+        int size = player2.hand().getCardCount();
+        List<Card> tempholder = new ArrayList<>();
+        for(Card card:player1.hand().getAllCards()){
+            player2.hand().addCard(card);
+            tempholder.add(card);
+        }
+
+        for(Card card:tempholder){
+            player1.hand().removeCard(card);
+        }
+
+        for(int i = 0;i<size-1;i++){
+            player1.hand().addCard(player2.hand().getcard(i));
+            player2.hand().removeCard(player2.hand().getcard(i));}
     }
 }

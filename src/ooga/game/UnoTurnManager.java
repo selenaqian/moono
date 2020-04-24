@@ -1,9 +1,11 @@
 package ooga.game;
 
+import ooga.player.AI_Player;
+import ooga.player.ManualPlayer;
 import ooga.player.Player;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Random;
+
+import java.util.*;
+
 public class UnoTurnManager implements TurnManager {
 
     private List<Player> players;
@@ -18,10 +20,32 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(List<Player> players){
+        setPlayers(players);
+        direction = CW;
+    }
+
+    //NOTE FROM TESS: for the XMLEncoder I needed to add a default constructor plus setters/getters
+
+    /**
+     * Creates new default UnoTurnManager required for XML.
+     * @author Tess Noonan (tcn6)
+     * NOTE: I have set the default players list as 1 human, 3 bots because xml can't save the players because List is
+     * not serializable.
+     */
+    public UnoTurnManager() {
+        setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
+        direction = CW;
+    }
+
+    /**
+     * Sets initial list of players.
+     * @param players
+     * @author Tess Noonan (tcn6)
+     */
+    public void setPlayers(List<Player> players){
         this.players = players;
         iterator = players.listIterator();
         current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
-        direction = CW;
     }
 
     @Override
@@ -46,8 +70,6 @@ public class UnoTurnManager implements TurnManager {
      */
     @Override
     public Player getNextPlayer() {
-
-
         //FIXME: use iterator or clean this up
         int currID = current.getID();
         if(currID == 1 && direction == CCW){
@@ -119,6 +141,7 @@ public class UnoTurnManager implements TurnManager {
      * Changes the direction, affecting which player has the next turn
      * Typically called when an uno reverse card is played
      */
+    @Override
     public void changeDirection(){
         if (direction == CW) {
             direction = CCW;
@@ -153,13 +176,32 @@ public class UnoTurnManager implements TurnManager {
     }
 
     public boolean isHumanTurn(){
-        if (current.getID() == humanPlayer.getID()) {
+        if (current instanceof ManualPlayer) {
             return true;
         }
 
         return false;
     }
 
+
+    //XMLEncoder requires matching setters and getters, so here all the ones we still need:
+    //@author Tess Noonan (tcn6)
+
+    /**
+     * Set direction.
+     * @param dir
+     */
+    public void setDirection(int dir) {
+        direction = dir;
+    }
+
+    /**
+     * Set current.
+     * @param curr
+     */
+    public void setCurrentPlayer(Player curr) {
+        current = curr;
+    }
 
 
 }

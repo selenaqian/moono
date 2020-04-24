@@ -1,6 +1,8 @@
 package ooga.game;
 import ooga.player.Player;
 
+import java.util.List;
+
 /**
  * Keeps track of players and delegates turns
  * Used to rotate between player objects so that each player can play
@@ -44,5 +46,26 @@ public interface TurnManager{
      */
     int getPlayerId(Player player);
 
+    /**
+     * Returns all players a TurnManager is keeping track of
+     * Used in UnoController to calculate scores for all players
+     * @return
+     * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
+     */
+    List<Player> getAllPlayers();
+
+    /**
+     * Changes the direction, affecting which player has the next turn
+     * Typically called when an uno reverse card is played
+     * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
+     */
+    void changeDirection();
+
+    /** Gives current direction.
+     * THIS IS USED JUST FOR TESTING PURPOSES
+     * refactored uno to use this method(sna19) since it makes it easier to work with the direction
+     * NOTE: THIS WAS ADDED TO THE INTERFACE BY TESS FOR XMLToJavaTest
+     */
+    int getDirection();
 
 }

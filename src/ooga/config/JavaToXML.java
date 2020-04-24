@@ -1,7 +1,5 @@
 package ooga.config;
 
-
-
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.io.FileOutputStream;
@@ -14,11 +12,9 @@ import java.util.ResourceBundle;
  * @author Tess Noonan
  */
 public class JavaToXML {
-    private ResourceBundle myResources = ResourceBundle.getBundle("errors");
 
-    //TODO: transfer these Strings to a properties file instead.
-    public static final String FILE_PATH = "data/";
-    //public static final String EXCEPTION_TEXT = "Exception! :"; sna19(modified this to use the error properties file so that error messages are not hardcoded
+    public static final String PROPERTIES = "xml_strings";
+    private ResourceBundle myResources = ResourceBundle.getBundle(PROPERTIES);
 
     /**
      * Creates new JavaToXML object.
@@ -34,14 +30,18 @@ public class JavaToXML {
      * @throws IOException
      */
     public void encode(GameInfo gameInfo, String fileName) throws IOException {
-        FileOutputStream fos = new FileOutputStream(FILE_PATH + fileName);
+        FileOutputStream fos = new FileOutputStream(myResources.getString("filePath") + fileName);
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.setExceptionListener(new ExceptionListener() {
             public void exceptionThrown(Exception e) {
-                System.out.println(myResources.getString("Exception") + e.toString());
+                System.out.println(myResources.getString("exceptionText") + e.toString());
             }
         });
-        encoder.writeObject(gameInfo);
+        encoder.writeObject(gameInfo.getDiscardPile());
+        encoder.writeObject(gameInfo.getDrawPile());
+        encoder.writeObject(gameInfo.getTurnManager());
+        encoder.writeObject(gameInfo.getScoreTracker());
+        encoder.writeObject(gameInfo.getGameSettings());
         encoder.close();
         fos.close();
     }

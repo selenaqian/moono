@@ -127,7 +127,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton.setOnMouseClicked(e -> {
             //pause the timeline
-            new SettingsView(); // or just have it show on new stage - either way should be fine I think depends on what info it needs
+            new SettingsView(myStylesheet); // or just have it show on new stage - either way should be fine I think depends on what info it needs
             // bc don't want to have to keep on passing info also it maybe does make sense for GameView to have a SettingsView as an instance
         });
         mainPane.getChildren().add(settingsButton);

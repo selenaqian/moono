@@ -19,6 +19,7 @@ import static ooga.view.SetupView.*;
 
 public class SettingsView {
     private ResourceBundle myResources;
+    private String myStylesheet;
     private Stage myStage;
     private Button slowDownButton;
     private Button speedUpButton;
@@ -27,29 +28,30 @@ public class SettingsView {
     private CheckBox darkModeToggle;
     private Button saveCurrentButton;
     private Button newGameButton;
-    private Button applyButton;
     private Button closeButton;
 
     public SettingsView() {
-        this(new Stage());
+        this(DEFAULT_STYLESHEET);
     }
 
-    public SettingsView(Stage stage) {
+    public SettingsView(String stylesheet) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
-        myStage = stage;
+        myStylesheet = stylesheet;
+        myStage = new Stage();
         themeOptions = new HashMap<>();
 
         VBox root = new VBox(DEFAULT_SPACING); // used to make scene later
+        root.setAlignment(Pos.CENTER);
         VBox allSpeedUI = makeSpeedUI();
         VBox allThemeUI = makeThemeUI();
-
-        saveCurrentButton = new Button(myResources.getString("save"));
-        newGameButton = new Button(myResources.getString("newGameButton"));
-
-        applyButton = new Button(myResources.getString("applyButton"));
+        HBox saveAndNewGameUI = makeSaveAndNewGameUI();
         closeButton = new Button(myResources.getString("closeButton"));
+        closeButton.setOnMouseClicked(e -> myStage.close());
 
+        root.getChildren().addAll(allSpeedUI, allThemeUI, saveAndNewGameUI, closeButton);
         Scene mainScene = new Scene(root, DEFAULT_STAGE_WIDTH/2, DEFAULT_STAGE_HEIGHT);
+        mainScene.getStylesheets().add(myStylesheet);
+        myStage.setTitle(myResources.getString("settingsButton"));
         myStage.setScene(mainScene);
         myStage.show();
     }
@@ -77,9 +79,12 @@ public class SettingsView {
 
     private VBox makeThemeUI() {
         VBox themeUI = new VBox(DEFAULT_SPACING);
+        themeUI.setAlignment(Pos.CENTER);
         Text themeTitle = new Text(myResources.getString("theme"));
+        themeTitle.getStyleClass().add("subtitle2");
 
         HBox themeOptionsToClick = new HBox(DEFAULT_SPACING);
+        themeOptionsToClick.setAlignment(Pos.CENTER);
         String[] allThemes = myResources.getString("themeOptions").split(",");
         for(String theme : allThemes) {
             Pane currentPane = new StackPane();
@@ -89,6 +94,7 @@ public class SettingsView {
             Rectangle colorBox = new Rectangle(rectSize, rectSize, currentColor);
             colorBox.setOnMouseClicked(e -> themeChosen(theme));
             Text colorText = new Text(theme);
+            colorText.getStyleClass().add("settingsThemeText");
             colorText.setOnMouseClicked(e -> themeChosen(theme));
 
             currentPane.getChildren().addAll(colorBox, colorText);
@@ -98,6 +104,17 @@ public class SettingsView {
         darkModeToggle = new CheckBox(myResources.getString("darkMode"));
         themeUI.getChildren().addAll(themeTitle, themeOptionsToClick, darkModeToggle);
         return themeUI;
+    }
+
+    private HBox makeSaveAndNewGameUI() {
+        HBox save_newGameUI = new HBox(DEFAULT_SPACING);
+        save_newGameUI.setAlignment(Pos.CENTER);
+        saveCurrentButton = new Button(myResources.getString("save"));
+        newGameButton = new Button(myResources.getString("newGameButton"));
+        //TODO: set actions - each pops up its own new window with more stuff
+
+        save_newGameUI.getChildren().addAll(saveCurrentButton, newGameButton);
+        return save_newGameUI;
     }
 
     private void themeChosen(String theme) {

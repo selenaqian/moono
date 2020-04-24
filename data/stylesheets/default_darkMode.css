@@ -1,3 +1,9 @@
+.root {
+    -fx-background-color: black;
+}
+.playerText {
+    -fx-fill: white;
+}
 .title {
     -fx-font-size: 72pt;
 }
@@ -14,6 +20,14 @@
 .settingsThemeText {
     -fx-fill: white;
     -fx-font-size: 14pt;
+}
+.deck {
+    -fx-border-color: white;
+    -fx-border-radius: 2pt;
+    -fx-background-color: black;
+    -fx-background-image: url('images/uno_card.png');
+    -fx-background-position: center;
+    -fx-background-size: 150px;
 }
 .myTurn {
     -fx-fill: green;

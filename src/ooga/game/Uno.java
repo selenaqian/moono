@@ -268,7 +268,7 @@ public class Uno implements GameModel, GameModelView {
 
 
     public boolean AIDeclareUno(){
-        if ((turnManager.getCurrentPlayer().hand().getCardCount() == 1 && Math.random() < AI_UNO_PROB)){
+        if ((hasUno() && Math.random() < AI_UNO_PROB)){
             callUno();
             return true;
         }

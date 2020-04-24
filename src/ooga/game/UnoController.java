@@ -67,7 +67,6 @@ public class UnoController implements GameController {
 
     private void step(double elapsedTime){
         gameView.myTurnColorChange(turnManager.getCurrentPlayer().getID());
-        uno.checkUno();
 
         if(uno.isOver()){
             System.out.println(uno.isOver());
@@ -80,6 +79,8 @@ public class UnoController implements GameController {
             }
             handleAIPlay();
         }
+        uno.checkUno();
+
     }
 
 

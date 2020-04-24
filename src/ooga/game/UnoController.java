@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.cards.Card;
+import ooga.config.GameInfo;
 import ooga.exceptions.OOGAException;
 import ooga.player.Player;
 import ooga.view.EndView;
@@ -15,7 +16,7 @@ import ooga.view.SoundPlayer;
 import java.util.ResourceBundle;
 
 
-public class UnoController implements GameController {
+public class UnoController implements GameController, GameSaver {
     private Timeline myAnimation = new Timeline();
     private int speed;
 
@@ -179,5 +180,18 @@ public class UnoController implements GameController {
     }
 
 
+    @Override
+    public GameInfo saveGame() {
+        GameInfo gameInfo = new GameInfo;
+        gameInfo.setGameSettings(settings);
+        gameInfo.setDrawPile(uno.getPileManager().getDrawPile());
+        gameInfo.setDiscardPile(uno.getPileManager().getDiscPile());
+        gameInfo.setScoreTracker(scoreTracker);
+        gameInfo.setTurnManager(turnManager);
+    }
 
+    @Override
+    public void loadGame(GameInfo gameInfo) {
+
+    }
 }

@@ -3,6 +3,7 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.config.GameInfo;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.AI_Player;

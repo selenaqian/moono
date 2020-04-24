@@ -3,6 +3,6 @@ package ooga.game;
 import ooga.config.GameInfo;
 
 public interface GameSaver {
-    void saveGame(GameInfo gameInfo);
+    GameInfo saveGame();
     void loadGame(GameInfo gameInfo);
 }

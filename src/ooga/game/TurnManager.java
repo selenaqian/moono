@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface TurnManager{
     /**
-     * Adds a player to the game
+     * Adds all players to the game
      * Can be called when initializing a new game
-     * @param player new player to add
+     * @param numPlayers from GameSettings
      */
-    void addPlayer(Player player);
+    void addPlayers(int numPlayers);
 
     /**
      * Determines the first player to play at the start of a new game or round

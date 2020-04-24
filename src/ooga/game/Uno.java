@@ -40,7 +40,33 @@ public class Uno implements GameModel, GameModelView {
 
     public Uno(){
         this(new GameSettings());
+
     }
+
+    public Uno(GameSettings settings){
+        mySettings = settings;
+        turnManager = new UnoTurnManager();
+        piles = new PileManager(mySettings.getSpecialCards());
+        rule = mySettings.getRule();
+        specialCards = mySettings.getSpecialCards();
+        turnManager.addPlayers(settings.getNumPlayers());
+        turnManager.setHumanPlayer(players.get(0));
+        dealCards();
+        actionApplier = new UnoActionApplier(this, turnManager);
+        playerObservers = new ArrayList();
+        notifyPlayerObservers();
+    }
+
+    //TODO: clean up constructors
+    public Uno(GameSettings settings, PileManager piles, UnoTurnManager turnManager){
+        this.mySettings = settings;
+        this.piles = piles;
+        this.turnManager = turnManager;
+        actionApplier = new UnoActionApplier(this, turnManager);
+        playerObservers = new ArrayList();
+        notifyPlayerObservers();
+    }
+
 
     public GameSettings getSettings(){
         return mySettings;
@@ -50,33 +76,14 @@ public class Uno implements GameModel, GameModelView {
         return piles;
     }
 
-    public Uno(GameSettings settings){
-        playerObservers = new ArrayList();
-        mySettings = settings;
-        piles = new PileManager(mySettings.getSpecialCards());
-        //rule = mySettings.getRule();
-        rule = new ClassicRules();
-        specialCards = mySettings.getSpecialCards();
-        addPlayers();
-        turnManager = new UnoTurnManager(players);
-        turnManager.setHumanPlayer(players.get(0));
-
-        actionApplier = new UnoActionApplier(this, turnManager);
-    }
-
-    public Uno(GameSettings settings, PileManager piles, UnoTurnManager turnManager){
-
-    }
-
-
     public UnoTurnManager getTurnManager(){
         return turnManager;
     }
 
+
     @Override
     public void start() {
-        dealCards();
-        notifyPlayerObservers();
+
     }
 
     @Override
@@ -197,22 +204,6 @@ public class Uno implements GameModel, GameModelView {
                 Card card = piles.drawCard();
                 player.takecard(card);
             }
-        }
-    }
-
-    /**
-     * Adds players to the game based on number of players selected in SetupView
-     * TODO: Refactor this - have another class to manage/initialize players?
-     */
-    private void addPlayers(){
-        //FIXME: pass id into player constructor
-        Player manPlayer = new ManualPlayer();
-        manPlayer.setID(1);
-        players.add(manPlayer);
-        for (int i = 2; i < mySettings.getNumPlayers()+1; i++){
-            Player aiPlayer = new AI_Player();
-            aiPlayer.setID(i);
-            players.add(aiPlayer);
         }
     }
 

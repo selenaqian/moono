@@ -65,11 +65,12 @@ public class UnoTurnManager implements TurnManager {
             aiPlayer.setID(i);
             players.add(aiPlayer);
         }
+
+        current = getFirstPlayer();
     }
 
 
-    @Override
-    public Player getFirstPlayer() {
+    private Player getFirstPlayer() {
         //TODO: randomize this(sna19)
         int playersize = players.size();
         Random rand = new Random();

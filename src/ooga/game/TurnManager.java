@@ -16,12 +16,6 @@ public interface TurnManager{
     void addPlayers(int numPlayers);
 
     /**
-     * Determines the first player to play at the start of a new game or round
-     * @return Player who gets to take the first turn
-     */
-    Player getFirstPlayer();
-
-    /**
      * Once the current player is done, called to set currentPlayer as the next player
      * @return
      */

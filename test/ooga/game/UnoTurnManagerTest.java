@@ -31,11 +31,6 @@ class UnoTurnManagerTest {
     }
 
     @org.junit.jupiter.api.Test
-    void testGetFirstPlayer() {
-        assertEquals(players.get(0), manager.getFirstPlayer());
-    }
-
-    @org.junit.jupiter.api.Test
     void testNextPlayer() {
         manager.getNextPlayer();
         assertEquals(players.get(1), manager.getCurrentPlayer());

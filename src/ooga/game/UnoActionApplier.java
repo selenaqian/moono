@@ -33,6 +33,7 @@ public class UnoActionApplier {
     private Uno uno;
 
     private WildcardObserver observer;
+    private SwapCardObserver oserver;
 
     /**
      * Create new UnoActionApplier
@@ -166,8 +167,8 @@ public class UnoActionApplier {
      */
     private void applyTrade(Player player1,Player player2){
         Random random = new Random();
-        int randon = random.nextInt(uno.getPlayers().size())+1;
-        player2 = uno.getPlayers().get(randon);
+        int randon = random.nextInt(uno.getaiPlayers().size());
+        player2 = uno.getaiPlayers().get(randon);
         int size = player2.hand().getCardCount();
         List<Card> tempholder = new ArrayList<>();
         for(Card card:player1.hand().getAllCards()){
@@ -182,5 +183,25 @@ public class UnoActionApplier {
         for(int i = 0;i<size-1;i++){
             player1.hand().addCard(player2.hand().getcard(i));
             player2.hand().removeCard(player2.hand().getcard(i));}
+    }
+
+
+
+    /**
+     * Notifies observers to make SwapCardSelectorView show up
+     */
+    public void notifySwapObserver() {
+        if (turnManager.isHumanTurn()) {
+            oserver.showplayerandcardoptions();
+        }
+    }
+
+
+    public void registerSwapObserver(SwapCardObserver o){
+        this.oserver = o;
+    }
+
+    public List<Player> getplayers(){
+        return uno.getaiPlayers();
     }
 }

@@ -285,7 +285,8 @@ public class Uno implements GameModel, GameModelView {
         return turnManager.getHumanPlayer().hand().getAllCards().get(1);
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> getaiPlayers() {
+        players.remove(0);
         return players;
     }
 }

@@ -15,8 +15,11 @@ class SetupViewTest extends DukeApplicationTest {
         startView = new SetupView(stage);
     }
 
+    /**
+     * Tests that default values set as expected.
+     */
     @Test
-    void testSetValuesDefault() {
+    void setValuesDefaultTest() {
         clickOn(startView.getWelcomeOkButton());
 
         assertEquals(4, startView.getMySettings().getNumPlayers());
@@ -24,8 +27,11 @@ class SetupViewTest extends DukeApplicationTest {
         assertEquals(500, startView.getMySettings().getWinningScore());
     }
 
+    /**
+     * Tests ability to change the values from default and set them properly in settings.
+     */
     @Test
-    void testSetValuesChanged() {
+    void setValuesChangedTest() {
         setValue(startView.getNumberPlayersSlider(), 3);
         setValue(startView.getCardsPerPlayerSlider(), 10);
         setValue(startView.getScoreToWinSlider(), 300);

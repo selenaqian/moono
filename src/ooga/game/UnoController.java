@@ -75,7 +75,9 @@ public class UnoController implements GameController {
         }
 
         if(!turnManager.isHumanTurn()){
-            uno.AIDeclareUno();
+            if(uno.AIDeclareUno()){
+                soundPlayer.playSound(String.valueOf(turnManager.getCurrentPlayer().getID()));
+            }
             handleAIPlay();
         }
     }

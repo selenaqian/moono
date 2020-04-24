@@ -18,6 +18,7 @@ public class WildColorSelectorView implements WildcardObserver {
     private UnoActionApplier myActionApplier;
     private String myStylesheet;
     private Stage newStage;
+    private Scene colorSelectorScene;
 
     public WildColorSelectorView(UnoActionApplier actionApplier, String stylesheet){
         myActionApplier = actionApplier;
@@ -38,7 +39,7 @@ public class WildColorSelectorView implements WildcardObserver {
             colorBox.setOnMouseClicked(e -> selectColorAction(suit));
         }
 
-        Scene colorSelectorScene = new Scene(root, SPECIAL_CARD_ACTION_WIDTH, SPECIAL_CARD_ACTION_HEIGHT);
+        colorSelectorScene = new Scene(root, SPECIAL_CARD_ACTION_WIDTH, SPECIAL_CARD_ACTION_HEIGHT);
         colorSelectorScene.getStylesheets().add(myStylesheet);
         newStage.setScene(colorSelectorScene);
         newStage.show();
@@ -47,5 +48,13 @@ public class WildColorSelectorView implements WildcardObserver {
     private void selectColorAction(Suit suit) {
         myActionApplier.setWildColor(suit.toString());
         newStage.close();
+    }
+
+    /**
+     * Method used to change the game theme mid-game. Only called within the view package, so method is package-private.
+     * @param theme the name of the desired theme.
+     */
+    void setTheme(String theme) {
+        myStylesheet = theme;
     }
 }

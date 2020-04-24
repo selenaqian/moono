@@ -32,6 +32,7 @@ import static ooga.view.SetupView.*;
 public class GameView implements GameViewInterface, PlayerObserver {
     public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
+    private Scene mainScene;
     private List<Pane> playerViews;
     private Pane player1Label; // store the user label separate from the others as well
     private Pane mainPane;
@@ -78,7 +79,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         //registering observer(s)
         myUno.registerPlayerObserver(this);
 
-        Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(myStylesheet);
         mainStage.setScene(mainScene);
         mainStage.show();
@@ -127,7 +128,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton.setOnMouseClicked(e -> {
             //pause the timeline
-            new SettingsView(myStylesheet); // or just have it show on new stage - either way should be fine I think depends on what info it needs
+            new SettingsView(myStylesheet, this); // or just have it show on new stage - either way should be fine I think depends on what info it needs
             // bc don't want to have to keep on passing info also it maybe does make sense for GameView to have a SettingsView as an instance
         });
         mainPane.getChildren().add(settingsButton);
@@ -285,6 +286,17 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void updateScore(int playerNumber, int score) {
         Text scoreDisplay = allPlayersScore.get(playerNumber-1);
         scoreDisplay.setText(myResources.getString("score") + score);
+    }
+
+    /**
+     * Method to change the game theme mid-game. Only called within the view package, so method is package-private.
+     * @param theme the name of the desired theme.
+     */
+    void setTheme(String theme) {
+        mainScene.getStylesheets().removeAll(mainScene.getStylesheets());
+        mainScene.getStylesheets().add(theme);
+        mySettings.setTheme(theme);
+        wildColorSelector.setTheme(theme);
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.

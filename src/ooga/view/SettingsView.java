@@ -1,6 +1,7 @@
 package ooga.view;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -20,25 +21,29 @@ import static ooga.view.SetupView.*;
 public class SettingsView {
     private ResourceBundle myResources;
     private String myStylesheet;
+    private GameView myGameView;
     private Stage myStage;
     private Button slowDownButton;
     private Button speedUpButton;
     private Text speedChangeText;
     private Map<String, Pane> themeOptions;
+    private Map<String, String> themeFileNames;
     private CheckBox darkModeToggle;
     private Button saveCurrentButton;
     private Button newGameButton;
     private Button closeButton;
 
     public SettingsView() {
-        this(DEFAULT_STYLESHEET);
+        this(DEFAULT_STYLESHEET, new GameView());
     }
 
-    public SettingsView(String stylesheet) {
+    public SettingsView(String stylesheet, GameView gameView) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
         myStylesheet = stylesheet;
+        myGameView = gameView;
         myStage = new Stage();
         themeOptions = new HashMap<>();
+        themeFileNames = new HashMap<>();
 
         VBox root = new VBox(DEFAULT_SPACING); // used to make scene later
         root.setAlignment(Pos.CENTER);
@@ -86,7 +91,9 @@ public class SettingsView {
         HBox themeOptionsToClick = new HBox(DEFAULT_SPACING);
         themeOptionsToClick.setAlignment(Pos.CENTER);
         String[] allThemes = myResources.getString("themeOptions").split(",");
-        for(String theme : allThemes) {
+        String[] allThemeFiles = myResources.getString("themeFileNames").split(",");
+        for(int i=0; i < allThemes.length; i++) {
+            String theme = allThemes[i];
             Pane currentPane = new StackPane();
             int sceneWidth = DEFAULT_STAGE_WIDTH/2;
             int rectSize = sceneWidth/(allThemes.length + 1);
@@ -100,6 +107,7 @@ public class SettingsView {
             currentPane.getChildren().addAll(colorBox, colorText);
             themeOptionsToClick.getChildren().add(currentPane);
             themeOptions.put(theme, currentPane);
+            themeFileNames.put(theme, allThemeFiles[i]);
         }
         darkModeToggle = new CheckBox(myResources.getString("darkMode"));
         themeUI.getChildren().addAll(themeTitle, themeOptionsToClick, darkModeToggle);
@@ -118,9 +126,21 @@ public class SettingsView {
     }
 
     private void themeChosen(String theme) {
-        // remove styling on all rectangles
-        // get the correct pane, then get the rectangle (argument 0 of children)
-        // add the new border styling
+        for(String themeName : themeOptions.keySet()) {
+            Node currentColorBox = themeOptions.get(themeName).getChildren().get(0);
+            currentColorBox.getStyleClass().removeAll(currentColorBox.getStyleClass());
+        }
+        Node colorBox = themeOptions.get(theme).getChildren().get(0);
+        colorBox.getStyleClass().add("themeOptionSelected");
+        if(!darkModeToggle.isSelected()) {
+            myGameView.setTheme(themeFileNames.get(theme));
+        }
+        else {
+            String themeFileName = themeFileNames.get(theme);
+            themeFileName = themeFileName.substring(0, themeFileName.length()-4);
+            myGameView.setTheme(themeFileName + "_darkMode.css");
+        }
+        //TODO: make the css files
     }
 
 }

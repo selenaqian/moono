@@ -10,6 +10,8 @@ import ooga.player.Player;
 import ooga.view.EndView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
+import ooga.view.SoundPlayer;
+
 import java.util.ResourceBundle;
 
 
@@ -26,11 +28,13 @@ public class UnoController implements GameController {
     UnoScoreTracker scoreTracker;
     Player winner;
     private ResourceBundle myResources = ResourceBundle.getBundle("default");
+    private SoundPlayer soundPlayer;
 
     public UnoController(Stage stage){
         mainStage = stage;
         this.settings = new GameSettings();
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
+        soundPlayer = new SoundPlayer();
     }
 
     @Override
@@ -74,8 +78,6 @@ public class UnoController implements GameController {
             uno.AIDeclareUno();
             handleAIPlay();
         }
-
-
     }
 
 
@@ -155,7 +157,7 @@ public class UnoController implements GameController {
     public void callUno(){
         if (turnManager.isHumanTurn()){
             uno.callUno();
-
+            soundPlayer.playSound(String.valueOf(turnManager.getCurrentPlayer().getID()));
             //TODO: something here in the view to give feedback to user when they call uno
         }
 

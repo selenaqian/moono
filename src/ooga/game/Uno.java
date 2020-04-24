@@ -268,7 +268,7 @@ public class Uno implements GameModel, GameModelView {
 
     public void AIDeclareUno(){
         if (Math.random() < AI_UNO_PROB){
-            didCallUno = true;
+            callUno();
         }
     }
 

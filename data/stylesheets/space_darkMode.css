@@ -13,6 +13,10 @@
 .button {
     -fx-font-size: 12pt;
 }
+.settingsThemeText {
+    -fx-fill: white;
+    -fx-font-size: 14pt;
+}
 .deck {
     -fx-border-color: white;
     -fx-border-radius: 2pt;

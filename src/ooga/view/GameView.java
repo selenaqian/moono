@@ -218,14 +218,16 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void myTurnColorChange(int playerNumber) {
         Node player1Circle = player1Label.getChildren().get(0); // the circle
         player1Circle.getStyleClass().removeAll(player1Circle.getStyleClass());
+        player1Circle.getStyleClass().add("playerText");
         VBox player1AllText = (VBox)player1Label.getChildren().get(1);
         for(Node n : player1AllText.getChildren()) {
             n.getStyleClass().removeAll(n.getStyleClass());
             n.getStyleClass().add("playerText");
         }
         for(int i=1; i<playerViews.size(); i++) {
-            Node playerCircle = playerViews.get(i).getChildren().get(0); // the circle
+            Node playerCircle = playerViews.get(i).getChildren().get(0);
             playerCircle.getStyleClass().removeAll(playerCircle.getStyleClass());
+            playerCircle.getStyleClass().add("playerText");
             VBox playerAllText = (VBox)playerViews.get(i).getChildren().get(1);
             for(Node n : playerAllText.getChildren()) {
                 n.getStyleClass().removeAll(n.getStyleClass());

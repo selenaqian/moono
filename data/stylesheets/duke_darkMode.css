@@ -13,6 +13,10 @@
 .button {
     -fx-font-size: 12pt;
 }
+.settingsThemeText {
+    -fx-fill: white;
+    -fx-font-size: 14pt;
+}
 .deck {
     -fx-background-color: white;
     -fx-background-image: url('images/duke_card.png');

@@ -51,7 +51,10 @@ public class SettingsView {
         VBox allThemeUI = makeThemeUI();
         HBox saveAndNewGameUI = makeSaveAndNewGameUI();
         closeButton = new Button(myResources.getString("closeButton"));
-        closeButton.setOnMouseClicked(e -> myStage.close());
+        closeButton.setOnMouseClicked(e -> {
+            myStage.close();
+            //TODO: start timeline again
+        });
 
         root.getChildren().addAll(allSpeedUI, allThemeUI, saveAndNewGameUI, closeButton);
         Scene mainScene = new Scene(root, DEFAULT_STAGE_WIDTH/2, DEFAULT_STAGE_HEIGHT);
@@ -142,5 +145,4 @@ public class SettingsView {
         }
         //TODO: make the css files
     }
-
 }

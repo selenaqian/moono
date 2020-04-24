@@ -109,9 +109,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
         deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
         discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardRender);
-        //mainPane.getChildren().add(decks);
-        //AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
-        //AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
         callUno = new Button(myResources.getString("callUno"));
         callUno.setAlignment(Pos.CENTER);
@@ -122,12 +119,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
         decksAndCallUno.getChildren().addAll(decks, callUno);
         mainPane.getChildren().add(decksAndCallUno);
         AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
-        AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - 2*deckView.getWidth());
+        AnchorPane.setRightAnchor(decksAndCallUno, mainPane.getWidth()/3);
 
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton.setOnMouseClicked(e -> {
-            //pause the timeline
+            myController.pause();
             new SettingsView(myStylesheet, this); // or just have it show on new stage - either way should be fine I think depends on what info it needs
             // bc don't want to have to keep on passing info also it maybe does make sense for GameView to have a SettingsView as an instance
         });

@@ -56,7 +56,11 @@ public class UnoController implements GameController {
 
     @Override
     public void pause() {
-        //TODO: add a popup view to adjust game options mid-game
+        //TODO: pause the timeline - GameView calls this when button is clicked ~from selena
+    }
+
+    public void play() {
+        //TODO: play the timeline again - but don't want use start(), need this to continue the game ~from selena
     }
 
     @Override

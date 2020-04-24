@@ -37,12 +37,12 @@ public class UnoController implements GameController, GameSaver {
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
         soundPlayer = new SoundPlayer();
         scoreTracker = new UnoScoreTracker();
-        uno = new Uno(settings);
-        uno.start();
     }
 
     @Override
     public void start() {
+        uno = new Uno(settings);
+        uno.start();
         gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         turnManager = uno.getTurnManager();
         speed = settings.getSpeed();

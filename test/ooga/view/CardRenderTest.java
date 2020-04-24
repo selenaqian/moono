@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardRenderTest {
+    /**
+     * Tests creation of a simple numerical card.
+     */
     @Test
     void createCardSimpleTest1() {
         Card card1 = new Card(Suit.A, Value.ZERO);
@@ -23,6 +26,9 @@ class CardRenderTest {
         assertEquals("AText", card1View.getCardViewText().getStyleClass().get(0));
     }
 
+    /**
+     * Tests creation of a simple numerical card.
+     */
     @Test
     void createCardSimpleTest2() {
         Card card2 = new Card(Suit.B, Value.TWO);
@@ -37,6 +43,9 @@ class CardRenderTest {
         assertEquals("BText", card2View.getCardViewText().getStyleClass().get(0));
     }
 
+    /**
+     * Tests creation of a simple numerical card.
+     */
     @Test
     void createCardSimpleTest3() {
         Card card3 = new Card(Suit.D, Value.FOUR);
@@ -51,6 +60,10 @@ class CardRenderTest {
         assertEquals("DText", card3View.getCardViewText().getStyleClass().get(0));
     }
 
+    /***
+     * Tests creation of a special card (non-numerical) and a method updating it to a numerical card.
+     * Used to change the visual of the discard pile in the game.
+     */
     @Test
     void updateCardRenderTest() {
         Card original = new Card(Suit.C, Value.SKIP);

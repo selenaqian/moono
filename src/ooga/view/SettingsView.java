@@ -45,6 +45,9 @@ public class SettingsView {
         themeOptions = new HashMap<>();
         themeFileNames = new HashMap<>();
 
+        //TODO: get this to work:
+        //myStage.setOnCloseRequest(e -> myController.play());
+
         VBox root = new VBox(DEFAULT_SPACING); // used to make scene later
         root.setAlignment(Pos.CENTER);
         VBox allSpeedUI = makeSpeedUI();

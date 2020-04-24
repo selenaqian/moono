@@ -25,12 +25,29 @@ public class PileManager {
         init();
     }
 
+    /**
+     * This constructor is used mainly in testing when a custom draw pile is used
+     * @param drawPile
+     */
+    public PileManager(DrawPile drawPile){
+        this();
+        this.drawPile = drawPile;
+    }
+
     public void init(){
         discPile = new DiscardPile();
         makeDrawPile(specialCards);
 
         //flip over the first card
         discPile.addCard(drawPile.drawCard());
+    }
+
+    public DiscardPile getDiscPile(){
+        return discPile;
+    }
+
+    public DrawPile getDrawPile(){
+        return drawPile;
     }
 
     public Card drawCard(){
@@ -59,6 +76,9 @@ public class PileManager {
 
         drawPile = new DrawPile(specialCardValues);
     }
+
+
+
 
 
 }

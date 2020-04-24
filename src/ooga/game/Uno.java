@@ -19,7 +19,7 @@ import java.util.Random;
  * Model class for handling play of Uno
  * Equivalent to GamePlay interface from planning
  */
-public class Uno implements GameModel {
+public class Uno implements GameModel, GameModelView {
 
     public static final int UNO_PENALTY = 2;
     public static final double AI_UNO_PROB = 0.5;
@@ -156,6 +156,11 @@ public class Uno implements GameModel {
     }
 
     @Override
+    public Player getCurrentPlayer() {
+        return turnManager.getCurrentPlayer();
+    }
+
+    @Override
     public void registerPlayerObserver(PlayerObserver o) {
         playerObservers.add(o);
     }
@@ -250,9 +255,8 @@ public class Uno implements GameModel {
      * If user has not declared, then they must pick up more cards
      */
     public boolean checkUno(){
-
         if (turnManager.getCurrentPlayer().hand().getCardCount() == 1 && didCallUno == false){
-           // System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
+            //System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
                 turnManager.getCurrentPlayer().takecard(piles.drawCard());
             }
@@ -268,10 +272,11 @@ public class Uno implements GameModel {
         }
     }
 
+    @Override
     public boolean isOver(){
-
         return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
 
     }
+
 
 }

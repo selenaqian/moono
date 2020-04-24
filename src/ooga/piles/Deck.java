@@ -15,7 +15,7 @@ public abstract class Deck implements Pile {
 
     public static final int EMPTY = 0;
 
-    protected Stack<Card> myCards; //TODO: protected so subclass has access -- is there better way?
+    protected Stack<Card> myCards; //protected so subclass has access
 
     /**
      * Shuffle the order of the Cards.
@@ -53,6 +53,15 @@ public abstract class Deck implements Pile {
             return null;
         }
         return myCards.pop();
+    }
+
+    /**
+     * Sets cards.
+     * XMLEncoder requires a matching setter and getter for each instance variable to be saved.
+     * @param cards
+     */
+    public void setAllCards(Stack<Card> cards) {
+        myCards = cards;
     }
 
     @Override

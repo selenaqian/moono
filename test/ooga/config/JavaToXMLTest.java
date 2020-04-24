@@ -8,12 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests JavaToXML class.
+ * About XML: it keeps track of all the variables that differ from the default instantiation.
+ *
  * @author Tess Noonan (tcn6)
  */
 class JavaToXMLTest {
@@ -23,7 +26,7 @@ class JavaToXMLTest {
 
     private DiscardPile discard = new DiscardPile();
     private DrawPile draw = new DrawPile();
-    private TurnManager tm = new UnoTurnManager(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player()));
+    private TurnManager tm = new UnoTurnManager();
     private GameSettings gs = new GameSettings();
     private ScoreTracker st = new UnoScoreTracker();
 
@@ -35,7 +38,13 @@ class JavaToXMLTest {
      */
     @Test
     void encodeBasic() {
-        discard.addCard(new Card(Suit.A, Value.ZERO));
+        discard.addCard(new Card(Suit.C, Value.SIX));
+        tm.changeDirection();
+        gs.setHandSize(8);
+        HashMap<Integer, Integer> scores = new HashMap<>();
+        scores.put(1, 300);
+        st.setScores(scores);
+
         GameInfo basicGI = new GameInfo(tm, gs, draw, discard, st);
         assertDoesNotThrow(() -> toXML.encode(basicGI, myResources.getString("testBasicGame")));
     }

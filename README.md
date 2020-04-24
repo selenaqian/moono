@@ -19,7 +19,7 @@ Finish Date:
 Hours Spent Together: 19 hours
 
 Individual:
-- Tess Hours: 19 hours
+- Tess Hours: 21 hours
 - Mary Hours: 21.5 hours
 - Selena Hours: 22 hours
 - Suomo Hours:12 hours
@@ -52,6 +52,7 @@ Features implemented:
 ### Notes/Assumptions
 
 Assumptions or Simplifications:
+* Lists are not serializable so when saving a game it defaults to 4 players in TurnManager
 
 Interesting data files:
 

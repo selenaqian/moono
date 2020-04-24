@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.cards.Card;
@@ -45,7 +46,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private UnoController myController;
     private GameSettings mySettings;
     private VBox allPlayersNot1;
-    private Button nextTurn;
     private ResourceBundle myResources;
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
@@ -110,12 +110,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
         mainPane.getChildren().add(callUno);
         AnchorPane.setTopAnchor(callUno, mainPane.getHeight()*5/8);
         AnchorPane.setLeftAnchor(callUno, mainPane.getWidth()/2 - callUno.getWidth());
-
-        nextTurn = new Button(myResources.getString("next"));
-        nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
-        mainPane.getChildren().add(nextTurn);
-        AnchorPane.setTopAnchor(nextTurn, 10.0);
-        AnchorPane.setRightAnchor(nextTurn, 10.0);
 
         updateHand(myUno.getUserHand());
     }

@@ -183,6 +183,7 @@ public class UnoTurnManager implements TurnManager {
         return false;
     }
 
+
     //XMLEncoder requires matching setters and getters, so here all the ones we still need:
     //@author Tess Noonan (tcn6)
 
@@ -201,5 +202,6 @@ public class UnoTurnManager implements TurnManager {
     public void setCurrentPlayer(Player curr) {
         current = curr;
     }
+
 
 }

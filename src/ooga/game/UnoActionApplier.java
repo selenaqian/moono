@@ -1,9 +1,12 @@
 package ooga.game;
 
+import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import ooga.player.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,6 +20,11 @@ import java.util.Random;
  * @author Suomo Ammah (sna19)
  */
 public class UnoActionApplier {
+    Card card;
+    Player chosenswap;
+    Player swapper;
+    Player player1;
+    Player player2;
 
     public static final int FOUR = 4;
     public static final int TWO = 2;
@@ -25,6 +33,7 @@ public class UnoActionApplier {
     private Uno uno;
 
     private WildcardObserver observer;
+    private SwapCardObserver oserver;
 
     /**
      * Create new UnoActionApplier
@@ -69,6 +78,7 @@ public class UnoActionApplier {
      * @param value
      */
     public void applyAction(Value value){
+
         switch(value){
             case SKIP:
                 applySkip();
@@ -85,6 +95,10 @@ public class UnoActionApplier {
             case WILD4:
                 applyWild4();
                 break;
+            case SWAP:
+                applySwap(card, chosenswap, swapper);
+            case TRADE:
+                applyTrade(player1, player2);
             default:
                 //this is a normal card: do nothing
                 return;
@@ -134,5 +148,60 @@ public class UnoActionApplier {
             uno.drawCard(nextPlayer);
         }
         turnManager.nextPlayer();
+    }
+
+
+    /**
+     * allows the manual player to swap a card with an AI player of choice
+     * */
+    private void applySwap(Card card, Player chosenswap, Player swapper){
+        Random random = new Random();
+        chosenswap.hand().addCard(card);
+        swapper.hand().removeCard(card);
+        int rand_int = random.nextInt(chosenswap.hand().getCardCount());
+        swapper.hand().addCard(chosenswap.hand().getcard(rand_int));
+    }
+
+    /**
+     * allows the manual player to trade hands with an AI player
+     */
+    private void applyTrade(Player player1,Player player2){
+        Random random = new Random();
+        int randon = random.nextInt(uno.getaiPlayers().size());
+        player2 = uno.getaiPlayers().get(randon);
+        int size = player2.hand().getCardCount();
+        List<Card> tempholder = new ArrayList<>();
+        for(Card card:player1.hand().getAllCards()){
+            player2.hand().addCard(card);
+            tempholder.add(card);
+        }
+
+        for(Card card:tempholder){
+            player1.hand().removeCard(card);
+        }
+
+        for(int i = 0;i<size-1;i++){
+            player1.hand().addCard(player2.hand().getcard(i));
+            player2.hand().removeCard(player2.hand().getcard(i));}
+    }
+
+
+
+    /**
+     * Notifies observers to make SwapCardSelectorView show up
+     */
+    public void notifySwapObserver() {
+        if (turnManager.isHumanTurn()) {
+            oserver.showplayerandcardoptions();
+        }
+    }
+
+
+    public void registerSwapObserver(SwapCardObserver o){
+        this.oserver = o;
+    }
+
+    public List<Player> getplayers(){
+        return uno.getaiPlayers();
     }
 }

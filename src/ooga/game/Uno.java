@@ -12,6 +12,7 @@ import ooga.rules.ClassicRules;
 import ooga.rules.Rule;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -293,4 +294,13 @@ public class Uno implements GameModel, GameModelView {
     }
 
 
+
+    public Card getUserHande() {
+        return turnManager.getHumanPlayer().hand().getAllCards().get(1);
+    }
+
+    public List<Player> getaiPlayers() {
+        players.remove(0);
+        return players;
+    }
 }

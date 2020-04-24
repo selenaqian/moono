@@ -192,6 +192,7 @@ public class UnoController implements GameController, GameSaver {
 
     @Override
     public void loadGame(GameInfo gameInfo) {
+        uno = new Uno(gameInfo.getGameSettings());
 
     }
 }

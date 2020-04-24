@@ -60,11 +60,14 @@ public class Uno implements GameModel, GameModelView {
         addPlayers();
         turnManager = new UnoTurnManager(players);
         turnManager.setHumanPlayer(players.get(0));
-        dealCards();
-        //update everything in view when game is first started
-        notifyPlayerObservers();
+
         actionApplier = new UnoActionApplier(this, turnManager);
     }
+
+    public Uno(GameSettings settings, PileManager piles, UnoTurnManager turnManager){
+
+    }
+
 
     public UnoTurnManager getTurnManager(){
         return turnManager;
@@ -72,6 +75,8 @@ public class Uno implements GameModel, GameModelView {
 
     @Override
     public void start() {
+        dealCards();
+        notifyPlayerObservers();
     }
 
     @Override

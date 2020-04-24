@@ -40,7 +40,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private List<Text> allPlayersScore; // similar function to allPlayersCardsLeft but for the score
     private HBox player1Hand; // store the card nodes for the user's hand
     private CardRender discardRender;
-    private Rectangle deckView;
+    private Region deckView;
     private HBox decks; // stores the view of both decks together
     private Uno myUno;
     private UnoController myController;
@@ -99,7 +99,13 @@ public class GameView implements GameViewInterface, PlayerObserver {
         positionPlayersNot1();
 
         decks = new HBox(DEFAULT_SPACING);
-        deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
+        deckView = new Region();
+        //deckView.setStyle("-fx-background-image: url(/stylesheets/images/duke_card.png)");
+        deckView.setMaxHeight(mainPane.getHeight()/3);
+        deckView.setMinHeight(mainPane.getHeight()/3);
+        deckView.setMaxWidth(mainPane.getWidth()/7);
+        deckView.setMinWidth(mainPane.getWidth()/7);
+        deckView.getStyleClass().add("deck");
         deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
         discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardRender);
@@ -122,7 +128,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         decksAndCallUno.getChildren().addAll(decks, unoButtons);
         mainPane.getChildren().add(decksAndCallUno);
         AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
-        AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - deckView.getWidth());
+        AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - 2*deckView.getWidth());
 
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton = new Button(myResources.getString("settingsButton"));

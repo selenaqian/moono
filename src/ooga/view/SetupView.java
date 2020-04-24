@@ -35,7 +35,7 @@ public class SetupView {
     public static final int INCREMENT_ONE = 1;
     public static final int INCREMENT_50 = 50;
     public static final int DEFAULT_SPACING = 10;
-    public static final String DEFAULT_STYLESHEET = "default.css";
+    public static final String DEFAULT_STYLESHEET = "stylesheets/default.css";
     public static final String DEFAULT_RESOURCES = "default";
 
     private GameSettings mySettings;

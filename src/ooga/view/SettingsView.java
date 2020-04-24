@@ -66,7 +66,7 @@ public class SettingsView {
         speedUI.setAlignment(Pos.CENTER);
         HBox speedButtons = new HBox(DEFAULT_SPACING);
         speedButtons.setAlignment(Pos.CENTER);
-        speedChangeText = new Text(myResources.getString("speedOriginal"));
+        speedChangeText = new Text(myResources.getString("speedOriginal")); //TODO: change to display # of seconds?
         slowDownButton = new Button(myResources.getString("slowDownButton"));
         slowDownButton.setOnMouseClicked(e -> {
             //TODO: call function to slow down game
@@ -110,7 +110,7 @@ public class SettingsView {
             themeFileNames.put(theme, allThemeFiles[i]);
         }
         darkModeToggle = new CheckBox(myResources.getString("darkMode"));
-        themeUI.getChildren().addAll(themeTitle, themeOptionsToClick, darkModeToggle);
+        themeUI.getChildren().addAll(themeTitle, darkModeToggle, themeOptionsToClick);
         return themeUI;
     }
 

@@ -28,7 +28,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         goToThemeView();
         clickOn(startView.getThemeOkButton());
 
-        assertEquals("default.css", startView.getMySettings().getTheme());
+        assertEquals("stylesheets/default.css", startView.getMySettings().getTheme());
     }
 
     @Test
@@ -38,7 +38,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         sleep(2, TimeUnit.SECONDS);
         clickOn(startView.getThemeOkButton());
 
-        assertEquals("duke.css", startView.getMySettings().getTheme());
+        assertEquals("stylesheets/duke.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(1).getStroke());
     }
 
@@ -49,7 +49,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         sleep(2, TimeUnit.SECONDS);
         clickOn(startView.getThemeOkButton());
 
-        assertEquals("space.css", startView.getMySettings().getTheme());
+        assertEquals("stylesheets/space.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(2).getStroke());
     }
 
@@ -65,7 +65,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
 
         clickOn(startView.getThemeOkButton());
 
-        assertEquals("duke.css", startView.getMySettings().getTheme());
+        assertEquals("stylesheets/duke.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(1).getStroke());
     }
 

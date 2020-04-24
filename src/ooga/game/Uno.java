@@ -30,8 +30,6 @@ public class Uno implements GameModel, GameModelView {
     private GameSettings mySettings;
     private PileManager piles;
     private UnoTurnManager turnManager;
-    private List<Player> players = new ArrayList<Player>();
-
     private UnoActionApplier actionApplier; //contains methods for action cards]
     private Rule rule;
     private List<Card> specialCards;
@@ -50,7 +48,6 @@ public class Uno implements GameModel, GameModelView {
         rule = mySettings.getRule();
         specialCards = mySettings.getSpecialCards();
         turnManager.addPlayers(settings.getNumPlayers());
-        turnManager.setHumanPlayer(players.get(0));
         dealCards();
         actionApplier = new UnoActionApplier(this, turnManager);
         playerObservers = new ArrayList();
@@ -89,11 +86,7 @@ public class Uno implements GameModel, GameModelView {
     @Override
     public void restart() {
         piles.init();
-        //clear player hands
-        for (Player p : players){
-            p.reset();
-        }
-
+        turnManager.clearPlayerHands();
         dealCards();
     }
 
@@ -186,7 +179,7 @@ public class Uno implements GameModel, GameModelView {
     @Override
     public void notifyPlayerObservers() {
         for (PlayerObserver o : playerObservers){
-            for (Player player : players){
+            for (Player player : turnManager.getAllPlayers()){
                 o.updatePlayerHand(player.getID(), player.hand().getAllCards());
             }
             o.updateDiscardPile(piles.showTopCard());
@@ -199,7 +192,7 @@ public class Uno implements GameModel, GameModelView {
      */
     private void dealCards(){
         for(int i = 0; i < mySettings.getNumPlayers(); i ++){
-            Player player = players.get(i);
+            Player player = turnManager.getAllPlayers().get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = piles.drawCard();
                 player.takecard(card);

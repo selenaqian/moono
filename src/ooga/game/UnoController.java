@@ -182,12 +182,14 @@ public class UnoController implements GameController, GameSaver {
 
     @Override
     public GameInfo saveGame() {
-        GameInfo gameInfo = new GameInfo;
+        GameInfo gameInfo = new GameInfo();
         gameInfo.setGameSettings(settings);
         gameInfo.setDrawPile(uno.getPileManager().getDrawPile());
         gameInfo.setDiscardPile(uno.getPileManager().getDiscPile());
         gameInfo.setScoreTracker(scoreTracker);
         gameInfo.setTurnManager(turnManager);
+
+        return gameInfo;
     }
 
     @Override

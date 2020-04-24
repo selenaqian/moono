@@ -47,6 +47,12 @@ public interface TurnManager{
     int getPlayerId(Player player);
 
     /**
+     * Removes all the cards from players' hands
+     * Used when resetting a game for a new round
+     */
+    void clearPlayerHands();
+
+    /**
      * Returns all players a TurnManager is keeping track of
      * Used in UnoController to calculate scores for all players
      * @return

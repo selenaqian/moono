@@ -55,9 +55,11 @@ public class UnoTurnManager implements TurnManager {
      */
     public void addPlayers(int numPlayers){
         //FIXME: pass id into player constructor
+        players = new ArrayList<>();
         Player manPlayer = new ManualPlayer();
         manPlayer.setID(1);
         players.add(manPlayer);
+        setHumanPlayer(manPlayer);
         for (int i = 2; i < numPlayers+1; i++){
             Player aiPlayer = new AI_Player();
             aiPlayer.setID(i);
@@ -162,6 +164,14 @@ public class UnoTurnManager implements TurnManager {
         }
     }
 
+
+    @Override
+    public void clearPlayerHands(){
+        for (Player player : players){
+            player.reset();
+        }
+    }
+
     /**
      * Returns all players a TurnManager is keeping track of
      * Used in UnoController to calculate scores for all players
@@ -179,7 +189,7 @@ public class UnoTurnManager implements TurnManager {
         return direction;
     }
 
-    public void setHumanPlayer(Player player){
+    private void setHumanPlayer(Player player){
         humanPlayer = player;
     }
 

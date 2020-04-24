@@ -12,7 +12,7 @@ import ooga.cards.Value;
  */
 public class AscendingRules extends Rule {
 
-    public static final int WILD_THRESHOLD = 15;
+    public static final int WILD_THRESHOLD = 13;
     public static final int SPECIAL_THRESHOLD = 10;
 
     /**

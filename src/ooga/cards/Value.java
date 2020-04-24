@@ -18,10 +18,8 @@ public enum Value {
     SKIP(10),
     REVERSE(11),
     DRAW2(12),
-    SWAP(13),
-    TRADE(14),
-    WILD(15),
-    WILD4(16);
+    WILD(13),
+    WILD4(14);
 
     private final int myNumericValue;
 

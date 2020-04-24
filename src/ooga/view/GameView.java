@@ -45,7 +45,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private UnoController myController;
     private GameSettings mySettings;
     private VBox allPlayersNot1;
-    private Button nextTurn;
+    private Button settingsButton;
     private ResourceBundle myResources;
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
@@ -123,11 +123,16 @@ public class GameView implements GameViewInterface, PlayerObserver {
         AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
         AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - deckView.getWidth());
 
-        nextTurn = new Button(myResources.getString("next"));
-        nextTurn.setOnMouseClicked(e -> myController.handleAIPlay());
-        mainPane.getChildren().add(nextTurn);
-        AnchorPane.setTopAnchor(nextTurn, 10.0);
-        AnchorPane.setRightAnchor(nextTurn, 10.0);
+        settingsButton = new Button(myResources.getString("settingsButton"));
+        settingsButton = new Button(myResources.getString("settingsButton"));
+        settingsButton.setOnMouseClicked(e -> {
+            //pause the timeline
+            new SettingsView(); // or just have it show on new stage - either way should be fine I think depends on what info it needs
+            // bc don't want to have to keep on passing info also it maybe does make sense for GameView to have a SettingsView as an instance
+        });
+        mainPane.getChildren().add(settingsButton);
+        AnchorPane.setTopAnchor(settingsButton, 10.0);
+        AnchorPane.setRightAnchor(settingsButton, 10.0);
 
         updateHand(myUno.getUserHand());
     }

@@ -195,6 +195,9 @@ public class GameView implements GameViewInterface, PlayerObserver {
         Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
         Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
         Text score = new Text(myResources.getString("score") + 0);
+        playerNumberText.getStyleClass().add("playerText");
+        cardsLeft.getStyleClass().add("playerText");
+        score.getStyleClass().add("playerText");
 
         if (allPlayersCardsLeft.size() >= playerNumber) {
             allPlayersCardsLeft.remove(playerNumber-1);
@@ -205,6 +208,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         textBox.getChildren().addAll(playerNumberText, cardsLeft, score);
 
         Circle playerIcon = new Circle(10);
+        playerIcon.getStyleClass().add("playerText");
         playerBox.getChildren().addAll(playerIcon, textBox);
         return playerBox;
     }
@@ -220,6 +224,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         VBox player1AllText = (VBox)player1Label.getChildren().get(1);
         for(Node n : player1AllText.getChildren()) {
             n.getStyleClass().removeAll(n.getStyleClass());
+            n.getStyleClass().add("playerText");
         }
         for(int i=1; i<playerViews.size(); i++) {
             Node playerCircle = playerViews.get(i).getChildren().get(0); // the circle
@@ -227,6 +232,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
             VBox playerAllText = (VBox)playerViews.get(i).getChildren().get(1);
             for(Node n : playerAllText.getChildren()) {
                 n.getStyleClass().removeAll(n.getStyleClass());
+                n.getStyleClass().add("playerText");
             }
         }
         if(playerNumber == 1) {

@@ -16,7 +16,7 @@ Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent Together: 19 hours
+Hours Spent Together: 22 hours
 
 Individual:
 - Tess Hours: 21 hours

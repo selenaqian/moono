@@ -7,7 +7,8 @@ import javafx.util.Duration;
 import ooga.cards.Card;
 import ooga.exceptions.OOGAException;
 import ooga.player.Player;
-import ooga.view.EndView;
+import ooga.view.EndGameView;
+import ooga.view.EndRoundView;
 import ooga.view.GameView;
 import ooga.view.SetupView;
 import ooga.view.SoundPlayer;
@@ -59,9 +60,9 @@ public class UnoController implements GameController {
     }
 
     @Override
-    public void endGame() {
+    public void endGame(int playerNumber) {
         //TODO: pass in the winner info to the view
-        new EndView(mainStage);
+        new EndGameView(mainStage, playerNumber);
 
     }
 
@@ -83,7 +84,6 @@ public class UnoController implements GameController {
         uno.checkUno();
 
     }
-
 
 
     /**
@@ -141,12 +141,12 @@ public class UnoController implements GameController {
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
 
-            //TODO: show a new round screen in the view
+            new EndRoundView(mainStage, p.getID(), scoreTracker.getScores()); //TODO: show a new round screen in the view
 
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 winner = p;
-                endGame();
+                endGame(p.getID());
             } else {
                 //play a new round
                 uno.restart();

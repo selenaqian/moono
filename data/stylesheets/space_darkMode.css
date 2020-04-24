@@ -1,3 +1,9 @@
+.root {
+    -fx-background-color: black;
+}
+.playerText {
+    -fx-fill: white;
+}
 .title {
     -fx-font-size: 72pt;
 }
@@ -6,6 +12,14 @@
 }
 .button {
     -fx-font-size: 12pt;
+}
+.deck {
+    -fx-border-color: white;
+    -fx-border-radius: 2pt;
+    -fx-background-color: black;
+    -fx-background-image: url('images/space_card.jpg');
+    -fx-background-position: center;
+    -fx-background-size: 150px;
 }
 .myTurn {
     -fx-fill: green;
@@ -23,20 +37,20 @@
     -fx-font-size: 20pt;
 }
 .DText {
-    -fx-fill: white;
+    -fx-fill: black;
     -fx-font-size: 20pt;
 }
 .A {
-    -fx-fill: blue;
+    -fx-fill: purple;
 }
 .B {
-    -fx-fill: teal;
+    -fx-fill: darkblue;
 }
 .C {
-    -fx-fill: aqua;
+    -fx-fill: violet;
 }
 .D {
-    -fx-fill: darkblue;
+    -fx-fill: pink;
 }
 .themeOptionSelected {
     -fx-stroke: aqua;

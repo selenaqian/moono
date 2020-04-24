@@ -1,0 +1,66 @@
+.root {
+    -fx-background-color: black;
+}
+.playerText {
+    -fx-fill: white;
+}
+.title {
+    -fx-font-size: 72pt;
+}
+.subtitle {
+    -fx-font-size: 36pt;
+}
+.subtitle2 {
+    -fx-font-size: 16pt;
+}
+.button {
+    -fx-font-size: 12pt;
+    -fx-text-alignment: center;
+}
+.settingsThemeText {
+    -fx-fill: white;
+    -fx-font-size: 14pt;
+}
+.deck {
+    -fx-border-color: white;
+    -fx-border-radius: 2pt;
+    -fx-background-color: black;
+    -fx-background-image: url('images/uno_card.png');
+    -fx-background-position: center;
+    -fx-background-size: 150px;
+}
+.myTurn {
+    -fx-fill: green;
+}
+.AText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.BText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.CText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.DText {
+    -fx-fill: black;
+    -fx-font-size: 20pt;
+}
+.A {
+    -fx-fill: red;
+}
+.B {
+    -fx-fill: blue;
+}
+.C {
+    -fx-fill: green;
+}
+.D {
+    -fx-fill: yellow;
+}
+.themeOptionSelected {
+    -fx-stroke: aqua;
+    -fx-stroke-width: 10pt;
+}

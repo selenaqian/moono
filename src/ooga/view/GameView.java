@@ -33,6 +33,7 @@ import static ooga.view.SetupView.*;
 public class GameView implements GameViewInterface, PlayerObserver {
     public static final int SPACING_BETWEEN_CARDS = 5;
     private Stage mainStage;
+    private Scene mainScene;
     private List<Pane> playerViews;
     private Pane player1Label; // store the user label separate from the others as well
     private Pane mainPane;
@@ -40,12 +41,13 @@ public class GameView implements GameViewInterface, PlayerObserver {
     private List<Text> allPlayersScore; // similar function to allPlayersCardsLeft but for the score
     private HBox player1Hand; // store the card nodes for the user's hand
     private CardRender discardRender;
-    private Rectangle deckView;
+    private Region deckView;
     private HBox decks; // stores the view of both decks together
     private Uno myUno;
     private UnoController myController;
     private GameSettings mySettings;
     private VBox allPlayersNot1;
+    private Button settingsButton;
     private ResourceBundle myResources;
     private WildColorSelectorView wildColorSelector;
     private String myStylesheet;
@@ -77,7 +79,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         //registering observer(s)
         myUno.registerPlayerObserver(this);
 
-        Scene mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(myStylesheet);
         mainStage.setScene(mainScene);
         mainStage.show();
@@ -97,19 +99,41 @@ public class GameView implements GameViewInterface, PlayerObserver {
         positionPlayersNot1();
 
         decks = new HBox(DEFAULT_SPACING);
-        deckView = new Rectangle(mainPane.getWidth()/7, mainPane.getHeight()/3);
+        deckView = new Region();
+        //deckView.setStyle("-fx-background-image: url(/stylesheets/images/duke_card.png)");
+        deckView.setMaxHeight(mainPane.getHeight()/3);
+        deckView.setMinHeight(mainPane.getHeight()/3);
+        deckView.setMaxWidth(mainPane.getWidth()/7);
+        deckView.setMinWidth(mainPane.getWidth()/7);
+        deckView.getStyleClass().add("deck");
         deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
         discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardRender);
-        mainPane.getChildren().add(decks);
-        AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
-        AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
+        //mainPane.getChildren().add(decks);
+        //AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
+        //AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
         callUno = new Button(myResources.getString("callUno"));
+        callUno.setAlignment(Pos.CENTER);
         callUno.setOnMouseClicked(e -> myController.callUno());
-        mainPane.getChildren().add(callUno);
-        AnchorPane.setTopAnchor(callUno, mainPane.getHeight()*5/8);
-        AnchorPane.setLeftAnchor(callUno, mainPane.getWidth()/2 - callUno.getWidth());
+
+        VBox decksAndCallUno = new VBox(DEFAULT_SPACING);
+        decksAndCallUno.setAlignment(Pos.CENTER);
+        decksAndCallUno.getChildren().addAll(decks, callUno);
+        mainPane.getChildren().add(decksAndCallUno);
+        AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
+        AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - 2*deckView.getWidth());
+
+        settingsButton = new Button(myResources.getString("settingsButton"));
+        settingsButton = new Button(myResources.getString("settingsButton"));
+        settingsButton.setOnMouseClicked(e -> {
+            //pause the timeline
+            new SettingsView(myStylesheet, this); // or just have it show on new stage - either way should be fine I think depends on what info it needs
+            // bc don't want to have to keep on passing info also it maybe does make sense for GameView to have a SettingsView as an instance
+        });
+        mainPane.getChildren().add(settingsButton);
+        AnchorPane.setTopAnchor(settingsButton, 10.0);
+        AnchorPane.setRightAnchor(settingsButton, 10.0);
 
         updateHand(myUno.getUserHand());
     }
@@ -171,6 +195,9 @@ public class GameView implements GameViewInterface, PlayerObserver {
         Text playerNumberText = new Text(myResources.getString("player") + playerNumber);
         Text cardsLeft = new Text(numberCards + myResources.getString("cardsLeft"));
         Text score = new Text(myResources.getString("score") + 0);
+        playerNumberText.getStyleClass().add("playerText");
+        cardsLeft.getStyleClass().add("playerText");
+        score.getStyleClass().add("playerText");
 
         if (allPlayersCardsLeft.size() >= playerNumber) {
             allPlayersCardsLeft.remove(playerNumber-1);
@@ -181,6 +208,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         textBox.getChildren().addAll(playerNumberText, cardsLeft, score);
 
         Circle playerIcon = new Circle(10);
+        playerIcon.getStyleClass().add("playerText");
         playerBox.getChildren().addAll(playerIcon, textBox);
         return playerBox;
     }
@@ -196,6 +224,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         VBox player1AllText = (VBox)player1Label.getChildren().get(1);
         for(Node n : player1AllText.getChildren()) {
             n.getStyleClass().removeAll(n.getStyleClass());
+            n.getStyleClass().add("playerText");
         }
         for(int i=1; i<playerViews.size(); i++) {
             Node playerCircle = playerViews.get(i).getChildren().get(0); // the circle
@@ -203,6 +232,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
             VBox playerAllText = (VBox)playerViews.get(i).getChildren().get(1);
             for(Node n : playerAllText.getChildren()) {
                 n.getStyleClass().removeAll(n.getStyleClass());
+                n.getStyleClass().add("playerText");
             }
         }
         if(playerNumber == 1) {
@@ -262,6 +292,17 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void updateScore(int playerNumber, int score) {
         Text scoreDisplay = allPlayersScore.get(playerNumber-1);
         scoreDisplay.setText(myResources.getString("score") + score);
+    }
+
+    /**
+     * Method to change the game theme mid-game. Only called within the view package, so method is package-private.
+     * @param theme the name of the desired theme.
+     */
+    void setTheme(String theme) {
+        mainScene.getStylesheets().removeAll(mainScene.getStylesheets());
+        mainScene.getStylesheets().add(theme);
+        mySettings.setTheme(theme);
+        wildColorSelector.setTheme(theme);
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.

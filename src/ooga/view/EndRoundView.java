@@ -1,3 +1,10 @@
+/**
+ * This class creates the view at the end of a round. It shows that the round is over and allows the user to advance to the next round.
+ * TODO: add something that shows the changes to scores?
+ *
+ * @author Selena Qian
+ */
+
 package ooga.view;
 
 import javafx.geometry.Pos;
@@ -7,14 +14,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Map;
+
 import static ooga.view.SetupView.*;
 import static ooga.view.SetupView.DEFAULT_STYLESHEET;
 
 public class EndRoundView extends EndView {
     private Button nextRoundButton;
+    private Map scores;
 
-    public EndRoundView(Stage stage, int playerNumber) {
+    public EndRoundView(Stage stage, int playerNumber, Map playerScores) {
         super(stage, playerNumber);
+        scores = playerScores;
+        showEndScene();
     }
 
     @Override
@@ -23,6 +35,9 @@ public class EndRoundView extends EndView {
         root.setAlignment(Pos.CENTER);
 
         Text roundComplete = makeText("roundComplete");
+
+        //TODO: make the player stuff for the scores
+
         Text startNextRound = makeText("startNextRound");
 
         nextRoundButton = new Button(myResources.getString("nextRoundButton"));

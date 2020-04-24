@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class UnoController implements GameController {
     private Timeline myAnimation = new Timeline();
-    private int speed;
+    private double speed;
 
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;

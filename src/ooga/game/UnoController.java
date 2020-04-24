@@ -36,17 +36,17 @@ public class UnoController implements GameController, GameSaver {
         this.settings = new GameSettings();
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
         soundPlayer = new SoundPlayer();
+        scoreTracker = new UnoScoreTracker();
+        uno = new Uno(settings);
+        uno.start();
     }
 
     @Override
     public void start() {
-        uno = new Uno(settings);
-        uno.start();
         gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         turnManager = uno.getTurnManager();
-        scoreTracker = new UnoScoreTracker();
-
         speed = settings.getSpeed();
+
         KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
@@ -192,7 +192,10 @@ public class UnoController implements GameController, GameSaver {
 
     @Override
     public void loadGame(GameInfo gameInfo) {
-        uno = new Uno(gameInfo.getGameSettings());
+        //TODO: use pile manager directly in GameInfo
+        PileManager pileManager = new PileManager(gameInfo.getDrawPile(), gameInfo.getDiscardPile());
+        uno = new Uno(gameInfo.getGameSettings(), pileManager, (UnoTurnManager) gameInfo.getTurnManager());
+        start();
 
     }
 }

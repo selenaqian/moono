@@ -1,6 +1,9 @@
 package ooga.view;
 
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.cards.Card;
@@ -37,7 +40,7 @@ class GameViewTest extends DukeApplicationTest {
      * Tests updating the visual of AI players' hands where cards aren't visible but the number of cards left is.
      */
     @Test
-    void testUpdateHandCardsLeft() {
+    void updateHandCardsLeftTest() {
         sleep(2, TimeUnit.SECONDS);
         javafxRun(() -> gameView.updateHand(3, 10));
         sleep(5, TimeUnit.SECONDS);
@@ -49,7 +52,7 @@ class GameViewTest extends DukeApplicationTest {
      * Tests updating the visual of player 1's hand where cards are actually visible.
      */
     @Test
-    void testUpdateHandOneNew() {
+    void UpdateHandOneNewCardTest() {
         sleep(2, TimeUnit.SECONDS);
         List<Card> newCards = new ArrayList<>();
         newCards.add(new Card(Suit.B, Value.FIVE));
@@ -71,7 +74,7 @@ class GameViewTest extends DukeApplicationTest {
      * Tests the creation of the visual of a hand for human player with multiple cards in it.
      */
     @Test
-    void testUpdateHandMultipleNew() {
+    void updateHandMultipleNewCardsTest() {
         sleep(2, TimeUnit.SECONDS);
         List<Card> newCards = new ArrayList<>();
         newCards.add(new Card(Suit.B, Value.FIVE));
@@ -98,18 +101,69 @@ class GameViewTest extends DukeApplicationTest {
      * Tests updating the visual of the discard pile which gets called when any player plays a card.
      */
     @Test
-    void testUpdateDiscardPile() {
+    void updateDiscardPileTest() {
         javafxRun(() -> gameView.updateDiscardPile(new Card(Suit.D, Value.SEVEN)));
         sleep(2, TimeUnit.SECONDS);
 
         assertEquals(0, new Card(Suit.D, Value.SEVEN).compareTo(gameView.getDiscardRender().getCard()));
     }
 
+    /**
+     * Tests updating the visual display of the score.
+     */
     @Test
-    void testUpdateScore() {
+    void updateScoreTest() {
         assertEquals("score: 0", gameView.getAllPlayersScore().get(0).getText());
         javafxRun(() -> gameView.updateScore(1, 10));
 
         assertEquals("score: 10", gameView.getAllPlayersScore().get(0).getText());
+    }
+
+    /**
+     * Tests that properly change colors for player 1's turn.
+     */
+    @Test
+    void player1ColorChangeOnTurnTest() {
+        gameView.myTurnColorChange(1);
+        Pane player1Pane = gameView.getPlayerViews().get(0);
+
+        assertEquals("myTurn", player1Pane.getChildren().get(0).getStyleClass().get(1));
+        VBox player1AllText = (VBox)player1Pane.getChildren().get(1);
+        for(Node current : player1AllText.getChildren()) {
+            assertEquals("myTurn", current.getStyleClass().get(1));
+        }
+
+        for(int i=1; i <= gameView.getPlayerViews().size(); i++) {
+            Pane currentPane = gameView.getPlayerViews().get(i-1);
+            assertEquals("playerText", currentPane.getChildren().get(0).getStyleClass().get(0));
+            VBox currentAllText = (VBox)currentPane.getChildren().get(1);
+            for(Node current : currentAllText.getChildren()) {
+                assertEquals("playerText", current.getStyleClass().get(0));
+            }
+        }
+    }
+
+    /**
+     * Tests that properly change colors for players other than player 1 on their turn.
+     */
+    @Test
+    void otherPlayerColorChangeOnTurnTest() {
+        gameView.myTurnColorChange(2);
+        Pane player2Pane = gameView.getPlayerViews().get(1);
+
+        assertEquals("myTurn", player2Pane.getChildren().get(0).getStyleClass().get(1));
+        VBox player2AllText = (VBox)player2Pane.getChildren().get(1);
+        for(Node current : player2AllText.getChildren()) {
+            assertEquals("myTurn", current.getStyleClass().get(1));
+        }
+
+        for(int i=1; i <= gameView.getPlayerViews().size(); i++) {
+            Pane currentPane = gameView.getPlayerViews().get(i-1);
+            assertEquals("playerText", currentPane.getChildren().get(0).getStyleClass().get(0));
+            VBox currentAllText = (VBox)currentPane.getChildren().get(1);
+            for(Node current : currentAllText.getChildren()) {
+                assertEquals("playerText", current.getStyleClass().get(0));
+            }
+        }
     }
 }

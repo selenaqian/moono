@@ -340,6 +340,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
         return discardRender;
     }
 
+    public List<Pane> getPlayerViews() {
+        List<Pane> allViews = playerViews;
+        allViews.remove(0);
+        allViews.add(0, player1Label);
+        return allViews;
+    }
 
     //Testing code for observers
     @Override

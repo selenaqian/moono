@@ -67,16 +67,20 @@ public class PileManager {
     }
 
     public Card drawCard(){
+
+        Card drawnCard =  drawPile.drawCard();
         //when draw pile is empty, put discard pile cards into it
         if (drawPile.getCardCount() == 0){
             drawPile = new DrawPile(discPile.getAllCards());
             discPile = new DiscardPile();
+            discPile.addCard(drawPile.drawCard());
         }
 
-        return drawPile.drawCard();
+        return drawnCard;
     }
 
     public Card showTopCard(){
+
         return discPile.showTopCard();
     }
 
@@ -99,6 +103,10 @@ public class PileManager {
      */
     public void setDrawPile(DrawPile drawPile){
         this.drawPile = drawPile;
+    }
+
+    public void setDiscPile(DiscardPile discPile){
+        this.discPile = discPile;
     }
 
 

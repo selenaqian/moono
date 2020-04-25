@@ -3,6 +3,7 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.config.GameInfo;
 import ooga.piles.DiscardPile;
 import ooga.piles.DrawPile;
 import ooga.player.AI_Player;
@@ -30,8 +31,6 @@ public class Uno implements GameModel, GameModelView {
     private GameSettings mySettings;
     private PileManager piles;
     private UnoTurnManager turnManager;
-    private List<Player> players = new ArrayList<Player>();
-
     private UnoActionApplier actionApplier; //contains methods for action cards]
     private Rule rule;
     private List<Card> specialCards;
@@ -40,7 +39,28 @@ public class Uno implements GameModel, GameModelView {
 
     public Uno(){
         this(new GameSettings());
+
     }
+
+    public Uno(GameSettings settings){
+        mySettings = settings;
+        piles = new PileManager(mySettings.getSpecialCards());
+        rule = mySettings.getRule();
+        turnManager = new UnoTurnManager();
+        turnManager.addPlayers(mySettings.getNumPlayers());
+        specialCards = mySettings.getSpecialCards();
+        dealCards();
+
+    }
+
+    //TODO: clean up constructors
+    public Uno(GameSettings settings, PileManager piles, UnoTurnManager turnManager){
+        this.mySettings = settings;
+        this.piles = piles;
+        this.turnManager = turnManager;
+        rule = mySettings.getRule();
+    }
+
 
     public GameSettings getSettings(){
         return mySettings;
@@ -50,38 +70,22 @@ public class Uno implements GameModel, GameModelView {
         return piles;
     }
 
-    public Uno(GameSettings settings){
-        playerObservers = new ArrayList();
-        mySettings = settings;
-        piles = new PileManager(mySettings.getSpecialCards());
-        //rule = mySettings.getRule();
-        rule = new ClassicRules();
-        specialCards = mySettings.getSpecialCards();
-        addPlayers();
-        turnManager = new UnoTurnManager(players);
-        turnManager.setHumanPlayer(players.get(0));
-        dealCards();
-        //update everything in view when game is first started
-        notifyPlayerObservers();
-        actionApplier = new UnoActionApplier(this, turnManager);
-    }
-
     public UnoTurnManager getTurnManager(){
         return turnManager;
     }
 
+
     @Override
     public void start() {
+        actionApplier = new UnoActionApplier(this, turnManager);
+        playerObservers = new ArrayList();
+        notifyPlayerObservers();
     }
 
     @Override
     public void restart() {
         piles.init();
-        //clear player hands
-        for (Player p : players){
-            p.reset();
-        }
-
+        turnManager.clearPlayerHands();
         dealCards();
     }
 
@@ -174,7 +178,7 @@ public class Uno implements GameModel, GameModelView {
     @Override
     public void notifyPlayerObservers() {
         for (PlayerObserver o : playerObservers){
-            for (Player player : players){
+            for (Player player : turnManager.getAllPlayers()){
                 o.updatePlayerHand(player.getID(), player.hand().getAllCards());
             }
             o.updateDiscardPile(piles.showTopCard());
@@ -187,27 +191,11 @@ public class Uno implements GameModel, GameModelView {
      */
     private void dealCards(){
         for(int i = 0; i < mySettings.getNumPlayers(); i ++){
-            Player player = players.get(i);
+            Player player = turnManager.getAllPlayers().get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = piles.drawCard();
                 player.takecard(card);
             }
-        }
-    }
-
-    /**
-     * Adds players to the game based on number of players selected in SetupView
-     * TODO: Refactor this - have another class to manage/initialize players?
-     */
-    private void addPlayers(){
-        //FIXME: pass id into player constructor
-        Player manPlayer = new ManualPlayer();
-        manPlayer.setID(1);
-        players.add(manPlayer);
-        for (int i = 2; i < mySettings.getNumPlayers()+1; i++){
-            Player aiPlayer = new AI_Player();
-            aiPlayer.setID(i);
-            players.add(aiPlayer);
         }
     }
 

@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.cards.Card;
+import ooga.config.GameInfo;
 import ooga.exceptions.OOGAException;
 import ooga.player.Player;
 import ooga.view.EndView;
@@ -15,9 +16,9 @@ import ooga.view.SoundPlayer;
 import java.util.ResourceBundle;
 
 
-public class UnoController implements GameController {
+public class UnoController implements GameController, GameSaver {
     private Timeline myAnimation = new Timeline();
-    private int speed;
+    private double speed;
 
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
@@ -35,6 +36,7 @@ public class UnoController implements GameController {
         this.settings = new GameSettings();
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
         soundPlayer = new SoundPlayer();
+        scoreTracker = new UnoScoreTracker();
     }
 
     @Override
@@ -43,9 +45,8 @@ public class UnoController implements GameController {
         uno.start();
         gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         turnManager = uno.getTurnManager();
-        scoreTracker = new UnoScoreTracker();
-
         speed = settings.getSpeed();
+
         KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
@@ -56,6 +57,8 @@ public class UnoController implements GameController {
     @Override
     public void pause() {
         //TODO: add a popup view to adjust game options mid-game
+
+
     }
 
     @Override
@@ -154,6 +157,10 @@ public class UnoController implements GameController {
         }
     }
 
+    public void newRound(){
+        uno.restart();
+    }
+
     /**
      * Called from view when user clicks call Uno for themselves
      * A user should click call uno when it is their turn but before making a play that would leave them with 1 card
@@ -173,11 +180,29 @@ public class UnoController implements GameController {
      * Changing score to play up until, access file saving/loading
      * @param updatedSettings
      */
-    public void accessSettings(GameSettings updatedSettings){
+    private void updateSettings(GameSettings updatedSettings){
         settings = updatedSettings;
 
     }
 
 
+    @Override
+    public GameInfo saveGame() {
+        GameInfo gameInfo = new GameInfo();
+        gameInfo.setGameSettings(settings);
+        gameInfo.setDrawPile(uno.getPileManager().getDrawPile());
+        gameInfo.setDiscardPile(uno.getPileManager().getDiscPile());
+        gameInfo.setScoreTracker(scoreTracker);
+        gameInfo.setTurnManager(turnManager);
 
+        return gameInfo;
+    }
+
+    @Override
+    public void loadGame(GameInfo gameInfo) {
+        //TODO: use pile manager directly in GameInfo
+        PileManager pileManager = new PileManager(gameInfo.getDrawPile(), gameInfo.getDiscardPile());
+        uno = new Uno(gameInfo.getGameSettings(), pileManager, (UnoTurnManager) gameInfo.getTurnManager());
+        uno.start();
+    }
 }

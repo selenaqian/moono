@@ -20,7 +20,7 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(List<Player> players){
-        setPlayers(players);
+        //setPlayers(players);
         direction = CW;
     }
 
@@ -33,7 +33,7 @@ public class UnoTurnManager implements TurnManager {
      * not serializable.
      */
     public UnoTurnManager() {
-        setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
+        //setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
         direction = CW;
     }
 
@@ -48,14 +48,29 @@ public class UnoTurnManager implements TurnManager {
         current = getFirstPlayer(); // TODO: this doesn't work here because players has nothing in it rn
     }
 
-    @Override
-    public void addPlayer(Player player) {
-        players.add(player);
+
+    /**
+     * Adds players to the game based on number of players selected in SetupView
+     * @param numPlayers receieved from GameSettings
+     */
+    public void addPlayers(int numPlayers){
+        //FIXME: pass id into player constructor
+        players = new ArrayList<>();
+        Player manPlayer = new ManualPlayer();
+        manPlayer.setID(1);
+        players.add(manPlayer);
+        setHumanPlayer(manPlayer);
+        for (int i = 2; i < numPlayers+1; i++){
+            Player aiPlayer = new AI_Player();
+            aiPlayer.setID(i);
+            players.add(aiPlayer);
+        }
+
+        current = getFirstPlayer();
     }
 
 
-    @Override
-    public Player getFirstPlayer() {
+    private Player getFirstPlayer() {
         //TODO: randomize this(sna19)
         int playersize = players.size();
         Random rand = new Random();
@@ -150,6 +165,14 @@ public class UnoTurnManager implements TurnManager {
         }
     }
 
+
+    @Override
+    public void clearPlayerHands(){
+        for (Player player : players){
+            player.reset();
+        }
+    }
+
     /**
      * Returns all players a TurnManager is keeping track of
      * Used in UnoController to calculate scores for all players
@@ -167,7 +190,7 @@ public class UnoTurnManager implements TurnManager {
         return direction;
     }
 
-    public void setHumanPlayer(Player player){
+    private void setHumanPlayer(Player player){
         humanPlayer = player;
     }
 

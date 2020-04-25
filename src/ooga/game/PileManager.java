@@ -34,6 +34,16 @@ public class PileManager {
         this.drawPile = drawPile;
     }
 
+    /**
+     * Constructor used when loading a game
+     * @param drawPile
+     * @param discPile
+     */
+    public PileManager(DrawPile drawPile, DiscardPile discPile){
+        this.drawPile = drawPile;
+        this.discPile = discPile;
+    }
+
     public void init(){
         discPile = new DiscardPile();
         makeDrawPile(specialCards);

@@ -9,17 +9,11 @@ import java.util.List;
  */
 public interface TurnManager{
     /**
-     * Adds a player to the game
+     * Adds all players to the game
      * Can be called when initializing a new game
-     * @param player new player to add
+     * @param numPlayers from GameSettings
      */
-    void addPlayer(Player player);
-
-    /**
-     * Determines the first player to play at the start of a new game or round
-     * @return Player who gets to take the first turn
-     */
-    Player getFirstPlayer();
+    void addPlayers(int numPlayers);
 
     /**
      * Once the current player is done, called to set currentPlayer as the next player
@@ -45,6 +39,12 @@ public interface TurnManager{
      * @return
      */
     int getPlayerId(Player player);
+
+    /**
+     * Removes all the cards from players' hands
+     * Used when resetting a game for a new round
+     */
+    void clearPlayerHands();
 
     /**
      * Returns all players a TurnManager is keeping track of

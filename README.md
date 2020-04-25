@@ -27,6 +27,14 @@ Individual:
 
 ### Primary Roles
 
+Mary Jiang (mvj6):
+* Implementing classes in the Game package:
+    * GameModel (Uno) and GameController (UnoController) for managing and calling game-play events
+    * Setting up TurnManager, PileManager, GameSettings
+    * Score-tracking 
+* Connecting view with controller and model components
+    * Setting up observers for game updates and handling wildcard view requirements
+
 
 ### Resources Used
 - [Uno Rules](https://service.mattel.com/instruction_sheets/42001pr.pdf)
@@ -76,6 +84,9 @@ Features implemented:
 ### Notes/Assumptions
 
 Assumptions or Simplifications:
+* This plays single-person game where there is 1 human player playing against up to 3 computers
+* Unlike in real-life games of Uno, users can only call uno for themselves and cannot "call out" other players
+    * Computer players calling uno is set to chance, and when they do call there will be a sound played ("Moono!")
 * Lists are not serializable so when saving a game it defaults to 4 players in TurnManager
 
 Interesting data files:

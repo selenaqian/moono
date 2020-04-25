@@ -9,6 +9,9 @@ import ooga.cards.Suit;
 import ooga.game.UnoActionApplier;
 import ooga.game.WildcardObserver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static ooga.view.SetupView.DEFAULT_SPACING;
 
 public class WildColorSelectorView implements WildcardObserver {
@@ -19,12 +22,14 @@ public class WildColorSelectorView implements WildcardObserver {
     private String myStylesheet;
     private Stage newStage;
     private Scene colorSelectorScene;
+    private List<Rectangle> colorBoxes;
 
     public WildColorSelectorView(UnoActionApplier actionApplier, String stylesheet){
         myActionApplier = actionApplier;
         myActionApplier.registerWildObserver(this);
         myStylesheet = stylesheet;
         newStage = new Stage();
+        colorBoxes = new ArrayList<>();
     }
 
     @Override
@@ -35,6 +40,7 @@ public class WildColorSelectorView implements WildcardObserver {
         for(Suit suit : Suit.values()) {
             Rectangle colorBox = new Rectangle(size, size);
             root.getChildren().add(colorBox);
+            colorBoxes.add(colorBox);
             colorBox.getStyleClass().add(suit.toString());
             colorBox.setOnMouseClicked(e -> selectColorAction(suit));
         }
@@ -56,5 +62,15 @@ public class WildColorSelectorView implements WildcardObserver {
      */
     void setTheme(String theme) {
         myStylesheet = theme;
+    }
+
+    //Methods below used for testing.
+
+    /**
+     * Allows test to access the colored rectangles and perform actions on them.
+     * @return the list containing the Rectangle objects that represent the different suit colors.
+     */
+    public List<Rectangle> getColorBoxes() {
+        return colorBoxes;
     }
 }

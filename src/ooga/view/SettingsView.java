@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.game.GameSettings;
 
 import java.util.*;
 
@@ -22,6 +23,8 @@ public class SettingsView {
     private ResourceBundle myResources;
     private String myStylesheet;
     private GameView myGameView;
+    private GameSettings mySettings;
+
     private Stage myStage;
     private Button slowDownButton;
     private Button speedUpButton;
@@ -35,20 +38,22 @@ public class SettingsView {
     private MidGameSaveNew saveNew;
 
     public SettingsView() {
-        this(DEFAULT_STYLESHEET, new GameView());
+        this(DEFAULT_STYLESHEET, new GameView(), new GameSettings());
     }
 
-    public SettingsView(String stylesheet, GameView gameView) {
+    public SettingsView(String stylesheet, GameView gameView, GameSettings settings) {
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
         myStylesheet = stylesheet;
         myGameView = gameView;
+        mySettings = settings;
+
         myStage = new Stage();
         themeOptions = new HashMap<>();
         themeFileNames = new HashMap<>();
         saveNew = new MidGameSaveNew(myGameView.getStage(), myStage, myGameView.getController());
 
-        //TODO: get this to work:
-        //myStage.setOnCloseRequest(e -> myController.play());
+        //TODO: check if this works
+        myStage.setOnCloseRequest(e -> myGameView.getController().play());
 
         VBox root = new VBox(DEFAULT_SPACING); // used to make scene later
         root.setAlignment(Pos.CENTER);
@@ -58,7 +63,6 @@ public class SettingsView {
         closeButton = new Button(myResources.getString("closeButton"));
         closeButton.setOnMouseClicked(e -> {
             myStage.close();
-            //TODO: start timeline again
         });
 
         root.getChildren().addAll(allSpeedUI, allThemeUI, saveAndNewGameUI, closeButton);
@@ -74,16 +78,20 @@ public class SettingsView {
         speedUI.setAlignment(Pos.CENTER);
         HBox speedButtons = new HBox(DEFAULT_SPACING);
         speedButtons.setAlignment(Pos.CENTER);
-        speedChangeText = new Text(myResources.getString("speedOriginal")); //TODO: change to display # of seconds?
+        speedChangeText = new Text(mySettings.getSpeed() + myResources.getString("speedSuffix")); //TODO: change to display # of seconds?
         slowDownButton = new Button(myResources.getString("slowDownButton"));
         slowDownButton.setOnMouseClicked(e -> {
-            //TODO: call function to slow down game
-            speedChangeText.setText(/* get new speed value, use an instance var if needed + */myResources.getString("speedSuffix"));
+            double newSpeed = mySettings.getSpeed() + 0.5;
+            myGameView.getController().changeSpeed(newSpeed);
+            speedChangeText.setText(newSpeed + myResources.getString("speedSuffix"));
         });
         speedUpButton = new Button(myResources.getString("speedUpButton"));
         speedUpButton.setOnMouseClicked(e -> {
-            //TODO: call function to speed up game
-            speedChangeText.setText(/* get new speed value + */myResources.getString("speedSuffix"));
+            if(mySettings.getSpeed() > 1) {
+                double newSpeed = mySettings.getSpeed() - 0.5;
+                myGameView.getController().changeSpeed(newSpeed);
+                speedChangeText.setText(newSpeed + myResources.getString("speedSuffix"));
+            }
         });
         speedButtons.getChildren().addAll(slowDownButton, speedUpButton);
         speedUI.getChildren().addAll(speedButtons, speedChangeText);
@@ -95,6 +103,7 @@ public class SettingsView {
         themeUI.setAlignment(Pos.CENTER);
         Text themeTitle = new Text(myResources.getString("theme"));
         themeTitle.getStyleClass().add("subtitle2");
+        Text themeInstructions = new Text(myResources.getString("themeSub"));
 
         HBox themeOptionsToClick = new HBox(DEFAULT_SPACING);
         themeOptionsToClick.setAlignment(Pos.CENTER);
@@ -118,7 +127,7 @@ public class SettingsView {
             themeFileNames.put(theme, allThemeFiles[i]);
         }
         darkModeToggle = new CheckBox(myResources.getString("darkMode"));
-        themeUI.getChildren().addAll(themeTitle, darkModeToggle, themeOptionsToClick);
+        themeUI.getChildren().addAll(themeTitle, themeInstructions, darkModeToggle, themeOptionsToClick);
         return themeUI;
     }
 

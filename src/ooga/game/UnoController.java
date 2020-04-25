@@ -161,8 +161,12 @@ public class UnoController implements GameController, GameSaver {
         }
     }
 
+    /**
+     * Sets up new round of a game after the "next round" button is clicked in EndRoundView
+     */
     public void newRound(){
         uno.restart();
+        gameView = new GameView(uno, this, mainStage, settings.getTheme());
     }
 
     /**

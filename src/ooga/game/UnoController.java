@@ -197,8 +197,8 @@ public class UnoController implements GameController, GameSaver {
 
     public void changeSpeed(double speed){
         this.speed = speed;
+        settings.setSpeed(speed);
         setupTimeline();
-
     }
 
 

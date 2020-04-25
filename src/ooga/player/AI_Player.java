@@ -15,16 +15,16 @@ public class AI_Player extends Player {
     String manualplayerName() {
         return null;
     }
-
-    @Override
-    List AIplayerName(int numaiplayers) {
-        List<String> ainames = new ArrayList<>();
-        numaiplayers = mySettings.getNumPlayers() - 1;
-
-        ainames.add(myResources.getString("AInames"));
-
-        return ainames;
-    }
+//
+//    @Override
+//    List AIplayerName(int numaiplayers) {
+//        List<String> ainames = new ArrayList<>();
+//        numaiplayers = mySettings.getNumPlayers() - 1;
+//
+//        ainames.add(myResources.getString("AInames"));
+//
+//        return ainames;
+//    }
 
     void setAIIDs() {
         AIIDs.add(2);

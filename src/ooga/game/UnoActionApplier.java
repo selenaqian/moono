@@ -116,7 +116,7 @@ public class UnoActionApplier {
     private void applyDraw2(){
         Player nextPlayer = turnManager.getNextPlayer();
         for(int i=0;i<TWO;i++){
-            nextPlayer.takecard(uno.getPileManager().drawCard());
+            nextPlayer.hand().addCard(uno.getPileManager().drawCard());
         }
     }
 

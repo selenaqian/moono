@@ -3,15 +3,16 @@ package ooga.player;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
-import ooga.piles.Hand;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class playertest {
 
-    private Hand myhand = new Hand();
-    private Player testplayer = new AI_Player();
+    private Player testPlayer = new AI_Player();
     private Card card1 = new Card(Suit.A, Value.ZERO);
     private Card card2 = new Card(Suit.A, Value.ZERO);
     private Card card3 = new Card(Suit.A, Value.ONE);
@@ -25,61 +26,89 @@ class playertest {
 
 
 
-/*
+/**
 tests that all cards are in the hand
  */
     @Test
     void testhandaccuracy(){
-        myhand.addCard(card1);
-        myhand.addCard(card2);
-        myhand.addCard(card3);
-        myhand.addCard(card4);
-        myhand.addCard(card5);
+        List<Card> cards= new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        cards.add(card5);
+        testPlayer.hand().addCards(cards);
 
 
 
-        assertEquals(5,testplayer.hand().getCardCount());
+
+        assertEquals(5, testPlayer.hand().getCardCount());
 
     }
 
-/*
+/**
 tests that a card is removed from the hand after play
  */
     @Test
     void testcardremoval(){
-        myhand.addCard(card1);
-        myhand.addCard(card2);
-        myhand.addCard(card3);
-        myhand.addCard(card4);
-        myhand.addCard(card5);
+        List<Card> cards= new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        cards.add(card5);
+        testPlayer.hand().addCards(cards);
 
 
-        testplayer.removecard(card5);
+        testPlayer.hand().removeCard(card5);
 
 
-        assertEquals(false, testplayer.hand().contains(card5));
+        assertEquals(false, testPlayer.hand().contains(card5));
 
-        assertEquals(4, testplayer.hand().getCardCount());
+        assertEquals(4, testPlayer.hand().getCardCount());
     }
 
-/*
+/**
 tests that a card is added to the hand after drawing from the drawpile
  */
     @Test
     void testcardaddition(){
-        myhand.addCard(card1);
-        myhand.addCard(card2);
-        myhand.addCard(card5);
+        List<Card> cards= new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card5);
+        testPlayer.hand().addCards(cards);
 
 
-        assertEquals(false,testplayer.hand().contains(card3));
 
-        testplayer.takecard(card3);
+        assertEquals(false, testPlayer.hand().contains(card3));
+
+        testPlayer.hand().addCard(card3);
 
 
-        assertEquals(4,testplayer.hand().getCardCount());
+        assertEquals(4, testPlayer.hand().getCardCount());
 
     }
+
+
+    /**
+     * tests that a hand properly resets
+     */
+    @Test
+    void testRest(){
+        List<Card> cards= new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        cards.add(card5);
+        testPlayer.hand().addCards(cards);
+
+        testPlayer.reset();
+
+        assertEquals(0,testPlayer.hand().getCardCount());
+    }
+
 
 
 

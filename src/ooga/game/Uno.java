@@ -87,7 +87,7 @@ public class Uno implements GameModel, GameModelView {
         if (rule.isValid(piles.showTopCard(), selectedCard)) {
 
             //make sure player updates their hand to remove the card
-            player.removecard(selectedCard);
+            player.hand().removeCard(selectedCard);
 
             //update the discard pile to add the card
             piles.discardCard(selectedCard);
@@ -129,7 +129,7 @@ public class Uno implements GameModel, GameModelView {
         Card card = piles.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        player.takecard(card);
+        player.hand().addCard(card);
      }
 
     @Override
@@ -182,7 +182,7 @@ public class Uno implements GameModel, GameModelView {
             Player player = turnManager.getAllPlayers().get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = piles.drawCard();
-                player.takecard(card);
+                player.hand().addCard(card);
             }
         }
     }
@@ -249,7 +249,7 @@ public class Uno implements GameModel, GameModelView {
         if (hasUno() && didCallUno == false){
             //System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
-                turnManager.getCurrentPlayer().takecard(piles.drawCard());
+                turnManager.getCurrentPlayer().hand().addCard(piles.drawCard());
             }
             return true;
         }

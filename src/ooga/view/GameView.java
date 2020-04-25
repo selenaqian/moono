@@ -84,6 +84,9 @@ public class GameView implements GameViewInterface, PlayerObserver {
         initializeGameScene();
     }
 
+    /**
+     * Allows other classes to call the main game view to show.
+     */
     public void showGameScene() {
         mainStage.setScene(mainScene);
         mainStage.show();
@@ -169,7 +172,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
         setBoxAllPlayersNot1();
         mainPane.getChildren().add(allPlayersNot1);
         AnchorPane.setRightAnchor(allPlayersNot1, 10.0);
-        AnchorPane.setTopAnchor(allPlayersNot1, mainStage.getHeight()/4);
+        AnchorPane.setTopAnchor(allPlayersNot1, DEFAULT_STAGE_HEIGHT/4.0);
     }
 
     /**
@@ -273,17 +276,16 @@ public class GameView implements GameViewInterface, PlayerObserver {
     public void updateHand(List<Card> cards) {
         player1Hand = new HBox(SPACING_BETWEEN_CARDS);
         for (Card c : cards) {
-            CardRender tempCardRender = new CardRender(c, Math.min(mainStage.getWidth()/cards.size() - SPACING_BETWEEN_CARDS, mainStage.getWidth()/10), mainStage.getHeight()/4);
+            CardRender tempCardRender = new CardRender(c, Math.min(DEFAULT_STAGE_WIDTH/cards.size() - SPACING_BETWEEN_CARDS, DEFAULT_STAGE_WIDTH/10), DEFAULT_STAGE_HEIGHT/4);
             player1Hand.getChildren().add(tempCardRender);
             tempCardRender.setOnMouseClicked(e -> {
-                //if wild card then need call wildcolor.show
                 if(tempCardRender.getCard().getValue()==Value.WILD) wildColorSelector.showColorSelector();
                 else myController.handleCardClick(tempCardRender.getCard());
             });
         }
         VBox player1Box = new VBox();
         StackPane player1Base = new StackPane();
-        Rectangle player1Mat = new Rectangle(mainStage.getWidth(), mainStage.getHeight()/4, Color.WHITE);
+        Rectangle player1Mat = new Rectangle(DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT/4, Color.WHITE);
         player1Base.getChildren().addAll(player1Mat, player1Hand);
 
         player1Box.getChildren().addAll(player1Label, player1Base);

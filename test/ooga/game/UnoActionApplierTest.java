@@ -28,7 +28,7 @@ class UnoActionApplierTest {
     @Test
     void applyActionSkip() {
         int firstPlayer = uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer());
-        int nextPlayer = 1;
+        int nextPlayer = 0;
         if(firstPlayer < uno.getTurnManager().getAllPlayers().size()){
             nextPlayer = firstPlayer + 1;
         }

@@ -52,17 +52,17 @@ public class UnoController implements GameController, GameSaver {
 
     @Override
     public void start() {
-        gameView.showGameScene();
         setupTimeline();
+        gameView.showGameScene();
     }
 
     @Override
     public void pause() {
-        //TODO: pause the timeline - GameView calls this when button is clicked ~from selena
+        //TODO: pause the timeline - GameView calls this when button is clicked
     }
 
     public void play() {
-        //TODO: play the timeline again - but don't want use start(), need this to continue the game ~from selena
+        //TODO: play the timeline again - but don't want use start(), need this to continue the game
     }
 
     @Override

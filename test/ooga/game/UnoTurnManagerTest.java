@@ -40,7 +40,7 @@ class UnoTurnManagerTest {
 
     @org.junit.jupiter.api.Test
     void testAddedPlayers() {
-        assertEquals(4, players.size());
+        assertEquals(3, players.size());
     }
 
     @org.junit.jupiter.api.Test

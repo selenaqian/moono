@@ -28,9 +28,9 @@ class UnoActionApplierTest {
     @Test
     void applyActionSkip() {
         int firstPlayer = uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer());
-        int nextPlayer = 0;
+        int nextPlayer = 1;
         if(firstPlayer < uno.getTurnManager().getAllPlayers().size()){
-            nextPlayer = firstPlayer++;
+            nextPlayer = firstPlayer + 1;
         }
         actionApplier.applyAction(Value.SKIP);
         assertEquals(nextPlayer, uno.getTurnManager().getPlayerId(uno.getTurnManager().getCurrentPlayer()));

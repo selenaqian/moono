@@ -81,10 +81,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
         mainScene = new Scene(mainPane, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         mainScene.getStylesheets().add(myStylesheet);
+        initializeGameScene();
+    }
+
+    public void showGameScene() {
         mainStage.setScene(mainScene);
         mainStage.show();
-        initializeGameScene();
-
     }
 
     /**

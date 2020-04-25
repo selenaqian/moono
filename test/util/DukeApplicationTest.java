@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.jupiter.api.AfterEach;
@@ -68,6 +69,10 @@ public class DukeApplicationTest extends ApplicationTest {
 
     protected void clickOn (Rectangle r) {
         simulateAction(r, () -> r.getOnMouseClicked().handle(new MouseEvent(MouseEvent.MOUSE_CLICKED, r.getX(), r.getY(), r.getX(), r.getY(), MouseButton.PRIMARY, 1, false, false, false, false, true, false, false, true, false, false, null)));
+    }
+
+    protected void clickOn (Region r) {
+        simulateAction(r, () -> r.getOnMouseClicked().handle(new MouseEvent(MouseEvent.MOUSE_CLICKED, r.getLayoutX(), r.getLayoutY(), r.getLayoutX(), r.getLayoutY(), MouseButton.PRIMARY, 1, false, false, false, false, true, false, false, true, false, false, null)));
     }
 
     protected void setValue (Slider s, double value) {

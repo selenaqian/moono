@@ -45,13 +45,13 @@ public class UnoController implements GameController, GameSaver {
         scoreTracker = new UnoScoreTracker();
         uno = new Uno(settings);
         uno.start();
-        gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         turnManager = uno.getTurnManager();
         speed = settings.getSpeed();
     }
 
     @Override
     public void start() {
+        gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         setupTimeline();
     }
 
@@ -160,7 +160,7 @@ public class UnoController implements GameController, GameSaver {
         for (Player p : turnManager.getAllPlayers()){
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
-            
+
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 winner = p;

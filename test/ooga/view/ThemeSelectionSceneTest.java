@@ -23,6 +23,9 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         clickOn(startView.getWelcomeOkButton());
     }
 
+    /**
+     * Test that the default theme works - when don't choose one, automatically set to default.css stylesheet.
+     */
     @Test
     void getSelectedThemeTestDefault() {
         goToThemeView();
@@ -31,6 +34,9 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         assertEquals("stylesheets/default.css", startView.getMySettings().getTheme());
     }
 
+    /**
+     * Test that selecting the duke theme works.
+     */
     @Test
     void getSelectedThemeTestDuke() {
         goToThemeView();
@@ -42,6 +48,9 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         assertEquals(Color.AQUA, backgroundBoxes.get(1).getStroke());
     }
 
+    /**
+     * Test that selecting the space theme works.
+     */
     @Test
     void getSelectedThemeTestSpace() {
         goToThemeView();
@@ -53,6 +62,9 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
         assertEquals(Color.AQUA, backgroundBoxes.get(2).getStroke());
     }
 
+    /**
+     * Test that clicking on one theme and then another works - properly updates view and changes stylesheet.
+     */
     @Test
     void getSelectedThemeTestMultipleClicks() {
         goToThemeView();
@@ -67,6 +79,7 @@ class ThemeSelectionSceneTest extends DukeApplicationTest {
 
         assertEquals("stylesheets/duke.css", startView.getMySettings().getTheme());
         assertEquals(Color.AQUA, backgroundBoxes.get(1).getStroke());
+        assertEquals(1, backgroundBoxes.get(0).getStrokeWidth());
     }
 
     /**

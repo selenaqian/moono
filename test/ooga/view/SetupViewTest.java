@@ -1,7 +1,6 @@
 package ooga.view;
 
 import javafx.stage.Stage;
-import ooga.game.UnoController;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 

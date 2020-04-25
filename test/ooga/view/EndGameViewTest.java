@@ -40,7 +40,7 @@ class EndGameViewTest extends DukeApplicationTest {
     @Test
     void startNewGameTest() {
         sleep(2, TimeUnit.SECONDS);
-        clickOn(newGameButton);
+        javafxRun(() -> clickOn(newGameButton));
         sleep(2, TimeUnit.SECONDS);
 
         Text welcomeText = lookup("#welcomeText").query();

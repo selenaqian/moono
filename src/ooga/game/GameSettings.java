@@ -3,6 +3,7 @@ package ooga.game;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
+import ooga.rules.AscendingRules;
 import ooga.rules.ClassicRules;
 import ooga.rules.DeadlyRules;
 import ooga.rules.Rule;
@@ -97,7 +98,8 @@ public class GameSettings {
             rule = new ClassicRules();
         } else if (ruleString.equals("DeadlyRules")) {
             rule = new DeadlyRules();
-
+        } else if (ruleString.equals("AscendingRules")) {
+            rule = new AscendingRules();
         }
     }
 

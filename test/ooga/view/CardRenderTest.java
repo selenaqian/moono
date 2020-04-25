@@ -1,6 +1,5 @@
 package ooga.view;
 
-import javafx.scene.paint.Color;
 import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;

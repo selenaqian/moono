@@ -7,6 +7,7 @@ import javafx.util.Duration;
 import ooga.cards.Card;
 import ooga.config.GameInfo;
 import ooga.config.JavaToXML;
+import ooga.config.XMLToJava;
 import ooga.exceptions.OOGAException;
 import ooga.player.Player;
 import ooga.view.EndGameView;
@@ -215,11 +216,13 @@ public class UnoController implements GameController, GameSaver {
     }
 
     @Override
-    public void loadGame(GameInfo gameInfo) {
+    public void loadGame(String fileName) throws IOException {
         //TODO: use pile manager directly in GameInfo
+        XMLToJava decoder = new XMLToJava();
+
+        GameInfo gameInfo = decoder.decode(fileName);
         PileManager pileManager = new PileManager(gameInfo.getDrawPile(), gameInfo.getDiscardPile());
         uno = new Uno(gameInfo.getGameSettings(), pileManager, (UnoTurnManager) gameInfo.getTurnManager());
         uno.start();
-
     }
 }

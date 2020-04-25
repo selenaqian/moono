@@ -20,7 +20,7 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(List<Player> players){
-        //setPlayers(players);
+        setPlayers(players);
         direction = CW;
     }
 
@@ -190,7 +190,7 @@ public class UnoTurnManager implements TurnManager {
         return direction;
     }
 
-    private void setHumanPlayer(Player player){
+    public void setHumanPlayer(Player player){
         humanPlayer = player;
     }
 

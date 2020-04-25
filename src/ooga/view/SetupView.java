@@ -247,4 +247,12 @@ public class SetupView {
     public ThemeSelectionScene getThemeSelection() {
         return themeSelection;
     }
+
+    /**
+     * Allows test to access the RulesAndSpecialCardScene to select the radio buttons, checkboxes and verify that they work as expected.
+     * @return the RulesAndSpecialCardScene that can then access those other parts.
+     */
+    public RulesAndSpecialCardScene getRulesAndSpecialCards() {
+        return rulesAndSpecialCards;
+    }
 }

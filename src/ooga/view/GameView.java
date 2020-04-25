@@ -54,6 +54,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
 
     public GameView() {
         this(new Uno(), new UnoController(new Stage()), new Stage(), DEFAULT_STYLESHEET);
+        myUno.start();
     }
 
     /**

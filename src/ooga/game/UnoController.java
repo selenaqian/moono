@@ -47,12 +47,7 @@ public class UnoController implements GameController, GameSaver {
         gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
         turnManager = uno.getTurnManager();
         speed = settings.getSpeed();
-
-        KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
-
+        setupTimeline();
     }
 
     @Override
@@ -88,6 +83,13 @@ public class UnoController implements GameController, GameSaver {
         }
         uno.checkUno();
 
+    }
+
+    private void setupTimeline(){
+        KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(frame);
+        myAnimation.play();
     }
 
 
@@ -184,6 +186,11 @@ public class UnoController implements GameController, GameSaver {
      */
     private void updateSettings(GameSettings updatedSettings){
         settings = updatedSettings;
+    }
+
+    public void changeSpeed(double speed){
+        this.speed = speed;
+        setupTimeline();
 
     }
 

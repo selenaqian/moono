@@ -19,6 +19,7 @@ import ooga.game.GameSettings;
 import ooga.game.UnoController;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -98,7 +99,12 @@ public class SetupView {
         fileChooser.setInitialDirectory(new File("data"));
         loadSavedButton.setOnMouseClicked(e -> {
             File selectedFile = fileChooser.showOpenDialog(new Stage());
-            //TODO: send info to controller
+            try {
+                myController.loadGame(selectedFile.getName());
+            } catch (IOException ex) {
+                System.out.println("Invalid file name.");
+                //TODO: change to popup?
+            }
         });
 
         root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton, loadSavedButton);

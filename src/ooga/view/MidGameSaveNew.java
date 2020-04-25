@@ -7,6 +7,7 @@
 
 package ooga.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -19,8 +20,7 @@ import ooga.game.UnoController;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import static ooga.view.SetupView.DEFAULT_RESOURCES;
-import static ooga.view.SetupView.DEFAULT_SPACING;
+import static ooga.view.SetupView.*;
 import static ooga.view.WildColorSelectorView.SPECIAL_CARD_ACTION_HEIGHT;
 import static ooga.view.WildColorSelectorView.SPECIAL_CARD_ACTION_WIDTH;
 
@@ -47,7 +47,9 @@ public class MidGameSaveNew {
 
     void showSaveScene() {
         VBox root = new VBox(DEFAULT_SPACING);
+        root.setAlignment(Pos.CENTER);
         Text savePrompt = new Text(myResources.getString("savePrompt"));
+        savePrompt.getStyleClass().add("subtitle2");
         saveFileName = new TextField();
         saveButton = new Button(myResources.getString("save2"));
         saveButton.setOnMouseClicked(e -> {
@@ -60,6 +62,7 @@ public class MidGameSaveNew {
         });
         root.getChildren().addAll(savePrompt, saveFileName, saveButton);
         Scene saveScene = new Scene(root, SPECIAL_CARD_ACTION_WIDTH, SPECIAL_CARD_ACTION_HEIGHT);
+        saveScene.getStylesheets().add(DEFAULT_STYLESHEET);
         saveStage = new Stage();
         saveStage.setScene(saveScene);
         saveStage.show();
@@ -67,9 +70,12 @@ public class MidGameSaveNew {
 
     void showNewGameScene() {
         VBox root = new VBox(DEFAULT_SPACING);
+        root.setAlignment(Pos.CENTER);
         Text overwrite = new Text(myResources.getString("overwrite"));
+        overwrite.getStyleClass().add("subtitle2");
 
         HBox yesOrNo = new HBox(DEFAULT_SPACING);
+        yesOrNo.setAlignment(Pos.CENTER);
         overwriteYes = new Button(myResources.getString("yes"));
         overwriteNo = new Button(myResources.getString("no"));
         yesOrNo.getChildren().addAll(overwriteYes, overwriteNo);
@@ -85,6 +91,7 @@ public class MidGameSaveNew {
 
         root.getChildren().addAll(overwrite, yesOrNo);
         Scene overwriteScene = new Scene(root, SPECIAL_CARD_ACTION_WIDTH, SPECIAL_CARD_ACTION_HEIGHT);
+        overwriteScene.getStylesheets().add(DEFAULT_STYLESHEET);
         overwriteStage = new Stage();
         overwriteStage.setScene(overwriteScene);
         overwriteStage.show();

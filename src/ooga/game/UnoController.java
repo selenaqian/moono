@@ -46,14 +46,19 @@ public class UnoController implements GameController, GameSaver {
         uno.start();
         turnManager = uno.getTurnManager();
         speed = settings.getSpeed();
-        gameView = new GameView(uno, this, mainStage, settings.getTheme()); //TODO: change to interface
+        gameView = new GameView(uno, this, mainStage, settings.getTheme());
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
     }
 
     @Override
     public void start() {
-        setupTimeline();
+        uno = new Uno(settings);
+        uno.start();
+        gameView = new GameView(uno, this, mainStage, settings.getTheme());
         gameView.showGameScene();
+        turnManager = uno.getTurnManager();
+        speed = settings.getSpeed();
+        setupTimeline();
     }
 
     @Override
@@ -178,6 +183,7 @@ public class UnoController implements GameController, GameSaver {
     public void newRound(){
         uno.restart();
         gameView = new GameView(uno, this, mainStage, settings.getTheme());
+        gameView.showGameScene();
     }
 
     /**

@@ -65,7 +65,10 @@ public class Uno implements GameModel, GameModelView {
 
     @Override
     public void start() {
+        actionApplier = new UnoActionApplier(this, turnManager);
+        playerObservers = new ArrayList();
         notifyPlayerObservers();
+        restart();
     }
 
     @Override

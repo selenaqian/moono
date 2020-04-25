@@ -101,6 +101,7 @@ class RulesAndSpecialCardScene {
             specialCardOptions.add(checkBox);
             specialCardsBox.getChildren().add(checkBox);
         }
+        //TODO (if time): create a checkbox to select all the others - requires additional work with observers
         /**CheckBox selectAll = new CheckBox("select all");
         if(selectAll.isSelected()) {
             for(CheckBox option : specialCardOptions) {

@@ -100,28 +100,9 @@ public class GameView implements GameViewInterface, PlayerObserver {
         positionPlayer1();
         positionPlayersNot1();
 
-        decks = new HBox(DEFAULT_SPACING);
-        deckView = new Region();
-        //deckView.setStyle("-fx-background-image: url(/stylesheets/images/duke_card.png)");
-        deckView.setMaxHeight(mainPane.getHeight()/3);
-        deckView.setMinHeight(mainPane.getHeight()/3);
-        deckView.setMaxWidth(mainPane.getWidth()/7);
-        deckView.setMinWidth(mainPane.getWidth()/7);
-        deckView.getStyleClass().add("deck");
-        deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
-        discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
-        decks.getChildren().addAll(deckView, discardRender);
-
-        callUno = new Button(myResources.getString("callUno"));
-        callUno.setAlignment(Pos.CENTER);
-        callUno.setOnMouseClicked(e -> myController.callUno());
-
-        VBox decksAndCallUno = new VBox(DEFAULT_SPACING);
-        decksAndCallUno.setAlignment(Pos.CENTER);
-        decksAndCallUno.getChildren().addAll(decks, callUno);
-        mainPane.getChildren().add(decksAndCallUno);
-        AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
-        AnchorPane.setRightAnchor(decksAndCallUno, mainPane.getWidth()/3);
+        makeDecks();
+        makeUnoButton();
+        setLocationDecksAndCallUno();
 
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton = new Button(myResources.getString("settingsButton"));
@@ -134,6 +115,43 @@ public class GameView implements GameViewInterface, PlayerObserver {
         AnchorPane.setRightAnchor(settingsButton, 10.0);
 
         updateHand(myUno.getUserHand());
+    }
+
+    /**
+     * Helper method that groups the decks and callUno button together and places them in the center of the scene.
+     */
+    private void setLocationDecksAndCallUno() {
+        VBox decksAndCallUno = new VBox(DEFAULT_SPACING);
+        decksAndCallUno.setAlignment(Pos.CENTER);
+        decksAndCallUno.getChildren().addAll(decks, callUno);
+        mainPane.getChildren().add(decksAndCallUno);
+        AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
+        AnchorPane.setRightAnchor(decksAndCallUno, mainPane.getWidth()/3);
+    }
+
+    /**
+     * Helper method to create the button that allows the user to call uno.
+     */
+    private void makeUnoButton() {
+        callUno = new Button(myResources.getString("callUno"));
+        callUno.setAlignment(Pos.CENTER);
+        callUno.setOnMouseClicked(e -> myController.callUno());
+    }
+
+    /**
+     * Helper method to create the visuals for the discard pile and the draw pile.
+     */
+    private void makeDecks() {
+        decks = new HBox(DEFAULT_SPACING);
+        deckView = new Region();
+        deckView.setMaxHeight(mainPane.getHeight()/3);
+        deckView.setMinHeight(mainPane.getHeight()/3);
+        deckView.setMaxWidth(mainPane.getWidth()/7);
+        deckView.setMinWidth(mainPane.getWidth()/7);
+        deckView.getStyleClass().add("deck");
+        deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
+        discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
+        decks.getChildren().addAll(deckView, discardRender);
     }
 
     /**

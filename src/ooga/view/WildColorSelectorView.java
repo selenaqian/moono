@@ -1,3 +1,9 @@
+/**
+ * Creates and shows the scene needed when the user plays a wild card. Allows user to then choose the color to change to.
+ *
+ * @author Selena Qian
+ */
+
 package ooga.view;
 
 import javafx.geometry.Pos;
@@ -51,6 +57,10 @@ public class WildColorSelectorView implements WildcardObserver {
         newStage.show();
     }
 
+    /**
+     * Method to handle the button actions. Sets the new color for the game.
+     * @param suit the selected color.
+     */
     private void selectColorAction(Suit suit) {
         myActionApplier.setWildColor(suit.toString());
         newStage.close();

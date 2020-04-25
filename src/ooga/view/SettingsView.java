@@ -1,3 +1,10 @@
+/**
+ * Class that creates the mid-game visual for changing options, including speed and theme, and allowing for saving or
+ * starting a new game.
+ *
+ * @author Selena Qian
+ */
+
 package ooga.view;
 
 import javafx.geometry.Pos;
@@ -55,8 +62,11 @@ public class SettingsView {
         showSettingsView();
     }
 
+    /**
+     * Helper method to contain and put together all of the elements in this scene.
+     */
     private void showSettingsView() {
-        //TODO: check if this works
+        //TODO: don't think the pause and play work
         myStage.setOnCloseRequest(e -> myGameView.getController().play());
 
         VBox root = new VBox(DEFAULT_SPACING); // used to make scene later
@@ -77,6 +87,10 @@ public class SettingsView {
         myStage.show();
     }
 
+    /**
+     * Helper method to create the buttons for slowing down and speeding up, and to set their actions.
+     * @return the VBox containing the two buttons and an indicator of the current speed.
+     */
     private VBox makeSpeedUI() {
         VBox speedUI = new VBox(DEFAULT_SPACING);
         speedUI.setAlignment(Pos.CENTER);
@@ -104,6 +118,10 @@ public class SettingsView {
         return speedUI;
     }
 
+    /**
+     * Helper method to handle creating the entire theme portion of the scene.
+     * @return the VBox containing the section title (theme:), dark mode checkbox, and theme option rectangles.
+     */
     private VBox makeThemeUI() {
         VBox themeUI = new VBox(DEFAULT_SPACING);
         themeUI.setAlignment(Pos.CENTER);
@@ -128,6 +146,13 @@ public class SettingsView {
         return themeUI;
     }
 
+    /**
+     * Helper method to create the visual and interactions for one theme option.
+     * Creates a square with the theme name on top.
+     * @param allThemes the array of theme names.
+     * @param theme the theme to create a Pane for.
+     * @return the Pane containing the square and name.
+     */
     private Pane makeThemeOption(String[] allThemes, String theme) {
         Pane currentPane = new StackPane();
         int sceneWidth = DEFAULT_STAGE_WIDTH/2;
@@ -145,6 +170,10 @@ public class SettingsView {
         return currentPane;
     }
 
+    /**
+     * Helper method to create the buttons for saving the current game and starting up a new game in the middle of the game.
+     * @return the HBox containing these two buttons.
+     */
     private HBox makeSaveAndNewGameUI() {
         HBox save_newGameUI = new HBox(DEFAULT_SPACING);
         save_newGameUI.setAlignment(Pos.CENTER);
@@ -157,6 +186,11 @@ public class SettingsView {
         return save_newGameUI;
     }
 
+    /**
+     * Helper method to set the actions that should occur when one of the themes is chosen.
+     * Updates the style of the box to show that it has been selected and updates the theme in GameView and GameSettings.
+     * @param theme the new desired theme.
+     */
     private void themeChosen(String theme) {
         for(String themeName : themeOptions.keySet()) {
             Node currentColorBox = themeOptions.get(themeName).getChildren().get(0);

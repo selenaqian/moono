@@ -45,6 +45,10 @@ public class MidGameSaveNew {
         myController = controller;
     }
 
+    /**
+     * Method is package-private because it is called in the SettingsView class.
+     * Creates the pop-up scene when the save button is clicked.
+     */
     void showSaveScene() {
         VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
@@ -56,7 +60,7 @@ public class MidGameSaveNew {
             try {
                 myController.saveGame(saveFileName.getText());
             } catch (IOException ex) {
-                // TODO: something for the error
+                // TODO(if time): popup for the error
             }
             saveStage.close();
         });
@@ -68,6 +72,10 @@ public class MidGameSaveNew {
         saveStage.show();
     }
 
+    /**
+     * Method is package-private because it is called in the SettingsView class.
+     * Creates the pop-up scene when the new game button is clicked.
+     */
     void showNewGameScene() {
         VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
@@ -95,9 +103,5 @@ public class MidGameSaveNew {
         overwriteStage = new Stage();
         overwriteStage.setScene(overwriteScene);
         overwriteStage.show();
-        //TODO: check on this:
-        //method showNewGameScene --> overwrite current? yes/no
-        //yes --> new in same scene
-        //no --> new in new scene - will timelines still work? if no, then just say warning: this will overwrite the current game
     }
 }

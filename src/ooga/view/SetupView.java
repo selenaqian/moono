@@ -94,6 +94,20 @@ public class SetupView {
         welcomeOkButton = new Button(myResources.getString("okay"));
         welcomeOkButton.setOnAction(e -> welcomeOkPressed());
         loadSavedButton = new Button(myResources.getString("loadSaved"));
+        loadSavedButtonActions();
+
+        root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton, loadSavedButton);
+
+        Scene welcomeScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
+        welcomeScene.getStylesheets().add(DEFAULT_STYLESHEET);
+        mainStage.setScene(welcomeScene);
+        mainStage.show();
+    }
+
+    /**
+     * Helper method to handle the needed actions when the user wants to load a previously saved game.
+     */
+    private void loadSavedButtonActions() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("data"));
         fileChooser.getExtensionFilters().add(
@@ -104,16 +118,9 @@ public class SetupView {
                 myController.loadGame(selectedFile.getName());
             } catch (IOException ex) {
                 System.out.println("Invalid file name.");
-                //TODO: change to popup?
+                //TODO (if time): change to popup?
             }
         });
-
-        root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton, loadSavedButton);
-
-        Scene welcomeScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
-        welcomeScene.getStylesheets().add(DEFAULT_STYLESHEET);
-        mainStage.setScene(welcomeScene);
-        mainStage.show();
     }
 
     /**
@@ -148,6 +155,10 @@ public class SetupView {
         themeSelection.getThemeOkButton().setOnAction(e -> themeOkClicked());
     }
 
+    /**
+     * Helper method to set the actions that should occur when the okay! button is clicked on the ThemeSelectionScene.
+     * Sets the theme in settings and starts up the next screen - now the GameView.
+     */
     private void themeOkClicked() {
         mySettings.setTheme(themeSelection.getSelectedTheme());
         myController.start();

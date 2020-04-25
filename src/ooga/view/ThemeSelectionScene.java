@@ -1,6 +1,6 @@
 /**
  * Helper class that creates the scene for selecting the initial theme. This scene will include options for the classic Uno
- * colors, as well as the Duke theme and the Space theme. TODO: (later) add images
+ * colors, as well as the Duke theme and the Space theme.
  * This class is package-private because only SetupView needs to access it.
  *
  * @author Selena Qian
@@ -73,7 +73,6 @@ class ThemeSelectionScene {
                 colors.getChildren().add(oneColor);
                 colorBoxes.add(oneColor);
             }
-            //figure out the on hover thing - use for selection
             Text themeText = new Text(theme);
             selection.getChildren().addAll(colorWrapper,themeText);
             themes.getChildren().add(selection);
@@ -85,6 +84,10 @@ class ThemeSelectionScene {
         return themeSelectionScene;
     }
 
+    /**
+     * Helper method to set the actions that should occur when one of the themes is selected.
+     * Changes the appearance of the selected theme.
+     */
     private void setClickStyling() {
         for(int i=0; i < colorBoxes.size(); i++) {
             int index = i;

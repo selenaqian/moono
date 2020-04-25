@@ -62,6 +62,7 @@ Selena Qian (sq22):
 - [XML De/Encoding](https://howtodoinjava.com/java/serialization/xmlencoder-and-xmldecoder-example/)
 - [Encoder Stack Exchange Help](https://stackoverflow.com/questions/24725368/java-lang-instantiation-exception-while-using-xmlencoder)
 - [JavaFX CSS Styling](https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#node)
+- [File choosers](http://tutorials.jenkov.com/javafx/filechooser.html)
 
 ### Running the Program
 

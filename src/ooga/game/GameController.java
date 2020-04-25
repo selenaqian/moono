@@ -23,6 +23,7 @@ public interface GameController{
 
     /**
      * Handle the end of a game if a player reaches the winning score or if a round is completed
+     * @param playerID winning player
      */
     void endGame(int playerID);
 
@@ -33,5 +34,22 @@ public interface GameController{
      */
     void step(double elapsedTime);
 
+    /**
+     * Adjust rate that step is called
+     * @param speed double representing seconds between each "turn"
+     */
+    void changeSpeed(double speed);
+
+    /**
+     * Creates a new EndRoundView controller once a round is over
+     * Updates player scores for the round
+     */
+    void endRound();
+
+    /**
+     * Called in EndRoundView when user clicks button to begin new round
+     * Resets a game but not the GameSettings and Scores
+     */
+    void newRound();
 
 }

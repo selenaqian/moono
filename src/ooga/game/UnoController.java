@@ -24,6 +24,8 @@ import java.util.ResourceBundle;
 public class UnoController implements GameController, GameSaver {
     private Timeline myAnimation = new Timeline();
     private double speed;
+    private ResourceBundle myResources = ResourceBundle.getBundle("default");
+    private SoundPlayer soundPlayer;
 
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
@@ -33,8 +35,7 @@ public class UnoController implements GameController, GameSaver {
     UnoTurnManager turnManager;
     UnoScoreTracker scoreTracker;
     Player winner;
-    private ResourceBundle myResources = ResourceBundle.getBundle("default");
-    private SoundPlayer soundPlayer;
+
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -86,6 +87,15 @@ public class UnoController implements GameController, GameSaver {
         uno.checkUno();
 
     }
+
+
+    @Override
+    public void changeSpeed(double speed){
+        this.speed = speed;
+        settings.setSpeed(speed);
+        setupTimeline();
+    }
+
 
     private void setupTimeline(){
         KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
@@ -179,22 +189,6 @@ public class UnoController implements GameController, GameSaver {
             //TODO: something here in the view to give feedback to user when they call uno
         }
 
-    }
-
-
-    /**
-     * Used to change settings during a game
-     * Changing score to play up until, access file saving/loading
-     * @param updatedSettings
-     */
-    private void updateSettings(GameSettings updatedSettings){
-        settings = updatedSettings;
-    }
-
-    public void changeSpeed(double speed){
-        this.speed = speed;
-        settings.setSpeed(speed);
-        setupTimeline();
     }
 
 

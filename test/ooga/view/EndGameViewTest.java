@@ -21,7 +21,7 @@ class EndGameViewTest extends DukeApplicationTest {
     }
 
     @Test
-    void endViewElementsTest() {
+    void endGameElementsTest() {
         Text gameCompleteText = lookup("#gameCompleteText").query();
         Text winnerText = lookup("#winnerText").query();
         Text startNewGameText = lookup("#startNewGameText").query();
@@ -32,7 +32,7 @@ class EndGameViewTest extends DukeApplicationTest {
     }
 
     @Test
-    void endViewStartNewGameTest() {
+    void startNewGameTest() {
         sleep(2, TimeUnit.SECONDS);
         clickOn(newGameButton);
         sleep(2, TimeUnit.SECONDS);

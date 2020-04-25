@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.cards.Card;
 import ooga.config.GameInfo;
+import ooga.config.JavaToXML;
 import ooga.exceptions.OOGAException;
 import ooga.player.Player;
 import ooga.view.EndGameView;
@@ -14,6 +15,7 @@ import ooga.view.GameView;
 import ooga.view.SetupView;
 import ooga.view.SoundPlayer;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 
@@ -200,7 +202,7 @@ public class UnoController implements GameController, GameSaver {
 
 
     @Override
-    public GameInfo saveGame() {
+    public void saveGame(String fileName) throws IOException {
         GameInfo gameInfo = new GameInfo();
         gameInfo.setGameSettings(settings);
         gameInfo.setDrawPile(uno.getPileManager().getDrawPile());
@@ -208,7 +210,8 @@ public class UnoController implements GameController, GameSaver {
         gameInfo.setScoreTracker(scoreTracker);
         gameInfo.setTurnManager(turnManager);
 
-        return gameInfo;
+        JavaToXML encoder = new JavaToXML();
+        encoder.encode(gameInfo, fileName);
     }
 
     @Override
@@ -217,5 +220,6 @@ public class UnoController implements GameController, GameSaver {
         PileManager pileManager = new PileManager(gameInfo.getDrawPile(), gameInfo.getDiscardPile());
         uno = new Uno(gameInfo.getGameSettings(), pileManager, (UnoTurnManager) gameInfo.getTurnManager());
         uno.start();
+
     }
 }

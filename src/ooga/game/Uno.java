@@ -62,19 +62,6 @@ public class Uno implements GameModel, GameModelView {
     }
 
 
-    public GameSettings getSettings(){
-        return mySettings;
-    }
-
-    public PileManager getPileManager(){
-        return piles;
-    }
-
-    public UnoTurnManager getTurnManager(){
-        return turnManager;
-    }
-
-
     @Override
     public void start() {
         actionApplier = new UnoActionApplier(this, turnManager);
@@ -145,6 +132,12 @@ public class Uno implements GameModel, GameModelView {
         player.takecard(card);
      }
 
+    @Override
+    public boolean isOver(){
+        return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
+
+    }
+
      public void endTurn(){
          notifyPlayerObservers();
          turnManager.nextPlayer();
@@ -158,11 +151,6 @@ public class Uno implements GameModel, GameModelView {
     @Override
     public Card getTopDiscardCard() {
         return piles.showTopCard();
-    }
-
-    @Override
-    public Player getCurrentPlayer() {
-        return turnManager.getCurrentPlayer();
     }
 
     @Override
@@ -199,11 +187,25 @@ public class Uno implements GameModel, GameModelView {
         }
     }
 
-    /**
-     * Returns the action applier object for use in the WildcardObserver
-     * Called from GameView to initialize a WildColorSelectorView
-     * @return
-     */
+
+
+    @Override
+    public GameSettings getSettings(){
+        return mySettings;
+    }
+
+
+    @Override
+    public UnoTurnManager getTurnManager(){
+        return turnManager;
+    }
+
+
+    @Override
+    public PileManager getPileManager(){
+        return piles;
+    }
+
     public UnoActionApplier getActionApplier(){
         return actionApplier;
     }
@@ -275,11 +277,7 @@ public class Uno implements GameModel, GameModelView {
         return false;
     }
 
-    @Override
-    public boolean isOver(){
-        return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
 
-    }
 
 
 }

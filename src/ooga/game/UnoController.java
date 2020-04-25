@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.cards.Card;
 import ooga.config.GameInfo;
+import ooga.config.GameSaver;
 import ooga.config.JavaToXML;
 import ooga.config.XMLToJava;
 import ooga.exceptions.OOGAException;
@@ -69,8 +70,8 @@ public class UnoController implements GameController, GameSaver {
 
     }
 
-
-    private void step(double elapsedTime){
+    @Override
+    public void step(double elapsedTime){
         gameView.myTurnColorChange(turnManager.getCurrentPlayer().getID());
 
         if(uno.isOver()){

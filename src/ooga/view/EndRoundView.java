@@ -21,11 +21,11 @@ import static ooga.view.SetupView.DEFAULT_STYLESHEET;
 
 public class EndRoundView extends EndView {
     private Button nextRoundButton;
-    private Map scores;
+    private Map<Integer, Integer> allPlayerScores;
 
     public EndRoundView(Stage stage, int playerNumber, Map playerScores) {
         super(stage, playerNumber);
-        scores = playerScores;
+        allPlayerScores = playerScores;
         showEndScene();
     }
 
@@ -35,24 +35,44 @@ public class EndRoundView extends EndView {
         root.setAlignment(Pos.CENTER);
 
         Text roundComplete = makeText("roundComplete");
-
-        //TODO: make the player stuff for the scores
-
+        VBox playerScoresText = makePlayerScoresText();
         Text startNextRound = makeText("startNextRound");
 
         nextRoundButton = new Button(myResources.getString("nextRoundButton"));
         nextRoundButton.setId("nextRoundButton");
         setButtonActions();
 
-        root.getChildren().addAll(roundComplete, startNextRound, nextRoundButton);
+        root.getChildren().addAll(roundComplete, playerScoresText, startNextRound, nextRoundButton);
         Scene endScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         endScene.getStylesheets().add(DEFAULT_STYLESHEET);
         mainStage.setScene(endScene);
         mainStage.show();
     }
 
+    private VBox makePlayerScoresText() {
+        VBox playerScoresText = new VBox(DEFAULT_SPACING);
+        playerScoresText.setAlignment(Pos.CENTER);
+        for(int i : allPlayerScores.keySet()) {
+            int score = allPlayerScores.get(i);
+            String player = myResources.getString("player");
+            String scoreLabel = " " + myResources.getString("score");
+            Text currentScore = new Text(player + i + scoreLabel + score);
+            currentScore.setId(player + i);
+            playerScoresText.getChildren().add(currentScore);
+        }
+        return playerScoresText;
+    }
+
     @Override
     protected void setButtonActions() {
         //TODO: call actions to proceed to next round
+    }
+
+    /**
+     * Used for testing. Allows test to access the button that advances to the next round.
+     * @return the button that advances to the next round - goes back to a GameView.
+     */
+    public Button getNextRoundButton() {
+        return nextRoundButton;
     }
 }

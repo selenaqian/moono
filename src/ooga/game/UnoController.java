@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ooga.cards.Card;
 import ooga.config.GameInfo;
+import ooga.config.GameSaver;
 import ooga.config.JavaToXML;
 import ooga.config.XMLToJava;
 import ooga.exceptions.OOGAException;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 public class UnoController implements GameController, GameSaver {
     private Timeline myAnimation = new Timeline();
     private double speed;
+    private ResourceBundle myResources = ResourceBundle.getBundle("default");
+    private SoundPlayer soundPlayer;
 
     GameSettings settings; //equivalent to model in MVC
     SetupView setupView;
@@ -32,8 +35,7 @@ public class UnoController implements GameController, GameSaver {
     UnoTurnManager turnManager;
     UnoScoreTracker scoreTracker;
     Player winner;
-    private ResourceBundle myResources = ResourceBundle.getBundle("default");
-    private SoundPlayer soundPlayer;
+
 
     public UnoController(Stage stage){
         mainStage = stage;
@@ -64,13 +66,11 @@ public class UnoController implements GameController, GameSaver {
 
     @Override
     public void endGame(int playerNumber) {
-        //TODO: pass in the winner info to the view
         new EndGameView(mainStage, playerNumber);
-
     }
 
-
-    private void step(double elapsedTime){
+    @Override
+    public void step(double elapsedTime){
         gameView.myTurnColorChange(turnManager.getCurrentPlayer().getID());
 
         if(uno.isOver()){
@@ -87,6 +87,15 @@ public class UnoController implements GameController, GameSaver {
         uno.checkUno();
 
     }
+
+
+    @Override
+    public void changeSpeed(double speed){
+        this.speed = speed;
+        settings.setSpeed(speed);
+        setupTimeline();
+    }
+
 
     private void setupTimeline(){
         KeyFrame frame = new KeyFrame(Duration.seconds(speed), e -> step(speed));
@@ -145,21 +154,19 @@ public class UnoController implements GameController, GameSaver {
     /**
      * Called from Uno when a user has no more cards left
      */
-    private void endRound(){
+    @Override
+    public void endRound(){
         scoreTracker.calculate(turnManager.getAllPlayers());
         for (Player p : turnManager.getAllPlayers()){
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
-
-            new EndRoundView(mainStage, p.getID(), scoreTracker.getScores(), this);
-
+            
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 winner = p;
                 endGame(p.getID());
             } else {
-                //play a new round
-                uno.restart();
+                new EndRoundView(mainStage, p.getID(), scoreTracker.getScores(),this);
             }
         }
     }
@@ -183,22 +190,6 @@ public class UnoController implements GameController, GameSaver {
             //TODO: something here in the view to give feedback to user when they call uno
         }
 
-    }
-
-
-    /**
-     * Used to change settings during a game
-     * Changing score to play up until, access file saving/loading
-     * @param updatedSettings
-     */
-    private void updateSettings(GameSettings updatedSettings){
-        settings = updatedSettings;
-    }
-
-    public void changeSpeed(double speed){
-        this.speed = speed;
-        settings.setSpeed(speed);
-        setupTimeline();
     }
 
 

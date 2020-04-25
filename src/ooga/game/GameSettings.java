@@ -13,8 +13,9 @@ import java.util.List;
 import static ooga.view.SetupView.DEFAULT_STYLESHEET;
 
 /**
- * Functions as a controller class
- * Called in SetupView
+ * Holds and updates values for game settings like number of players, number of cards, winning score
+ * Called in SetupView and passed to model
+ * @author Mary Jiang (mvj6)
  */
 public class GameSettings {
 
@@ -81,21 +82,6 @@ public class GameSettings {
 //            // FIXME: do something with this exception
 //            //e.printStackTrace();
 
-
-//        //TODO: test if relfection works
-//        try {
-//            Class<?> clazz = ruleString.getClass();
-//            Object o = clazz.getDeclaredConstructor().newInstance();
-//            rule = (Rule) o;
-//        }
-//
-//        catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-//            // FIXME: do something with this exception
-//            e.printStackTrace();
-//        }
-
-//        }
-//
 //
 //    }
 

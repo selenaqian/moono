@@ -63,19 +63,6 @@ public class Uno implements GameModel, GameModelView {
     }
 
 
-    public GameSettings getSettings(){
-        return mySettings;
-    }
-
-    public PileManager getPileManager(){
-        return piles;
-    }
-
-    public UnoTurnManager getTurnManager(){
-        return turnManager;
-    }
-
-
     @Override
     public void start() {
         notifyPlayerObservers();
@@ -99,7 +86,7 @@ public class Uno implements GameModel, GameModelView {
         if (rule.isValid(piles.showTopCard(), selectedCard)) {
 
             //make sure player updates their hand to remove the card
-            player.removecard(selectedCard);
+            player.hand().removeCard(selectedCard);
 
             //update the discard pile to add the card
             piles.discardCard(selectedCard);
@@ -141,8 +128,14 @@ public class Uno implements GameModel, GameModelView {
         Card card = piles.drawCard();
 
         //get player to accept the drawn card into their own hand of cards
-        player.takecard(card);
+        player.hand().addCard(card);
      }
+
+    @Override
+    public boolean isOver(){
+        return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
+
+    }
 
      public void endTurn(){
          notifyPlayerObservers();
@@ -157,11 +150,6 @@ public class Uno implements GameModel, GameModelView {
     @Override
     public Card getTopDiscardCard() {
         return piles.showTopCard();
-    }
-
-    @Override
-    public Player getCurrentPlayer() {
-        return turnManager.getCurrentPlayer();
     }
 
     @Override
@@ -193,16 +181,30 @@ public class Uno implements GameModel, GameModelView {
             Player player = turnManager.getAllPlayers().get(i);
             for (int j = 0; j < mySettings.getHandSize(); j++){
                 Card card = piles.drawCard();
-                player.takecard(card);
+                player.hand().addCard(card);
             }
         }
     }
 
-    /**
-     * Returns the action applier object for use in the WildcardObserver
-     * Called from GameView to initialize a WildColorSelectorView
-     * @return
-     */
+
+
+    @Override
+    public GameSettings getSettings(){
+        return mySettings;
+    }
+
+
+    @Override
+    public UnoTurnManager getTurnManager(){
+        return turnManager;
+    }
+
+
+    @Override
+    public PileManager getPileManager(){
+        return piles;
+    }
+
     public UnoActionApplier getActionApplier(){
         return actionApplier;
     }
@@ -246,7 +248,7 @@ public class Uno implements GameModel, GameModelView {
         if (hasUno() && didCallUno == false){
             //System.out.println("UNO penalty to player " + turnManager.getCurrentPlayer().getID());
             for (int i = 0; i < UNO_PENALTY; i++){
-                turnManager.getCurrentPlayer().takecard(piles.drawCard());
+                turnManager.getCurrentPlayer().hand().addCard(piles.drawCard());
             }
             return true;
         }
@@ -274,11 +276,7 @@ public class Uno implements GameModel, GameModelView {
         return false;
     }
 
-    @Override
-    public boolean isOver(){
-        return rule.isOver(getTopDiscardCard(), turnManager.getCurrentPlayer().hand());
 
-    }
 
 
 }

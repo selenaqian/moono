@@ -13,8 +13,4 @@ public class ManualPlayer extends Player {
         return name;
     }
 
-    @Override
-    List AIplayerName(int numaiplayers) {
-        return null;
-    }
 }

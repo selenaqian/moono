@@ -9,6 +9,11 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds the discard and draw piles and handles updates to those piles
+ * @author Mary Jiang (mvj6)
+ */
+
 public class PileManager {
     private DiscardPile discPile;
     private DrawPile drawPile;
@@ -43,6 +48,7 @@ public class PileManager {
         this.drawPile = drawPile;
         this.discPile = discPile;
     }
+
 
     public void init(){
         discPile = new DiscardPile();

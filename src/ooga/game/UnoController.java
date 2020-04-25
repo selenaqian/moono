@@ -154,7 +154,8 @@ public class UnoController implements GameController, GameSaver {
     /**
      * Called from Uno when a user has no more cards left
      */
-    private void endRound(){
+    @Override
+    public void endRound(){
         scoreTracker.calculate(turnManager.getAllPlayers());
         for (Player p : turnManager.getAllPlayers()){
             //update scores in the view
@@ -165,7 +166,7 @@ public class UnoController implements GameController, GameSaver {
                 winner = p;
                 endGame(p.getID());
             } else {
-                new EndRoundView(mainStage, p.getID(), scoreTracker.getScores()); \
+                new EndRoundView(mainStage, p.getID(), scoreTracker.getScores());
             }
         }
     }

@@ -16,10 +16,10 @@ Start Date: 3/30/2020
 
 Finish Date: 
 
-Hours Spent Together: 22 hours
+Hours Spent Together: 25 hours
 
 Individual:
-- Tess Hours: 21 hours
+- Tess Hours: 22 hours
 - Mary Hours: 21.5 hours
 - Selena Hours: 22 hours
 - Suomo Hours:12 hours
@@ -42,12 +42,35 @@ Individual:
 
 ### Running the Program
 
-Main class: Main.java
+Main class:
+* Main.java
 
-Data files needed: 
+Data files needed:
+* deck_size.properties
+* default.properties
+* errors.properties
+* scoring.properties
+* xml_strings.properties
+* *Audio*
+    * Uno1.mp3
+    * Uno2.mp3
+    * Uno3.mp3
+    * Uno4.mp3
+    * uno_audios.properties
+* *stylesheets*
+    * default.css
+    * defaul_darkMode.css
+    * duke.css
+    * duke_darkMode.css
+    * space.css
+    * space_darkMode.css
+    * *images*
+        * duke_card.png
+        * space_card.jpg
+        * uno_card.png
 
 Features implemented:
-
+* 
 
 
 ### Notes/Assumptions

@@ -28,6 +28,9 @@ class EndRoundViewTest extends DukeApplicationTest {
         continueButton = endRoundView.getNextRoundButton();
     }
 
+    /**
+     * Tests that the elements in the scene are being created correctly.
+     */
     @Test
     void endRoundElementsTest() {
         sleep(2, TimeUnit.SECONDS);
@@ -45,6 +48,9 @@ class EndRoundViewTest extends DukeApplicationTest {
         assertNotNull(lookup("Player 3 score: 0").query());
     }
 
+    /**
+     * Tests that the next round button advances to the next round - should go back to GameView with updated scores.
+     */
     @Test
     void startNewRoundTest() {
         clickOn(continueButton);

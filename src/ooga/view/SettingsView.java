@@ -32,6 +32,7 @@ public class SettingsView {
     private Button saveCurrentButton;
     private Button newGameButton;
     private Button closeButton;
+    private MidGameSaveNew saveNew;
 
     public SettingsView() {
         this(DEFAULT_STYLESHEET, new GameView());
@@ -44,6 +45,7 @@ public class SettingsView {
         myStage = new Stage();
         themeOptions = new HashMap<>();
         themeFileNames = new HashMap<>();
+        saveNew = new MidGameSaveNew(myGameView.getStage(), myStage, myGameView.getController());
 
         //TODO: get this to work:
         //myStage.setOnCloseRequest(e -> myController.play());
@@ -125,7 +127,8 @@ public class SettingsView {
         save_newGameUI.setAlignment(Pos.CENTER);
         saveCurrentButton = new Button(myResources.getString("save"));
         newGameButton = new Button(myResources.getString("newGameButton"));
-        //TODO: set actions - each pops up its own new window with more stuff
+        saveCurrentButton.setOnMouseClicked(e -> saveNew.showSaveScene());
+        newGameButton.setOnMouseClicked(e -> saveNew.showNewGameScene());
 
         save_newGameUI.getChildren().addAll(saveCurrentButton, newGameButton);
         return save_newGameUI;

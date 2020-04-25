@@ -5,7 +5,6 @@
  */
 package ooga.view;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ooga.cards.Card;
@@ -304,6 +302,23 @@ public class GameView implements GameViewInterface, PlayerObserver {
         mainScene.getStylesheets().add(theme);
         mySettings.setTheme(theme);
         wildColorSelector.setTheme(theme);
+    }
+
+    /**
+     * Allows other view classes to access the controller stored by the GameView object. Used by SettingsView to create the LoadView.
+     * @return the controller stored by this class.
+     */
+    UnoController getController() {
+        return myController;
+    }
+
+    /**
+     * Allows other view classes to access the stage this GameView is using. Used by SettingsView to send info to MidGameSaveNew
+     * about where to overwrite the game if desired.
+     * @return the stage stored by this class.
+     */
+    Stage getStage() {
+        return mainStage;
     }
 
     // Methods below primarily used for testing - to get objects and check their displayed values.

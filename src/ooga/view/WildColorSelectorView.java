@@ -12,8 +12,8 @@ import ooga.game.WildcardObserver;
 import static ooga.view.SetupView.DEFAULT_SPACING;
 
 public class WildColorSelectorView implements WildcardObserver {
-    public final int SPECIAL_CARD_ACTION_WIDTH = 500;
-    public final int SPECIAL_CARD_ACTION_HEIGHT = 300;
+    public static final int SPECIAL_CARD_ACTION_WIDTH = 500;
+    public static final int SPECIAL_CARD_ACTION_HEIGHT = 300;
 
     private UnoActionApplier myActionApplier;
     private String myStylesheet;

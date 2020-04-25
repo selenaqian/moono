@@ -73,14 +73,13 @@ public class SetupView {
         scoreToWinSlider = new Slider(MIN_SCORE, MAX_SCORE, DEFAULT_SCORE);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCES);
 
-        showWelcomeScene(mainStage);
+        showWelcomeScene();
     }
 
     /**
      * Helper method to create and display the first scene.
-     * @param stage this object's stage where the scene will be shown.
      */
-    private void showWelcomeScene(Stage stage) {
+    private void showWelcomeScene() {
         VBox root = new VBox(DEFAULT_SPACING);
         root.setAlignment(Pos.CENTER);
 
@@ -97,6 +96,8 @@ public class SetupView {
         loadSavedButton = new Button(myResources.getString("loadSaved"));
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("data"));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("XML Files", "*.XML"));
         loadSavedButton.setOnMouseClicked(e -> {
             File selectedFile = fileChooser.showOpenDialog(new Stage());
             try {
@@ -111,8 +112,8 @@ public class SetupView {
 
         Scene welcomeScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         welcomeScene.getStylesheets().add(DEFAULT_STYLESHEET);
-        stage.setScene(welcomeScene);
-        stage.show();
+        mainStage.setScene(welcomeScene);
+        mainStage.show();
     }
 
     /**

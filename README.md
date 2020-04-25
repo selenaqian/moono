@@ -21,7 +21,7 @@ Hours Spent Together: 25 hours
 Individual:
 - Tess Hours: 22 hours
 - Mary Hours: 21.5 hours
-- Selena Hours: 22 hours
+- Selena Hours: 25 hours
 - Suomo Hours:12 hours
 
 
@@ -35,6 +35,21 @@ Mary Jiang (mvj6):
 * Connecting view with controller and model components
     * Setting up observers for game updates and handling wildcard view requirements
 
+Selena Qian (sq22):
+* Implementing classes in the View package:
+    * CardRender
+    * EndView
+        * EndGameView
+        * EndRound
+    * GameViewInterface
+        * GameView
+    * MidGameSaveNew
+    * RulesAndSpecialCardScene
+    * SettingsView
+    * SetupView
+    * ThemeSelectionScene
+    * WildColorSelectorView
+* Required setting up the UI and setting the buttons and clicks on certain nodes to actions.
 
 ### Resources Used
 - [Uno Rules](https://service.mattel.com/instruction_sheets/42001pr.pdf)
@@ -67,7 +82,7 @@ Data files needed:
     * uno_audios.properties
 * *stylesheets*
     * default.css
-    * defaul_darkMode.css
+    * default_darkMode.css
     * duke.css
     * duke_darkMode.css
     * space.css
@@ -78,8 +93,15 @@ Data files needed:
         * uno_card.png
 
 Features implemented:
-* 
-
+* Classic Uno game
+* Deadly Uno - immediately lose if you cannot play a card
+* Ascending Uno - must play a card with an equal or higher value as well as the same color
+* Multiple color themes
+* Dark mode for each color theme
+* Save games
+* Load games
+* Multiple games played at once
+* Preferences for speed and theme can be changed mid-game
 
 ### Notes/Assumptions
 
@@ -92,9 +114,25 @@ Assumptions or Simplifications:
 Interesting data files:
 
 Known Bugs:
+* Loading a game currently is not functioning as expected.
 
 Extra credit:
 
 
 ### Impressions
 
+This project was a lot more involved than our previous ones. Our design plan was useful at a high level to help us think
+about where to start, but as we began to add in more features, we quickly saw how easy it was to allow dependencies to arise.
+Furthermore, there were a lot of implementation details that made us re-think our initial design plan. Many features were
+initially implemented in once place because it did make sense to put it there, but we then realized that the function also
+needed to be called from another part of the project as well.
+
+We also spent a fair chunk of time discussing the idea of data-driven design. While we weren't able to make everything data-driven,
+this was certainly something that we thought about along the process. Looking at the project as it is, we can definitely see
+some areas where data could help a lot in making the project more flexible, such as using a properties file for the sizes of
+objects in the UI.
+
+(Selena)
+I did find it rewarding to see the finished product, especially with some of the more interesting visuals. The UI component
+definitely added a sense of satisfaction for me — seeing the turns advance and the game being played is pretty cool. I think
+that we overall were able to create something pretty cool.

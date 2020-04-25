@@ -13,10 +13,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ooga.game.GameSettings;
 import ooga.game.UnoController;
 
+import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -92,6 +94,12 @@ public class SetupView {
         welcomeOkButton = new Button(myResources.getString("okay"));
         welcomeOkButton.setOnAction(e -> welcomeOkPressed());
         loadSavedButton = new Button(myResources.getString("loadSaved"));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("data"));
+        loadSavedButton.setOnMouseClicked(e -> {
+            File selectedFile = fileChooser.showOpenDialog(new Stage());
+            //TODO: send info to controller
+        });
 
         root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton, loadSavedButton);
 

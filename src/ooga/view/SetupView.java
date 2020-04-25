@@ -45,6 +45,7 @@ public class SetupView {
     private Slider cardsPerPlayerSlider;
     private Slider scoreToWinSlider;
     private Button welcomeOkButton;
+    private Button loadSavedButton;
     private ResourceBundle myResources;
     private RulesAndSpecialCardScene rulesAndSpecialCards;
     private ThemeSelectionScene themeSelection;
@@ -90,8 +91,9 @@ public class SetupView {
 
         welcomeOkButton = new Button(myResources.getString("okay"));
         welcomeOkButton.setOnAction(e -> welcomeOkPressed());
+        loadSavedButton = new Button(myResources.getString("loadSaved"));
 
-        root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton);
+        root.getChildren().addAll(welcomeText, numberPlayers, cardsPerPlayer, scoreToWin, welcomeOkButton, loadSavedButton);
 
         Scene welcomeScene = new Scene(root, DEFAULT_STAGE_WIDTH, DEFAULT_STAGE_HEIGHT);
         welcomeScene.getStylesheets().add(DEFAULT_STYLESHEET);

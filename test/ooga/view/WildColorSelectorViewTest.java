@@ -25,6 +25,9 @@ class WildColorSelectorViewTest extends DukeApplicationTest {
         wildColorSelector.showColorSelector();
     }
 
+    /**
+     * Test that all of the elements show up properly.
+     */
     @Test
     void showColorSelectorTestElements() {
         List<Rectangle> colorBoxes = wildColorSelector.getColorBoxes();

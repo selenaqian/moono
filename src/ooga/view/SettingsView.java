@@ -95,6 +95,7 @@ public class SettingsView {
         themeUI.setAlignment(Pos.CENTER);
         Text themeTitle = new Text(myResources.getString("theme"));
         themeTitle.getStyleClass().add("subtitle2");
+        Text themeInstructions = new Text(myResources.getString("themeSub"));
 
         HBox themeOptionsToClick = new HBox(DEFAULT_SPACING);
         themeOptionsToClick.setAlignment(Pos.CENTER);
@@ -118,7 +119,7 @@ public class SettingsView {
             themeFileNames.put(theme, allThemeFiles[i]);
         }
         darkModeToggle = new CheckBox(myResources.getString("darkMode"));
-        themeUI.getChildren().addAll(themeTitle, darkModeToggle, themeOptionsToClick);
+        themeUI.getChildren().addAll(themeTitle, themeInstructions, darkModeToggle, themeOptionsToClick);
         return themeUI;
     }
 

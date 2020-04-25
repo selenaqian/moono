@@ -26,26 +26,37 @@
     <void property="suit">
      <object class="java.lang.Enum" id="Suit1" method="valueOf">
       <class>ooga.cards.Suit</class>
-      <string>A</string>
+      <string>D</string>
      </object>
     </void>
     <void property="value">
      <object class="java.lang.Enum" id="Value1" method="valueOf">
       <class>ooga.cards.Value</class>
-      <string>ONE</string>
+      <string>EIGHT</string>
      </object>
     </void>
    </void>
    <void id="Card0" index="1">
-    <void property="value">
-     <object class="java.lang.Enum" id="Value2" method="valueOf">
-      <class>ooga.cards.Value</class>
-      <string>SEVEN</string>
-     </object>
+    <void property="suit">
+     <object idref="Suit1"/>
     </void>
-    <void id="Suit2" property="suit"/>
+    <void id="Value2" property="value"/>
    </void>
    <void index="2">
+    <void property="suit">
+     <object class="java.lang.Enum" id="Suit2" method="valueOf">
+      <class>ooga.cards.Suit</class>
+      <string>A</string>
+     </object>
+    </void>
+    <void property="value">
+     <object class="java.lang.Enum" id="Value3" method="valueOf">
+      <class>ooga.cards.Value</class>
+      <string>ONE</string>
+     </object>
+    </void>
+   </void>
+   <void index="3">
     <void property="suit">
      <object class="java.lang.Enum" id="Suit3" method="valueOf">
       <class>ooga.cards.Suit</class>
@@ -53,20 +64,9 @@
      </object>
     </void>
     <void property="value">
-     <object class="java.lang.Enum" id="Value3" method="valueOf">
-      <class>ooga.cards.Value</class>
-      <string>THREE</string>
-     </object>
-    </void>
-   </void>
-   <void index="3">
-    <void property="suit">
-     <object idref="Suit0"/>
-    </void>
-    <void property="value">
      <object class="java.lang.Enum" id="Value4" method="valueOf">
       <class>ooga.cards.Value</class>
-      <string>ZERO</string>
+      <string>SEVEN</string>
      </object>
     </void>
    </void>
@@ -74,45 +74,40 @@
     <void property="value">
      <object class="java.lang.Enum" id="Value5" method="valueOf">
       <class>ooga.cards.Value</class>
-      <string>NINE</string>
+      <string>ZERO</string>
      </object>
     </void>
    </void>
    <void index="5">
     <void property="suit">
-     <object idref="Suit2"/>
+     <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object class="java.lang.Enum" id="Value6" method="valueOf">
-      <class>ooga.cards.Value</class>
-      <string>EIGHT</string>
-     </object>
+     <object idref="Value5"/>
     </void>
    </void>
    <void index="6">
+    <void property="suit">
+     <object idref="Suit3"/>
+    </void>
     <void property="value">
      <object idref="Value3"/>
     </void>
    </void>
    <void index="7">
-    <void property="suit">
-     <object idref="Suit2"/>
-    </void>
     <void property="value">
-     <object class="java.lang.Enum" id="Value7" method="valueOf">
-      <class>ooga.cards.Value</class>
-      <string>TWO</string>
-     </object>
+     <object idref="Value1"/>
     </void>
    </void>
-   <void index="8">
-    <void property="value">
-     <object idref="Value6"/>
+   <void id="Card1" index="8">
+    <void property="suit">
+     <object idref="Suit1"/>
     </void>
+    <void id="Value6" property="value"/>
    </void>
    <void index="9">
     <void property="suit">
-     <object idref="Suit2"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
      <object idref="Value0"/>
@@ -120,37 +115,40 @@
    </void>
    <void index="10">
     <void property="suit">
-     <object idref="Suit2"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object class="java.lang.Enum" id="Value8" method="valueOf">
+     <object class="java.lang.Enum" id="Value7" method="valueOf">
       <class>ooga.cards.Value</class>
-      <string>FIVE</string>
+      <string>NINE</string>
      </object>
     </void>
    </void>
    <void index="11">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
     <void property="value">
-     <object idref="Value5"/>
+     <object idref="Value2"/>
     </void>
    </void>
    <void index="12">
+    <void property="suit">
+     <object idref="Suit1"/>
+    </void>
     <void property="value">
-     <object idref="Value7"/>
+     <object idref="Value4"/>
     </void>
    </void>
    <void index="13">
     <void property="suit">
-     <object idref="Suit2"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value5"/>
+     <object idref="Value2"/>
     </void>
    </void>
    <void index="14">
-    <void property="suit">
-     <object idref="Suit1"/>
-    </void>
     <void property="value">
      <object idref="Value6"/>
     </void>
@@ -160,18 +158,15 @@
      <object idref="Suit0"/>
     </void>
     <void property="value">
-     <object idref="Value8"/>
+     <object idref="Value3"/>
     </void>
    </void>
    <void index="16">
     <void property="suit">
-     <object idref="Suit3"/>
+     <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object class="java.lang.Enum" id="Value9" method="valueOf">
-      <class>ooga.cards.Value</class>
-      <string>FOUR</string>
-     </object>
+     <object idref="Value2"/>
     </void>
    </void>
    <void index="17">
@@ -187,83 +182,63 @@
      <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value6"/>
+     <object idref="Value3"/>
     </void>
    </void>
    <void index="19">
     <void property="suit">
-     <object idref="Suit1"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value3"/>
+     <object idref="Value0"/>
+    </void>
+   </void>
+   <void index="20">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
+    <void property="value">
+     <object idref="Value6"/>
     </void>
    </void>
    <void index="21">
     <void property="suit">
-     <object idref="Suit1"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value9"/>
+     <object class="java.lang.Enum" id="Value8" method="valueOf">
+      <class>ooga.cards.Value</class>
+      <string>FOUR</string>
+     </object>
     </void>
    </void>
    <void index="22">
     <void property="value">
-     <object idref="Value2"/>
+     <object idref="Value1"/>
     </void>
    </void>
    <void index="23">
     <void property="suit">
-     <object idref="Suit0"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value9"/>
+     <object idref="Value8"/>
     </void>
    </void>
    <void index="24">
-    <void property="suit">
-     <object idref="Suit2"/>
-    </void>
     <void property="value">
-     <object idref="Value1"/>
+     <object idref="Value2"/>
     </void>
    </void>
    <void index="25">
     <void property="suit">
-     <object idref="Suit2"/>
+     <object idref="Suit0"/>
     </void>
     <void property="value">
-     <object idref="Value9"/>
+     <object idref="Value6"/>
     </void>
    </void>
    <void index="26">
-    <void property="value">
-     <object idref="Value2"/>
-    </void>
-   </void>
-   <void index="27">
-    <void property="value">
-     <object idref="Value2"/>
-    </void>
-   </void>
-   <void index="28">
-    <void property="suit">
-     <object idref="Suit0"/>
-    </void>
-   </void>
-   <void index="29">
-    <void property="suit">
-     <object idref="Suit3"/>
-    </void>
-   </void>
-   <void index="30">
-    <void property="suit">
-     <object idref="Suit1"/>
-    </void>
-    <void property="value">
-     <object idref="Value4"/>
-    </void>
-   </void>
-   <void index="31">
     <void property="suit">
      <object idref="Suit0"/>
     </void>
@@ -271,38 +246,84 @@
      <object idref="Value7"/>
     </void>
    </void>
-   <void index="32">
+   <void index="27">
     <void property="suit">
-     <object idref="Suit1"/>
+     <object idref="Suit2"/>
     </void>
+    <void property="value">
+     <object idref="Value1"/>
+    </void>
+   </void>
+   <void index="28">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
+    <void property="value">
+     <object idref="Value8"/>
+    </void>
+   </void>
+   <void index="29">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
+    <void property="value">
+     <object idref="Value4"/>
+    </void>
+   </void>
+   <void index="30">
+    <void property="suit">
+     <object idref="Suit2"/>
+    </void>
+    <void property="value">
+     <object idref="Value7"/>
+    </void>
+   </void>
+   <void index="31">
     <void property="value">
      <object idref="Value5"/>
     </void>
    </void>
-   <void index="33">
+   <void index="32">
     <void property="suit">
-     <object idref="Suit0"/>
+     <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value9"/>
+     <object class="java.lang.Enum" id="Value9" method="valueOf">
+      <class>ooga.cards.Value</class>
+      <string>TWO</string>
+     </object>
+    </void>
+   </void>
+   <void index="33">
+    <void property="suit">
+     <object idref="Suit3"/>
+    </void>
+    <void property="value">
+     <object idref="Value1"/>
     </void>
    </void>
    <void index="34">
     <void property="suit">
-     <object idref="Suit0"/>
+     <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value0"/>
+     <object idref="Value8"/>
     </void>
    </void>
    <void index="35">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
     <void property="value">
-     <object idref="Value6"/>
+     <object idref="Value3"/>
     </void>
    </void>
    <void index="36">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
     <void property="value">
-     <object idref="Value2"/>
+     <object idref="Value1"/>
     </void>
    </void>
    <void index="37">
@@ -315,42 +336,26 @@
    </void>
    <void index="38">
     <void property="suit">
-     <object idref="Suit1"/>
+     <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value2"/>
+     <object idref="Value7"/>
     </void>
    </void>
    <void index="39">
     <void property="suit">
-     <object idref="Suit3"/>
-    </void>
-   </void>
-   <void index="40">
-    <void property="suit">
      <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value1"/>
+     <object idref="Value9"/>
     </void>
    </void>
-   <void index="41">
-    <void property="suit">
-     <object idref="Suit3"/>
-    </void>
+   <void index="40">
     <void property="value">
-     <object idref="Value0"/>
+     <object idref="Value3"/>
     </void>
    </void>
    <void index="42">
-    <void property="suit">
-     <object idref="Suit3"/>
-    </void>
-    <void property="value">
-     <object idref="Value5"/>
-    </void>
-   </void>
-   <void index="43">
     <void property="suit">
      <object idref="Suit0"/>
     </void>
@@ -358,9 +363,17 @@
      <object idref="Value7"/>
     </void>
    </void>
+   <void index="43">
+    <void property="suit">
+     <object idref="Suit2"/>
+    </void>
+    <void property="value">
+     <object idref="Value0"/>
+    </void>
+   </void>
    <void index="44">
     <void property="value">
-     <object idref="Value3"/>
+     <object idref="Value6"/>
     </void>
    </void>
    <void index="45">
@@ -372,24 +385,24 @@
     </void>
    </void>
    <void index="46">
-    <void property="value">
-     <object idref="Value0"/>
-    </void>
-   </void>
-   <void index="47">
     <void property="suit">
      <object idref="Suit0"/>
     </void>
     <void property="value">
-     <object idref="Value3"/>
+     <object idref="Value9"/>
+    </void>
+   </void>
+   <void index="47">
+    <void property="value">
+     <object idref="Value4"/>
     </void>
    </void>
    <void index="48">
     <void property="suit">
-     <object idref="Suit3"/>
+     <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value8"/>
+     <object idref="Value1"/>
     </void>
    </void>
    <void index="49">
@@ -397,49 +410,25 @@
      <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value4"/>
+     <object idref="Value2"/>
     </void>
    </void>
    <void index="50">
-    <void property="suit">
-     <object idref="Suit2"/>
-    </void>
     <void property="value">
-     <object idref="Value8"/>
+     <object idref="Value0"/>
     </void>
    </void>
    <void index="51">
     <void property="value">
-     <object idref="Value1"/>
-    </void>
-   </void>
-   <void index="52">
-    <void property="suit">
-     <object idref="Suit0"/>
-    </void>
-    <void property="value">
-     <object idref="Value1"/>
-    </void>
-   </void>
-   <void index="53">
-    <void property="value">
      <object idref="Value5"/>
     </void>
    </void>
-   <void index="54">
-    <void property="suit">
-     <object idref="Suit3"/>
-    </void>
+   <void index="52">
     <void property="value">
      <object idref="Value9"/>
     </void>
    </void>
-   <void index="55">
-    <void property="value">
-     <object idref="Value6"/>
-    </void>
-   </void>
-   <void index="56">
+   <void index="53">
     <void property="suit">
      <object idref="Suit2"/>
     </void>
@@ -447,20 +436,27 @@
      <object idref="Value2"/>
     </void>
    </void>
-   <void index="57">
-    <void property="suit">
-     <object idref="Suit2"/>
-    </void>
+   <void index="54">
     <void property="value">
      <object idref="Value4"/>
     </void>
    </void>
-   <void index="58">
+   <void index="56">
+    <void property="value">
+     <object idref="Value3"/>
+    </void>
+   </void>
+   <void index="57">
     <void property="suit">
      <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value8"/>
+     <object idref="Value7"/>
+    </void>
+   </void>
+   <void index="58">
+    <void property="value">
+     <object idref="Value7"/>
     </void>
    </void>
    <void index="59">
@@ -468,7 +464,7 @@
      <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value7"/>
+     <object idref="Value6"/>
     </void>
    </void>
    <void index="60">
@@ -476,36 +472,33 @@
      <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value0"/>
+     <object idref="Value8"/>
     </void>
    </void>
    <void index="61">
-    <void property="suit">
-     <object idref="Suit3"/>
-    </void>
     <void property="value">
-     <object idref="Value6"/>
+     <object idref="Value9"/>
     </void>
    </void>
    <void index="62">
+    <void property="suit">
+     <object idref="Suit0"/>
+    </void>
     <void property="value">
-     <object idref="Value1"/>
+     <object idref="Value0"/>
     </void>
    </void>
    <void index="63">
     <void property="suit">
-     <object idref="Suit1"/>
+     <object idref="Suit2"/>
     </void>
     <void property="value">
      <object idref="Value8"/>
     </void>
    </void>
    <void index="64">
-    <void property="suit">
-     <object idref="Suit1"/>
-    </void>
     <void property="value">
-     <object idref="Value7"/>
+     <object idref="Value6"/>
     </void>
    </void>
    <void index="65">
@@ -513,7 +506,7 @@
      <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value4"/>
+     <object idref="Value9"/>
     </void>
    </void>
    <void index="66">
@@ -521,15 +514,15 @@
      <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value4"/>
+     <object idref="Value0"/>
     </void>
    </void>
    <void index="67">
     <void property="suit">
-     <object idref="Suit2"/>
+     <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value3"/>
+     <object idref="Value4"/>
     </void>
    </void>
    <void index="68">
@@ -537,28 +530,28 @@
      <object idref="Suit2"/>
     </void>
     <void property="value">
-     <object idref="Value7"/>
+     <object idref="Value5"/>
     </void>
    </void>
    <void index="69">
+    <void property="value">
+     <object idref="Value1"/>
+    </void>
+   </void>
+   <void index="71">
     <void property="suit">
      <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value7"/>
-    </void>
-   </void>
-   <void index="70">
-    <void property="value">
      <object idref="Value0"/>
     </void>
    </void>
-   <void index="71">
+   <void index="72">
     <void property="value">
-     <object idref="Value9"/>
+     <object idref="Value4"/>
     </void>
    </void>
-   <void index="72">
+   <void index="73">
     <void property="suit">
      <object idref="Suit1"/>
     </void>
@@ -566,59 +559,51 @@
      <object idref="Value5"/>
     </void>
    </void>
-   <void index="73">
+   <void index="74">
     <void property="suit">
      <object idref="Suit0"/>
     </void>
     <void property="value">
-     <object idref="Value0"/>
-    </void>
-   </void>
-   <void index="74">
-    <void property="value">
-     <object idref="Value1"/>
+     <object idref="Value5"/>
     </void>
    </void>
    <void index="75">
-    <void property="value">
-     <object idref="Value0"/>
+    <void property="suit">
+     <object idref="Suit1"/>
     </void>
    </void>
    <void index="76">
     <void property="suit">
-     <object idref="Suit1"/>
+     <object idref="Suit3"/>
     </void>
     <void property="value">
-     <object idref="Value9"/>
+     <object idref="Value2"/>
     </void>
    </void>
    <void index="77">
     <void property="suit">
-     <object idref="Suit3"/>
+     <object idref="Suit1"/>
     </void>
     <void property="value">
-     <object idref="Value3"/>
+     <object idref="Value8"/>
     </void>
    </void>
    <void index="78">
-    <void property="suit">
-     <object idref="Suit0"/>
-    </void>
     <void property="value">
-     <object idref="Value4"/>
+     <object idref="Value9"/>
     </void>
    </void>
    <void index="79">
-    <void property="suit">
-     <object idref="Suit3"/>
-    </void>
     <void property="value">
-     <object idref="Value1"/>
+     <object idref="Value4"/>
     </void>
    </void>
   </void>
  </object>
  <object class="ooga.game.UnoTurnManager">
+  <void property="currentPlayer">
+   <object class="ooga.player.ManualPlayer"/>
+  </void>
   <void property="direction">
    <int>-1</int>
   </void>

@@ -20,7 +20,7 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(List<Player> players){
-        //setPlayers(players);
+        setPlayers(players);
         direction = CW;
     }
 
@@ -33,7 +33,7 @@ public class UnoTurnManager implements TurnManager {
      * not serializable.
      */
     public UnoTurnManager() {
-        //setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
+        setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
         direction = CW;
     }
 

@@ -44,7 +44,7 @@ public class UnoScoreTracker implements ScoreTracker {
         return playerScores.get(player.getID());
     }
 
-    public int calcPlayerScore(Player player) {
+    private int calcPlayerScore(Player player) {
         int score = 0;
         for (Card card : player.hand().getAllCards()) {
             String cardType = card.getValue().name();
@@ -60,7 +60,6 @@ public class UnoScoreTracker implements ScoreTracker {
     }
 
     private void updatePlayerScore(int playerID, int addedScore){
-        //TODO: change playerID to integer if necessary
         if (!playerScores.containsKey(playerID)){
             playerScores.putIfAbsent(playerID, addedScore);
         } else {

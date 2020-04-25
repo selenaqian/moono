@@ -15,14 +15,27 @@ class UnoTurnManagerTest {
     private UnoTurnManager manager;
     private List<Player> players;
 
+    ManualPlayer player1;
+    AI_Player player2;
+    AI_Player player3;
+
+
     @BeforeEach
     void setUp(){
         players = new ArrayList<>();
-        players.add(new ManualPlayer());
-        players.add(new AI_Player());
-        players.add(new AI_Player());
-        players.add(new AI_Player());
+        player1 = new ManualPlayer();
+        player2 = new AI_Player();
+        player3 = new AI_Player();
+
+        player1.setID(1);
+        player2.setID(2);
+        player3.setID(3);
+
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
         manager = new UnoTurnManager(players);
+        manager.setHumanPlayer(player1);
     }
 
     @org.junit.jupiter.api.Test
@@ -32,15 +45,45 @@ class UnoTurnManagerTest {
 
     @org.junit.jupiter.api.Test
     void testNextPlayer() {
-        manager.getNextPlayer();
-        assertEquals(players.get(1), manager.getCurrentPlayer());
+        manager.setCurrentPlayer(player1);
+        manager.nextPlayer();
+        assertEquals(player2, manager.getCurrentPlayer());
+        manager.nextPlayer();
+        assertEquals(player3, manager.getCurrentPlayer());
+        manager.nextPlayer();
+        assertEquals(player1, manager.getCurrentPlayer());
     }
 
     @org.junit.jupiter.api.Test
     void testGetCurrentPlayer() {
+        manager.setCurrentPlayer(player1);
         assertEquals(players.get(0), manager.getCurrentPlayer());
-        manager.getNextPlayer();
-        assertEquals(players.get(1), manager.getCurrentPlayer());
     }
+
+    @org.junit.jupiter.api.Test
+    void testGetHumanPlayer() {
+        manager.setCurrentPlayer(player1);
+        assertEquals(player1, manager.getHumanPlayer());
+
+        //make sure AI players are not recognized as manual
+        manager.nextPlayer();
+        assertFalse(manager.isHumanTurn());
+    }
+
+
+    @org.junit.jupiter.api.Test
+    void testChangeDirection(){
+        manager.changeDirection();
+        assertEquals(-1, manager.getDirection());
+
+        manager.setCurrentPlayer(player1);
+        manager.nextPlayer();
+        assertEquals(player3, manager.getCurrentPlayer());
+        manager.nextPlayer();
+        assertEquals(player2, manager.getCurrentPlayer());
+
+    }
+
+
 
 }

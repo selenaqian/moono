@@ -57,6 +57,8 @@ public class UnoController implements GameController, GameSaver {
     @Override
     public void pause() {
         //TODO: add a popup view to adjust game options mid-game
+
+
     }
 
     @Override
@@ -178,7 +180,7 @@ public class UnoController implements GameController, GameSaver {
      * Changing score to play up until, access file saving/loading
      * @param updatedSettings
      */
-    public void accessSettings(GameSettings updatedSettings){
+    private void updateSettings(GameSettings updatedSettings){
         settings = updatedSettings;
 
     }
@@ -201,7 +203,6 @@ public class UnoController implements GameController, GameSaver {
         //TODO: use pile manager directly in GameInfo
         PileManager pileManager = new PileManager(gameInfo.getDrawPile(), gameInfo.getDiscardPile());
         uno = new Uno(gameInfo.getGameSettings(), pileManager, (UnoTurnManager) gameInfo.getTurnManager());
-        start();
-
+        uno.start();
     }
 }

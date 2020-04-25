@@ -43,15 +43,13 @@ public class Uno implements GameModel, GameModelView {
 
     public Uno(GameSettings settings){
         mySettings = settings;
-        turnManager = new UnoTurnManager();
         piles = new PileManager(mySettings.getSpecialCards());
         rule = mySettings.getRule();
+        turnManager = new UnoTurnManager();
+        turnManager.addPlayers(mySettings.getNumPlayers());
         specialCards = mySettings.getSpecialCards();
-        turnManager.addPlayers(settings.getNumPlayers());
         dealCards();
-        actionApplier = new UnoActionApplier(this, turnManager);
-        playerObservers = new ArrayList();
-        notifyPlayerObservers();
+
     }
 
     //TODO: clean up constructors
@@ -59,9 +57,7 @@ public class Uno implements GameModel, GameModelView {
         this.mySettings = settings;
         this.piles = piles;
         this.turnManager = turnManager;
-        actionApplier = new UnoActionApplier(this, turnManager);
-        playerObservers = new ArrayList();
-        notifyPlayerObservers();
+        rule = mySettings.getRule();
     }
 
 
@@ -80,7 +76,9 @@ public class Uno implements GameModel, GameModelView {
 
     @Override
     public void start() {
-
+        actionApplier = new UnoActionApplier(this, turnManager);
+        playerObservers = new ArrayList();
+        notifyPlayerObservers();
     }
 
     @Override

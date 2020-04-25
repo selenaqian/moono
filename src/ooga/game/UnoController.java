@@ -151,7 +151,7 @@ public class UnoController implements GameController, GameSaver {
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
 
-            new EndRoundView(mainStage, p.getID(), scoreTracker.getScores()); //TODO: show a new round screen in the view
+            new EndRoundView(mainStage, p.getID(), scoreTracker.getScores(), this);
 
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){

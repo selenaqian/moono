@@ -3,6 +3,7 @@ package ooga.view;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.game.UnoController;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -24,7 +25,8 @@ class EndRoundViewTest extends DukeApplicationTest {
         for(int i=2; i <=4; i++) {
             playerScores.put(i, 0);
         }
-        endRoundView = new EndRoundView(stage, 1, playerScores);
+        UnoController myController = new UnoController(stage);
+        endRoundView = new EndRoundView(stage, 1, playerScores, myController);
         continueButton = endRoundView.getNextRoundButton();
     }
 
@@ -46,18 +48,6 @@ class EndRoundViewTest extends DukeApplicationTest {
         assertNotNull(lookup("Player 2 score: 0").query());
         assertNotNull(lookup("Player 3 score: 0").query());
         assertNotNull(lookup("Player 3 score: 0").query());
-    }
-
-    /**
-     * Tests that the next round button advances to the next round - should go back to GameView with updated scores.
-     */
-    @Test
-    void startNewRoundTest() {
-        clickOn(continueButton);
-
-        assertNotNull(lookup("Player 1").query());
-        assertNotNull(lookup("score: 10").query());
-        assertNotNull(lookup("score: 0").query());
     }
 
 }

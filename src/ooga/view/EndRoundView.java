@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ooga.game.UnoController;
 
 import java.util.Map;
 
@@ -22,10 +23,12 @@ import static ooga.view.SetupView.DEFAULT_STYLESHEET;
 public class EndRoundView extends EndView {
     private Button nextRoundButton;
     private Map<Integer, Integer> allPlayerScores;
+    private UnoController myController;
 
-    public EndRoundView(Stage stage, int playerNumber, Map playerScores) {
+    public EndRoundView(Stage stage, int playerNumber, Map playerScores, UnoController controller) {
         super(stage, playerNumber);
         allPlayerScores = playerScores;
+        myController = controller;
         showEndScene();
     }
 
@@ -65,7 +68,7 @@ public class EndRoundView extends EndView {
 
     @Override
     protected void setButtonActions() {
-        //TODO: call actions to proceed to next round
+        nextRoundButton.setOnMouseClicked(e -> myController.newRound());
     }
 
     /**

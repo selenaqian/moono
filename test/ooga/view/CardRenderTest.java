@@ -1,3 +1,9 @@
+/**
+ * Tests CardRender class.
+ *
+ * @author Selena Qian
+ */
+
 package ooga.view;
 
 import ooga.cards.Card;

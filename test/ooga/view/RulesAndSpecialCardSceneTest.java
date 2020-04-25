@@ -1,3 +1,9 @@
+/**
+ * Tests the RulesAndSpecialCardScene class.
+ *
+ * @author Selena Qian
+ */
+
 package ooga.view;
 
 import javafx.stage.Stage;
@@ -18,6 +24,9 @@ class RulesAndSpecialCardSceneTest extends DukeApplicationTest {
         clickOn(startView.getWelcomeOkButton()); // advances to the rules and special cards selection scene
     }
 
+    /**
+     * Tests that classic rules are implemented when no interaction happens.
+     */
     @Test
     void defaultRulesSelectionsTest() {
         clickOn(startView.getRulesOkButton());
@@ -25,6 +34,9 @@ class RulesAndSpecialCardSceneTest extends DukeApplicationTest {
         assertTrue(startView.getMySettings().getRule() instanceof ClassicRules);
     }
 
+    /**
+     * Tests that the deadly rules are implemented when the user selects them.
+     */
     @Test
     void deadlyRulesTest() {
         startView.getRulesAndSpecialCards().ruleSelections.get(1).setSelected(true);
@@ -33,6 +45,9 @@ class RulesAndSpecialCardSceneTest extends DukeApplicationTest {
         assertTrue(startView.getMySettings().getRule() instanceof DeadlyRules);
     }
 
+    /**
+     * Tests that the ascending rules are implemented when the user selects them.
+     */
     @Test
     void ascendingRulesTest() {
         startView.getRulesAndSpecialCards().ruleSelections.get(2).setSelected(true);
@@ -41,12 +56,18 @@ class RulesAndSpecialCardSceneTest extends DukeApplicationTest {
         assertTrue(startView.getMySettings().getRule() instanceof AscendingRules);
     }
 
+    /**
+     * Tests that the default functions as expected - if no special cards checked, none will be passed for creation.
+     */
     @Test
     void noSpecialCardsTest() {
         clickOn(startView.getRulesOkButton());
         assertEquals(0, startView.getRulesAndSpecialCards().getSpecialCardSelections().size());
     }
 
+    /**
+     * Tests that choosing one special card works.
+     */
     @Test
     void oneSpecialCardTest() {
         startView.getRulesAndSpecialCards().specialCardOptions.get(0).setSelected(true);
@@ -55,6 +76,9 @@ class RulesAndSpecialCardSceneTest extends DukeApplicationTest {
         assertEquals("WILD", startView.getRulesAndSpecialCards().getSpecialCardSelections().get(0));
     }
 
+    /**
+     * Tests that choosing multiple but not all special cards works.
+     */
     @Test
     void multipleSpecialCardsTest() {
         for(int i = 0; i < 4; i++) {
@@ -69,6 +93,9 @@ class RulesAndSpecialCardSceneTest extends DukeApplicationTest {
         assertEquals("REVERSE", startView.getRulesAndSpecialCards().getSpecialCardSelections().get(3));
     }
 
+    /**
+     * Tests that choosing all special cards works.
+     */
     @Test
     void allSpecialCardsTest() {
         for(int i = 0; i < startView.getRulesAndSpecialCards().specialCardOptions.size(); i++) {

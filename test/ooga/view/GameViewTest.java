@@ -1,3 +1,8 @@
+/**
+ * Tests GameView class.
+ *
+ * @author Selena Qian
+ */
 package ooga.view;
 
 import javafx.scene.Node;

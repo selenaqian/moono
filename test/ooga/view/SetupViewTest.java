@@ -1,3 +1,9 @@
+/**
+ * Tests the SetupView class.
+ *
+ * @author Selena Qian
+ */
+
 package ooga.view;
 
 import javafx.stage.Stage;

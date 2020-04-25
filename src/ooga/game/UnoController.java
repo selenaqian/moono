@@ -183,6 +183,10 @@ public class UnoController implements GameController, GameSaver {
     public void newRound(){
         uno.restart();
         gameView = new GameView(uno, this, mainStage, settings.getTheme());
+        for (Player p : turnManager.getAllPlayers()) {
+            //update scores in the view
+            gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
+        }
         gameView.showGameScene();
     }
 

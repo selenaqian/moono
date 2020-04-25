@@ -56,4 +56,14 @@ class EndRoundViewTest extends DukeApplicationTest {
         assertNotNull(lookup("Player 3 score: 0").query());
     }
 
+    /**
+     * Tests that score updates on the GameView.
+     */
+    @Test
+    void startNextRoundTest() {
+        clickOn(continueButton);
+
+        assertNotNull("score: 10");
+    }
+
 }

@@ -5,6 +5,7 @@
  */
 package ooga.view;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -109,9 +110,6 @@ public class GameView implements GameViewInterface, PlayerObserver {
         deckView.setOnMouseClicked(e -> myController.handleDrawPileClick());
         discardRender = new CardRender(new Card(Suit.A, Value.ZERO), mainPane.getWidth()/7, mainPane.getHeight()/3);
         decks.getChildren().addAll(deckView, discardRender);
-        //mainPane.getChildren().add(decks);
-        //AnchorPane.setTopAnchor(decks,mainPane.getHeight()/4);
-        //AnchorPane.setLeftAnchor(decks, mainPane.getWidth()/2 - deckView.getWidth());
 
         callUno = new Button(myResources.getString("callUno"));
         callUno.setAlignment(Pos.CENTER);
@@ -122,12 +120,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
         decksAndCallUno.getChildren().addAll(decks, callUno);
         mainPane.getChildren().add(decksAndCallUno);
         AnchorPane.setTopAnchor(decksAndCallUno,mainPane.getHeight()/4);
-        AnchorPane.setLeftAnchor(decksAndCallUno, mainPane.getWidth()/2 - 2*deckView.getWidth());
+        AnchorPane.setRightAnchor(decksAndCallUno, mainPane.getWidth()/3);
 
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton = new Button(myResources.getString("settingsButton"));
         settingsButton.setOnMouseClicked(e -> {
-            //pause the timeline
+            myController.pause();
             new SettingsView(myStylesheet, this); // or just have it show on new stage - either way should be fine I think depends on what info it needs
             // bc don't want to have to keep on passing info also it maybe does make sense for GameView to have a SettingsView as an instance
         });
@@ -220,19 +218,17 @@ public class GameView implements GameViewInterface, PlayerObserver {
      */
     public void myTurnColorChange(int playerNumber) {
         Node player1Circle = player1Label.getChildren().get(0); // the circle
-        player1Circle.getStyleClass().removeAll(player1Circle.getStyleClass());
+        resetStyle(player1Circle, "playerText");
         VBox player1AllText = (VBox)player1Label.getChildren().get(1);
         for(Node n : player1AllText.getChildren()) {
-            n.getStyleClass().removeAll(n.getStyleClass());
-            n.getStyleClass().add("playerText");
+            resetStyle(n, "playerText");
         }
         for(int i=1; i<playerViews.size(); i++) {
-            Node playerCircle = playerViews.get(i).getChildren().get(0); // the circle
-            playerCircle.getStyleClass().removeAll(playerCircle.getStyleClass());
+            Node playerCircle = playerViews.get(i).getChildren().get(0);
+            resetStyle(playerCircle, "playerText");
             VBox playerAllText = (VBox)playerViews.get(i).getChildren().get(1);
             for(Node n : playerAllText.getChildren()) {
-                n.getStyleClass().removeAll(n.getStyleClass());
-                n.getStyleClass().add("playerText");
+                resetStyle(n, "playerText");
             }
         }
         if(playerNumber == 1) {
@@ -248,6 +244,11 @@ public class GameView implements GameViewInterface, PlayerObserver {
         for(Node n : playerNumberAllText.getChildren()) {
             n.getStyleClass().add("myTurn");
         }
+    }
+
+    private void resetStyle(Node currentNode, String newStyle) {
+        currentNode.getStyleClass().removeAll(currentNode.getStyleClass());
+        currentNode.getStyleClass().add(newStyle);
     }
 
     @Override
@@ -339,6 +340,12 @@ public class GameView implements GameViewInterface, PlayerObserver {
         return discardRender;
     }
 
+    public List<Pane> getPlayerViews() {
+        List<Pane> allViews = playerViews;
+        allViews.remove(0);
+        allViews.add(0, player1Label);
+        return allViews;
+    }
 
     //Testing code for observers
     @Override

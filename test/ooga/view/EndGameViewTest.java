@@ -20,8 +20,11 @@ class EndGameViewTest extends DukeApplicationTest {
         newGameButton = endView.getNewGameButton();
     }
 
+    /**
+     * Tests that the elements in the scene are being created correctly.
+     */
     @Test
-    void endViewElementsTest() {
+    void endGameElementsTest() {
         Text gameCompleteText = lookup("#gameCompleteText").query();
         Text winnerText = lookup("#winnerText").query();
         Text startNewGameText = lookup("#startNewGameText").query();
@@ -31,8 +34,11 @@ class EndGameViewTest extends DukeApplicationTest {
         assertEquals("new game", newGameButton.getText());
     }
 
+    /**
+     * Tests that clicking on the new game button does start up a new game - should go back to the welcome screen and can check elements in there.
+     */
     @Test
-    void endViewStartNewGameTest() {
+    void startNewGameTest() {
         sleep(2, TimeUnit.SECONDS);
         clickOn(newGameButton);
         sleep(2, TimeUnit.SECONDS);

@@ -5,13 +5,13 @@ import ooga.cards.Card;
 import ooga.cards.Suit;
 import ooga.cards.Value;
 import org.junit.jupiter.api.Test;
-import util.DukeApplicationTest;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardRenderTest {
+    /**
+     * Tests creation of a simple numerical card.
+     */
     @Test
     void createCardSimpleTest1() {
         Card card1 = new Card(Suit.A, Value.ZERO);
@@ -26,6 +26,9 @@ class CardRenderTest {
         assertEquals("AText", card1View.getCardViewText().getStyleClass().get(0));
     }
 
+    /**
+     * Tests creation of a simple numerical card.
+     */
     @Test
     void createCardSimpleTest2() {
         Card card2 = new Card(Suit.B, Value.TWO);
@@ -40,6 +43,9 @@ class CardRenderTest {
         assertEquals("BText", card2View.getCardViewText().getStyleClass().get(0));
     }
 
+    /**
+     * Tests creation of a simple numerical card.
+     */
     @Test
     void createCardSimpleTest3() {
         Card card3 = new Card(Suit.D, Value.FOUR);
@@ -52,5 +58,32 @@ class CardRenderTest {
         assertEquals("D", card3View.getCardViewBase().getStyleClass().get(0));
         assertEquals("4", card3View.getCardViewText().getText());
         assertEquals("DText", card3View.getCardViewText().getStyleClass().get(0));
+    }
+
+    /***
+     * Tests creation of a special card (non-numerical) and a method updating it to a numerical card.
+     * Used to change the visual of the discard pile in the game.
+     */
+    @Test
+    void updateCardRenderTest() {
+        Card original = new Card(Suit.C, Value.SKIP);
+        CardRender cardView = new CardRender(original, 100, 200);
+
+        assertEquals(0, original.compareTo(cardView.getCard()));
+        assertEquals(100, cardView.getCardViewBase().getWidth());
+        assertEquals(200, cardView.getCardViewBase().getHeight());
+        assertEquals("C", cardView.getCardViewBase().getStyleClass().get(0));
+        assertEquals("SKIP", cardView.getCardViewText().getText());
+        assertEquals("CText", cardView.getCardViewText().getStyleClass().get(0));
+
+        Card replacement = new Card(Suit.A, Value.ZERO);
+        cardView.updateCardRender(replacement);
+
+        assertEquals(0, replacement.compareTo(cardView.getCard()));
+        assertEquals(100, cardView.getCardViewBase().getWidth());
+        assertEquals(200, cardView.getCardViewBase().getHeight());
+        assertEquals("A", cardView.getCardViewBase().getStyleClass().get(0));
+        assertEquals("0", cardView.getCardViewText().getText());
+        assertEquals("AText", cardView.getCardViewText().getStyleClass().get(0));
     }
 }

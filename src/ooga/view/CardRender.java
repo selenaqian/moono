@@ -43,6 +43,11 @@ public class CardRender extends StackPane {
         this.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Called in GameView to update the rendering of the discard pile. Changes the visuals of the card instead of creating
+     * a new instance. Useful because allows preservation of the previous dimensions.
+     * @param card the new card to render the visual for.
+     */
     public void updateCardRender(Card card) {
         myCard = card;
         cardViewBase.getStyleClass().removeAll(cardViewBase.getStyleClass());

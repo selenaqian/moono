@@ -62,8 +62,9 @@ class RulesAndSpecialCardScene {
     private VBox makeRulesBox() {
         VBox rulesBox = new VBox(DEFAULT_SPACING);
         Text rulesText = new Text(myResources.getString("rulesText"));
+        rulesText.getStyleClass().add("subtitle2");
         rulesBox.getChildren().add(rulesText);
-        String[] allRules = myResources.getString("rulesOptions").split(",");
+        String[] allRules = myResources.getString("rulesOptions").split(";");
         for (String ruleType : allRules) {
             Text ruleHeader = new Text(ruleType);
             rulesBox.getChildren().add(ruleHeader);
@@ -90,6 +91,7 @@ class RulesAndSpecialCardScene {
     private VBox makeSpecialCardsBox() {
         VBox specialCardsBox = new VBox(DEFAULT_SPACING);
         Text specialCardsText = new Text(myResources.getString("specialCardsText"));
+        specialCardsText.getStyleClass().add("subtitle2");
         specialCardsBox.getChildren().add(specialCardsText);
 
         String[] allSpecialCards = myResources.getString("specialCardsOptions").split(",");

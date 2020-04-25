@@ -65,7 +65,7 @@ public class SettingsView {
         VBox allThemeUI = makeThemeUI();
         HBox saveAndNewGameUI = makeSaveAndNewGameUI();
         closeButton = new Button(myResources.getString("closeButton"));
-        closeButton.setOnMouseClicked(e -> {
+        closeButton.setOnAction(e -> {
             myStage.close();
         });
 
@@ -150,8 +150,8 @@ public class SettingsView {
         save_newGameUI.setAlignment(Pos.CENTER);
         saveCurrentButton = new Button(myResources.getString("save"));
         newGameButton = new Button(myResources.getString("newGameButton"));
-        saveCurrentButton.setOnMouseClicked(e -> saveNew.showSaveScene());
-        newGameButton.setOnMouseClicked(e -> saveNew.showNewGameScene());
+        saveCurrentButton.setOnAction(e -> saveNew.showSaveScene());
+        newGameButton.setOnAction(e -> saveNew.showNewGameScene());
 
         save_newGameUI.getChildren().addAll(saveCurrentButton, newGameButton);
         return save_newGameUI;
@@ -179,14 +179,6 @@ public class SettingsView {
     //Methods below used for testing.
 
     /**
-     * Allows test to access the controller and verify that the speed has changed appropriately.
-     * @return the UnoController associated with this SettingsView and the game as a whole.
-     */
-    public UnoController getController() {
-        return myGameView.getController();
-    }
-
-    /**
      * Allows test to access the game settings and verify that speed has changed appropriately.
      * @return the GameSettings associated with this SettingsView and the game as a whole.
      */
@@ -200,5 +192,13 @@ public class SettingsView {
      */
     public Map<String, Pane> getThemeOptions() {
         return themeOptions;
+    }
+
+    /**
+     * Allows test to access the save and new popups to check that they do actually show up.
+     * @return the MidGameSaveNew object that will then allow for checking of elements inside it.
+     */
+    public MidGameSaveNew getSaveNew() {
+        return saveNew;
     }
 }

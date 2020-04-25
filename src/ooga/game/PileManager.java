@@ -93,6 +93,14 @@ public class PileManager {
         drawPile = new DrawPile(specialCardValues);
     }
 
+    /**
+     * Added for bug fix testing
+     * @param drawPile
+     */
+    public void setDrawPile(DrawPile drawPile){
+        this.drawPile = drawPile;
+    }
+
 
 
 

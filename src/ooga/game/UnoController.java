@@ -50,6 +50,20 @@ public class UnoController implements GameController, GameSaver {
         setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
     }
 
+    //added for bug fixing tests
+    public UnoController(Stage stage, Uno uno){
+        mainStage = stage;
+        this.settings = new GameSettings();
+        soundPlayer = new SoundPlayer();
+        scoreTracker = new UnoScoreTracker();
+        this.uno = uno;
+        uno.start();
+        turnManager = uno.getTurnManager();
+        speed = settings.getSpeed();
+        gameView = new GameView(uno, this, mainStage, settings.getTheme());
+        setupView = new SetupView(this, settings, mainStage); //so that view knows about controller and GameSettings
+    }
+
     @Override
     public void start() {
         uno = new Uno(settings);

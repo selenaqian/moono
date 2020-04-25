@@ -7,6 +7,12 @@
 .button {
     -fx-font-size: 12pt;
 }
+.deck {
+    -fx-background-color: white;
+    -fx-background-image: url('images/duke_card.png');
+    -fx-background-position: center;
+    -fx-background-size: 150px;
+}
 .myTurn {
     -fx-fill: green;
 }
@@ -23,20 +29,20 @@
     -fx-font-size: 20pt;
 }
 .DText {
-    -fx-fill: black;
+    -fx-fill: white;
     -fx-font-size: 20pt;
 }
 .A {
-    -fx-fill: purple;
+    -fx-fill: blue;
 }
 .B {
-    -fx-fill: darkblue;
+    -fx-fill: teal;
 }
 .C {
-    -fx-fill: violet;
+    -fx-fill: aqua;
 }
 .D {
-    -fx-fill: pink;
+    -fx-fill: darkblue;
 }
 .themeOptionSelected {
     -fx-stroke: aqua;

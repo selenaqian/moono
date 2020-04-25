@@ -10,13 +10,13 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EndViewTest extends DukeApplicationTest {
-    private EndView endView;
+class EndGameViewTest extends DukeApplicationTest {
+    private EndGameView endView;
     private Button newGameButton;
 
     @Override
     public void start(Stage stage) {
-        endView = new EndView(stage);
+        endView = new EndGameView(stage, 1);
         newGameButton = endView.getNewGameButton();
     }
 
@@ -26,7 +26,7 @@ class EndViewTest extends DukeApplicationTest {
         Text winnerText = lookup("#winnerText").query();
         Text startNewGameText = lookup("#startNewGameText").query();
         assertEquals("game complete.", gameCompleteText.getText());
-        assertEquals("congratulations player ", winnerText.getText());
+        assertEquals("congratulations player 1", winnerText.getText());
         assertEquals("start new game?", startNewGameText.getText());
         assertEquals("new game", newGameButton.getText());
     }

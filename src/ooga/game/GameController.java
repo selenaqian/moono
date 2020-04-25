@@ -23,6 +23,6 @@ public interface GameController{
     /**
      * Handle the end of a game if a player reaches the winning score or if a round is completed
      */
-    void endGame();
+    void endGame(int playerID);
 
 }

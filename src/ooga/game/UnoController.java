@@ -64,9 +64,7 @@ public class UnoController implements GameController, GameSaver {
 
     @Override
     public void endGame(int playerNumber) {
-        //TODO: pass in the winner info to the view
         new EndGameView(mainStage, playerNumber);
-
     }
 
 
@@ -151,15 +149,12 @@ public class UnoController implements GameController, GameSaver {
             //update scores in the view
             gameView.updateScore(p.getID(), scoreTracker.getPlayerScore(p));
 
-            new EndRoundView(mainStage, p.getID(), scoreTracker.getScores()); //TODO: show a new round screen in the view
-
             //check if a game can end
             if (scoreTracker.getPlayerScore(p) >= settings.getWinningScore()){
                 winner = p;
                 endGame(p.getID());
             } else {
-                //play a new round
-                uno.restart();
+                new EndRoundView(mainStage, p.getID(), scoreTracker.getScores()); \
             }
         }
     }

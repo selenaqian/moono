@@ -20,7 +20,7 @@ public class UnoTurnManager implements TurnManager {
     private Player current; //the player making the turn
 
     public UnoTurnManager(List<Player> players){
-        //setPlayers(players);
+        setPlayers(players);
         direction = CW;
     }
 
@@ -51,7 +51,7 @@ public class UnoTurnManager implements TurnManager {
 
     /**
      * Adds players to the game based on number of players selected in SetupView
-     * @param numPlayers receieved from GameSettings
+     * @param numPlayers received from GameSettings
      */
     public void addPlayers(int numPlayers){
         //FIXME: pass id into player constructor

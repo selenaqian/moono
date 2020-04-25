@@ -35,6 +35,7 @@ public class GameSettings {
         specialCards = new ArrayList<>();
         theme = DEFAULT_STYLESHEET;
         speed = 1.5;
+        rule = new ClassicRules();
     }
 
     public int getNumPlayers() {

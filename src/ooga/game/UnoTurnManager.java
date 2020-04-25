@@ -33,7 +33,7 @@ public class UnoTurnManager implements TurnManager {
      * not serializable.
      */
     public UnoTurnManager() {
-        //setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
+        setPlayers(new ArrayList<>(Arrays.asList(new ManualPlayer(), new AI_Player(), new AI_Player(), new AI_Player())));
         direction = CW;
     }
 

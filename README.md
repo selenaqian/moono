@@ -22,7 +22,7 @@ Individual:
 - Tess Hours: 22 hours
 - Mary Hours: 21.5 hours
 - Selena Hours: 25 hours
-- Suomo Hours:12 hours
+- Suomo Hours:20 hours
 
 
 ### Primary Roles

@@ -36,8 +36,8 @@
 
 ## Team
 * Contrast initial planning and wireframe with the implementation
-![initial plan]()
-![later implementation]()
+![initial plan](initial_plan.png)
+![later implementation](later_dependencies.png)
 * Each learned from Agile/Scrum process
 * Four significant events
     * Translating APIs to coding reality

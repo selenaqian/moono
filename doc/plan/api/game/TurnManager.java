@@ -43,7 +43,7 @@ public interface TurnManager{
 
     /**
      * What direction the next turn will go in
-     * @return
+     * @return int
      */
     int getDirection();
 
@@ -53,5 +53,12 @@ public interface TurnManager{
      * @see getNextPlayer()
      */
     void changeDirection();
+
+    /**
+     * Returns all players a TurnManager is keeping track of
+     * Used in UnoController to calculate scores for all players
+     * @return List<Player>
+     */
+    List<Player> getAllPlayers();
 
 }

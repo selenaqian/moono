@@ -14,12 +14,12 @@ Names:
 
 Start Date: 3/30/2020
 
-Finish Date: 
+Finish Date: 4/27/2020
 
-Hours Spent Together: 25 hours
+Hours Spent Together: 27 hours
 
 Individual:
-- Tess Hours: 22 hours
+- Tess Hours: 23 hours
 - Mary Hours: 21.5 hours
 - Selena Hours: 25 hours
 - Suomo Hours:20 hours
@@ -50,6 +50,24 @@ Selena Qian (sq22):
     * ThemeSelectionScene
     * WildColorSelectorView
 * Required setting up the UI and setting the buttons and clicks on certain nodes to actions.
+
+Tess Noonan (tcn6):
+* Implementing classes in the cards package
+    * Card
+    * Suit enum
+    * Value enum
+* Implementing classes in the piles package to group together cards:
+    * Pile interface
+    * Deck abstract class
+    * DiscardPile
+    * DrawPile
+    * CardBuilder
+    * Hand
+* Implementing classes in the config package in order to give backend save/load functionality:
+    * GameInfo
+    * JavaToXML
+    * XMLToJava
+* Contributed to the UnoActionApplier class
 
 ### Resources Used
 - [Uno Rules](https://service.mattel.com/instruction_sheets/42001pr.pdf)

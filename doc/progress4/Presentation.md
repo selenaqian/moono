@@ -24,7 +24,10 @@
     * ThemeSelectionThemeTest
 
 ## Design
-* Revisit design goals: flexible, encapsulated/data driven
+* Initial design goals:
+    * Flexibility for a variety of Uno-based games, with customizable themes
+        * Implementing new rules and special cards should not affect rest of code
+    
 * APIs (Pile and Game)
     * Show public methods
     * Supports new features

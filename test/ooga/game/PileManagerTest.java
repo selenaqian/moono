@@ -37,10 +37,10 @@ class PileManagerTest {
         assertEquals(1, piles.getDrawPile().getCardCount());
 
         piles.discardCard(piles.drawCard());
-        assertEquals(0, piles.getDrawPile().getCardCount());
+        assertEquals(2, piles.getDrawPile().getCardCount());
 
         piles.discardCard(piles.drawCard());
-        assertEquals(3, piles.getDrawPile().getCardCount());
+        assertEquals(1, piles.getDrawPile().getCardCount());
 
     }
 

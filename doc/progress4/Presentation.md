@@ -32,7 +32,8 @@
     * Evolution over sprints
 * Use cases
     * Pile: dealing Cards
-    ```java
+    
+  ```java
      /**
      * --> This is from the Uno class
      * Deal cards to all players in the beginning of a game
@@ -47,11 +48,66 @@
         }
      }
    ```
-    * Game:
-* A design element that has changed
+    * GameModel: getting a player to play a card
+    ```
+   /**
+       * --> From the UnoController class
+       * Called when a user selects a card from their hand
+       * @param card card that was clicked in the view
+       */
+      public void handleCardClick(Card card){
+          if(turnManager.isHumanTurn()){
+              if(uno.playCard(card, turnManager.getCurrentPlayer())) {
+                  try {
+                      Thread.sleep(2000);
+                  }
+                  catch (Exception e) {
+                      throw new OOGAException(myResources.getString("NoSuch"),e);
+                  }
+              }
+          }
+      }
+  ```
+  ```
+  /**
+  * --> From the Uno class (implements GameModel)
+  */
+ 
+  @Override
+      public boolean playCard(Card selectedCard, Player player){
+          //check if played card can be played on top of the discard pile top card
+          if (rule.isValid(piles.showTopCard(), selectedCard)) {
+  
+              //make sure player updates their hand to remove the card
+              player.hand().removeCard(selectedCard);
+  
+              //update the discard pile to add the card
+              piles.discardCard(selectedCard);
+  
+              //apply associated action
+              actionApplier.applyAction(selectedCard.getValue());
+              endTurn();
+          }
+          return false;
+      }
+ 
+```
+```
+
+* A design element that has changed:
+    * Connecting the model and view with observers vs. JavaFX property binding
+    ```java
+  public interface PlayerObserver {
+      void updatePlayerHand(int playerId, List<Card> cardsLeft);
+      void updateDiscardPile(Card card);
+  }
+    ```
+    
+    
 
 ## Team
 * Contrast initial planning and wireframe with the implementation
+![wireframe_screenshot](uno_wireframe.png)
 ![initial plan](initial_plan.png)
 ![later implementation](later_dependencies.png)
 * Each learned from Agile/Scrum process

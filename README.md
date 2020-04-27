@@ -52,7 +52,15 @@ Selena Qian (sq22):
 * Required setting up the UI and setting the buttons and clicks on certain nodes to actions.
 
 Suomo Ammah (sna19):
-* TODO: Suomo add your contributions
+* Implementing classes in the player package
+  * Manual player
+  * Ai player
+* Setting up the exception class and implementing special cards
+  * draw2
+  * skip
+  * reverse
+  * swap(later removed)
+  * trade(later removed)
 
 Tess Noonan (tcn6):
 * Implementing classes in the cards package
@@ -163,3 +171,6 @@ objects in the UI.
 I did find it rewarding to see the finished product, especially with some of the more interesting visuals. The UI component
 definitely added a sense of satisfaction for me — seeing the turns advance and the game being played is pretty cool. I think
 that we overall were able to create something pretty cool.
+
+I appreciate dthe time we spent just discussing design and putting together a comprehensive plan with the APIs and use cases. It's already been mentioned
+but we couldn't implement all the features we wanted but I think we did our best and focused most on design.

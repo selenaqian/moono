@@ -12,10 +12,11 @@
 Mary Jiang (mvj6):
 * Implementing classes in the Game package:
     * GameModel (Uno) and GameController (UnoController) for managing and calling game-play events
-    * Setting up TurnManager, PileManager, GameSettings
-    * Score-tracking 
+    * Setting up TurnManager, PileManager, GameSettings, and UnoActionApplier
+    * ScoreTracker
 * Connecting view with controller and model components
-    * Setting up observers for game updates and handling wildcard view requirements
+    * Creating observers for game updates
+    * Handling calls to view for wildcards
 
 Selena Qian (sq22):
 * Implementing classes in the View package:
@@ -125,8 +126,20 @@ Player(Model)
       manipulation of the players' hands.
 
 View (View):
-    * The PlayerObserver interface is implemented by GameView. It updates the cards in the user's hand, and updates the
-    number of cards that all players have. 
+* This package handles the creation of the visual scenes and showing them on the JavaFX stage. It also handles the user
+inputs, such as user selections of total number of players, what rules to use, and which special cards to use.
+* SetupView, GameView, and EndView are the main classes, each with helper or child classes that aid in the creation of the
+visual material.
+    * SetupView: Asks for user input about game elements - rules, special cards, theme, number of players, number of cards
+    to start with per player, and score to play to. Sends that information to the GameSettings. Uses RulesAndSpecialCardsScene
+    and ThemeSelectionScene to build those views.
+    * GameView: Implements GameViewInterface and PlayerObserver. Is created by the controller and sets up the main visuals
+    of the gameplay. Sends information to the controller about user clicks on the cards. Receives information about whose
+    turn it is and when to update the player displays or the decks.
+    * EndView: Abstract class, with EndGameView and EndRoundView as the concrete classes. Creates and shows a screen at
+    some endpoint in the game.
+* The PlayerObserver interface is implemented by GameView. It updates the cards in the user's hand, and updates the
+number of cards that all players have. 
 
 #### Assumptions/Simplifications
 

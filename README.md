@@ -150,6 +150,7 @@ Known Bugs:
 * Loading a game currently is not functioning as expected.
 * If the human player keeps hoarding cards and does not make plays, they will eventually exhaust all the cards in the piles. 
 There is currently no behavior to handle this error or force a user to play a card.
+* Behavior of the WILD and WILD4 cards is not completely working as expected 
 
 Extra credit:
 

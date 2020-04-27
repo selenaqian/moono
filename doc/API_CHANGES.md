@@ -21,3 +21,9 @@ display of player scores - forgot about this functionality in the original plan.
 10. (4/16/2020) Moved drawCard() method from DrawPile to Deck so that DiscardPile also has access to it.
 11. (4/22/2020) Added getAllPlayers() method to TurnManager so I could have access to it for XMLToJavaTest.
 12. (4/22/2020) Added setScores() and getScores() methods to ScoreTracker so they could be used in JavaToXMLTest.
+13. (4/23/2020) Split up GameModel to create a new interface GameModelView that contains methods for the view to call.
+14. (4/9/2020 - method added, 4/27/2020 - added to documentation) Added public method in GameViewInterface to change the
+color of a player's name, cards left, score, and icon when it's their turn. (meant to add this documentation earlier but
+slipped my mind)
+15. (4/24/2020) Added a showGameScene() method in GameViewInterface because realized that the creation of the instance needed
+to be separate from the displaying of the scene.

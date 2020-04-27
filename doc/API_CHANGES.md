@@ -21,3 +21,4 @@ display of player scores - forgot about this functionality in the original plan.
 10. (4/16/2020) Moved drawCard() method from DrawPile to Deck so that DiscardPile also has access to it.
 11. (4/22/2020) Added getAllPlayers() method to TurnManager so I could have access to it for XMLToJavaTest.
 12. (4/22/2020) Added setScores() and getScores() methods to ScoreTracker so they could be used in JavaToXMLTest.
+13. (4/23/2020) Split up GameModel to create a new interface GameModelView that contains methods for the view to call.

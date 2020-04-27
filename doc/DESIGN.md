@@ -12,10 +12,11 @@
 Mary Jiang (mvj6):
 * Implementing classes in the Game package:
     * GameModel (Uno) and GameController (UnoController) for managing and calling game-play events
-    * Setting up TurnManager, PileManager, GameSettings
-    * Score-tracking 
+    * Setting up TurnManager, PileManager, GameSettings, and UnoActionApplier
+    * ScoreTracker
 * Connecting view with controller and model components
-    * Setting up observers for game updates and handling wildcard view requirements
+    * Creating observers for game updates
+    * Handling calls to view for wildcards
 
 Selena Qian (sq22):
 * Implementing classes in the View package:

@@ -4,8 +4,7 @@ import ooga.cards.Card;
 import ooga.piles.Hand;
 
 /**
- * A Ruleset defines how a game is to be played, as in what moves are legal, how the game ends,
- * and the consequences of special Cards.
+ * A Ruleset defines how a game is to be played, as in what moves are legal, how the game ends..
  */
 public abstract class Rule {
 

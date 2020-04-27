@@ -33,6 +33,9 @@ Selena Qian (sq22):
     * WildColorSelectorView
 * Required setting up the UI and setting the buttons and clicks on certain nodes to actions.
 
+Suomo Ammah (sna19):
+* TODO: Suomo add your contributions
+
 Tess Noonan (tcn6):
 * Implementing classes in the cards package
     * Card
@@ -53,11 +56,41 @@ Tess Noonan (tcn6):
 
 #### Design Goals
 
-what are the project's design goals, specifically what kinds of new features did you want to make easy to add
+(what are the project's design goals, specifically what kinds of new features did you want to make easy to add)
+
+The core of our project is to make a functioning Uno game. Then, our goal is to be able to add variations on top of
+that. Functionally, we want to be able to use a variety of rule sets, different combinations of cards (either classic
+or ones you invent yourself), and different combinations of human and bot players. We also want the flexibility to
+change aspects of the game play such as hand size and winning score. Aesthetically, we want to be able to mix up the
+theme and be able to change the language/text.
+
+TODO: Anyone add anything else that would be good.
 
 #### Project Design
 
-describe the high-level design of your project, focusing on the purpose and interaction of the core classes
+(describe the high-level design of your project, focusing on the purpose and interaction of the core classes)
+
+TODO: right now i've organized these into mvc categories, but feel free to change that if you have a better system
+
+Model:
+   * The most basic structure we have in the game are the cards. They are instances of the Card class and each contain
+   two properties: a Value and Suit (which we have implemented as enums).
+   * The next structure are the Piles which are groups of Cards. The Pile interface has two types of subclasses: Decks
+   and Hands. A Deck, which is an abstract class, is an ordered Pile (implemented as a Stack) that can be shuffled. We
+   have two types of Decks: DrawPiles and DiscardPiles. On the other "hand", a Hand is an unordered grouping of Cards.
+   Also note, DrawPile uses the CardBuilder class to instantiate its initial Stack of Cards.
+   * Then we have a Rule which specifies what moves are valid and when a game is over. The Rule abstract class defines
+   the default end of a game as when a Player has only one Card left in their hand which is valid. The subclasses
+   ClassicRules and AscendingRules use this implementation while DeadlyRules overrides the method.
+   * The config package provides functionality for saving and loading in a game. The classes that define a unique game
+   are DrawPile, DiscardPile, TurnManager, ScoreTracker, and GameSettings, so the GameInfo class holds all these as
+   instance variables to organize all the necessary information in one place. The JavaToXML class encodes a game to an
+   XML file and the XMLToJava class decodes an XML file back to an instance of GameInfo.
+   * TODO: Suomo describe Player
+
+Controller:
+
+View:
 
 #### Assumptions/Simplifications
 
@@ -72,11 +105,14 @@ a human error interpreting the rules of Uno!
 #### Adding new features
 
 * Adding new special cards:
-    * TODO: backend and controller here
+    * Add new value to the Value enum, update in CardBuilder/Rules where appropriate
+    * Add enum to the switch statement in UnoActionApplier, create method that applies action
+    * MARY CHECK ME HERE: Extend WildcardObserver if frontend feedback is required
     * In properties file:
         * Add an option to specialCards
 * Adding different rule sets:
-    * TODO: backend and controller here
+    * Create a new class in the rules package that extends Rule. Must override the isValid() method, can override isOver() method if applicable
+    * TODO: controller here
     * In properties file:
         * If mutually exclusive from other rule sets, add to an element of rulesOptions and update the corresponding key
         * Else add another element to rulesOptions (semicolon-delineated list) and create its corresponding key

@@ -51,6 +51,9 @@ Selena Qian (sq22):
     * WildColorSelectorView
 * Required setting up the UI and setting the buttons and clicks on certain nodes to actions.
 
+Suomo Ammah (sna19):
+* TODO: Suomo add your contributions
+
 Tess Noonan (tcn6):
 * Implementing classes in the cards package
     * Card

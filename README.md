@@ -32,6 +32,7 @@ Mary Jiang (mvj6):
     * GameModel (Uno) and GameController (UnoController) for managing and calling game-play events
     * Setting up TurnManager, PileManager, GameSettings
     * Score-tracking 
+    * Playing sounds
 * Connecting view with controller and model components
     * Setting up observers for game updates and handling wildcard view requirements
 

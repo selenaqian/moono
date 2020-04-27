@@ -26,13 +26,6 @@ class UnoScoreTrackerTest {
 
 
     @BeforeEach
-
-    void setUpPlayerHands(){
-        player1.hand().addCard(new Card(Suit.A, Value.ONE));
-        player1.hand().addCard(new Card(Suit.A, Value.TWO));
-        player1.hand().addCard(new Card(Suit.A, Value.REVERSE));
-        player1.hand().addCard(new Card(Suit.A, Value.WILD));}
-
     void setUpPlayers(){
         scoreTracker = new UnoScoreTracker();
         players = new ArrayList<>();

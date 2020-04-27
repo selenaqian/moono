@@ -75,7 +75,7 @@ theme and be able to change the language/text.
 
 Config:
    * The config package provides functionality for saving and loading in a game.The JavaToXML class encodes a game to an
-   XML file and the XMLToJava class decodes an XML file back to an instance of GameModel.
+   XML file and the XMLToJava class decodes an XML file back to an instance of GameInfo.
   
 Game (Model and Controller):
    * The GameModel (in planning known as "GameInfo") interface allows the GameController to call actions that play a game, such as drawCard() and playCard().
@@ -93,6 +93,8 @@ Game (Model and Controller):
    View instances of SetupView and GameView are also initialized by the Controller.
    In the UnoController implementation, it also handles clicks from the user in the view to play or draw a card.
         * Holds an instance of ScoreTracker, which is used to calculate and track player scores   
+        * Calls to SoundPlayer to play an audio when there is an event (i.e. Uno is called)
+        * 
 
 Cards (Model): 
    * The most basic structure we have in the game are the cards. They are instances of the Card class and each contain

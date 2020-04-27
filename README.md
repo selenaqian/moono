@@ -111,11 +111,16 @@ Assumptions or Simplifications:
 * Unlike in real-life games of Uno, users can only call uno for themselves and cannot "call out" other players
     * Computer players calling uno is set to chance, and when they do call there will be a sound played ("Moono!")
 * Lists are not serializable so when saving a game it defaults to 4 players in TurnManager
+* Real Uno score-tracking adds the scores of other players to the winner of each round, but our version only adds
+the scores of each player to themselves (i.e. there is no advantage to "winning" a round by shedding all cards). This was
+a human error interpreting the rules of Uno!
 
 Interesting data files:
 
 Known Bugs:
 * Loading a game currently is not functioning as expected.
+* If the human player keeps hoarding cards and does not make plays, they will eventually exhaust all the cards in the piles. 
+There is currently no behavior to handle this error or force a user to play a card.
 
 Extra credit:
 

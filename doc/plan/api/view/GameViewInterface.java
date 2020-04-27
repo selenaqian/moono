@@ -5,12 +5,9 @@ import ooga.cards.Card;
 import java.util.List;
 
 /**
- * A ViewInterface creates the user interface. It has the options for initial game setup and will be able to pass that
- * information to the backend.
+ * A GameViewInterface creates the user interface for the gameplay. These visuals make up the main screen of the game, and
+ * this interface includes methods that allow the controller and backend to call updates on the visuals when certain actions occur.
  *
- * These initial options include slider values for the number of players (2-4), number of cards per player, the point
- * total that one player needs to reach before determining the overall winner, any custom rules selections, any special cards
- * selections, and the deck theme.
  *
  * @author Selena Qian
  */
@@ -45,4 +42,17 @@ public interface GameViewInterface {
      * @param score the new score of the player.
      */
     public void updateScore(int playerNumber, int score);
+
+    /**
+     * Changes coloring of the text and circle to indicate which player's turn it is.
+     * Called in the game package.
+     * @param playerNumber the number of the player whose turn it now is.
+     */
+    public void myTurnColorChange(int playerNumber);
+
+    /**
+     * Allows other classes to call the main game view to show.
+     * Needed in order to separate instantiation/creation from actually showing the scene.
+     */
+    public void showGameScene();
 }

@@ -87,6 +87,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
     /**
      * Allows other classes to call the main game view to show.
      */
+    @Override
     public void showGameScene() {
         mainStage.setScene(mainScene);
         mainStage.show();
@@ -237,6 +238,7 @@ public class GameView implements GameViewInterface, PlayerObserver {
      * Called in the game package.
      * @param playerNumber the number of the player whose turn it now is.
      */
+    @Override
     public void myTurnColorChange(int playerNumber) {
         Node player1Circle = player1Label.getChildren().get(0); // the circle
         resetStyle(player1Circle, "playerText");

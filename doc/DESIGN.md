@@ -80,9 +80,32 @@ TODO: Anyone add anything else that would be good.
 
 TODO: right now i've organized these into mvc categories, but feel free to change that if you have a better system
 
-Model:
+Config:
+   * The config package provides functionality for saving and loading in a game.The JavaToXML class encodes a game to an
+   XML file and the XMLToJava class decodes an XML file back to an instance of GameModel.
+  
+Game (Model and Controller):
+   * The GameModel (in planning known as "GameInfo") interface allows the GameController to call actions that play a game, such as drawCard() and playCard().
+        * The classes that define a unique game are PileManager TurnManager, GameSettings, and ActionApplier,
+        so the GameModel class holds all these as instance variables to organize all the necessary information in one place. 
+            * PileManager contains Piles that the GameModel can call to initialize and access the DrawPile and DiscardPile
+            * TurnManager initializes and contains all players in a game, and is used by GameModel to get the current player
+            and move the turn to someone else. 
+            * GameSettings holds information to initialize a game, such as the number of players or the cards per player. 
+            * ActionApplier holds helper methods to call changes to the GameModel when a special card is played
+   * GameModelView is an interface implemented by the same class as GameModel. It provides read-only methods that give
+   the View information about the game and contains methods to add/remove and update observers.
+   * The GameController ("GameFlow" during planning) interface initializes an instance of a GameModel. It contains a JavaFX timeline that calls
+   actions on the GameModel at each step. The GameView can call methods in the Controller to start, pause, or end a game.
+   View instances of SetupView and GameView are also initialized by the Controller.
+   In the UnoController implementation, it also handles clicks from the user in the view to play or draw a card.
+        * Holds an instance of ScoreTracker, which is used to calculate and track player scores   
+
+Cards (Model): 
    * The most basic structure we have in the game are the cards. They are instances of the Card class and each contain
    two properties: a Value and Suit (which we have implemented as enums).
+   
+Piles (Model):
    * The next structure are the Piles which are groups of Cards. The Pile interface has two types of subclasses: Decks
    and Hands. A Deck, which is an abstract class, is an ordered Pile (implemented as a Stack) that can be shuffled. We
    have two types of Decks: DrawPiles and DiscardPiles. On the other "hand", a Hand is an unordered grouping of Cards.
@@ -90,15 +113,13 @@ Model:
    * Then we have a Rule which specifies what moves are valid and when a game is over. The Rule abstract class defines
    the default end of a game as when a Player has only one Card left in their hand which is valid. The subclasses
    ClassicRules and AscendingRules use this implementation while DeadlyRules overrides the method.
-   * The config package provides functionality for saving and loading in a game. The classes that define a unique game
-   are DrawPile, DiscardPile, TurnManager, ScoreTracker, and GameSettings, so the GameInfo class holds all these as
-   instance variables to organize all the necessary information in one place. The JavaToXML class encodes a game to an
-   XML file and the XMLToJava class decodes an XML file back to an instance of GameInfo.
+
+Player(Model)
    * TODO: Suomo describe Player
 
-Controller:
-
-View:
+View (View):
+    * The PlayerObserver interface is implemented by GameView. It updates the cards in the user's hand, and updates the
+    number of cards that all players have. 
 
 #### Assumptions/Simplifications
 

@@ -65,21 +65,13 @@ Tess Noonan (tcn6):
 
 #### Design Goals
 
-(what are the project's design goals, specifically what kinds of new features did you want to make easy to add)
-
 The core of our project is to make a functioning Uno game. Then, our goal is to be able to add variations on top of
 that. Functionally, we want to be able to use a variety of rule sets, different combinations of cards (either classic
 or ones you invent yourself), and different combinations of human and bot players. We also want the flexibility to
 change aspects of the game play such as hand size and winning score. Aesthetically, we want to be able to mix up the
 theme and be able to change the language/text.
 
-TODO: Anyone add anything else that would be good.
-
 #### Project Design
-
-(describe the high-level design of your project, focusing on the purpose and interaction of the core classes)
-
-TODO: right now i've organized these into mvc categories, but feel free to change that if you have a better system
 
 Config:
    * The config package provides functionality for saving and loading in a game.The JavaToXML class encodes a game to an
@@ -120,7 +112,6 @@ Piles (Model):
    instance variables to organize all the necessary information in one place. The JavaToXML class encodes a game to an
    XML file and the XMLToJava class decodes an XML file back to an instance of GameInfo.
    
-
 Player(Model)
    * The player class is an abstract class with two subclasses: Manualplayer and AI player. The class enables setting IDs for the players and 
       manipulation of the players' hands.

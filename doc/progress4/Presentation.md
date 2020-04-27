@@ -52,7 +52,7 @@
      }
    ```
     * GameModel: getting a player to play a card
-    ```
+    ``` java
    /**
        * --> From the UnoController class
        * Called when a user selects a card from their hand
@@ -71,7 +71,7 @@
           }
       }
   ```
-  ```
+  ``` java
   /**
   * --> From the Uno class (implements GameModel)
   */
@@ -93,20 +93,15 @@
           }
           return false;
       }
- 
-```
-```
-
+  ```
 * A design element that has changed:
     * Connecting the model and view with observers vs. JavaFX property binding
-    ```java
+  ```java
   public interface PlayerObserver {
       void updatePlayerHand(int playerId, List<Card> cardsLeft);
       void updateDiscardPile(Card card);
   }
-    ```
-    
-    
+  ```
 
 ## Team
 * Contrast initial planning and wireframe with the implementation

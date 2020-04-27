@@ -16,4 +16,16 @@ public interface ScoreTracker{
      * Get the total score of a player
      */
     int getPlayerScore(Player player);
+
+    /**
+     * Gets scores.
+     * @param scores
+     */
+    void setScores(HashMap<Integer, Integer> scores);
+
+    /**
+     * Sets scores.
+     * @return playerScores.
+     */
+    HashMap<Integer, Integer> getScores();
 }

@@ -172,5 +172,5 @@ I did find it rewarding to see the finished product, especially with some of the
 definitely added a sense of satisfaction for me — seeing the turns advance and the game being played is pretty cool. I think
 that we overall were able to create something pretty cool.
 
-I appreciate dthe time we spent just discussing design and putting together a comprehensive plan with the APIs and use cases. It's already been mentioned
-but we couldn't implement all the features we wanted but I think we did our best and focused most on design.
+I appreciated the time we spent just discussing design and putting together a comprehensive plan with the APIs and use cases. It's already been mentioned
+but we couldn't implement all the features we wanted but I think we did our best and focused most on design.(Suomo)

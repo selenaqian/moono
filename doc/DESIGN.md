@@ -94,7 +94,8 @@ Model:
    are DrawPile, DiscardPile, TurnManager, ScoreTracker, and GameSettings, so the GameInfo class holds all these as
    instance variables to organize all the necessary information in one place. The JavaToXML class encodes a game to an
    XML file and the XMLToJava class decodes an XML file back to an instance of GameInfo.
-   * TODO: Suomo describe Player
+   * The player class is an abstract class with two subclasses: Manualplayer and AI player. The class enables setting IDs for the players and 
+   manipulation of the players' hands.
 
 Controller:
 

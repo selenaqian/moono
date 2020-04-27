@@ -14,12 +14,12 @@ Names:
 
 Start Date: 3/30/2020
 
-Finish Date: 
+Finish Date: 4/27/2020
 
-Hours Spent Together: 25 hours
+Hours Spent Together: 27 hours
 
 Individual:
-- Tess Hours: 22 hours
+- Tess Hours: 23 hours
 - Mary Hours: 21.5 hours
 - Selena Hours: 25 hours
 - Suomo Hours:20 hours
@@ -50,6 +50,24 @@ Selena Qian (sq22):
     * ThemeSelectionScene
     * WildColorSelectorView
 * Required setting up the UI and setting the buttons and clicks on certain nodes to actions.
+
+Tess Noonan (tcn6):
+* Implementing classes in the cards package
+    * Card
+    * Suit enum
+    * Value enum
+* Implementing classes in the piles package to group together cards:
+    * Pile interface
+    * Deck abstract class
+    * DiscardPile
+    * DrawPile
+    * CardBuilder
+    * Hand
+* Implementing classes in the config package in order to give backend save/load functionality:
+    * GameInfo
+    * JavaToXML
+    * XMLToJava
+* Contributed to the UnoActionApplier class
 
 ### Resources Used
 - [Uno Rules](https://service.mattel.com/instruction_sheets/42001pr.pdf)
@@ -111,11 +129,16 @@ Assumptions or Simplifications:
 * Unlike in real-life games of Uno, users can only call uno for themselves and cannot "call out" other players
     * Computer players calling uno is set to chance, and when they do call there will be a sound played ("Moono!")
 * Lists are not serializable so when saving a game it defaults to 4 players in TurnManager
+* Real Uno score-tracking adds the scores of other players to the winner of each round, but our version only adds
+the scores of each player to themselves (i.e. there is no advantage to "winning" a round by shedding all cards). This was
+a human error interpreting the rules of Uno!
 
 Interesting data files:
 
 Known Bugs:
 * Loading a game currently is not functioning as expected.
+* If the human player keeps hoarding cards and does not make plays, they will eventually exhaust all the cards in the piles. 
+There is currently no behavior to handle this error or force a user to play a card.
 
 Extra credit:
 

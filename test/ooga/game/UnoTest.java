@@ -46,6 +46,8 @@ class UnoTest extends DukeApplicationTest {
     void setUpPiles(){
         Stack<Card> cards = new Stack<>();
         cards.add(new Card(Suit.A, Value.ONE));
+        cards.add(new Card(Suit.A, Value.ONE));
+        cards.add(new Card(Suit.A, Value.ONE));
         DrawPile drawPile = new DrawPile(cards);
         uno.getPileManager().setDrawPile(drawPile);
     }
@@ -60,15 +62,18 @@ class UnoTest extends DukeApplicationTest {
     @Test
     void testEmptyDrawPile(){
         setUpPlayerHands();
+        DiscardPile discPile = new DiscardPile();
+        uno.getPileManager().setDiscPile(discPile);
+        uno.getPileManager().getDiscPile().addCard(uno.getPileManager().drawCard());
+        assertEquals(2, pileManager.getDrawPile().getCardCount());
+
+        controller.handleAIPlay();
+        uno.notifyPlayerObservers();
         assertEquals(1, pileManager.getDrawPile().getCardCount());
+
         controller.handleAIPlay();
         uno.notifyPlayerObservers();
         assertEquals(0, pileManager.getDrawPile().getCardCount());
-        controller.handleAIPlay();
-        uno.notifyPlayerObservers();
-        assertEquals(1, pileManager.getDrawPile().getCardCount());
-        controller.handleAIPlay();
-        uno.notifyPlayerObservers();
 
     }
 }

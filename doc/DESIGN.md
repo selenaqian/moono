@@ -115,12 +115,16 @@ a human error interpreting the rules of Uno!
 * Adding new special cards:
     * Add new value to the Value enum, update in CardBuilder/Rules where appropriate
     * Add enum to the switch statement in UnoActionApplier, create method that applies action
-    * MARY CHECK ME HERE: Extend WildcardObserver if frontend feedback is required
+    * If user interaction is required to perform the action of the card (e.g. cards that perform complex actions), the
+    WildcardObserver and WildCardSelectorView can be modified. A new update method should be included in the observer
+    interface to accommodate the action, then implemented in UnoActionApplier. WildCardSelectorView should have an
+    update method that creates the JavaFX elements necessary to get user input. 
     * In properties file:
         * Add an option to specialCards
 * Adding different rule sets:
     * Create a new class in the rules package that extends Rule. Must override the isValid() method, can override isOver() method if applicable
-    * TODO: controller here
+    * If Java reflection has not been implemented in GameSettings getRule(), then getRule() must be modified so that it will
+    return the new rule.
     * In properties file:
         * If mutually exclusive from other rule sets, add to an element of rulesOptions and update the corresponding key
         * Else add another element to rulesOptions (semicolon-delineated list) and create its corresponding key

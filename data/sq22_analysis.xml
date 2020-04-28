@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.1-BellSoft" class="java.beans.XMLDecoder">
+ <object class="ooga.piles.DiscardPile" id="DiscardPile0">
+  <void property="allCards">
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object class="java.lang.Enum" id="Suit0" method="valueOf">
+       <class>ooga.cards.Suit</class>
+       <string>D</string>
+      </object>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value0" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>EIGHT</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value1" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>FIVE</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value2" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>ZERO</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object class="java.lang.Enum" id="Suit1" method="valueOf">
+       <class>ooga.cards.Suit</class>
+       <string>C</string>
+      </object>
+     </void>
+     <void property="value">
+      <object idref="Value2"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value3" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>ONE</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value4" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>SKIP</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object class="java.lang.Enum" id="Suit2" method="valueOf">
+       <class>ooga.cards.Suit</class>
+       <string>A</string>
+      </object>
+     </void>
+     <void property="value">
+      <object idref="Value4"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value5" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>NINE</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value6" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>SEVEN</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value2"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value7" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>TWO</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value7"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value8" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>SIX</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value9" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>THREE</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value10" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>FOUR</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object class="java.lang.Enum" id="Suit3" method="valueOf">
+       <class>ooga.cards.Suit</class>
+       <string>B</string>
+      </object>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value7"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value10"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+ <object class="ooga.piles.DrawPile" id="DrawPile0">
+  <void property="allCards">
+   <void method="clear"/>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value2"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value2"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value7"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value11" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>WILD</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value7"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value10"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value4"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object class="java.lang.Enum" id="Value12" method="valueOf">
+       <class>ooga.cards.Value</class>
+       <string>WILD4</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value10"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value4"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value10"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value11"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value7"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value12"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value10"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value9"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value10"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value3"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value8"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value1"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value7"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value12"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value12"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit3"/>
+     </void>
+     <void property="value">
+      <object idref="Value5"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit0"/>
+     </void>
+     <void property="value">
+      <object idref="Value11"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit1"/>
+     </void>
+     <void property="value">
+      <object idref="Value0"/>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="ooga.cards.Card">
+     <void property="suit">
+      <object idref="Suit2"/>
+     </void>
+     <void property="value">
+      <object idref="Value6"/>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+ <object class="ooga.game.UnoTurnManager">
+  <void property="currentPlayer">
+   <object class="ooga.player.ManualPlayer" id="ManualPlayer0">
+    <void property="ID">
+     <int>1</int>
+    </void>
+   </object>
+  </void>
+  <void property="humanPlayer">
+   <object idref="ManualPlayer0"/>
+  </void>
+ </object>
+ <object class="ooga.game.UnoScoreTracker"/>
+ <object class="ooga.game.GameSettings">
+  <void property="handSize">
+   <int>12</int>
+  </void>
+  <void property="numPlayers">
+   <int>2</int>
+  </void>
+  <void property="theme">
+   <string>stylesheets/sq22-analysis_darkMode.css</string>
+  </void>
+  <void property="winningScore">
+   <int>50</int>
+  </void>
+ </object>
+</java>

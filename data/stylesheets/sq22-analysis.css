@@ -1,0 +1,62 @@
+.root {
+    -fx-background-color: lightblue;
+}
+.title {
+    -fx-font-size: 72pt;
+}
+.subtitle {
+    -fx-font-size: 36pt;
+}
+.subtitle2 {
+    -fx-font-size: 16pt;
+}
+.button {
+    -fx-font-size: 12pt;
+    -fx-text-alignment: center;
+}
+.settingsThemeText {
+    -fx-fill: white;
+    -fx-font-size: 14pt;
+}
+.deck {
+    -fx-background-color: black;
+    -fx-background-image: url('images/sq22_analysis_card.jpeg');
+    -fx-background-position: center;
+    -fx-background-size: 150px;
+}
+.myTurn {
+    -fx-fill: purple;
+    -fx-underline: true;
+}
+.AText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.BText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.CText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.DText {
+    -fx-fill: white;
+    -fx-font-size: 20pt;
+}
+.A {
+    -fx-fill: lightgreen;
+}
+.B {
+    -fx-fill: teal;
+}
+.C {
+    -fx-fill: orange;
+}
+.D {
+    -fx-fill: crimson;
+}
+.themeOptionSelected {
+    -fx-stroke: aqua;
+    -fx-stroke-width: 10pt;
+}

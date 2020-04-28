@@ -25,6 +25,11 @@ public class EndGameView extends EndView {
         showEndScene();
     }
 
+    /**
+     * Creates and shows the scene for the end of a game.
+     * Includes text that the game has ended, who the winner is, and asks if the user wants to start a new game.
+     * Also has a button for starting that new game.
+     */
     @Override
     protected void showEndScene() {
         VBox root = new VBox(DEFAULT_SPACING);
@@ -46,6 +51,9 @@ public class EndGameView extends EndView {
         mainStage.show();
     }
 
+    /**
+     * Sets up the new game button to start a new game in the same window.
+     */
     @Override
     protected void setButtonActions() {
         newGameButton.setOnAction(e -> {

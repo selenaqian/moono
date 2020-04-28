@@ -62,7 +62,7 @@ class ThemeSelectionScene {
             StackPane colorWrapper = new StackPane();
             VBox colors = new VBox();
             colors.setAlignment(Pos.CENTER);
-            Rectangle colorsBackground = new Rectangle(DEFAULT_STAGE_WIDTH/4, DEFAULT_STAGE_HEIGHT/2);
+            Rectangle colorsBackground = new Rectangle(DEFAULT_STAGE_WIDTH/(allThemes.length+1), DEFAULT_STAGE_HEIGHT/2);
             colorWrapper.getChildren().addAll(colorsBackground, colors);
             backgroundBoxes.add(colorsBackground);
 

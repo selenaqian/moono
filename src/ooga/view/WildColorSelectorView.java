@@ -38,6 +38,9 @@ public class WildColorSelectorView implements WildcardObserver {
         colorBoxes = new ArrayList<>();
     }
 
+    /**
+     * Called when a wild card is played. Displays the popup with the color options the user can then select.
+     */
     @Override
     public void showColorSelector() {
         HBox root = new HBox(DEFAULT_SPACING);

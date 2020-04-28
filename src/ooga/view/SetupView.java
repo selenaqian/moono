@@ -194,6 +194,8 @@ public class SetupView {
         return box;
     }
 
+    //Methods below used for testing.
+
     /**
      * Used for testing. Allows test to access the okay! button in the starting scene.
      * @return the okay! button in welcomeScene.

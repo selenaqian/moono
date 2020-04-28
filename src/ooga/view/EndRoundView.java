@@ -1,6 +1,6 @@
 /**
  * This class creates the view at the end of a round. It shows that the round is over and allows the user to advance to the next round.
- * TODO: add something that shows the changes to scores?
+ * It also displays the new scores for each of the players.
  *
  * @author Selena Qian
  */
@@ -32,6 +32,10 @@ public class EndRoundView extends EndView {
         showEndScene();
     }
 
+    /**
+     * Creates and shows the end round scene. Displays text stating that the round is complete, shows the updated player
+     * scores, and asks if the user wants to start the next round. Also has a button to start the next round.
+     */
     @Override
     protected void showEndScene() {
         VBox root = new VBox(DEFAULT_SPACING);
@@ -52,6 +56,10 @@ public class EndRoundView extends EndView {
         mainStage.show();
     }
 
+    /**
+     * Creates the text objects showing each player's score.
+     * @return a VBox containing all of the players' scores.
+     */
     private VBox makePlayerScoresText() {
         VBox playerScoresText = new VBox(DEFAULT_SPACING);
         playerScoresText.setAlignment(Pos.CENTER);
@@ -66,6 +74,9 @@ public class EndRoundView extends EndView {
         return playerScoresText;
     }
 
+    /**
+     * Sets up the next round button to advance to the next round in the same window.
+     */
     @Override
     protected void setButtonActions() {
         nextRoundButton.setOnMouseClicked(e -> myController.newRound());

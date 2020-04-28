@@ -2,6 +2,7 @@
  * Class that builds the main gameplay scenes and gets user input to play and draw cards.
  *
  * @author Selena Qian
+ * @author Mary Jiang
  */
 package ooga.view;
 
@@ -269,11 +270,20 @@ public class GameView implements GameViewInterface, PlayerObserver {
         }
     }
 
+    /**
+     * Changes styling on the visual object. Used primarily to reset objects back to default style.
+     * @param currentNode the object to change the styling for.
+     * @param newStyle the style to change to.
+     */
     private void resetStyle(Node currentNode, String newStyle) {
         currentNode.getStyleClass().removeAll(currentNode.getStyleClass());
         currentNode.getStyleClass().add(newStyle);
     }
 
+    /**
+     * Called by the controller. Updates the view of the hand for human players.
+     * @param cards the list of cards in the player's hand.
+     */
     @Override
     public void updateHand(List<Card> cards) {
         player1Hand = new HBox(SPACING_BETWEEN_CARDS);
@@ -311,6 +321,11 @@ public class GameView implements GameViewInterface, PlayerObserver {
         discardRender.updateCardRender(card);
     }
 
+    /**
+     * Called by the controller. Updates the view of the score for the given player.
+     * @param playerNumber the player to update the score for.
+     * @param score the new score of the player.
+     */
     @Override
     public void updateScore(int playerNumber, int score) {
         Text scoreDisplay = allPlayersScore.get(playerNumber-1);
@@ -379,6 +394,10 @@ public class GameView implements GameViewInterface, PlayerObserver {
         return discardRender;
     }
 
+    /**
+     * Used for testing. Allows test to access the visuals of all of the players' names, cards left, scores, and icons.
+     * @return the list of panes containing the above information, wher player 1 is at index 0.
+     */
     public List<Pane> getPlayerViews() {
         List<Pane> allViews = playerViews;
         allViews.remove(0);

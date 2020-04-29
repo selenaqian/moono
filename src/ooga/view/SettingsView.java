@@ -2,6 +2,12 @@
  * Class that creates the mid-game visual for changing options, including speed and theme, and allowing for saving or
  * starting a new game.
  *
+ * I think this feature is well-designed because the separation of the creation of each of the visual sections makes it
+ * readable and easy to follow. Objects of this class are instantiated when the settings button in the GameView is pressed,
+ * and this class then handles all of the actions related to the visual objects in it. This class demonstrates encapsulation
+ * in multiple ways — both by handling everything related to its own visual objects and by telling other classes to do certain
+ * functions, such as setting the new game speed when the appropriate buttons are pressed.
+ *
  * @author Selena Qian
  */
 
@@ -28,6 +34,11 @@ import java.util.*;
 import static ooga.view.SetupView.*;
 
 public class SettingsView {
+    public static final int POSITIVE = 1;
+    public static final int NEGATIVE = -1;
+    public static final int FASTEST_SPEED = 1;
+    public static final double SPEED_INCREMENT = 0.5;
+
     private ResourceBundle myResources;
     private String myStylesheet;
     private GameView myGameView;
@@ -66,7 +77,6 @@ public class SettingsView {
      * Helper method to contain and put together all of the elements in this scene.
      */
     private void showSettingsView() {
-        //TODO: don't think the pause and play work
         myStage.setOnCloseRequest(e -> myGameView.getController().play());
 
         VBox root = new VBox(DEFAULT_SPACING); // used to make scene later
@@ -99,23 +109,28 @@ public class SettingsView {
         speedChangeText = new Text(mySettings.getSpeed() + myResources.getString("speedSuffix")); //TODO: change to display # of seconds?
         slowDownButton = new Button(myResources.getString("slowDownButton"));
         slowDownButton.setOnAction(e -> {
-            double newSpeed = mySettings.getSpeed() + 0.5;
-            myGameView.getController().changeSpeed(newSpeed);
-            mySettings.setSpeed(newSpeed);
-            speedChangeText.setText(newSpeed + myResources.getString("speedSuffix"));
+            changeSpeed(POSITIVE);
         });
         speedUpButton = new Button(myResources.getString("speedUpButton"));
         speedUpButton.setOnAction(e -> {
-            if(mySettings.getSpeed() > 1) {
-                double newSpeed = mySettings.getSpeed() - 0.5;
-                myGameView.getController().changeSpeed(newSpeed);
-                mySettings.setSpeed(newSpeed);
-                speedChangeText.setText(newSpeed + myResources.getString("speedSuffix"));
+            if(mySettings.getSpeed() > FASTEST_SPEED) {
+                changeSpeed(NEGATIVE);
             }
         });
         speedButtons.getChildren().addAll(slowDownButton, speedUpButton);
         speedUI.getChildren().addAll(speedButtons, speedChangeText);
         return speedUI;
+    }
+
+    /**
+     * Slows down or speeds up the speed of the game.
+     * @param sign positive 1 to slow down, negative 1 to speed up.
+     */
+    private void changeSpeed(int sign) {
+        double newSpeed = mySettings.getSpeed() + SPEED_INCREMENT *sign;
+        myGameView.getController().changeSpeed(newSpeed);
+        mySettings.setSpeed(newSpeed);
+        speedChangeText.setText(newSpeed + myResources.getString("speedSuffix"));
     }
 
     /**
@@ -198,16 +213,13 @@ public class SettingsView {
         }
         Node colorBox = themeOptions.get(theme).getChildren().get(0);
         colorBox.getStyleClass().add("themeOptionSelected");
-        if(!darkModeToggle.isSelected()) {
-            myGameView.setTheme(themeFileNames.get(theme));
-            mySettings.setTheme(themeFileNames.get(theme));
+
+        String themeFileName = themeFileNames.get(theme);
+        if(darkModeToggle.isSelected()) {
+            themeFileName = themeFileName.substring(0, themeFileName.length()-4) + "_darkMode.css";
         }
-        else {
-            String themeFileName = themeFileNames.get(theme);
-            themeFileName = themeFileName.substring(0, themeFileName.length()-4);
-            myGameView.setTheme(themeFileName + "_darkMode.css");
-            mySettings.setTheme(themeFileName + "_darkMode.css");
-        }
+        myGameView.setTheme(themeFileName);
+        mySettings.setTheme(themeFileName);
     }
 
     //Methods below used for testing.
